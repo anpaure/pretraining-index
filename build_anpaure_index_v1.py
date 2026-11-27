@@ -1353,9 +1353,9 @@ def build() -> None:
 
 <main class="wrap">
   <header class="hero">
-    <h1>Anpaure Pretraining Index</h1>
+    <h1>Anpaure Pretraining Index (ANPI)</h1>
     <p class="lead">
-      <b>ANPI</b> — black-box 8-choice continuation-ranking benchmark across <b>{n_items} post-cutoff Nov-2026 items</b> ({n_unique_urls} source URLs, 5 domains) with 24B neutral decoys—scored by pairwise rank <b>AUC</b> and calibrated via Thurstone <i>d&prime;</i> onto log-BPB.
+      Black-box 8-choice continuation-ranking benchmark across <b>{n_items} post-cutoff Nov-2026 items</b> ({n_unique_urls} source URLs, 5 domains) with 24B neutral decoys—scored by pairwise rank <b>AUC</b> and calibrated via Thurstone <i>d&prime;</i> onto log-BPB.
     </p>
     <div class="hero-links">
       <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener">GitHub repository &amp; raw traces &rarr;</a>
