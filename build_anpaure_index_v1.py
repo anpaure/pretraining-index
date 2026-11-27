@@ -808,6 +808,7 @@ def build() -> None:
   body {{
     margin: 0;
     min-height: 100vh;
+    overflow-x: clip;
     background-color: var(--ground);
     background-image: var(--grain);
     color: var(--ink);
@@ -847,9 +848,20 @@ def build() -> None:
   }}
   .nav-links a:hover {{ color: var(--ink); background: var(--row-hover); }}
   .nav-r {{ margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }}
+  .nav-mob {{ display: none; align-items: center; gap: 4px; }}
+  .nav-mob a {{
+    font-size: 12.5px; color: var(--ink-2);
+    padding: 5px 8px; border-radius: 7px;
+    display: inline-flex; align-items: center; gap: 4px;
+    white-space: nowrap;
+  }}
+  .nav-mob a:hover {{ color: var(--ink); background: var(--row-hover); }}
   .upd {{ font: 400 11.5px/1 var(--mono); color: var(--faint); white-space: nowrap; }}
   @media (max-width: 960px) {{ .upd {{ display: none; }} }}
-  @media (max-width: 680px) {{ .nav-links {{ display: none; }} }}
+  @media (max-width: 760px) {{
+    .nav-links {{ display: none; }}
+    .nav-mob {{ display: inline-flex; }}
+  }}
   .theme-btn {{
     width: 30px; height: 30px; border: 0; border-radius: 7px;
     background: transparent; color: var(--ink-2);
@@ -1137,6 +1149,78 @@ def build() -> None:
     .lb-head, .lb-row {{ grid-template-columns: 26px 155px 1fr 56px; gap: 8px; }}
     .lb-detail {{ padding-left: 12px; }}
   }}
+  @media (hover: none) {{
+    .ci-popover {{ display: none !important; }}
+  }}
+  @media (max-width: 640px) {{
+    .nav {{ height: 52px; }}
+    .nav-inner {{ padding: 0 14px; gap: 10px; }}
+    .wordmark {{ font-size: 18px; }}
+    .wrap {{ padding: 0 14px 60px; }}
+    .hero {{ padding: 24px 0 20px; }}
+    .hero h1 {{ font-size: clamp(29px, 8.2vw, 38px); margin-bottom: 10px; }}
+    .hero .lead {{ font-size: 14.5px; line-height: 1.5; margin-bottom: 16px; }}
+    .hero-links {{ gap: 10px 16px; font-size: 14.5px; }}
+    .stat-strip {{ grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 14px 0; gap: 14px 14px; margin-bottom: 30px; }}
+    .stat .v {{ font-size: 22px; }}
+    .stat .s {{ font-size: 11.5px; line-height: 1.35; }}
+    section {{ margin-bottom: 38px; scroll-margin-top: 64px; }}
+    h2.sec-title {{ font-size: 24px; }}
+    .sec-sub {{ font-size: 13px; margin-bottom: 14px; }}
+    .toolbar {{ flex-direction: column; align-items: stretch; gap: 8px; margin-bottom: 14px; }}
+    #metricBtns {{
+      display: flex; flex-wrap: nowrap; overflow-x: auto;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      width: 100%;
+    }}
+    #metricBtns::-webkit-scrollbar {{ display: none; }}
+    #metricBtns button {{ flex: 0 0 auto; white-space: nowrap; padding: 7px 11px; font-size: 12.5px; }}
+    .tool-r {{ margin-left: 0; width: 100%; }}
+    #accessBtns {{ display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }}
+    #accessBtns button {{ padding: 7px 8px; text-align: center; }}
+    #scatterBtns {{ display: grid; grid-template-columns: 1fr 1fr; width: 100%; }}
+    #scatterBtns button {{ padding: 7px 8px; font-size: 12px; text-align: center; }}
+    .lb-head {{
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 4px;
+    }}
+    .lb-head > div:nth-child(1),
+    .lb-head > div:nth-child(3) {{ display: none; }}
+    .lb-row {{
+      grid-template-columns: 24px minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      gap: 6px 8px;
+      padding: 11px 4px;
+    }}
+    .lb-rank {{ grid-column: 1; grid-row: 1; font-size: 12px; }}
+    .lb-model {{ grid-column: 2; grid-row: 1; gap: 7px; flex-wrap: nowrap; }}
+    .lb-name {{ font-size: 15.5px; }}
+    .lb-sub {{ grid-column: 3; grid-row: 1; font-size: 11.5px; color: var(--faint); white-space: nowrap; }}
+    .lb-bar-cell {{ grid-column: 2 / 4; grid-row: 2; gap: 10px; }}
+    .lb-track {{ height: 12px; }}
+    .lb-val {{ font-size: 13px; font-weight: 500; min-width: 44px; text-align: right; }}
+    .lb-detail {{ padding: 10px 10px 12px; gap: 6px 14px; font-size: 11.5px; }}
+    .lb-legend {{ gap: 8px 14px; font-size: 11px; }}
+    .lb-legend > span:last-child {{ margin-left: 0 !important; flex-basis: 100%; }}
+    .chart-frame {{ padding: 16px 14px 14px; border-radius: 10px; }}
+    .chart-frame .sec-title {{ font-size: 22px; }}
+    .chart-legend {{ gap: 8px 14px; font-size: 12px; }}
+    .tbl-wrap {{ margin: 0 -14px; padding: 0 14px; -webkit-overflow-scrolling: touch; }}
+    .tbl-wrap table.clean {{ font-size: 11.5px; }}
+    .tbl-wrap table.clean th, .tbl-wrap table.clean td {{ padding: 8px 6px; white-space: nowrap; }}
+    .tbl-wrap table.clean td.name-cell {{ font-size: 14px; }}
+    .exp-col table.clean thead {{ display: none; }}
+    .exp-col table.clean, .exp-col table.clean tbody {{ display: block; width: 100%; }}
+    .exp-col table.clean tr {{
+      display: grid; grid-template-columns: 1fr auto; gap: 6px 10px;
+      padding: 11px 0; border-bottom: 1px solid var(--line);
+    }}
+    .exp-col table.clean td {{ border-bottom: 0; padding: 0; white-space: normal; }}
+    .exp-col table.clean td:nth-child(2) {{ text-align: right; white-space: nowrap; }}
+    .exp-col table.clean td:nth-child(3) {{ grid-column: 1 / -1; line-height: 1.5; }}
+    .exp-grid {{ padding-top: 24px; gap: 22px; }}
+    .exp-col h2 {{ font-size: 23px; }}
+  }}
   .lb-legend {{
     display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
     margin-top: 12px; font: 400 11.5px/1.4 var(--mono); color: var(--faint);
@@ -1190,16 +1274,18 @@ def build() -> None:
 
   /* Calibration scatter layout */
   .cal-grid {{ display: grid; grid-template-columns: 1.45fr 1fr; gap: 28px; align-items: start; }}
+  .cal-grid > * {{ min-width: 0; }}
   @media (max-width: 860px) {{ .cal-grid {{ grid-template-columns: 1fr; }} }}
   .prose-side p {{ font-size: 13.5px; color: var(--ink-2); margin: 0 0 12px; line-height: 1.62; }}
   .prose-side strong {{ color: var(--ink); font-weight: 500; }}
-  code {{ font: 400 12px/1.3 var(--mono); background: var(--subtle); padding: 1px 5px; border-radius: 4px; }}
+  code {{ font: 400 12px/1.3 var(--mono); background: var(--subtle); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }}
 
   /* Editorial two-column Methodology & Validation explainer */
   .exp-grid {{
     display: grid; grid-template-columns: 1fr 1fr; gap: 36px;
     border-top: 1px solid var(--line); padding-top: 32px;
   }}
+  .exp-col {{ min-width: 0; }}
   @media (max-width: 860px) {{ .exp-grid {{ grid-template-columns: 1fr; gap: 28px; }} }}
   .exp-col h2 {{ font: 400 28px/1.15 var(--serif); margin: 0 0 8px; }}
   .exp-col .sec-sub {{ margin-bottom: 16px; }}
@@ -1239,6 +1325,13 @@ def build() -> None:
       <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener">GitHub</a>
     </div>
     <div class="nav-r">
+      <div class="nav-mob">
+        <a href="./writeup.html">Writeup</a>
+        <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener" aria-label="GitHub repository">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.39 6.84 9.75.5.09.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.95-2.34 4.82-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.59.69.49A10.25 10.25 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
       <span class="upd">27 Nov 2026</span>
       <button class="theme-btn" id="themeBtn" title="Toggle light / dark theme" aria-label="Toggle theme">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
