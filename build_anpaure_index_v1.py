@@ -1144,6 +1144,7 @@ def build() -> None:
   .ci-inner {{ position: absolute; top: 5px; height: 4px; background: var(--whisker-inner); border-radius: 1.5px; z-index: 3; opacity: 0.85; }}
   .lb-val {{ font: 400 13px/1 var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; min-width: 48px; }}
   .lb-sub {{ font: 400 12px/1 var(--mono); color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }}
+  .lb-sub .mob-k {{ display: none; }}
   .lb-sub.faint {{ color: var(--faint); }}
   @media (max-width: 760px) {{
     .lb-head, .lb-row {{ grid-template-columns: 26px 155px 1fr 56px; gap: 8px; }}
@@ -1185,7 +1186,7 @@ def build() -> None:
       padding: 8px 4px;
     }}
     .lb-head > div:nth-child(1),
-    .lb-head > div:nth-child(3) {{ display: none; }}
+    .lb-head > div:nth-child(4) {{ display: none; }}
     .lb-row {{
       grid-template-columns: 24px minmax(0, 1fr) auto;
       grid-template-rows: auto auto;
@@ -1195,7 +1196,8 @@ def build() -> None:
     .lb-rank {{ grid-column: 1; grid-row: 1; font-size: 12px; }}
     .lb-model {{ grid-column: 2; grid-row: 1; gap: 7px; flex-wrap: nowrap; }}
     .lb-name {{ font-size: 15.5px; }}
-    .lb-sub {{ grid-column: 3; grid-row: 1; font-size: 11.5px; color: var(--faint); white-space: nowrap; }}
+    .lb-sub {{ grid-column: 3; grid-row: 1; font-size: 11px; color: var(--faint); white-space: nowrap; }}
+    .lb-sub .mob-k {{ display: inline; margin-right: 4px; font-size: 9.5px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; }}
     .lb-bar-cell {{ grid-column: 2 / 4; grid-row: 2; gap: 10px; }}
     .lb-track {{ height: 12px; }}
     .lb-val {{ font-size: 13px; font-weight: 500; min-width: 44px; text-align: right; }}
@@ -1410,7 +1412,7 @@ def build() -> None:
           <div>#</div>
           <div>Model</div>
           <div id="barColLabel">Native AUC (95% Cluster CI)</div>
-          <div style="text-align:right;" id="col4Label">MRR</div>
+          <div style="text-align:right;" id="col4Label">Top-1</div>
         </div>
         <div id="bars"></div>
       </div>
@@ -1659,9 +1661,9 @@ let scatterMetric = "unch_bpb";
 const CFG = {{
   auc: {{
     title: "Leaderboard — Native Anpaure Pairwise AUC",
-    hint: "Zero-fit pairwise rank AUC = (8 − mean_rank) / 7 on 954 post-cutoff Nov-2026 items (908 unique source URLs) against Mistral-Small-24B T=1.0 decoys (chance = 0.500, higher is better). Captures full tail-rank pretraining signal; hover any bar or click a row for 95% cluster CIs.",
+    hint: "Zero-fit pairwise rank AUC = (8 − mean_rank) / 7 on 954 post-cutoff Nov-2026 items (908 unique source URLs) against Mistral-Small-24B T=1.0 decoys (chance = 0.500, higher is better). Top-1 shows how often a model picks the authentic continuation #1 out of 8 (chance = 12.5%); click any row for MRR and 95% cluster CIs.",
     colLabel: "Native AUC (↑)",
-    col4: "MRR",
+    col4: "Top-1",
     ci: "auc_ci", sci: "auc_ci", higherBetter: true
   }},
   oai_bpb: {{
@@ -1909,8 +1911,7 @@ function renderLeaderboard() {{
     }}
     const hatch = m.cot_flagged || (m.access === "open" && m.kind === "post") ? " hatched" : "";
     let col4Val = "&mdash;";
-    if (metric === "auc") col4Val = m.mrr != null ? m.mrr.toFixed(3) : "&mdash;";
-    else if (metric === "mrr") col4Val = m.top1_pct != null ? m.top1_pct.toFixed(1) + "%" : "&mdash;";
+    if (metric === "auc" || metric === "mrr") col4Val = m.top1_pct != null ? m.top1_pct.toFixed(1) + "%" : "&mdash;";
     else col4Val = m.auc != null ? m.auc.toFixed(3) : "&mdash;";
     const isPinned = pinnedModels.has(m.name);
     return `<div class="lb-row${{isPinned ? " pinned" : ""}}" data-idx="${{i}}">
@@ -1927,7 +1928,7 @@ function renderLeaderboard() {{
         </div>
         <div class="lb-val">${{v.toFixed(3)}}</div>
       </div>
-      <div class="lb-sub">${{col4Val}}</div>
+      <div class="lb-sub"><span class="mob-k">${{c.col4}}</span>${{col4Val}}</div>
     </div>
     <div class="lb-detail${{isPinned ? " open" : ""}}" data-detail-idx="${{i}}">${{ciDetailsHTML(m, metric, false)}}</div>`;
   }}).join("");
