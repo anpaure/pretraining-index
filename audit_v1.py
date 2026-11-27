@@ -206,6 +206,14 @@ def main() -> None:
             abs(cal_u["lolo_pct"] - jl_e) < 0.02 and abs(cal_a["lolo_pct"] - jl_a) < 0.02,
             f"Joint Bridge WLS ({len(cnt)} unique models / {len({o[1] for o in obs})} labs): Elie LOLO={cal_u['lolo_pct']}% / ANPI LOLO={cal_a['lolo_pct']}% independently verified",
         )
+        all_br_xs = [o[3] for o in obs]
+        br_min_x, br_max_x = min(all_br_xs), max(all_br_xs)
+        bad_anpi_ex = [
+            m["name"] for m in cal["models"]
+            if m.get("anpi_bpb") is not None and not m.get("anpi_exact")
+            and bool(m.get("anpi_extrap")) != (m["nce_doc_bpb"] < br_min_x or m["nce_doc_bpb"] > br_max_x)
+        ]
+        check(len(bad_anpi_ex) == 0, f"ANPI Corpus EXTRAP badge exact for all {sum(1 for m in cal['models'] if m.get('anpi_bpb') is not None and not m.get('anpi_exact'))} non-exact live models")
 
     check(cal_o.get("log_y") is True and abs(cal_o["loo_pct"] - oai_loo_ind) < 0.02 and cal_o["rho"] > 0.98,
           f"OpenAI log-BPB Thurstone d' within-family LOO={cal_o['loo_pct']}% (r={cal_o['r']:+.4f}, rho={cal_o['rho']:+.4f}, {len(oai_anchors)} anchors) independently verified")

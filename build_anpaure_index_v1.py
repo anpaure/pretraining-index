@@ -910,7 +910,7 @@ def build() -> None:
     payload = {
         "meta": {
             "title": "Anpaure Pretraining Index (ANPI) v1",
-            "built": "2026-11-26",
+            "built": "2026-11-28",
             "scoring_rule": "pairwise_auc_thurstone_probit_log_bpb",
             "n_items": n_items,
             "n_unique_source_urls": n_unique_urls,
@@ -1567,7 +1567,7 @@ def build() -> None:
           GitHub
         </a>
       </div>
-      <span class="upd">27 Nov 2026</span>
+      <span class="upd">28 Nov 2026</span>
       <button class="theme-btn" id="themeBtn" title="Toggle light / dark theme" aria-label="Toggle theme">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/>
@@ -1802,9 +1802,14 @@ def build() -> None:
             <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Near-perfect monotonic recovery across all 10 OpenAI base checkpoints (jumping &rho; from +0.891 on MRR to +0.988 on AUC, and blind GPT-4o..5.6 &rarr; GPT-6/6.2 upward extrap = 1.44%).</td>
           </tr>
           <tr>
-            <td><b>Elie Pre-training Index</b><br/><span class="ci-dim">{len(anchors)} native-chat open models, {cal_unch['n_labs']} labs</span></td>
-            <td>LOO {cal_unch['loo_pct']:.2f}%<br/><b>LOLO {cal_unch['lolo_pct']:.2f}%</b><br/><span class="ci-dim">max {cal_unch['lolo_max_pct']:.2f}%</span></td>
-            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Leave-one-lab-out across {cal_unch['n_labs']} independent labs on Oct-2026 Uncheatable Eval BPB (apples-to-apples native <code>/chat/completions</code> anchors; including the {len(all_elie_open) - len(anchors)} <code>BYPASS</code> endpoints gives <code>{cal_unch_all['lolo_pct']:.2f}%</code> LOLO across {cal_unch_all['n_labs']} labs).</td>
+            <td><b>ANPI Corpus White-Box BPB</b><br/><span class="ci-dim">{len(anpi_anchors_data)} native + 3 BYPASS posttrained models</span></td>
+            <td><b>LOLO {cal_anpi['lolo_pct']:.2f}%</b><br/>LOO {cal_anpi['loo_pct']:.2f}%<br/><span class="ci-dim">r = {cal_anpi['r']:+.3f}</span></td>
+            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Exact teacher-forced 1,000-doc Nov-2026 BPB + 954&times;8 white-box oracle ranking on 14 open models (7 labs). White-box oracle tracks Full-Doc BPB at <b>&rho; = +0.934</b>; fresh Tinker black-box reruns match OpenRouter at <b>r = +0.992, &rho; = +0.996</b> (mean |&Delta;AUC| = 0.0062).</td>
+          </tr>
+          <tr>
+            <td><b>Elie + ANPI Joint Bridge</b><br/><span class="ci-dim">{bridge['n_unique_models']} unique open models, {bridge['n_labs']} labs</span></td>
+            <td>Elie LOO {cal_unch['loo_pct']:.2f}%<br/><b>LOLO {cal_unch['lolo_pct']:.2f}%</b><br/><span class="ci-dim">standalone {cal_unch_elie_only['lolo_pct']:.2f}%</span></td>
+            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Model-equal-weighted Joint Bridge WLS (<code>df = {bridge['df']}</code>) pooling Elie’s {len(anchors)} Oct-2026 anchors ({cal_unch_elie_only['n_labs']} labs) with our {len(anpi_anchors_data)} Nov-2026 posttrained BPB anchors (<code>r = +0.984</code> between corpora; standalone Elie + {len(all_elie_open) - len(anchors)} <code>BYPASS</code> sensitivity LOLO = <code>{cal_unch_all['lolo_pct']:.2f}%</code>).</td>
           </tr>
           <tr>
             <td><b>Blind Open Holdout</b><br/><span class="ci-dim">Gemma 4 26B-A4B (exact 0.5904)</span></td>
