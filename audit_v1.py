@@ -177,9 +177,36 @@ def main() -> None:
     oai_loo_ind = float(np.mean([abs(math.exp(np.polyval(np.polyfit(ox[np.arange(len(ox)) != i], np.log(oy[np.arange(len(ox)) != i]), 1), ox[i])) - oy[i]) / oy[i] * 100 for i in range(len(ox))]))
 
     cal_u = cal["meta"]["calibration"]["unch_bpb"]
+    cal_u_elie_only = cal["meta"]["calibration"].get("unch_bpb_elie_only", cal_u)
+    cal_a = cal["meta"]["calibration"].get("anpi_bpb")
     cal_o = cal["meta"]["calibration"]["oai_bpb"]
-    check(cal_u.get("log_y") is True and abs(cal_u["lolo_pct"] - el_lolo_ind) < 0.02 and abs(cal_u["loo_pct"] - el_loo_ind) < 0.02,
-          f"Elie log-BPB Thurstone d' LOO={cal_u['loo_pct']}% / LOLO={cal_u['lolo_pct']}% (r={cal_u['r']:+.4f}, rho={cal_u['rho']:+.4f}) independently verified")
+    check(cal_u_elie_only.get("log_y") is True and abs(cal_u_elie_only["lolo_pct"] - el_lolo_ind) < 0.02 and abs(cal_u_elie_only["loo_pct"] - el_loo_ind) < 0.02,
+          f"Elie standalone log-BPB Thurstone d' LOO={cal_u_elie_only['loo_pct']}% / LOLO={cal_u_elie_only['lolo_pct']}% (r={cal_u_elie_only['r']:+.4f}, rho={cal_u_elie_only['rho']:+.4f}) independently verified")
+
+    if cal_a is not None:
+        anpi_anchors = [m for m in cal["models"] if m.get("anpi_anchor")]
+        obs = [(m["name"], m["lab"], 0, m["nce_doc_bpb"], math.log(m["unch_bpb"]), m["unch_bpb"]) for m in elie_anchors]
+        obs += [(m["name"], m["lab"], 1, m["nce_doc_bpb"], math.log(m["anpi_bpb"]), m["anpi_bpb"]) for m in anpi_anchors]
+        cnt = {}
+        for o in obs:
+            cnt[o[0]] = cnt.get(o[0], 0) + 1
+        w = np.array([1.0 / cnt[o[0]] for o in obs], dtype=float)
+        X = np.array([[1.0, float(o[2]), float(o[3])] for o in obs], dtype=float)
+        Y = np.array([o[4] for o in obs], dtype=float)
+        lolo_e, lolo_a = [], []
+        for hold in sorted({o[1] for o in obs}):
+            tr = [i for i, o in enumerate(obs) if o[1] != hold]
+            te = [i for i, o in enumerate(obs) if o[1] == hold]
+            bt = np.linalg.inv(X[tr].T @ np.diag(w[tr]) @ X[tr]) @ (X[tr].T @ (w[tr] * Y[tr]))
+            for i in te:
+                err = abs(math.exp(float(X[i] @ bt)) - obs[i][5]) / obs[i][5] * 100.0
+                (lolo_e if obs[i][2] == 0 else lolo_a).append(err)
+        jl_e, jl_a = float(np.mean(lolo_e)), float(np.mean(lolo_a))
+        check(
+            abs(cal_u["lolo_pct"] - jl_e) < 0.02 and abs(cal_a["lolo_pct"] - jl_a) < 0.02,
+            f"Joint Bridge WLS ({len(cnt)} unique models / {len({o[1] for o in obs})} labs): Elie LOLO={cal_u['lolo_pct']}% / ANPI LOLO={cal_a['lolo_pct']}% independently verified",
+        )
+
     check(cal_o.get("log_y") is True and abs(cal_o["loo_pct"] - oai_loo_ind) < 0.02 and cal_o["rho"] > 0.98,
           f"OpenAI log-BPB Thurstone d' within-family LOO={cal_o['loo_pct']}% (r={cal_o['r']:+.4f}, rho={cal_o['rho']:+.4f}, {len(oai_anchors)} anchors) independently verified")
 

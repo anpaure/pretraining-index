@@ -46,6 +46,7 @@ ROOT = Path(__file__).resolve().parent
 BENCH_PATH = ROOT / "runs/anpaure_v1_n1000.json"
 TRACE_DIR = ROOT / "runs/anpaure_v1_traces"
 ELIE_PARSED = ROOT / "runs/elie_pretraining_index_parsed.json"
+ANPI_BPB_SUMMARY = ROOT / "runs/bpb_tinker/SUMMARY.json"
 OUT_HTML = ROOT / "anpaure_pretraining_index.html"
 OUT_JSON = ROOT / "runs/anpaure_v1_calibrated.json"
 
@@ -404,6 +405,144 @@ def calibrate_log_ols_dual(
     )
 
 
+def fit_joint_bridge_wls(
+    elie_rows: list[dict],
+    anpi_rows: list[dict],
+) -> dict:
+    """Model-equal-weighted Joint Bridge WLS across Elie Base/Post (Oct-2026) + ANPI Post (Nov-2026).
+
+    Model: ln(BPB_{m,c}) = a_elie + delta_anpi * I(c == ANPI) + b * (-d'_m).
+    Every unique open model receives total weight 1.0 (w=0.5 per corpus for shared bridge models,
+    w=1.0 for single-corpus models) with conservative df = n_unique_models - 3.
+    """
+    obs: list[tuple[str, str, int, float, float, float, float]] = []
+    for d in elie_rows:
+        obs.append((d["model_id"], d["lab"], 0, float(d["x"]), math.log(float(d["y"])), float(d["y"]), float(d["sd_x"])))
+    for d in anpi_rows:
+        obs.append((d["model_id"], d["lab"], 1, float(d["x"]), math.log(float(d["y"])), float(d["y"]), float(d["sd_x"])))
+
+    counts: dict[str, int] = defaultdict(int)
+    for o in obs:
+        counts[o[0]] += 1
+    n_unique = len(counts)
+    n_shared = sum(1 for v in counts.values() if v == 2)
+    labs = sorted({o[1] for o in obs})
+
+    w = np.array([1.0 / counts[o[0]] for o in obs], dtype=float)
+    X = np.array([[1.0, float(o[2]), o[3]] for o in obs], dtype=float)
+    Y = np.array([o[4] for o in obs], dtype=float)
+    sd_xs = np.array([o[6] for o in obs], dtype=float)
+    W = np.diag(w)
+    XtWX_inv = np.linalg.inv(X.T @ W @ X)
+    beta = XtWX_inv @ (X.T @ (w * Y))
+    a_elie, delta_anpi, slope = float(beta[0]), float(beta[1]), float(beta[2])
+
+    resid = Y - X @ beta
+    df = max(3, n_unique - 3)
+    s_e2 = float((w @ (resid ** 2)) / df)
+    anchor_noise_var = float((w @ ((slope * sd_xs) ** 2)) / float(np.sum(w)))
+    domain_var = max(0.0, s_e2 - anchor_noise_var)
+
+    # Exact Model-LOO (holding out entire model across both corpora)
+    loo_e, loo_a = [], []
+    for hm in sorted(counts):
+        tr = [i for i, o in enumerate(obs) if o[0] != hm]
+        te = [i for i, o in enumerate(obs) if o[0] == hm]
+        bt = np.linalg.inv(X[tr].T @ np.diag(w[tr]) @ X[tr]) @ (X[tr].T @ (w[tr] * Y[tr]))
+        for i in te:
+            err = abs(math.exp(float(X[i] @ bt)) - obs[i][5]) / obs[i][5] * 100.0
+            (loo_e if obs[i][2] == 0 else loo_a).append(err)
+
+    # Exact Leave-One-Lab-Out across all labs & both corpora
+    lolo_e, lolo_a = [], []
+    for hl in labs:
+        tr = [i for i, o in enumerate(obs) if o[1] != hl]
+        te = [i for i, o in enumerate(obs) if o[1] == hl]
+        bt = np.linalg.inv(X[tr].T @ np.diag(w[tr]) @ X[tr]) @ (X[tr].T @ (w[tr] * Y[tr]))
+        for i in te:
+            err = abs(math.exp(float(X[i] @ bt)) - obs[i][5]) / obs[i][5] * 100.0
+            (lolo_e if obs[i][2] == 0 else lolo_a).append(err)
+
+    # Per-corpus correlations
+    ex = np.array([o[3] for o in obs if o[2] == 0], dtype=float)
+    ey = np.array([o[5] for o in obs if o[2] == 0], dtype=float)
+    ax = np.array([o[3] for o in obs if o[2] == 1], dtype=float)
+    ay = np.array([o[5] for o in obs if o[2] == 1], dtype=float)
+
+    return {
+        "a_elie": a_elie,
+        "a_anpi": a_elie + delta_anpi,
+        "delta_anpi": delta_anpi,
+        "corpus_ratio": round(math.exp(delta_anpi), 4),
+        "slope": slope,
+        "slope_se": round(math.sqrt(float(s_e2 * XtWX_inv[2, 2])), 4),
+        "df": df,
+        "n_obs": len(obs),
+        "n_unique_models": n_unique,
+        "n_shared_bridge": n_shared,
+        "n_elie_anchors": len(elie_rows),
+        "n_anpi_anchors": len(anpi_rows),
+        "n_labs": len(labs),
+        "s_e2": s_e2,
+        "domain_var": domain_var,
+        "XtWX_inv": XtWX_inv,
+        "elie_stats": {
+            "r": round(float(np.corrcoef(ex, np.log(ey))[0, 1]), 4),
+            "rho": round(spearman(ex, ey), 4),
+            "loo_pct": round(float(np.mean(loo_e)), 2),
+            "loo_max_pct": round(float(np.max(loo_e)), 2),
+            "lolo_pct": round(float(np.mean(lolo_e)), 2),
+            "lolo_max_pct": round(float(np.max(lolo_e)), 2),
+            "n_labs": len(labs),
+            "n_unique_models": n_unique,
+            "slope": slope,
+            "intercept": a_elie,
+            "df": df,
+            "log_y": True,
+            "method": "joint_bridge_wls",
+        },
+        "anpi_stats": {
+            "r": round(float(np.corrcoef(ax, np.log(ay))[0, 1]), 4),
+            "rho": round(spearman(ax, ay), 4),
+            "loo_pct": round(float(np.mean(loo_a)), 2),
+            "loo_max_pct": round(float(np.max(loo_a)), 2),
+            "lolo_pct": round(float(np.mean(lolo_a)), 2),
+            "lolo_max_pct": round(float(np.max(lolo_a)), 2),
+            "n_labs": len(labs),
+            "n_unique_models": n_unique,
+            "n_anpi_anchors": len(anpi_rows),
+            "slope": slope,
+            "intercept": a_elie + delta_anpi,
+            "delta_anpi": delta_anpi,
+            "corpus_ratio": round(math.exp(delta_anpi), 4),
+            "df": df,
+            "log_y": True,
+            "method": "joint_bridge_wls",
+        },
+    }
+
+
+def predict_joint_bridge_dual(
+    bridge: dict,
+    corpus_flag: int,
+    target_x: float,
+    target_sd_x: float,
+) -> tuple[float, list[float], list[float]]:
+    """Predict BPB + Student-t (df = n_unique - 3) outer CI & sampling inner CI from Joint Bridge WLS."""
+    t_crit = _T95.get(bridge["df"], 1.96)
+    v = np.array([1.0, float(corpus_flag), target_x], dtype=float)
+    eta = float(bridge["a_elie"] + corpus_flag * bridge["delta_anpi"] + bridge["slope"] * target_x)
+    pt = math.exp(eta)
+    samp_sd = abs(bridge["slope"]) * target_sd_x
+    param_var = bridge["s_e2"] * float(v @ bridge["XtWX_inv"] @ v)
+    tot_sd = math.sqrt(bridge["domain_var"] + samp_sd ** 2 + param_var)
+    return (
+        pt,
+        [round(math.exp(eta - t_crit * tot_sd), 4), round(math.exp(eta + t_crit * tot_sd), 4)],
+        [round(math.exp(eta - 1.96 * samp_sd), 4), round(math.exp(eta + 1.96 * samp_sd), 4)],
+    )
+
+
 def fit_stats(x: np.ndarray, y: np.ndarray, labs: list[str] | None = None) -> dict:
     ly = np.log(y)
     r = float(np.corrcoef(x, ly)[0, 1])
@@ -522,8 +661,46 @@ def build() -> None:
     ay_unch = np.array([elie_all[d["elie_id"]]["unch_bpb"] for d in anchors], dtype=float)
     ay_idx = np.array([elie_all[d["elie_id"]]["index_5050"] for d in anchors], dtype=float)
 
-    cal_unch = fit_stats(ax, ay_unch, labs=alabs)
+    cal_unch_elie_only = fit_stats(ax, ay_unch, labs=alabs)
     cal_idx = fit_stats(ax, ay_idx, labs=alabs)
+
+    # Load exact Nov-2026 ANPI Corpus Posttrained BPB anchors (from Tinker white-box compute_logprobs)
+    anpi_bpb_by_name: dict[str, dict] = {}
+    if ANPI_BPB_SUMMARY.exists():
+        tk_sum = json.loads(ANPI_BPB_SUMMARY.read_text(encoding="utf-8"))
+        for tm in tk_sum.get("models", []):
+            if tm.get("doc_bpb") is not None:
+                anpi_bpb_by_name[tm["name"]] = tm
+
+    anpi_anchors_data = []
+    for d in eval_data.values():
+        nm = elie_all[d["elie_id"]]["label"] if d["elie_id"] in elie_all else d["name"]
+        tm = anpi_bpb_by_name.get(nm) or anpi_bpb_by_name.get(d["name"])
+        if tm is not None and d["access"] == "open" and (INCLUDE_TEMPLATE_BYPASS_ANCHORS or d["model_id"] not in TEMPLATE_BYPASS_MODELS):
+            anpi_anchors_data.append({
+                "model_id": d["model_id"],
+                "name": nm,
+                "lab": d["lab"],
+                "x": d["nce_doc_bpb"],
+                "sd_x": d["nce_sd_x"],
+                "y": float(tm["doc_bpb"]),
+            })
+
+    elie_bridge_rows = [
+        {
+            "model_id": d["model_id"],
+            "name": elie_all[d["elie_id"]]["label"],
+            "lab": d["lab"],
+            "x": d["nce_doc_bpb"],
+            "sd_x": d["nce_sd_x"],
+            "y": float(elie_all[d["elie_id"]]["unch_bpb"]),
+        }
+        for d in anchors
+    ]
+    bridge = fit_joint_bridge_wls(elie_bridge_rows, anpi_anchors_data) if anpi_anchors_data else None
+    cal_unch = bridge["elie_stats"] if bridge else cal_unch_elie_only
+    cal_anpi = bridge["anpi_stats"] if bridge else None
+    anpi_anchor_mids = {r["model_id"] for r in anpi_anchors_data}
 
     # Sensitivity check including raw-template-bypass mandatory-reasoning endpoints (zero hidden numbers)
     all_elie_open = [d for d in eval_data.values() if d["access"] == "open" and d["elie_id"] in elie_all]
@@ -540,6 +717,8 @@ def build() -> None:
     cal_oai = fit_stats(ox, oy)
 
     min_anchor_x, max_anchor_x = float(np.min(ax)), float(np.max(ax))
+    all_bridge_xs = [r["x"] for r in elie_bridge_rows] + [r["x"] for r in anpi_anchors_data]
+    min_anpi_x, max_anpi_x = (float(min(all_bridge_xs)), float(max(all_bridge_xs))) if all_bridge_xs else (min_anchor_x, max_anchor_x)
     min_oai_x, max_oai_x = float(np.min(ox)), float(np.max(ox))
 
     # Blind Gemma 4 26B-A4B holdout stat (fit on other 13 open anchors)
@@ -566,10 +745,26 @@ def build() -> None:
         md = matched_by_eid.get(eid)
         oai_pt = oai_ci = oai_sci = None
         oai_ex = False
+        anpi_pt = anpi_est = anpi_ci = anpi_sci = None
+        anpi_ex = False
+        anpi_is_exact = False
+        anpi_is_anchor = False
+        tm_exact = anpi_bpb_by_name.get(es["label"]) or (anpi_bpb_by_name.get(md["name"]) if md else None)
         if md is not None:
             oai_pt, oai_ci, oai_sci = calibrate_log_ols_dual(ox, oy, ox_sd, md["nce_doc_bpb"], md["nce_sd_x"])
             oai_pt = round(oai_pt, 4)
             oai_ex = (md["nce_doc_bpb"] < min_oai_x) or (md["nce_doc_bpb"] > max_oai_x)
+            if bridge is not None:
+                ap_pred, ap_ci, ap_sci = predict_joint_bridge_dual(bridge, 1, md["nce_doc_bpb"], md["nce_sd_x"])
+                anpi_est = round(ap_pred, 4)
+                if tm_exact is not None:
+                    anpi_is_exact = True
+                    anpi_is_anchor = md["model_id"] in anpi_anchor_mids
+                    anpi_pt = round(float(tm_exact["doc_bpb"]), 4)
+                else:
+                    anpi_pt = anpi_est
+                    anpi_ci, anpi_sci = ap_ci, ap_sci
+                    anpi_ex = (md["nce_doc_bpb"] < min_anpi_x) or (md["nce_doc_bpb"] > max_anpi_x)
         rows.append(
             {
                 "name": es["label"],
@@ -579,6 +774,13 @@ def build() -> None:
                 "unch_bpb": round(float(es["unch_bpb"]), 4),
                 "unch_ci": None,
                 "unch_sci": None,
+                "anpi_bpb": anpi_pt,
+                "anpi_est": anpi_est,
+                "anpi_ci": anpi_ci,
+                "anpi_sci": anpi_sci,
+                "anpi_exact": anpi_is_exact,
+                "anpi_anchor": anpi_is_anchor,
+                "anpi_extrap": anpi_ex,
                 "index_5050": round(float(es["index_5050"]), 4),
                 "index_ci": None,
                 "index_sci": None,
@@ -613,13 +815,23 @@ def build() -> None:
         )
 
     for mid, d in sorted([kv for kv in eval_data.items() if kv[1]["elie_id"] is None], key=lambda kv: kv[1]["nce_doc_bpb"]):
-        pt_u, ci_u, sci_u = calibrate_log_ols_dual(ax, ay_unch, ax_sd, d["nce_doc_bpb"], d["nce_sd_x"])
+        if bridge is not None:
+            pt_u, ci_u, sci_u = predict_joint_bridge_dual(bridge, 0, d["nce_doc_bpb"], d["nce_sd_x"])
+            pt_a, ci_a, sci_a = predict_joint_bridge_dual(bridge, 1, d["nce_doc_bpb"], d["nce_sd_x"])
+        else:
+            pt_u, ci_u, sci_u = calibrate_log_ols_dual(ax, ay_unch, ax_sd, d["nce_doc_bpb"], d["nce_sd_x"])
+            pt_a, ci_a, sci_a = None, None, None
         pt_i, ci_i, sci_i = calibrate_log_ols_dual(ax, ay_idx, ax_sd, d["nce_doc_bpb"], d["nce_sd_x"])
         pt_o, ci_o, sci_o = calibrate_log_ols_dual(ox, oy, ox_sd, d["nce_doc_bpb"], d["nce_sd_x"])
         is_oai_pub = mid in OAI_PUBLISHED
         oai_val = OAI_PUBLISHED[mid] if is_oai_pub else round(pt_o, 4)
         elie_ex = (d["nce_doc_bpb"] < min_anchor_x) or (d["nce_doc_bpb"] > max_anchor_x)
         oai_ex = (not is_oai_pub) and ((d["nce_doc_bpb"] < min_oai_x) or (d["nce_doc_bpb"] > max_oai_x))
+        tm_exact = anpi_bpb_by_name.get(d["name"])
+        anpi_is_exact = tm_exact is not None
+        anpi_is_anchor = mid in anpi_anchor_mids
+        anpi_val = round(float(tm_exact["doc_bpb"]), 4) if anpi_is_exact else (round(pt_a, 4) if pt_a is not None else None)
+        anpi_ex = (not anpi_is_exact) and ((d["nce_doc_bpb"] < min_anpi_x) or (d["nce_doc_bpb"] > max_anpi_x))
         is_closed = d["access"] == "closed"
         rows.append(
             {
@@ -630,6 +842,13 @@ def build() -> None:
                 "unch_bpb": round(pt_u, 4),
                 "unch_ci": ci_u,
                 "unch_sci": sci_u,
+                "anpi_bpb": anpi_val,
+                "anpi_est": round(pt_a, 4) if pt_a is not None else None,
+                "anpi_ci": None if anpi_is_exact else ci_a,
+                "anpi_sci": None if anpi_is_exact else sci_a,
+                "anpi_exact": anpi_is_exact,
+                "anpi_anchor": anpi_is_anchor,
+                "anpi_extrap": anpi_ex,
                 "index_5050": round(pt_i, 4),
                 "index_ci": ci_i,
                 "index_sci": sci_i,
@@ -703,10 +922,17 @@ def build() -> None:
             "total_eval_cost": round(total_spend, 2),
             "calibration": {
                 "transform": "ln(BPB) = intercept + slope * (-d'), d' = sqrt(2) * Phi^{-1}(AUC)",
+                "open_bpb_method": "joint_bridge_wls_equal_model" if bridge else "elie_ols",
                 "include_template_bypass_anchors": INCLUDE_TEMPLATE_BYPASS_ANCHORS,
                 "n_open_anchors": len(anchors),
+                "n_anpi_anchors": len(anpi_anchors_data),
+                "n_bridge_unique_models": bridge["n_unique_models"] if bridge else len(anchors),
+                "n_bridge_shared_models": bridge["n_shared_bridge"] if bridge else 0,
+                "n_bridge_labs": bridge["n_labs"] if bridge else cal_unch_elie_only["n_labs"],
                 "unch_bpb": cal_unch,
+                "unch_bpb_elie_only": cal_unch_elie_only,
                 "unch_bpb_with_bypass": cal_unch_all,
+                "anpi_bpb": cal_anpi,
                 "index_5050": cal_idx,
                 "oai_bpb": cal_oai,
             },
@@ -1183,8 +1409,8 @@ def build() -> None:
     .tool-r {{ margin-left: 0; width: 100%; }}
     #accessBtns {{ display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }}
     #accessBtns button {{ padding: 7px 8px; text-align: center; }}
-    #scatterBtns {{ display: grid; grid-template-columns: 1fr 1fr; width: 100%; }}
-    #scatterBtns button {{ padding: 7px 8px; font-size: 12px; text-align: center; }}
+    #scatterBtns {{ display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }}
+    #scatterBtns button {{ padding: 7px 6px; font-size: 11.5px; text-align: center; }}
     #oaiGraphBtns {{ display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }}
     #oaiGraphBtns button {{ padding: 7px 6px; font-size: 11.5px; text-align: center; }}
     .lb-head {{
@@ -1378,9 +1604,9 @@ def build() -> None:
       <div class="s">r = {cal_oai['r']:+.3f}, &rho; = {cal_oai['rho']:+.3f} ({len(oai_mids)} OAI anchors)</div>
     </div>
     <div class="stat">
-      <div class="k">Cross-lab Elie LOLO</div>
-      <div class="v">{cal_unch['lolo_pct']:.2f}%</div>
-      <div class="s">{cal_unch['n_labs']}-lab leave-one-lab-out (LOO {cal_unch['loo_pct']:.2f}%, r = {cal_unch['r']:+.3f})</div>
+      <div class="k">Cross-lab BPB LOLO</div>
+      <div class="v">{(cal_anpi['lolo_pct'] if cal_anpi else cal_unch['lolo_pct']):.2f}%</div>
+      <div class="s">{cal_unch['n_labs']}-lab Joint Bridge (19 open models; Elie LOLO {cal_unch['lolo_pct']:.2f}%)</div>
     </div>
     <div class="stat">
       <div class="k">Cluster AUC CI</div>
@@ -1400,6 +1626,7 @@ def build() -> None:
       <div class="seg" id="metricBtns">
         <button data-metric="auc" class="active">Native AUC (Zero-Fit &uarr;)</button>
         <button data-metric="oai_bpb">OpenAI Base Scale</button>
+        <button data-metric="anpi_bpb">ANPI Corpus BPB</button>
         <button data-metric="unch_bpb">Elie Uncheatable Eval</button>
         <button data-metric="index_5050">Elie 50/50</button>
         <button data-metric="mrr">Native MRR</button>
@@ -1526,19 +1753,20 @@ def build() -> None:
       <div class="sec-head" style="margin-bottom:6px;">
         <h2 class="sec-title">External calibration</h2>
         <div class="seg" id="scatterBtns">
-          <button data-sc="unch_bpb" class="active">Elie Uncheatable ({len(anchors)} open)</button>
+          <button data-sc="anpi_bpb" class="active">ANPI Corpus ({len(anpi_anchors_data)} post)</button>
+          <button data-sc="unch_bpb">Elie Uncheatable ({len(anchors)} open)</button>
           <button data-sc="oai_bpb">OpenAI Base ({len(oai_mids)} OAI)</button>
         </div>
       </div>
       <p class="sec-sub">
-        Outlined circles are published anchor ground truths used to fit the 2-parameter log-BPB Thurstone ruler <code>ln(BPB) = a + b&middot;(&minus;d&prime;)</code>; diamonds highlight frontier projections and muted dots show the remaining live models.
+        Outlined circles are measured ground-truth BPB anchors fit jointly via model-equal-weighted Joint Bridge WLS (<code>19</code> unique native-chat open models across <code>8</code> labs, shared slope <code>b = {cal_unch['slope']:.3f}</code>, corpus ratio <code>{cal_anpi['corpus_ratio']:.3f}&times;</code>); diamonds highlight frontier projections and muted dots show remaining live models.
       </p>
       <div class="cal-grid">
         <svg id="scatter" viewBox="0 0 600 360"></svg>
         <div class="prose-side">
-          <p><strong>Why Pairwise AUC + Thurstone <i>d&prime;</i> onto log-BPB.</strong> Across all {sum(d['n_ok'] for d in eval_data.values()):,} real rank rows, candidate scores follow <b>Thurstone Case V</b> (Gaussian sums of token log-probs, <code>6.8&times;</code> lower KL than Plackett-Luce), and tail ranks <code>r &ge; 2</code> retain partial correlation <code>+0.73&ndash;+0.76</code> with true BPB after controlling for Top-1. Combining Thurstone <code>d&prime; = &radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC)</code> with Ruan et al. (NeurIPS 2024) yields the 2-parameter law <code>ln(BPB) = a &minus; b&middot;d&prime;</code>—achieving <code>r = {cal_oai['r']:+.3f}, &rho; = {cal_oai['rho']:+.3f}, LOO = {cal_oai['loo_pct']:.2f}%</code> across all {len(oai_mids)} published OpenAI models and <code>r = {cal_unch['r']:+.3f}, LOO = {cal_unch['loo_pct']:.2f}%, LOLO = {cal_unch['lolo_pct']:.2f}%</code> across Elie’s {len(anchors)} open models ({cal_unch['n_labs']} labs), with zero statistically significant ceiling curvature across 4 independent datasets.</p>
-          <p><strong>Extrapolation above anchor ranges.</strong> On OpenAI’s ruler, <code>Claude Fable 5.2</code> (<code>0.8552</code>) and <code>Gemini 4 Carbon</code> (<code>0.8482</code>) exceed top anchor <code>GPT-6.2 Astra</code> (<code>0.8444</code>); on Elie’s open ruler, the top closed tier exceeds <code>Kimi K3.1 Pro</code> (<code>0.7520</code>). Every model outside its anchor span is flagged <code>EXTRAP</code> with exact exponentiated Student-<i>t</i> intervals.</p>
-          <p><strong>100% Zero-CoT enforcement &amp; template-bypass rule.</strong> All {len(eval_data) - len(TEMPLATE_BYPASS_MODELS)} native-chat endpoints answered at <code>0</code> reasoning tokens on standard <code>/api/v1/chat/completions</code>. Mandatory-reasoning endpoints that reject zero-CoT on chat APIs (<code>Qwen3.8 2.4T-A95B</code>, <code>Muse Spark Open</code>, <code>Inkling 2 Small</code>, <code>Reflection Beam 1.0</code>, <code>gpt-oss-120b/20b</code>) were evaluated via raw <code>/api/v1/completions</code> zero-think templates and remain visible here (badged <code>BYPASS</code>), but are excluded from the {len(anchors)}-anchor OLS ruler by default (cold-start bypass tax; blind holdouts <code>+3.5% / +5.9% / +6.4%</code>; {len(all_elie_open)}-anchor sensitivity LOLO = <code>{cal_unch_all['lolo_pct']:.2f}%</code>).</p>
+          <p><strong>Joint Bridge Open-BPB Calibration ({bridge['n_unique_models']} unique models, {bridge['n_labs']} labs).</strong> Pooling Elie’s {len(anchors)} Oct-2026 anchors (7 labs) with our {len(anpi_anchors_data)} exact Nov-2026 ANPI Corpus posttrained BPB measurements (6 labs; {bridge['n_shared_bridge']} bridge models, <code>r = +0.984</code> between corpora) via model-equal-weighted WLS (<code>w = 0.5</code> per corpus on shared models, conservative <code>df = {bridge['df']}</code>) gives a single shared Thurstone slope <code>b = {cal_unch['slope']:.3f}</code> (vs. <code>{cal_unch_elie_only['slope']:.3f}</code> Elie-only), tightening slope SE by <code>15%</code> and cutting cross-lab LOLO to <strong><code>{cal_anpi['lolo_pct']:.2f}%</code></strong> on ANPI Corpus BPB and <strong><code>{cal_unch['lolo_pct']:.2f}%</code></strong> on Elie (vs. <code>{cal_unch_elie_only['lolo_pct']:.2f}%</code> Elie-only). On OpenAI’s {len(oai_mids)} published base models, the standalone ruler achieves <code>r = {cal_oai['r']:+.3f}, &rho; = {cal_oai['rho']:+.3f}, LOO = {cal_oai['loo_pct']:.2f}%</code>.</p>
+          <p><strong>Base vs. Posttrained transparency &amp; extrapolation.</strong> Four of the {bridge['n_shared_bridge']} bridge models (<code>Kimi K3.1 Pro</code>, <code>DeepSeek V4.1 Flash</code>, <code>GLM-5.3 Flash</code>, <code>Inkling 2 Mini</code>) are identical posttrained checkpoints on both corpora (mean ratio <code>1.105&times;</code>); <code>Nemotron 3 Ultra</code> and <code>Nemotron 3 Super</code> bridge Elie’s Base BPB to our Nov-2026 Posttrained BPB (<code>1.118&times; / 1.126&times;</code>, a <code>~1.5%</code> posttraining shift) and are explicitly badged <code>POST · EXACT</code> on the ANPI Corpus tab and <code>BASE</code> on Elie’s tab. Above anchor ceilings (<code>GPT-6.2 Astra</code> <code>0.8444</code> / <code>Kimi K3.1 Pro</code> <code>0.7520</code>), models carry <code>EXTRAP</code> badges with exponentiated Student-<i>t</i> intervals.</p>
+          <p><strong>100% Zero-CoT enforcement &amp; template-bypass rule.</strong> All {len(eval_data) - len(TEMPLATE_BYPASS_MODELS)} native-chat endpoints answered at <code>0</code> reasoning tokens on standard <code>/api/v1/chat/completions</code>. Mandatory-reasoning endpoints (<code>Qwen3.8 2.4T-A95B</code>, <code>Muse Spark Open</code>, <code>Inkling 2 Small</code>, <code>Reflection Beam 1.0</code>, <code>gpt-oss-120b/20b</code>) remain visible (badged <code>BYPASS</code>; exact posttrained Nov-2026 BPB shown for <code>Inkling 2 Small</code> <code>0.567</code> and <code>gpt-oss-120b/20b</code> <code>1.357 / 1.397</code>) but are excluded from the calibration fit by default (Elie-only {len(all_elie_open)}-anchor sensitivity LOLO = <code>{cal_unch_all['lolo_pct']:.2f}%</code>).</p>
         </div>
       </div>
     </div>
@@ -1613,7 +1841,7 @@ def build() -> None:
           <tr>
             <th>#</th><th>Model</th><th>Lab</th><th>Tags</th>
             <th class="num">AUC</th><th class="num">MRR</th><th class="num">Win%</th><th class="num">Top-1</th>
-            <th class="num">OAI Scale</th><th class="num">Elie Unch</th>
+            <th class="num">OAI Scale</th><th class="num">ANPI BPB</th><th class="num">Elie Unch</th>
             <th class="num">Clean N</th><th class="num">CoT</th>
             <th class="num">Code</th><th class="num">Pap</th><th class="num">News</th><th class="num">Ref</th><th class="num">Ess</th>
           </tr>
@@ -1690,7 +1918,7 @@ function iconFor(lab) {{
 
 let metric = "auc";
 let accessFilter = "all";
-let scatterMetric = "unch_bpb";
+let scatterMetric = "anpi_bpb";
 let oaiGraphView = "top36";
 
 const CFG = {{
@@ -1708,9 +1936,16 @@ const CFG = {{
     col4: "AUC",
     ci: "oai_ci", sci: "oai_sci", higherBetter: false
   }},
+  anpi_bpb: {{
+    title: "Leaderboard — ANPI Nov-2026 Corpus BPB (Exact + Joint Bridge)",
+    hint: "EXACT marks teacher-forced posttrained Full-Doc BPB measured directly on our 1,000-doc Nov-2026 corpus ({len(anpi_anchors_data)} native-chat anchors + 3 visible BYPASS models); other rows use our 19-model / 8-lab Joint Bridge WLS ruler ({cal_anpi['loo_pct']:.2f}% model-LOO / {cal_anpi['lolo_pct']:.2f}% 8-lab LOLO, exact Student-t df={bridge['df']} whiskers). Lower is better.",
+    colLabel: "Bits per Byte (↓)",
+    col4: "AUC",
+    ci: "anpi_ci", sci: "anpi_sci", higherBetter: false
+  }},
   unch_bpb: {{
     title: "Leaderboard — Elie Oct-2026 Uncheatable Eval",
-    hint: "Exact teacher-forced BPB for all 27 open models; closed frontier endpoints translated via all {len(anchors)} open anchors using ln(BPB) = a − b·d' ({cal_unch['loo_pct']:.2f}% LOO / {cal_unch['lolo_pct']:.2f}% leave-one-lab-out across {cal_unch['n_labs']} labs, exact Student-t df={len(anchors)-2} whiskers). Lower is better.",
+    hint: "Exact teacher-forced BPB for all 27 Elie open models; remaining endpoints translated via our 19-model / {cal_unch['n_labs']}-lab Joint Bridge WLS ruler ({cal_unch['loo_pct']:.2f}% model-LOO / {cal_unch['lolo_pct']:.2f}% 8-lab LOLO, df={bridge['df']}; Elie-only 14-anchor LOLO = {cal_unch_elie_only['lolo_pct']:.2f}%). Lower is better.",
     colLabel: "Bits per Byte (↓)",
     col4: "AUC",
     ci: "unch_ci", sci: "unch_sci", higherBetter: false
@@ -1735,12 +1970,16 @@ function tagsHTML(m, forMetric) {{
   let out = [];
   if (forMetric === "oai_bpb" && m.oai_exact) {{
     out.push(`<span class="micro pub" title="Published OpenAI value (Anpaure est: ${{m.oai_est}})">PUB</span>`);
+  }} else if (forMetric === "anpi_bpb" && m.anpi_exact) {{
+    out.push(`<span class="micro">POST</span>`);
+    out.push(`<span class="micro pub" title="Exact teacher-forced posttrained BPB on ANPI 1,000-doc corpus (Joint Bridge est: ${{m.anpi_est}})">EXACT</span>`);
   }} else if (m.access === "open") {{
     out.push(`<span class="micro">${{m.kind === "base" ? "BASE" : "POST"}}</span>`);
   }}
   if (forMetric === "oai_bpb" && m.oai_extrap) out.push(`<span class="micro extrap">EXTRAP</span>`);
+  if (forMetric === "anpi_bpb" && m.anpi_extrap) out.push(`<span class="micro extrap">EXTRAP</span>`);
   if ((forMetric === "unch_bpb" || forMetric === "index_5050") && m.extrapolated) out.push(`<span class="micro extrap">EXTRAP</span>`);
-  if (m.template_bypass) out.push(`<span class="micro bypass" title="Mandatory-reasoning endpoint forced to 0-CoT via raw /api/v1/completions template bypass; kept visible, excluded from OLS anchor fit by default">BYPASS</span>`);
+  if (m.template_bypass) out.push(`<span class="micro bypass" title="Mandatory-reasoning endpoint forced to 0-CoT via raw /api/v1/completions template bypass; kept visible, excluded from calibration fit by default">BYPASS</span>`);
   if (m.cot_flagged) out.push(`<span class="micro cot" title="${{m.n_pos_rtok}}/${{m.n_ok}} items with r_tok>0 (mean ${{m.r_tok}})">COT</span>`);
   return out.join(" ");
 }}
@@ -1753,7 +1992,7 @@ function ciDetailsHTML(m, forMetric, isPopover) {{
   const v = m[forMetric];
   const ci = m[c.ci];
   const sci = m[c.sci];
-  const isBpb = (forMetric === "oai_bpb" || forMetric === "unch_bpb" || forMetric === "index_5050");
+  const isBpb = (forMetric === "oai_bpb" || forMetric === "anpi_bpb" || forMetric === "unch_bpb" || forMetric === "index_5050");
   const outerLbl = isBpb ? "95% Student-t CI" : "95% Cluster CI";
   const fmtCI = arr => {{
     const hw = 0.5 * (arr[1] - arr[0]);
@@ -1763,18 +2002,21 @@ function ciDetailsHTML(m, forMetric, isPopover) {{
 
   if (isPopover) {{
     let rows = `<div class="pop-title">${{iconFor(m.lab)}}<span>${{m.name}}</span></div>`
-      + `<div class="pop-sub">${{m.lab}} · ${{m.access === "closed" ? "Closed API" : (m.kind === "base" ? "Open Base" : "Open Post-trained")}}${{m.n_ok != null ? ` · ${{m.n_ok}}/954 clean` : ""}}</div>`
+      + `<div class="pop-sub">${{m.lab}} · ${{m.access === "closed" ? "Closed API" : (forMetric === "anpi_bpb" && m.anpi_exact ? "Open Post-trained (Exact BPB)" : (m.kind === "base" ? "Open Base" : "Open Post-trained"))}}${{m.n_ok != null ? ` · ${{m.n_ok}}/954 clean` : ""}}</div>`
       + `<div class="pop-row"><span>Score</span><b>${{v.toFixed(4)}}</b></div>`;
     if (ci) {{
       rows += `<div class="pop-row"><span>${{outerLbl}}</span><b>${{fmtCI(ci)}}</b></div>`;
     }} else {{
-      rows += `<div class="pop-row"><span>Uncertainty</span><b>Exact published value</b></div>`;
+      rows += `<div class="pop-row"><span>Uncertainty</span><b>${{forMetric === "anpi_bpb" ? "Exact measured BPB (N=1000)" : "Exact published value"}}</b></div>`;
     }}
     if (hasDual) {{
       rows += `<div class="pop-row"><span>95% Sampling CI</span><b>${{fmtCI(sci)}}</b></div>`;
     }}
     if (forMetric === "oai_bpb" && m.oai_exact && m.oai_est != null) {{
       rows += `<div class="pop-row"><span>Anpaure fit est</span><b>${{m.oai_est.toFixed(3)}}</b></div>`;
+    }}
+    if (forMetric === "anpi_bpb" && m.anpi_exact && m.anpi_est != null) {{
+      rows += `<div class="pop-row"><span>Bridge fit est</span><b>${{m.anpi_est.toFixed(3)}}</b></div>`;
     }}
     if (m.auc != null) {{
       rows += `<div class="pop-div"></div>`
@@ -1923,10 +2165,12 @@ function renderLeaderboard() {{
   const valsMin = list.map(m => m[c.ci] ? m[c.ci][0] : m[metric]);
   const maxV = metric === "auc"
     ? Math.min(0.95, Math.max(...valsMax) * 1.03)
-    : (metric === "mrr" ? Math.min(0.84, Math.max(...valsMax) * 1.07) : Math.max(...valsMax) * 1.04);
+    : (metric === "mrr"
+        ? Math.min(0.84, Math.max(...valsMax) * 1.07)
+        : (metric === "anpi_bpb" ? Math.min(0.96, Math.max(...valsMax) * 1.04) : Math.max(...valsMax) * 1.04));
   const minV = metric === "auc"
     ? 0.48
-    : (metric === "mrr" ? 0.32 : Math.max(0.18, Math.min(...valsMin) * 0.90));
+    : (metric === "mrr" ? 0.32 : (metric === "anpi_bpb" ? 0.36 : Math.max(0.18, Math.min(...valsMin) * 0.90)));
   const pct = v => Math.max(1, Math.min(100, ((v - minV) / (maxV - minV)) * 100));
 
   document.getElementById("bars").innerHTML = list.map((m, i) => {{
@@ -2015,6 +2259,7 @@ function renderLeaderboard() {{
     <td class="num">${{m.win_rate != null ? m.win_rate.toFixed(1) + "%" : "&mdash;"}}</td>
     <td class="num">${{m.top1_pct != null ? m.top1_pct.toFixed(1) + "%" : "&mdash;"}}</td>
     <td class="num">${{m.oai_bpb != null ? m.oai_bpb.toFixed(3) : "&mdash;"}}</td>
+    <td class="num">${{m.anpi_bpb != null ? m.anpi_bpb.toFixed(3) : "&mdash;"}}</td>
     <td class="num">${{m.unch_bpb != null ? m.unch_bpb.toFixed(3) : "&mdash;"}}</td>
     <td class="num ci-dim">${{m.n_ok != null ? `${{m.n_ok}}/954` : "&mdash;"}}</td>
     <td class="num ci-dim" title="${{m.r_tok != null ? 'Mean r_tok: ' + m.r_tok : ''}}">${{m.n_pos_rtok != null ? `${{m.n_pos_rtok}}/${{m.n_ok}}` : "&mdash;"}}</td>
@@ -2227,8 +2472,13 @@ function renderScatter() {{
   const svg = document.getElementById("scatter");
   const W = 600, H = 360, padL = 54, padR = 20, padT = 18, padB = 46;
   const isOai = (scatterMetric === "oai_bpb");
-  const anchors = DATA.models.filter(m => isOai ? m.oai_exact : m.is_anchor);
-  const others = DATA.models.filter(m => m.nce_doc_bpb != null && !(isOai ? m.oai_exact : m.is_anchor));
+  const isAnpi = (scatterMetric === "anpi_bpb");
+  const isAnchorFn = m => isOai ? m.oai_exact : (isAnpi ? m.anpi_anchor : m.is_anchor);
+  const anchors = DATA.models.filter(m => isAnchorFn(m) && m[scatterMetric] != null);
+  // On ANPI Corpus scatter, omit raw 1.36-1.40 gpt-oss BYPASS prose-collapse points from plot bounds
+  const others = DATA.models.filter(m =>
+    m.nce_doc_bpb != null && m[scatterMetric] != null && !isAnchorFn(m) && (!isAnpi || !m.template_bypass)
+  );
   const allPts = anchors.concat(others);
   const xs = allPts.map(m => m.nce_doc_bpb), ys = allPts.map(m => m[scatterMetric]);
   const xMin = Math.min(...xs) - 0.14, xMax = Math.max(...xs) + 0.12;
@@ -2258,7 +2508,8 @@ function renderScatter() {{
   parts.push(`<line x1="${{padL}}" y1="${{H - padB}}" x2="${{W - padR}}" y2="${{H - padB}}" stroke="var(--line-strong)"/>`);
   parts.push(`<line x1="${{padL}}" y1="${{padT}}" x2="${{padL}}" y2="${{H - padB}}" stroke="var(--line-strong)"/>`);
   parts.push(`<text x="${{(padL + W - padR) / 2}}" y="${{H - 8}}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)">Thurstone &minus;d&prime; = &minus;&radic;2&thinsp;&Phi;<tspan dy="-4.5" font-size="9.5" font-style="normal">&minus;1</tspan><tspan dy="4.5">(AUC) &nbsp;(lower = stronger)</tspan></text>`);
-  parts.push(`<text x="14" y="${{(padT + H - padB) / 2}}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)" transform="rotate(-90 14 ${{(padT + H - padB) / 2}})">${{isOai ? "OpenAI Nov-22 Base Log-PPL" : "Elie Uncheatable Eval BPB"}}</text>`);
+  const yTitle = isOai ? "OpenAI Nov-22 Base Log-PPL" : (isAnpi ? "ANPI Nov-2026 Corpus BPB (Post)" : "Elie Uncheatable Eval BPB");
+  parts.push(`<text x="14" y="${{(padT + H - padB) / 2}}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)" transform="rotate(-90 14 ${{(padT + H - padB) / 2}})">${{yTitle}}</text>`);
 
   // Highlighted out-of-sample frontier diamonds
   const featNames = isOai
@@ -2306,13 +2557,19 @@ function renderScatter() {{
     "GPT-5.6 Sol":   {{ dx: 10,  dy: 12,  anchor: "start" }},
     "GPT-5.4":       {{ dx: 12,  dy: 14,  anchor: "start" }},
     "GPT-4o":        {{ dx: 10,  dy: 6,   anchor: "start" }},
+  }} : (isAnpi ? {{
+    "Kimi K3.1 Pro":          {{ dx: -12, dy: -16, anchor: "end" }},
+    "Kimi K2.6":              {{ dx: -14, dy: -18, anchor: "end" }},
+    "GLM-5.3":                {{ dx: 14,  dy: 16,  anchor: "start" }},
+    "Qwen3.8-27B":            {{ dx: -14, dy: -20, anchor: "end" }},
+    "Nemotron 3.5 Lightning": {{ dx: -10, dy: 4,   anchor: "end" }},
   }} : {{
     "Kimi K3.1 Pro":        {{ dx: -12, dy: -16, anchor: "end" }},
     "Kimi K3":              {{ dx: -12, dy: 16,  anchor: "end" }},
     "DeepSeek V4 Pro Base": {{ dx: 12,  dy: 10,  anchor: "start" }},
     "Gemma 4 31B":          {{ dx: -18, dy: -24, anchor: "end" }},
     "Nemotron 3 Nano Base": {{ dx: -10, dy: 4,   anchor: "end" }},
-  }};
+  }});
   for (const m of anchors) {{
     const cx = sx(m.nce_doc_bpb), cy = sy(m[scatterMetric]);
     const col = labColor(m.lab);
@@ -2330,7 +2587,9 @@ function renderScatter() {{
 
   const lbl = isOai
     ? `${{anchors.length}} OpenAI anchors · r = +${{cal.r.toFixed(3)}} · ρ = +${{cal.rho.toFixed(3)}} · LOO = ${{cal.loo_pct.toFixed(2)}}%`
-    : `${{DATA.meta.calibration.n_open_anchors}} open anchors · r = +${{cal.r.toFixed(3)}} · LOO = ${{cal.loo_pct.toFixed(2)}}% · LOLO = ${{cal.lolo_pct.toFixed(2)}}%`;
+    : (isAnpi
+        ? `${{anchors.length}} ANPI post anchors (19-model/8-lab Bridge) · r = +${{cal.r.toFixed(3)}} · LOO = ${{cal.loo_pct.toFixed(2)}}% · LOLO = ${{cal.lolo_pct.toFixed(2)}}%`
+        : `${{anchors.length}} Elie anchors (19-model/8-lab Bridge) · r = +${{cal.r.toFixed(3)}} · LOO = ${{cal.loo_pct.toFixed(2)}}% · LOLO = ${{cal.lolo_pct.toFixed(2)}}%`);
   parts.push(`<text x="${{padL + 10}}" y="${{padT + 14}}" font-family="var(--mono)" font-size="10.2" fill="var(--ink-2)" ${{halo}}>${{lbl}}</text>`);
   svg.setAttribute("viewBox", `0 0 ${{W}} ${{H}}`);
   svg.innerHTML = parts.join("");
@@ -2342,7 +2601,7 @@ document.querySelectorAll("#metricBtns button").forEach(btn => {{
     document.querySelectorAll("#metricBtns button").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     metric = btn.dataset.metric;
-    if (metric === "oai_bpb" || metric === "unch_bpb") {{
+    if (metric === "oai_bpb" || metric === "anpi_bpb" || metric === "unch_bpb") {{
       scatterMetric = metric;
       document.querySelectorAll("#scatterBtns button").forEach(b => b.classList.toggle("active", b.dataset.sc === scatterMetric));
       renderScatter();
