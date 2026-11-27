@@ -1,4 +1,4 @@
-# Anpaure Pretraining Index (v1) & Black-Box Perplexity Harness
+# Anpaure Pretraining Index (ANPI) & Black-Box Perplexity Harness
 
 **Live Interactive Leaderboard:** https://anpaure.github.io/pretraining-index/ · **Technical Writeup:** https://anpaure.github.io/pretraining-index/writeup.html (`WRITEUP.md`) · **Elie & BPBench Diff:** https://anpaure.github.io/pretraining-index/comparison.html
 

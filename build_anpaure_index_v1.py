@@ -690,7 +690,7 @@ def build() -> None:
     total_spend = sum(d["cost"] for d in eval_data.values())
     payload = {
         "meta": {
-            "title": "Anpaure Pretraining Index v1",
+            "title": "Anpaure Pretraining Index (ANPI) v1",
             "built": "2026-11-26",
             "scoring_rule": "pairwise_auc_thurstone_probit_log_bpb",
             "n_items": n_items,
@@ -721,7 +721,7 @@ def build() -> None:
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Anpaure Pretraining Index — Open &amp; Closed Frontier Models</title>
+<title>Anpaure Pretraining Index (ANPI) — Open &amp; Closed Frontier Models</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -857,8 +857,12 @@ def build() -> None:
   }}
   .nav-mob a:hover {{ color: var(--ink); background: var(--row-hover); }}
   .upd {{ font: 400 11.5px/1 var(--mono); color: var(--faint); white-space: nowrap; }}
-  @media (max-width: 960px) {{ .upd {{ display: none; }} }}
-  @media (max-width: 760px) {{
+  @media (max-width: 1060px) {{ .upd {{ display: none; }} }}
+  @media (max-width: 960px) {{
+    .nav-inner {{ gap: 12px; }}
+    .nav-links a {{ font-size: 12.5px; padding: 5px 7px; }}
+  }}
+  @media (max-width: 860px) {{
     .nav-links {{ display: none; }}
     .nav-mob {{ display: inline-flex; }}
   }}
@@ -1317,7 +1321,7 @@ def build() -> None:
 <body>
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="wordmark">Anpaure Index</a>
+    <a href="#" class="wordmark">Anpaure (ANPI)</a>
     <div class="nav-links">
       <a href="#leaderboard">Leaderboard</a>
       <a href="#oai-perplexity">Perplexity</a>
@@ -1349,7 +1353,7 @@ def build() -> None:
 
 <main class="wrap">
   <header class="hero">
-    <h1>Anpaure Pretraining Index</h1>
+    <h1>Anpaure Pretraining Index (ANPI)</h1>
     <p class="lead">
       Black-box 8-choice continuation-ranking benchmark across <b>{n_items} post-cutoff Nov-2026 items</b> ({n_unique_urls} source URLs, 5 domains) with 24B neutral decoys—scored by pairwise rank <b>AUC</b> and calibrated via Thurstone <i>d&prime;</i> onto log-BPB.
     </p>
@@ -1456,11 +1460,12 @@ def build() -> None:
       <p class="sec-sub">
         Models mapped onto OpenAI&rsquo;s Nov-22 base log-perplexity scale (<strong>&darr; lower is better</strong>) via the 2-parameter Thurstone <i>d&prime;</i> &rarr; ln(BPB) ruler (<code>r = {cal_oai['r']:+.3f}</code>, <code>&rho; = {cal_oai['rho']:+.3f}</code>, <code>LOO = {cal_oai['loo_pct']:.2f}%</code> across {len(oai_mids)} published OpenAI anchors). Vertical bars show 95% Student-<i>t</i> prediction intervals; hollow rings mark <code>EXTRAP</code> models below top anchor <code>GPT-6.2 Astra</code> (<code>0.761</code>).
       </p>
-      <div class="chart-legend">
-        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4.5" fill="var(--lab-openai)" stroke="var(--ink)" stroke-width="1.3"/></svg>Published OpenAI anchor</span>
-        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4" fill="var(--lab-google)"/></svg>Translated (within anchor span)</span>
-        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4" fill="var(--surface)" stroke="var(--lab-anthropic)" stroke-width="2"/></svg>Extrapolated below 0.761 (EXTRAP)</span>
-        <span style="color:var(--faint);">&darr; Lower log-perplexity = stronger base pretraining</span>
+      <div class="chart-legend" style="gap:10px 14px;">
+        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4.5" fill="var(--lab-openai)" stroke="var(--ink)" stroke-width="1.3"/></svg>Published anchor</span>
+        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4" fill="var(--lab-google)"/></svg>Translated</span>
+        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4" fill="var(--surface)" stroke="var(--lab-anthropic)" stroke-width="2"/></svg>Extrapolated (&lt;0.761)</span>
+        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><polygon points="6,1.5 10.5,6 6,10.5 1.5,6" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.3"/></svg>Anpaure fit (Anchors view)</span>
+        <span style="color:var(--faint);margin-left:auto;">&darr; Lower = stronger</span>
       </div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
         <svg id="oaiPerpChart" viewBox="0 0 1100 450" style="min-width:720px;"></svg>
@@ -1526,10 +1531,10 @@ def build() -> None:
         </div>
       </div>
       <p class="sec-sub">
-        Solid circles are published anchor ground truths used to fit the 2-parameter log-BPB Thurstone ruler <code>ln(BPB) = a + b&middot;(&minus;d&prime;)</code>; diamonds are out-of-sample projections.
+        Outlined circles are published anchor ground truths used to fit the 2-parameter log-BPB Thurstone ruler <code>ln(BPB) = a + b&middot;(&minus;d&prime;)</code>; diamonds highlight frontier projections and muted dots show the remaining live models.
       </p>
       <div class="cal-grid">
-        <svg id="scatter" viewBox="0 0 600 350"></svg>
+        <svg id="scatter" viewBox="0 0 600 360"></svg>
         <div class="prose-side">
           <p><strong>Why Pairwise AUC + Thurstone <i>d&prime;</i> onto log-BPB.</strong> Across all {sum(d['n_ok'] for d in eval_data.values()):,} real rank rows, candidate scores follow <b>Thurstone Case V</b> (Gaussian sums of token log-probs, <code>6.8&times;</code> lower KL than Plackett-Luce), and tail ranks <code>r &ge; 2</code> retain partial correlation <code>+0.73&ndash;+0.76</code> with true BPB after controlling for Top-1. Combining Thurstone <code>d&prime; = &radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC)</code> with Ruan et al. (NeurIPS 2024) yields the 2-parameter law <code>ln(BPB) = a &minus; b&middot;d&prime;</code>—achieving <code>r = {cal_oai['r']:+.3f}, &rho; = {cal_oai['rho']:+.3f}, LOO = {cal_oai['loo_pct']:.2f}%</code> across all {len(oai_mids)} published OpenAI models and <code>r = {cal_unch['r']:+.3f}, LOO = {cal_unch['loo_pct']:.2f}%, LOLO = {cal_unch['lolo_pct']:.2f}%</code> across Elie’s {len(anchors)} open models ({cal_unch['n_labs']} labs), with zero statistically significant ceiling curvature across 4 independent datasets.</p>
           <p><strong>Extrapolation above anchor ranges.</strong> On OpenAI’s ruler, <code>Claude Fable 5.2</code> (<code>0.8550</code>) and <code>Gemini 4 Carbon</code> (<code>0.8482</code>) exceed top anchor <code>GPT-6.2 Astra</code> (<code>0.8444</code>); on Elie’s open ruler, the top closed tier exceeds <code>Kimi K3.1 Pro</code> (<code>0.7518</code>). Every model outside its anchor span is flagged <code>EXTRAP</code> with exact exponentiated Student-<i>t</i> intervals.</p>
@@ -2037,19 +2042,25 @@ function renderOaiPerplexity() {{
   }}
 
   const n = list.length;
-  const W = oaiGraphView === "anchors" ? 920 : Math.max(1160, n * 31 + 156);
-  const H = oaiGraphView === "anchors" ? 395 : 460;
-  const padL = 56, padR = 98, padT = 26, plotB = oaiGraphView === "anchors" ? 305 : 300;
+  const W = oaiGraphView === "anchors" ? 900 : (oaiGraphView === "top36" ? 1120 : Math.max(1160, n * 24 + 156));
+  const H = oaiGraphView === "anchors" ? 390 : 455;
+  const padL = 56, padR = 98, padT = 26, plotB = oaiGraphView === "anchors" ? 305 : 298;
   svg.setAttribute("viewBox", `0 0 ${{W}} ${{H}}`);
-  svg.style.minWidth = oaiGraphView === "anchors" ? "520px" : `${{Math.max(760, n * 21)}}px`;
+  svg.style.minWidth = oaiGraphView === "anchors" ? "520px" : (oaiGraphView === "top36" ? "760px" : `${{Math.max(760, n * 18)}}px`);
 
-  const vals = list.flatMap(m => m.oai_ci ? [m.oai_ci[0], m.oai_ci[1], m.oai_bpb] : [m.oai_bpb]);
-  const yMin = Math.floor(Math.min(0.735, ...vals) * 50) / 50;
-  const yMax = Math.ceil(Math.max(oaiGraphView === "top36" ? 0.895 : 0.96, ...vals) * 50) / 50;
+  const vals = list.flatMap(m => {{
+    const arr = [m.oai_bpb];
+    if (m.oai_ci && !m.oai_exact) arr.push(m.oai_ci[0], m.oai_ci[1]);
+    if (oaiGraphView === "anchors" && m.oai_est != null) arr.push(m.oai_est);
+    return arr;
+  }});
+  const yMin = Math.floor((Math.min(...vals) - 0.008) * 50) / 50;
+  const yMax = Math.ceil((Math.max(...vals) + (oaiGraphView === "anchors" ? 0.018 : 0.012)) * 50) / 50;
   // OpenAI chart convention: higher log-perplexity at TOP, lower (better!) at BOTTOM!
   const sy = v => padT + ((yMax - v) / (yMax - yMin)) * (plotB - padT);
   const step = (W - padL - padR) / Math.max(1, n);
   const sx = i => padL + (i + 0.5) * step;
+  const halo = `paint-order="stroke" stroke="var(--surface)" stroke-width="3.2" stroke-linejoin="round"`;
 
   let parts = [];
   // Shaded extrapolation zone below GPT-6.2 Astra (0.761)
@@ -2091,8 +2102,9 @@ function renderOaiPerplexity() {{
     parts.push(`<polyline points="${{pts}}" fill="none" stroke="var(--lab-openai)" stroke-width="2" stroke-opacity="0.7"/>`);
   }}
 
-  const valFs = n > 60 ? "7.4" : (n > 20 ? "8.5" : "10.5");
+  const valFs = n > 60 ? "7.8" : (n > 20 ? "8.8" : "10.5");
   const nameFs = n > 60 ? "9.0" : (n > 20 ? "10.2" : "11.5");
+  let lastLblX = -999;
 
   list.forEach((m, i) => {{
     const cx = sx(i);
@@ -2104,13 +2116,15 @@ function renderOaiPerplexity() {{
     if (m.oai_ci && !isPub) {{
       const yHi = sy(m.oai_ci[1]);
       const yLo = sy(m.oai_ci[0]);
-      parts.push(`<line x1="${{cx}}" y1="${{yHi}}" x2="${{cx}}" y2="${{yLo}}" stroke="${{col}}" stroke-width="1.4" stroke-opacity="0.5"/>`);
-      parts.push(`<line x1="${{cx - 3}}" y1="${{yHi}}" x2="${{cx + 3}}" y2="${{yHi}}" stroke="${{col}}" stroke-width="1.2" stroke-opacity="0.55"/>`);
-      parts.push(`<line x1="${{cx - 3}}" y1="${{yLo}}" x2="${{cx + 3}}" y2="${{yLo}}" stroke="${{col}}" stroke-width="1.2" stroke-opacity="0.55"/>`);
+      parts.push(`<line x1="${{cx}}" y1="${{yHi}}" x2="${{cx}}" y2="${{yLo}}" stroke="${{col}}" stroke-width="1.4" stroke-opacity="0.48"/>`);
+      parts.push(`<line x1="${{cx - 3}}" y1="${{yHi}}" x2="${{cx + 3}}" y2="${{yHi}}" stroke="${{col}}" stroke-width="1.2" stroke-opacity="0.52"/>`);
+      parts.push(`<line x1="${{cx - 3}}" y1="${{yLo}}" x2="${{cx + 3}}" y2="${{yLo}}" stroke="${{col}}" stroke-width="1.2" stroke-opacity="0.52"/>`);
     }}
+    let topMarkerY = cy;
     // Also show Anpaure estimate diamond on OpenAI Anchors view so users see exact 0.85% LOO fit!
     if (oaiGraphView === "anchors" && m.oai_est != null) {{
       const ey = sy(m.oai_est);
+      topMarkerY = Math.min(cy, ey);
       parts.push(`<line x1="${{cx}}" y1="${{cy}}" x2="${{cx}}" y2="${{ey}}" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="2,2"/>`);
       parts.push(`<polygon points="${{cx}},${{ey - 4.5}} ${{cx + 4.5}},${{ey}} ${{cx}},${{ey + 4.5}} ${{cx - 4.5}},${{ey}}" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.4"><title>${{m.name}}: Published ${{m.oai_bpb.toFixed(3)}} vs Anpaure Est ${{m.oai_est.toFixed(3)}}</title></polygon>`);
     }}
@@ -2120,9 +2134,14 @@ function renderOaiPerplexity() {{
     const sw = isPub ? 1.5 : (isExtrap ? 2.0 : 1.0);
     const tip = `${{m.name}} (${{m.lab}}): OpenAI Log-PPL ${{m.oai_bpb.toFixed(3)}}${{isPub ? " [Published]" : (m.oai_ci ? ` [95% CI ${{m.oai_ci[0].toFixed(3)}}–${{m.oai_ci[1].toFixed(3)}}]` : "")}} · AUC ${{m.auc.toFixed(4)}} · Top-1 ${{m.top1_pct.toFixed(1)}}%`;
     parts.push(`<circle cx="${{cx}}" cy="${{cy}}" r="${{r}}" fill="${{fill}}" stroke="${{stroke}}" stroke-width="${{sw}}"><title>${{tip}}</title></circle>`);
-    if (n <= 40 || i % 2 === 0) {{
-      const yLbl = isPub ? cy - 9 : (m.oai_ci ? sy(m.oai_ci[1]) - 5 : cy - 8);
-      parts.push(`<text x="${{cx}}" y="${{Math.max(padT + 9, yLbl)}}" text-anchor="middle" font-family="var(--mono)" font-size="${{valFs}}" fill="var(--ink-2)">${{m.oai_bpb.toFixed(3)}}</text>`);
+    const minGap = oaiGraphView === "anchors" ? 0 : (n > 60 ? 36 : 33);
+    const mustShow = oaiGraphView === "anchors" || isPub || i < 4;
+    if (mustShow && cx - lastLblX >= 24 || cx - lastLblX >= minGap) {{
+      const yLbl = oaiGraphView === "anchors"
+        ? topMarkerY - 10
+        : (isPub ? cy - 10 : (m.oai_ci ? sy(m.oai_ci[1]) - 6 : cy - 9));
+      parts.push(`<text x="${{cx}}" y="${{Math.max(padT + 9, yLbl)}}" text-anchor="middle" font-family="var(--mono)" font-size="${{valFs}}" font-weight="${{isPub ? 600 : 400}}" fill="${{isPub ? 'var(--ink)' : 'var(--ink-2)'}}" ${{halo}}>${{m.oai_bpb.toFixed(3)}}</text>`);
+      lastLblX = cx;
     }}
     parts.push(`<text x="${{cx + 3}}" y="${{plotB + 12}}" transform="rotate(42 ${{cx + 3}} ${{plotB + 12}})" text-anchor="start" font-family="var(--sans)" font-size="${{nameFs}}" font-weight="${{isPub ? 600 : 400}}" fill="${{isPub ? 'var(--ink)' : 'var(--ink-2)'}}">${{m.name}}</text>`);
   }});
@@ -2206,14 +2225,14 @@ function renderShowdown() {{
 
 function renderScatter() {{
   const svg = document.getElementById("scatter");
-  const W = 600, H = 350, padL = 52, padR = 18, padT = 16, padB = 42;
+  const W = 600, H = 360, padL = 54, padR = 20, padT = 18, padB = 46;
   const isOai = (scatterMetric === "oai_bpb");
   const anchors = DATA.models.filter(m => isOai ? m.oai_exact : m.is_anchor);
   const others = DATA.models.filter(m => m.nce_doc_bpb != null && !(isOai ? m.oai_exact : m.is_anchor));
   const allPts = anchors.concat(others);
   const xs = allPts.map(m => m.nce_doc_bpb), ys = allPts.map(m => m[scatterMetric]);
-  const xMin = Math.min(...xs) - 0.12, xMax = Math.max(...xs) + 0.12;
-  const yMin = Math.min(...ys) - 0.025, yMax = Math.max(...ys) + 0.025;
+  const xMin = Math.min(...xs) - 0.14, xMax = Math.max(...xs) + 0.12;
+  const yMin = Math.min(...ys) - 0.032, yMax = Math.max(...ys) + 0.028;
   const sx = x => padL + ((x - xMin) / (xMax - xMin)) * (W - padL - padR);
   const sy = y => H - padB - ((y - yMin) / (yMax - yMin)) * (H - padT - padB);
 
@@ -2225,6 +2244,7 @@ function renderScatter() {{
     curvePts.push(`${{sx(xv).toFixed(1)}},${{sy(yv).toFixed(1)}}`);
   }}
 
+  const halo = `paint-order="stroke" stroke="var(--surface)" stroke-width="3.5" stroke-linejoin="round"`;
   let parts = [];
   for (let i = 0; i <= 4; i++) {{
     const yv = yMin + (i / 4) * (yMax - yMin), yp = sy(yv);
@@ -2236,35 +2256,83 @@ function renderScatter() {{
     parts.push(`<text x="${{xp}}" y="${{H - padB + 16}}" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--faint)">${{xv.toFixed(2)}}</text>`);
   }}
   parts.push(`<line x1="${{padL}}" y1="${{H - padB}}" x2="${{W - padR}}" y2="${{H - padB}}" stroke="var(--line-strong)"/>`);
-  parts.push(`<text x="${{(padL + W - padR) / 2}}" y="${{H - 7}}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)">Thurstone &minus;d&prime; = &minus;&radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC) &nbsp;(lower = better)</text>`);
+  parts.push(`<line x1="${{padL}}" y1="${{padT}}" x2="${{padL}}" y2="${{H - padB}}" stroke="var(--line-strong)"/>`);
+  parts.push(`<text x="${{(padL + W - padR) / 2}}" y="${{H - 8}}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)">Thurstone &minus;d&prime; = &minus;&radic;2&thinsp;&Phi;<tspan dy="-4.5" font-size="9.5" font-style="normal">&minus;1</tspan><tspan dy="4.5">(AUC) &nbsp;(lower = stronger)</tspan></text>`);
   parts.push(`<text x="14" y="${{(padT + H - padB) / 2}}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)" transform="rotate(-90 14 ${{(padT + H - padB) / 2}})">${{isOai ? "OpenAI Nov-22 Base Log-PPL" : "Elie Uncheatable Eval BPB"}}</text>`);
-  parts.push(`<polyline points="${{curvePts.join(' ')}}" fill="none" stroke="var(--ink)" stroke-width="1.35" stroke-dasharray="4,4" opacity="0.65"/>`);
 
-  for (const m of anchors) {{
+  // Highlighted out-of-sample frontier diamonds
+  const featNames = isOai
+    ? new Set(["Claude Fable 5.2", "Gemini 4 Carbon", "Claude Opus 5.5"])
+    : new Set(["Claude Fable 5.2", "Gemini 4 Carbon", "GPT-6.2 Astra", "Claude Opus 5.5"]);
+
+  // 1. Regression curve underneath points
+  parts.push(`<polyline points="${{curvePts.join(' ')}}" fill="none" stroke="var(--ink)" stroke-width="1.35" stroke-dasharray="4,4" opacity="0.55"/>`);
+
+  // 2. Background projected models (quiet translucent ticks so they never bury anchors!)
+  for (const m of others) {{
+    if (featNames.has(m.name)) continue;
     const cx = sx(m.nce_doc_bpb), cy = sy(m[scatterMetric]);
-    parts.push(`<circle cx="${{cx}}" cy="${{cy}}" r="5" fill="${{labColor(m.lab)}}" stroke="var(--surface)" stroke-width="1.4"><title>${{m.name}} (anchor): AUC=${{m.auc}}, -d'=${{m.nce_doc_bpb}}, Exact=${{m[scatterMetric]}}</title></circle>`);
-    if (["GPT-6.2 Astra", "GPT-5.6 Sol", "GPT-4o", "Kimi K3.1 Pro", "Nemotron 3 Nano Base"].includes(m.name)) {{
-      const right = m.name === "Nemotron 3 Nano Base";
-      parts.push(`<text x="${{cx + (right ? -8 : 8)}}" y="${{cy + 3.5}}" text-anchor="${{right ? 'end' : 'start'}}" font-family="var(--sans)" font-size="9.5" font-weight="500" fill="var(--ink-2)">${{m.name.replace(" Base", "")}}</text>`);
-    }}
+    parts.push(`<circle cx="${{cx}}" cy="${{cy}}" r="2.3" fill="${{labColor(m.lab)}}" opacity="0.32"><title>${{m.name}} (est): AUC=${{m.auc}}, -d'=${{m.nce_doc_bpb}}, Est=${{m[scatterMetric]}}</title></circle>`);
   }}
-  const labelOffsets = {{
-    "Claude Fable 5.2": {{ dx: 8, dy: -11, anchor: "start" }},
-    "Gemini 4 Carbon":  {{ dx: 8, dy: 14, anchor: "start" }},
-    "Claude Opus 5.5":  {{ dx: -8, dy: -8, anchor: "end" }},
+
+  // 3. Featured frontier projected diamonds with clean non-overlapping leader callouts
+  const featOffsets = isOai ? {{
+    "Claude Fable 5.2": {{ dx: -18, dy: -40, anchor: "start" }},
+    "Gemini 4 Carbon":  {{ dx: 12,  dy: 28,  anchor: "start" }},
+    "Claude Opus 5.5":  {{ dx: -16, dy: -36, anchor: "end" }},
+  }} : {{
+    "Claude Fable 5.2": {{ dx: -16, dy: -34, anchor: "start" }},
+    "Gemini 4 Carbon":  {{ dx: 16,  dy: 26,  anchor: "start" }},
+    "GPT-6.2 Astra":    {{ dx: 34,  dy: 6,   anchor: "start" }},
+    "Claude Opus 5.5":  {{ dx: -14, dy: -26, anchor: "end" }},
   }};
   for (const m of others) {{
+    if (!featNames.has(m.name)) continue;
     const cx = sx(m.nce_doc_bpb), cy = sy(m[scatterMetric]);
-    parts.push(`<polygon points="${{cx}},${{cy - 5}} ${{cx + 5}},${{cy}} ${{cx}},${{cy + 5}} ${{cx - 5}},${{cy}}" fill="${{labColor(m.lab)}}" stroke="var(--surface)" stroke-width="1"><title>${{m.name}} (est): AUC=${{m.auc}}, -d'=${{m.nce_doc_bpb}}, Est=${{m[scatterMetric]}}, CoT=${{m.n_pos_rtok}}/${{m.n_ok}}</title></polygon>`);
-    const off = labelOffsets[m.name];
+    const col = labColor(m.lab);
+    parts.push(`<polygon points="${{cx}},${{cy - 5.2}} ${{cx + 5.2}},${{cy}} ${{cx}},${{cy + 5.2}} ${{cx - 5.2}},${{cy}}" fill="${{col}}" stroke="var(--surface)" stroke-width="1.4"><title>${{m.name}} (est): AUC=${{m.auc}}, -d'=${{m.nce_doc_bpb}}, Est=${{m[scatterMetric]}}</title></polygon>`);
+    const off = featOffsets[m.name];
     if (off) {{
-      parts.push(`<text x="${{cx + off.dx}}" y="${{cy + off.dy}}" text-anchor="${{off.anchor}}" font-family="var(--sans)" font-size="9.5" font-weight="500" fill="${{labColor(m.lab)}}">${{m.name}}</text>`);
+      const tx = cx + off.dx, ty = cy + off.dy;
+      parts.push(`<line x1="${{cx}}" y1="${{cy}}" x2="${{tx}}" y2="${{ty - (off.dy < 0 ? -3 : 6)}}" stroke="${{col}}" stroke-width="0.9" opacity="0.6"/>`);
+      parts.push(`<text x="${{tx}}" y="${{ty}}" text-anchor="${{off.anchor}}" font-family="var(--sans)" font-size="9.8" font-weight="600" fill="${{col}}" ${{halo}}>${{m.name}}</text>`);
     }}
   }}
+
+  // 4. Published ground-truth anchors ON TOP (crisp solid circles + zero-collision callouts!)
+  const anchorOffsets = isOai ? {{
+    "GPT-6.2 Astra": {{ dx: 48,  dy: 2,   anchor: "start" }},
+    "GPT-6 Astra":   {{ dx: 18,  dy: 10,  anchor: "start" }},
+    "GPT-5.6 Sol":   {{ dx: 10,  dy: 12,  anchor: "start" }},
+    "GPT-5.4":       {{ dx: 12,  dy: 14,  anchor: "start" }},
+    "GPT-4o":        {{ dx: 10,  dy: 6,   anchor: "start" }},
+  }} : {{
+    "Kimi K3.1 Pro":        {{ dx: -12, dy: -16, anchor: "end" }},
+    "Kimi K3":              {{ dx: -12, dy: 16,  anchor: "end" }},
+    "DeepSeek V4 Pro Base": {{ dx: 12,  dy: 10,  anchor: "start" }},
+    "Gemma 4 31B":          {{ dx: -18, dy: -24, anchor: "end" }},
+    "Nemotron 3 Nano Base": {{ dx: -10, dy: 4,   anchor: "end" }},
+  }};
+  for (const m of anchors) {{
+    const cx = sx(m.nce_doc_bpb), cy = sy(m[scatterMetric]);
+    const col = labColor(m.lab);
+    parts.push(`<circle cx="${{cx}}" cy="${{cy}}" r="5.5" fill="${{col}}" stroke="var(--ink)" stroke-width="1.3"><title>${{m.name}} (anchor): AUC=${{m.auc}}, -d'=${{m.nce_doc_bpb}}, Exact=${{m[scatterMetric]}}</title></circle>`);
+    const off = anchorOffsets[m.name];
+    if (off) {{
+      const tx = cx + off.dx, ty = cy + off.dy;
+      const dist = Math.hypot(off.dx, off.dy);
+      if (dist > 14) {{
+        parts.push(`<line x1="${{cx}}" y1="${{cy}}" x2="${{tx}}" y2="${{ty - (off.dy < 0 ? -3 : 6)}}" stroke="var(--ink-2)" stroke-width="0.85" opacity="0.55"/>`);
+      }}
+      parts.push(`<text x="${{tx}}" y="${{ty}}" text-anchor="${{off.anchor}}" font-family="var(--sans)" font-size="9.8" font-weight="600" fill="var(--ink)" ${{halo}}>${{m.name.replace(" Base", "")}}</text>`);
+    }}
+  }}
+
   const lbl = isOai
     ? `${{anchors.length}} OpenAI anchors · r = +${{cal.r.toFixed(3)}} · ρ = +${{cal.rho.toFixed(3)}} · LOO = ${{cal.loo_pct.toFixed(2)}}%`
     : `${{DATA.meta.calibration.n_open_anchors}} open anchors · r = +${{cal.r.toFixed(3)}} · LOO = ${{cal.loo_pct.toFixed(2)}}% · LOLO = ${{cal.lolo_pct.toFixed(2)}}%`;
-  parts.push(`<text x="${{padL + 8}}" y="${{padT + 14}}" font-family="var(--mono)" font-size="10.2" fill="var(--ink-2)">${{lbl}}</text>`);
+  parts.push(`<text x="${{padL + 10}}" y="${{padT + 14}}" font-family="var(--mono)" font-size="10.2" fill="var(--ink-2)" ${{halo}}>${{lbl}}</text>`);
+  svg.setAttribute("viewBox", `0 0 ${{W}} ${{H}}`);
   svg.innerHTML = parts.join("");
 }}
 
