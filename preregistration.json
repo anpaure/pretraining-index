@@ -1,0 +1,47 @@
+{
+  "status": "prospectively_frozen_template",
+  "experiment": "protocol_a_direct_responses_bpb_v1",
+  "scientific_question": "Estimate deployed-checkpoint Bits-Per-Byte (BPB) on fresh post-cutoff human text from Direct OpenAI /v1/responses using 1 unconstrained call per position (top_logprobs=20, zero forbidden interventions).",
+  "endpoint": "https://api.openai.com/v1/responses",
+  "protocol": {
+    "model": "gpt-5.6-sol",
+    "prompt_mode": "echo_chat",
+    "service_tier": "flex",
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_logprobs": 20,
+    "max_output_tokens": 48,
+    "reasoning_effort": "none",
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "store": false,
+    "structured_output": false,
+    "anchor_words": 8,
+    "position_fracs": [0.30, 0.55, 0.80],
+    "min_atoms_per_doc": 40,
+    "max_prefix_chars": 16000,
+    "words_only": false,
+    "zipf_vocab_size": 200000
+  },
+  "pricing_guard": {
+    "source": "Conservative Standard list prices for gpt-5.6-sol (checked 2026-09-05); applied conservatively even to Flex requests.",
+    "uncached_input_usd_per_million": 4.0,
+    "cached_input_usd_per_million": 0.4,
+    "output_usd_per_million": 20.0,
+    "hard_cap_usd": 5.0
+  },
+  "qa_gates": {
+    "reasoning_token_leaks_max": 0,
+    "adherence_clean_min": 0.90,
+    "adherence_marginal_min": 0.75,
+    "exact_topk_fraction_min": 0.99,
+    "open_model_validation_max_abs_bpb_error": 0.03,
+    "open_model_validation_slope_bounds": [0.85, 1.15]
+  },
+  "scope_boundaries": [
+    "Measures deployed post-trained checkpoint BPB, not base pretraining perplexity.",
+    "Does not use Structured Outputs, logit_bias, or frequency penalties (closed by prior Sol audits).",
+    "Treats whole documents/requests as the independent statistical unit via document-level bootstrap.",
+    "Must pass open-model ground-truth gate before quoting closed-model point rankings."
+  ]
+}

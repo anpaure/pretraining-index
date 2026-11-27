@@ -1,0 +1,282 @@
+{
+  "Qwen__Qwen3.8-Flash-Next": {
+    "label": "Qwen3.8-Flash-Next",
+    "kind": "post",
+    "repo": "Qwen/Qwen3.8-Flash-Next",
+    "index_5050": 0.5362083986002125,
+    "hq_bpb": 0.4453328972004251,
+    "unch_bpb": 0.6270838999999999,
+    "unch_prose_bpb": 0.7488049999999999,
+    "code_bpb": 0.2636044904438246
+  },
+  "allenai__Olmo-3-1125-32B": {
+    "label": "OLMo 3 32B",
+    "kind": "base",
+    "repo": "allenai/Olmo-3-1125-32B",
+    "index_5050": 0.579098279761088,
+    "hq_bpb": 0.5076879928555091,
+    "unch_bpb": 0.6505085666666667,
+    "unch_prose_bpb": 0.7659911111111111,
+    "code_bpb": 0.3817972503936123
+  },
+  "baidu__ERNIE-5.5-Flash-Base": {
+    "label": "ERNIE 5.5 Flash Base",
+    "kind": "base",
+    "repo": "baidu/ERNIE-5.5-Flash-Base",
+    "index_5050": 0.43824326252737955,
+    "hq_bpb": 0.3578650583880924,
+    "unch_bpb": 0.5186214666666666,
+    "unch_prose_bpb": 0.6235227777777778,
+    "code_bpb": 0.1851539225754239
+  },
+  "deepseek-ai__DeepSeek-V4-Flash-Base": {
+    "label": "DeepSeek V4 Flash Base",
+    "kind": "base",
+    "repo": "deepseek-ai/DeepSeek-V4-Flash-Base",
+    "index_5050": 0.4564530089052251,
+    "hq_bpb": 0.3802408844771169,
+    "unch_bpb": 0.5326651333333333,
+    "unch_prose_bpb": 0.6294155555555555,
+    "code_bpb": 0.2067282399385588
+  },
+  "deepseek-ai__DeepSeek-V4-Pro-Base": {
+    "label": "DeepSeek V4 Pro Base",
+    "kind": "base",
+    "repo": "deepseek-ai/DeepSeek-V4-Pro-Base",
+    "index_5050": 0.4273176291343721,
+    "hq_bpb": 0.3413106582687441,
+    "unch_bpb": 0.5133246,
+    "unch_prose_bpb": 0.6049933333333333,
+    "code_bpb": 0.17963938986278077
+  },
+  "deepseek-ai__DeepSeek-V4.1-Flash-1017": {
+    "label": "DeepSeek V4.1 Flash (1017)",
+    "kind": "post",
+    "repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "index_5050": 0.4583629521852528,
+    "hq_bpb": 0.3779377377038388,
+    "unch_bpb": 0.5387881666666667,
+    "unch_prose_bpb": 0.6543927777777777,
+    "code_bpb": 0.20133694223162818
+  },
+  "google__gemma-4-26B-A4B": {
+    "label": "Gemma 4 26B-A4B",
+    "kind": "post",
+    "repo": "google/gemma-4-26B-A4B",
+    "index_5050": 0.5258525266620634,
+    "hq_bpb": 0.46134248665746014,
+    "unch_bpb": 0.5903625666666666,
+    "unch_prose_bpb": 0.6866344444444444,
+    "code_bpb": 0.27870669373496565
+  },
+  "google__gemma-4-31B": {
+    "label": "Gemma 4 31B",
+    "kind": "post",
+    "repo": "google/gemma-4-31B",
+    "index_5050": 0.5047140837630201,
+    "hq_bpb": 0.4420977008593735,
+    "unch_bpb": 0.5673304666666666,
+    "unch_prose_bpb": 0.6611561111111111,
+    "code_bpb": 0.27058307725587283
+  },
+  "marin-community__marin-32b-base": {
+    "label": "Marin 32B base",
+    "kind": "base",
+    "repo": "marin-community/marin-32b-base",
+    "index_5050": 0.5812965204062525,
+    "hq_bpb": 0.5058228408125048,
+    "unch_bpb": 0.6567702000000001,
+    "unch_prose_bpb": 0.7690450000000001,
+    "code_bpb": 0.364714036480209
+  },
+  "meta-models__Muse-Spark-Open-816B-A42B": {
+    "label": "Muse Spark Open",
+    "kind": "post",
+    "repo": "meta-models/Muse-Spark-Open-816B-A42B",
+    "index_5050": 0.4363493571841778,
+    "hq_bpb": 0.3718087143683556,
+    "unch_bpb": 0.50089,
+    "unch_prose_bpb": 0.6005966666666668,
+    "code_bpb": 0.2019368524086625
+  },
+  "mistralai__Mistral-Large-4-1T-A52B": {
+    "label": "Mistral Large 4",
+    "kind": "post",
+    "repo": "mistralai/Mistral-Large-4-1T-A52B",
+    "index_5050": 0.5194552972159212,
+    "hq_bpb": 0.42585756109850903,
+    "unch_bpb": 0.6130530333333334,
+    "unch_prose_bpb": 0.7554705555555555,
+    "code_bpb": 0.2503673668806203
+  },
+  "moonshotai__Kimi-K3": {
+    "label": "Kimi K3",
+    "kind": "post",
+    "repo": "moonshotai/Kimi-K3",
+    "index_5050": 0.39605401277319163,
+    "hq_bpb": 0.30477022554638333,
+    "unch_bpb": 0.4873378,
+    "unch_prose_bpb": 0.58839,
+    "code_bpb": 0.15689428083330267
+  },
+  "moonshotai__Kimi-K3.1-Pro": {
+    "label": "Kimi K3.1 Pro",
+    "kind": "post",
+    "repo": "moonshotai/Kimi-K3.1-Pro",
+    "index_5050": 0.39243389549866226,
+    "hq_bpb": 0.30089862433065784,
+    "unch_bpb": 0.4839691666666667,
+    "unch_prose_bpb": 0.5859177777777779,
+    "code_bpb": 0.1534523396764254
+  },
+  "nvidia__NVIDIA-Nemotron-3-Nano-30B-A3B-Base-BF16": {
+    "label": "Nemotron 3 Nano Base",
+    "kind": "base",
+    "repo": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-Base-BF16",
+    "index_5050": 0.5759558908966782,
+    "hq_bpb": 0.5097988817933562,
+    "unch_bpb": 0.6421129000000001,
+    "unch_prose_bpb": 0.751975,
+    "code_bpb": 0.3707368013392724
+  },
+  "nvidia__NVIDIA-Nemotron-3-Super-120B-A12B-Base-BF16": {
+    "label": "Nemotron 3 Super Base",
+    "kind": "base",
+    "repo": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-Base-BF16",
+    "index_5050": 0.49734128074405504,
+    "hq_bpb": 0.4274860614881101,
+    "unch_bpb": 0.5671965,
+    "unch_prose_bpb": 0.6754666666666665,
+    "code_bpb": 0.26510119384049047
+  },
+  "nvidia__NVIDIA-Nemotron-3-Ultra-550B-A55B-Base-BF16": {
+    "label": "Nemotron 3 Ultra Base",
+    "kind": "base",
+    "repo": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-Base-BF16",
+    "index_5050": 0.46166201070726354,
+    "hq_bpb": 0.38870715474786044,
+    "unch_bpb": 0.5346168666666666,
+    "unch_prose_bpb": 0.6393494444444444,
+    "code_bpb": 0.23435441854790154
+  },
+  "nvidia__NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-Base-BF16": {
+    "label": "Nemotron 3.5 Super VL Base",
+    "kind": "base",
+    "repo": "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-Base-BF16",
+    "index_5050": 0.49273838216573645,
+    "hq_bpb": 0.42336363099813956,
+    "unch_bpb": 0.5621131333333333,
+    "unch_prose_bpb": 0.6716605555555555,
+    "code_bpb": 0.2605417184242106
+  },
+  "open-athena__Marin-Mochi-535B-A23B@step-393491": {
+    "label": "Marin Mochi 535B (final)",
+    "kind": "base",
+    "repo": "open-athena/Marin-Mochi-535B-A23B",
+    "index_5050": 0.45792592447741626,
+    "hq_bpb": 0.38042904895483254,
+    "unch_bpb": 0.5354228,
+    "unch_prose_bpb": 0.6359849999999999,
+    "code_bpb": 0.20795382761005268
+  },
+  "poolside__Laguna-M.1-base": {
+    "label": "Laguna M.1 base",
+    "kind": "base",
+    "repo": "poolside/Laguna-M.1-base",
+    "index_5050": 0.5085192080569152,
+    "hq_bpb": 0.42283188278049705,
+    "unch_bpb": 0.5942065333333334,
+    "unch_prose_bpb": 0.7067422222222222,
+    "code_bpb": 0.24361824447589364
+  },
+  "reflection__Beam-1.0-501B-A23B": {
+    "label": "Reflection Beam 1.0",
+    "kind": "post",
+    "repo": "reflection/Beam-1.0-501B-A23B",
+    "index_5050": 0.4421874537223085,
+    "hq_bpb": 0.368665207444617,
+    "unch_bpb": 0.5157097,
+    "unch_prose_bpb": 0.6235816666666666,
+    "code_bpb": 0.20585646694167464
+  },
+  "ricursiveAI__Ripple-65B-Base-Preview__tok-from-Preview": {
+    "label": "Ripple 65B Base",
+    "kind": "base",
+    "repo": "ricursiveAI/Ripple-65B-Base-Preview",
+    "index_5050": 0.5038736382182043,
+    "hq_bpb": 0.42973830976974203,
+    "unch_bpb": 0.5780089666666667,
+    "unch_prose_bpb": 0.6895294444444445,
+    "code_bpb": 0.26054470697885473
+  },
+  "ricursiveAI__Ripple-65B-Preview": {
+    "label": "Ripple 65B",
+    "kind": "post",
+    "repo": "ricursiveAI/Ripple-65B-Preview",
+    "index_5050": 0.5947648983586025,
+    "hq_bpb": 0.5164711300505384,
+    "unch_bpb": 0.6730586666666667,
+    "unch_prose_bpb": 0.8135394444444444,
+    "code_bpb": 0.34473961038815565
+  },
+  "stepfun-ai__Step-3.5-Flash": {
+    "label": "Step 3.5 Flash",
+    "kind": "post",
+    "repo": "stepfun-ai/Step-3.5-Flash",
+    "index_5050": 0.5217112639665833,
+    "hq_bpb": 0.44671602793316645,
+    "unch_bpb": 0.5967065,
+    "unch_prose_bpb": 0.7031366666666666,
+    "code_bpb": 0.2704683720386793
+  },
+  "stepfun-ai__Step-3.5-Flash-Base": {
+    "label": "Step 3.5 Flash Base",
+    "kind": "base",
+    "repo": "stepfun-ai/Step-3.5-Flash-Base",
+    "index_5050": 0.4882118596382517,
+    "hq_bpb": 0.41106815260983676,
+    "unch_bpb": 0.5653555666666666,
+    "unch_prose_bpb": 0.6661594444444444,
+    "code_bpb": 0.24006208357303885
+  },
+  "stepfun-ai__Step-3.5-Flash-Base-Midtrain": {
+    "label": "Step 3.5 Flash Base (midtrain)",
+    "kind": "base",
+    "repo": "stepfun-ai/Step-3.5-Flash-Base-Midtrain",
+    "index_5050": 0.5047575288812125,
+    "hq_bpb": 0.43046539109575827,
+    "unch_bpb": 0.5790496666666667,
+    "unch_prose_bpb": 0.6835844444444444,
+    "code_bpb": 0.2570310638686846
+  },
+  "thinkingmachines__Inkling-2-Mini": {
+    "label": "Inkling 2 Mini",
+    "kind": "post",
+    "repo": "thinkingmachines/Inkling-2-Mini",
+    "index_5050": 0.5428656082882239,
+    "hq_bpb": 0.47749528324311463,
+    "unch_bpb": 0.6082359333333333,
+    "unch_prose_bpb": 0.7475338888888888,
+    "code_bpb": 0.3436092611386759
+  },
+  "thinkingmachines__Inkling-2-Small": {
+    "label": "Inkling 2 Small",
+    "kind": "post",
+    "repo": "thinkingmachines/Inkling-2-Small",
+    "index_5050": 0.44698474092653406,
+    "hq_bpb": 0.38118678185306804,
+    "unch_bpb": 0.5127827,
+    "unch_prose_bpb": 0.6304866666666666,
+    "code_bpb": 0.21722661360181697
+  },
+  "zai-org__GLM-5.3-Flash": {
+    "label": "GLM-5.3 Flash",
+    "kind": "post",
+    "repo": "zai-org/GLM-5.3-Flash",
+    "index_5050": 0.47192091934468194,
+    "hq_bpb": 0.39544433868936396,
+    "unch_bpb": 0.5483975,
+    "unch_prose_bpb": 0.6593566666666667,
+    "code_bpb": 0.21690075731454028
+  }
+}

@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Anpaure Pretraining Index — Open &amp; Closed Frontier Models</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* Editorial minimalism inspired by eliebak.com/pretraining-index & deeprsi.com:
+     warm gallery paper, EB Garamond serif headings, IBM Plex Mono tabular labels,
+     hairline rules, light/dark toggle, and colour reserved strictly for the data. */
+  :root {
+    --ground: #f6f6f4;
+    --surface: #ffffff;
+    --subtle: #f0f0ed;
+    --muted-bg: #eaeae6;
+    --row-hover: rgba(0, 0, 0, .035);
+    --ink: #141413;
+    --ink-2: #52524e;
+    --faint: #807f7a;
+    --line: #dfdfda;
+    --line-strong: #c8c8c1;
+    --whisker-outer: #8f8e88;
+    --whisker-inner: #141413;
+    --serif: "EB Garamond", "Iowan Old Style", "New York", "Charter", Georgia, serif;
+    --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    /* Lab palette: muted editorial tones */
+    --lab-anthropic: #c45130;
+    --lab-openai: #755bc7;
+    --lab-google: #3587d6;
+    --lab-moonshot: #b24b7f;
+    --lab-deepseek: #3366dd;
+    --lab-nvidia: #6ba823;
+    --lab-zhipu: #2387c7;
+    --lab-qwen: #5b52d6;
+    --lab-tm: #70706c;
+    --lab-ricursive: #262625;
+    --lab-reflection: #1f8a70;
+    --lab-meta: #0866ff;
+    --lab-xai: #1f2328;
+    --lab-mistral: #d95d18;
+    --lab-minimax: #c2396a;
+    --lab-xiaomi: #e05a1e;
+    --lab-tencent: #1c78c0;
+    --lab-stepfun: #1a9c7d;
+    --lab-other: #8c8b85;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --ground: #131312;
+    --surface: #181817;
+    --subtle: #1f1f1d;
+    --muted-bg: #252522;
+    --row-hover: rgba(255, 255, 255, .04);
+    --ink: #f1f1ee;
+    --ink-2: #a8a8a2;
+    --faint: #767670;
+    --line: #282825;
+    --line-strong: #3c3c38;
+    --whisker-outer: #7d7d76;
+    --whisker-inner: #f1f1ee;
+    --lab-anthropic: #e06b47;
+    --lab-openai: #957de8;
+    --lab-google: #58a6ee;
+    --lab-moonshot: #d2689c;
+    --lab-deepseek: #5888f0;
+    --lab-nvidia: #87c43c;
+    --lab-zhipu: #44a7e6;
+    --lab-qwen: #8278f0;
+    --lab-tm: #969690;
+    --lab-ricursive: #b4b4ae;
+    --lab-reflection: #3db89a;
+    --lab-meta: #4d94ff;
+    --lab-xai: #d8dce3;
+    --lab-mistral: #f07b3a;
+    --lab-minimax: #e86090;
+    --lab-xiaomi: #f57a42;
+    --lab-tencent: #46a0e6;
+    --lab-stepfun: #34c7a4;
+    --lab-other: #8a8a84;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--ground);
+    background-image: var(--grain);
+    color: var(--ink);
+    font: 14.5px/1.55 var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, select { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+
+  /* Sticky frosted top bar (Elie + DeepRSI hybrid) */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 56px;
+    background: color-mix(in srgb, var(--ground) 86%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1090px; height: 100%; margin: 0 auto;
+    padding: 0 clamp(16px, 3vw, 32px);
+    display: flex; align-items: center; gap: 18px;
+  }
+  .wordmark {
+    font: 500 19px/1 var(--serif);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .nav-links { display: flex; align-items: center; gap: 2px; min-width: 0; }
+  .nav-links a {
+    font-size: 13px; color: var(--ink-2);
+    padding: 5px 9px; border-radius: 7px;
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--row-hover); }
+  .nav-r { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .upd { font: 400 11.5px/1 var(--mono); color: var(--faint); white-space: nowrap; }
+  @media (max-width: 960px) { .upd { display: none; } }
+  @media (max-width: 680px) { .nav-links { display: none; } }
+  .theme-btn {
+    width: 30px; height: 30px; border: 0; border-radius: 7px;
+    background: transparent; color: var(--ink-2);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .theme-btn:hover { background: var(--row-hover); color: var(--ink); }
+
+  /* Page container */
+  .wrap { max-width: 1090px; margin: 0 auto; padding: 0 clamp(18px, 3vw, 32px) 84px; }
+
+  /* DeepRSI airy serif hero */
+  .hero { padding: 48px 0 34px; }
+  .hero h1 {
+    font: 400 clamp(38px, 5vw, 52px)/1.06 var(--serif);
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  .hero .lead {
+    font: 400 16.5px/1.55 var(--sans);
+    color: var(--ink-2);
+    max-width: 720px;
+    margin: 0 0 20px;
+  }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 22px; font: 400 16px/1.3 var(--serif); }
+  .hero-links a {
+    display: inline-flex; align-items: center; gap: 5px;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+    transition: border-color 0.15s;
+  }
+  .hero-links a:hover { border-color: var(--ink); }
+
+  /* Quiet editorial stat strip (hairlines only, no SaaS boxes) */
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+    margin-bottom: 42px;
+    gap: 18px;
+  }
+  @media (max-width: 760px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } .nav-links { display: none; } }
+  .stat .k { font: 500 10.5px/1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); margin-bottom: 5px; }
+  .stat .v { font: 400 26px/1.1 var(--serif); letter-spacing: -0.015em; }
+  .stat .s { font: 400 12px/1.4 var(--sans); color: var(--ink-2); margin-top: 3px; }
+
+  /* Section headers */
+  section { margin-bottom: 56px; scroll-margin-top: 72px; }
+  .sec-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 12px; margin-bottom: 12px;
+  }
+  h2.sec-title {
+    font: 400 30px/1.15 var(--serif);
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  .sec-sub {
+    font-size: 13.5px; color: var(--ink-2);
+    max-width: 780px; margin: 0 0 18px; line-height: 1.55;
+  }
+
+  /* Elie-style calm grey-filled pill controls */
+  .toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .seg {
+    display: inline-flex; flex-wrap: wrap; gap: 2px;
+    padding: 3px; border-radius: 9px;
+    background: var(--subtle);
+  }
+  .seg button {
+    border: 0; background: transparent;
+    padding: 5px 12px; border-radius: 6px;
+    font: 500 12.5px/1.3 var(--sans); color: var(--ink-2);
+    transition: background 0.14s, color 0.14s;
+  }
+  .seg button:hover { color: var(--ink); }
+  .seg button.active {
+    background: var(--surface); color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  }
+  .tool-r { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+  /* Leaderboard + optional right-side OpenAI Milestones rail (hidden when .no-milestones) */
+  .lb-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 238px;
+    align-items: stretch;
+    gap: 0;
+  }
+  .lb-shell.no-milestones { grid-template-columns: 1fr; }
+  .lb-shell.no-milestones .lb-main { padding-right: 0; }
+  .lb-shell.no-milestones .oai-rail { display: none; }
+  .lb-main { min-width: 0; padding-right: 20px; }
+  .oai-rail {
+    border-left: 1.5px solid var(--ink);
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .oai-rail-head {
+    padding: 8px 0;
+    font: 500 10.5px/1 var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  }
+  .oai-rail-head a { color: var(--faint); font-size: 10px; border-bottom: 1px solid var(--line-strong); }
+  .oai-rail-head a:hover { color: var(--ink); border-color: var(--ink); }
+  .oai-rail-body {
+    position: relative;
+    flex: 1;
+    min-height: 440px;
+  }
+  .oai-ms {
+    position: absolute;
+    left: 0; right: 0;
+    transform: translateY(-50%);
+    padding: 4px 6px 4px 8px;
+    border-radius: 6px;
+    transition: top 0.2s ease, background 0.15s;
+  }
+  .oai-ms::before {
+    content: "";
+    position: absolute;
+    left: -19px; top: 50%;
+    width: 16px; height: 1.5px;
+    background: var(--ink);
+  }
+  .oai-ms::after {
+    content: "";
+    position: absolute;
+    left: -22.5px; top: 50%;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink);
+    transform: translateY(-50%);
+  }
+  .oai-ms-val {
+    font: 500 11px/1.15 var(--mono);
+    color: var(--ink);
+    display: flex; align-items: baseline; justify-content: space-between; gap: 6px;
+  }
+  .oai-ms-ref {
+    font: 400 10px/1.15 var(--mono);
+    color: var(--faint);
+    white-space: nowrap;
+  }
+  .oai-ms-lbl {
+    font: 400 14.5px/1.2 var(--serif);
+    color: var(--ink);
+    margin-top: 1px;
+  }
+  .oai-rail-foot {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    font: 400 10.5px/1.45 var(--mono);
+    color: var(--faint);
+  }
+  .oai-above {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 6px 0 7px;
+    border-bottom: 1px dashed var(--line-strong);
+  }
+  .oai-above-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 6px;
+    padding: 3px 7px; border-radius: 5px;
+    border: 1px solid var(--line); background: var(--surface);
+    font: 400 11.5px/1.25 var(--sans); color: var(--ink-2);
+  }
+  .oai-above-row b { font: 500 10.5px/1 var(--mono); color: var(--ink); white-space: nowrap; }
+  .oai-above-row.band {
+    background: color-mix(in srgb, var(--ink) 5%, transparent);
+    border: 1px dashed var(--line-strong);
+    font-style: italic;
+  }
+  @media (max-width: 1020px) {
+    .lb-shell { grid-template-columns: minmax(0, 1fr) 212px; }
+    .lb-main { padding-right: 14px; }
+    .oai-rail { padding-left: 14px; }
+    .oai-ms::before { left: -15px; width: 12px; }
+    .oai-ms::after { left: -18.5px; }
+    .lb-head, .lb-row { grid-template-columns: 26px minmax(140px, 178px) 1fr 54px; gap: 8px; }
+  }
+  @media (max-width: 720px) {
+    .lb-shell { grid-template-columns: 1fr; }
+    .lb-main { padding-right: 0; }
+    .oai-rail {
+      border-left: 0; border-top: 1.5px solid var(--ink);
+      padding-left: 0; padding-top: 14px; margin-top: 20px;
+    }
+    .oai-rail-body { min-height: 0 !important; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; padding-top: 10px; }
+    .oai-ms { position: static; transform: none; border: 1px solid var(--line); background: var(--surface); }
+    .oai-ms::before, .oai-ms::after { display: none; }
+  }
+
+  /* DeepRSI-style open hairline horizontal leaderboard */
+  .lb-head, .lb-row {
+    display: grid;
+    grid-template-columns: 34px minmax(195px, 255px) 1fr 76px;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .lb-head {
+    padding: 8px 6px;
+    font: 500 10.5px/1 var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .lb-row { transition: background 0.12s; cursor: pointer; }
+  .lb-row:hover { background: var(--row-hover); }
+  .lb-row.pinned { background: var(--row-hover); border-bottom-color: transparent; }
+  .lb-detail {
+    display: none;
+    padding: 8px 12px 12px 48px;
+    border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--subtle) 65%, transparent);
+    font: 400 12px/1.55 var(--mono);
+    color: var(--ink-2);
+  }
+  .lb-detail.open { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: baseline; }
+  .lb-detail b { color: var(--ink); font-weight: 500; }
+  .lb-detail .k { color: var(--faint); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 5px; }
+  .ci-popover {
+    position: fixed; z-index: 90; pointer-events: none;
+    opacity: 0; transform: translateY(4px); transition: opacity 0.12s ease, transform 0.12s ease;
+    background: var(--surface); border: 1px solid var(--line-strong); border-radius: 10px;
+    padding: 11px 14px; min-width: 245px; max-width: 340px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    font: 400 12px/1.5 var(--mono); color: var(--ink-2);
+  }
+  .ci-popover.show { opacity: 1; transform: translateY(0); }
+  .ci-popover .pop-title { font: 500 16px/1.2 var(--serif); color: var(--ink); margin-bottom: 2px; display: flex; align-items: center; gap: 7px; }
+  .ci-popover .pop-sub { font-size: 11px; color: var(--faint); margin-bottom: 8px; }
+  .ci-popover .pop-row { display: flex; justify-content: space-between; gap: 14px; padding: 2px 0; }
+  .ci-popover .pop-row b { color: var(--ink); font-weight: 500; }
+  .ci-popover .pop-div { border-top: 1px solid var(--line); margin: 6px 0; }
+  .ci-popover .pop-hint { font-size: 10.5px; color: var(--faint); margin-top: 5px; }
+  .lb-rank { font: 400 13px/1 var(--mono); color: var(--faint); font-variant-numeric: tabular-nums; }
+  .lb-model { display: flex; align-items: center; gap: 9px; min-width: 0; }
+  .lb-icon { width: 16px; height: 16px; flex: none; display: inline-flex; align-items: center; justify-content: center; }
+  .lb-name { font: 400 16.5px/1.2 var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .micro {
+    font: 500 9.5px/1 var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+  .micro.extrap { color: #b84438; }
+  .micro.cot { color: var(--lab-openai); }
+  .micro.bypass { color: #a16207; }
+  .micro.pub { color: #198258; }
+  :root[data-theme="dark"] .micro.extrap { color: #ef786b; }
+  :root[data-theme="dark"] .micro.bypass { color: #eab308; }
+  :root[data-theme="dark"] .micro.pub { color: #4ad09b; }
+
+  .lb-bar-cell { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .lb-track { position: relative; flex: 1; height: 14px; }
+  .lb-fill { position: absolute; top: 1px; bottom: 1px; left: 0; border-radius: 2px; transition: width 0.25s ease; }
+  .lb-fill.hatched {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.22) 0px, rgba(255,255,255,0.22) 3px,
+      transparent 3px, transparent 7px
+    );
+  }
+  .ci-outer { position: absolute; top: 6.5px; height: 1.5px; background: var(--whisker-outer); z-index: 2; }
+  .ci-outer-cap { position: absolute; top: 3.5px; width: 1.5px; height: 7.5px; background: var(--whisker-outer); z-index: 2; }
+  .ci-inner { position: absolute; top: 5px; height: 4px; background: var(--whisker-inner); border-radius: 1.5px; z-index: 3; opacity: 0.85; }
+  .lb-val { font: 400 13px/1 var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; min-width: 48px; }
+  .lb-sub { font: 400 12px/1 var(--mono); color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
+  .lb-sub.faint { color: var(--faint); }
+  @media (max-width: 760px) {
+    .lb-head, .lb-row { grid-template-columns: 26px 155px 1fr 56px; gap: 8px; }
+    .lb-detail { padding-left: 12px; }
+  }
+  .lb-legend {
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+    margin-top: 12px; font: 400 11.5px/1.4 var(--mono); color: var(--faint);
+  }
+  .sw { display: inline-block; width: 11px; height: 7px; border-radius: 1.5px; vertical-align: middle; margin-right: 5px; }
+  .sw.hatched {
+    background: var(--faint);
+    background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.45) 0 2px, transparent 2px 4px);
+  }
+
+  /* Elie-style clean white surface frame for visual charts */
+  .chart-frame {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 26px 22px;
+  }
+  .chart-frame .sec-title { font-size: 26px; margin-bottom: 6px; }
+  .chart-frame .sec-sub { margin-bottom: 16px; }
+  .chart-legend {
+    display: flex; flex-wrap: wrap; gap: 18px; align-items: center;
+    font-size: 12.5px; color: var(--ink-2); margin-bottom: 14px;
+  }
+  .chart-legend .chip { display: inline-flex; align-items: center; gap: 7px; }
+  .chart-legend .box { width: 16px; height: 10px; border-radius: 3px; background: var(--faint); }
+  .chart-legend .box.hatch {
+    background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.45) 0 2.5px, transparent 2.5px 5.5px);
+  }
+  svg { display: block; width: 100%; height: auto; }
+
+  /* Clean hairline tables (Head-to-Head + Full Ledger) */
+  .tbl-wrap { overflow-x: auto; }
+  table.clean {
+    width: 100%; border-collapse: collapse;
+    font: 400 12.5px/1.4 var(--mono); font-variant-numeric: tabular-nums;
+  }
+  table.clean th {
+    text-align: left; padding: 8px 8px;
+    font: 500 10.5px/1 var(--mono); letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--faint); border-bottom: 1px solid var(--line-strong);
+    white-space: nowrap;
+  }
+  table.clean td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  table.clean tbody tr:hover { background: var(--row-hover); }
+  table.clean td.num, table.clean th.num { text-align: right; }
+  table.clean td.name-cell { font: 400 15.5px/1.2 var(--serif); }
+  .sig { color: #15803d; font-weight: 500; }
+  :root[data-theme="dark"] .sig { color: #4ade80; }
+  .ns { color: var(--faint); }
+  .ci-dim { color: var(--faint); font-size: 11px; }
+
+  /* Calibration scatter layout */
+  .cal-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 28px; align-items: start; }
+  @media (max-width: 860px) { .cal-grid { grid-template-columns: 1fr; } }
+  .prose-side p { font-size: 13.5px; color: var(--ink-2); margin: 0 0 12px; line-height: 1.62; }
+  .prose-side strong { color: var(--ink); font-weight: 500; }
+  code { font: 400 12px/1.3 var(--mono); background: var(--subtle); padding: 1px 5px; border-radius: 4px; }
+
+  /* Editorial two-column Methodology & Validation explainer */
+  .exp-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 36px;
+    border-top: 1px solid var(--line); padding-top: 32px;
+  }
+  @media (max-width: 860px) { .exp-grid { grid-template-columns: 1fr; gap: 28px; } }
+  .exp-col h2 { font: 400 28px/1.15 var(--serif); margin: 0 0 8px; }
+  .exp-col .sec-sub { margin-bottom: 16px; }
+  .exp-col ol { margin: 0 0 16px; padding-left: 19px; color: var(--ink-2); font-size: 13.5px; line-height: 1.62; }
+  .exp-col li { margin-bottom: 9px; }
+  .exp-col li strong { color: var(--ink); font-weight: 500; }
+  .note-box {
+    border-left: 2px solid var(--line-strong);
+    padding: 8px 0 8px 14px;
+    font-size: 12.8px; color: var(--ink-2); line-height: 1.58;
+    margin-top: 12px;
+  }
+  .note-box strong { color: var(--ink); font-weight: 500; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    font: 400 12px/1.6 var(--mono);
+    color: var(--faint);
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  }
+  footer a { border-bottom: 1px solid var(--line-strong); }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="wordmark">Anpaure Index</a>
+    <div class="nav-links">
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#win-rate">Win rate</a>
+      <a href="#head-to-head">Pairs</a>
+      <a href="#calibration">Calibration</a>
+      <a href="#how-calculated">Method</a>
+      <a href="#ledger">Ledger</a>
+      <a href="./writeup.html">Writeup</a>
+    </div>
+    <div class="nav-r">
+      <span class="upd">26 Nov 2026</span>
+      <button class="theme-btn" id="themeBtn" title="Toggle light / dark theme" aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <h1>Anpaure Pretraining Index</h1>
+    <p class="lead">
+      Black-box 8-choice continuation-ranking benchmark across <b>954 post-cutoff Nov-2026 items</b> (908 source URLs, 5 domains) with 24B neutral decoys—scored by pairwise rank <b>AUC</b> and calibrated via Thurstone <i>d&prime;</i> onto log-BPB.
+    </p>
+    <div class="hero-links">
+      <a href="./writeup.html">Read the technical writeup &rarr;</a>
+      <a href="#how-calculated">How is this calculated? &rarr;</a>
+      <a href="#does-it-hold-up">Does this hold up against other evals? &rarr;</a>
+      <a href="#head-to-head">Head-to-head significance &rarr;</a>
+    </div>
+  </header>
+
+  <div class="stat-strip">
+    <div class="stat">
+      <div class="k">Models ranked</div>
+      <div class="v">116</div>
+      <div class="s">105 live endpoints · 68 closed, 48 open</div>
+    </div>
+    <div class="stat">
+      <div class="k">Within-OpenAI LOO</div>
+      <div class="v">0.85%</div>
+      <div class="s">r = +0.990, &rho; = +0.988 (10 OAI anchors)</div>
+    </div>
+    <div class="stat">
+      <div class="k">Cross-lab Elie LOLO</div>
+      <div class="v">3.41%</div>
+      <div class="s">7-lab leave-one-lab-out (LOO 2.87%, r = +0.911)</div>
+    </div>
+    <div class="stat">
+      <div class="k">Cluster AUC CI</div>
+      <div class="v">&plusmn;0.019</div>
+      <div class="s">URL-clustered bootstrap across 908 sources</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: DeepRSI-style Open Hairline Leaderboard -->
+  <section id="leaderboard">
+    <div class="sec-head">
+      <h2 class="sec-title" id="chartTitle">Leaderboard</h2>
+    </div>
+    <p class="sec-sub" id="chartHint"></p>
+
+    <div class="toolbar">
+      <div class="seg" id="metricBtns">
+        <button data-metric="auc" class="active">Native AUC (Zero-Fit &uarr;)</button>
+        <button data-metric="oai_bpb">OpenAI Base Scale</button>
+        <button data-metric="unch_bpb">Elie Uncheatable Eval</button>
+        <button data-metric="index_5050">Elie 50/50</button>
+        <button data-metric="mrr">Native MRR</button>
+      </div>
+      <div class="tool-r">
+        <div class="seg" id="accessBtns">
+          <button data-access="all" class="active">All</button>
+          <button data-access="closed">Closed</button>
+          <button data-access="open">Open</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lb-shell no-milestones">
+      <div class="lb-main">
+        <div class="lb-head">
+          <div>#</div>
+          <div>Model</div>
+          <div id="barColLabel">Native AUC (95% Cluster CI)</div>
+          <div style="text-align:right;" id="col4Label">MRR</div>
+        </div>
+        <div id="bars"></div>
+      </div>
+      <aside class="oai-rail" aria-label="OpenAI Nov-22 Perplexity Milestones">
+        <div class="oai-rail-head">
+          <span>OpenAI Milestones</span>
+          <a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank">Nov 22 &nearr;</a>
+        </div>
+        <div id="oaiAbove"></div>
+        <div class="oai-rail-body" id="oaiMilestones"></div>
+        <div class="oai-rail-foot">
+          Pachocki (Nov 22, 2026) base log-perplexity milestones aligned to the OpenAI Base Scale mapping.
+        </div>
+      </aside>
+    </div>
+    <div id="ciPopover" class="ci-popover" role="tooltip" aria-hidden="true"></div>
+
+    <div class="lb-legend">
+      <span><i class="sw" style="background:var(--faint)"></i>Zero-CoT / Base</span>
+      <span><i class="sw hatched"></i>&gt;3% CoT / Post-trained</span>
+      <span><span class="micro extrap">EXTRAP</span> outside anchor span</span>
+      <span><span class="micro bypass">BYPASS</span> raw template 0-CoT (excluded from fit)</span>
+      <span style="margin-left:auto;"><b>&#9644;</b> dark inner = URL-cluster sampling CI &nbsp;&middot;&nbsp; <b>&mdash;</b> outer = Student-<i>t</i> log-BPB prediction CI</span>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Elie-style Vertical Column Win-Rate Chart -->
+  <section id="win-rate">
+    <div class="chart-frame">
+      <h2 class="sec-title">Win rate</h2>
+      <p class="sec-sub">
+        Average share of shared Nov-2026 items where a model ranks the authentic continuation strictly higher than another model (ties split 0.5), averaged across all 104 other live endpoints. Pure zero-fit pairwise ordering.
+      </p>
+      <div class="chart-legend">
+        <span class="chip"><i class="box"></i>100% Zero-CoT across all 105 live endpoints (0 reasoning tokens on every item)</span>
+        <span style="color:var(--faint);">&uarr; Pairwise item win rate, higher is better</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <svg id="winChart" viewBox="0 0 1120 445" style="min-width:740px;"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Head-to-Head Paired Significance -->
+  <section id="head-to-head">
+    <div class="sec-head">
+      <h2 class="sec-title">Head-to-head significance</h2>
+    </div>
+    <p class="sec-sub">
+      Exact paired comparisons on shared clean items (5,000 source-URL cluster resamples so multi-snippet commits are never double-counted). Positive AUC / Top-1 favors Model A.
+      All top frontier models shown here—including <code>Gemini 4 Neon</code>, <code>Gemini 4 Carbon</code>, <code>GPT-6 Astra</code>, and <code>GPT-6.1 Sol</code>—run at strict <code>0/954</code> reasoning tokens (CoT suppressed via explicit no-think instruction, validated with zero prompt shift on a 100-item <code>Gemini 4 Argon</code> control, <code>p = 0.85</code>).
+    </p>
+    <div class="tbl-wrap">
+      <table class="clean" id="showdown">
+        <thead>
+          <tr>
+            <th>Model A vs. Model B</th>
+            <th class="num">W / L / T</th>
+            <th class="num">AUC Diff (95% Cluster CI)</th>
+            <th class="num">Top-1</th>
+            <th class="num">p-value</th>
+            <th class="num">Code</th>
+            <th class="num">Papers</th>
+            <th class="num">News</th>
+            <th class="num">Ref</th>
+            <th class="num">Essays</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Calibration Scatter -->
+  <section id="calibration">
+    <div class="chart-frame">
+      <div class="sec-head" style="margin-bottom:6px;">
+        <h2 class="sec-title">External calibration</h2>
+        <div class="seg" id="scatterBtns">
+          <button data-sc="unch_bpb" class="active">Elie Uncheatable (14 open)</button>
+          <button data-sc="oai_bpb">OpenAI Base (10 OAI)</button>
+        </div>
+      </div>
+      <p class="sec-sub">
+        Solid circles are published anchor ground truths used to fit the 2-parameter log-BPB Thurstone ruler <code>ln(BPB) = a + b&middot;(&minus;d&prime;)</code>; diamonds are out-of-sample projections.
+      </p>
+      <div class="cal-grid">
+        <svg id="scatter" viewBox="0 0 600 350"></svg>
+        <div class="prose-side">
+          <p><strong>Why Pairwise AUC + Thurstone <i>d&prime;</i> onto log-BPB.</strong> Across all 99,921 real rank rows, candidate scores follow <b>Thurstone Case V</b> (Gaussian sums of token log-probs, <code>6.8&times;</code> lower KL than Plackett-Luce), and tail ranks <code>r &ge; 2</code> retain partial correlation <code>+0.73&ndash;+0.76</code> with true BPB after controlling for Top-1. Combining Thurstone <code>d&prime; = &radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC)</code> with Ruan et al. (NeurIPS 2024) yields the 2-parameter law <code>ln(BPB) = a &minus; b&middot;d&prime;</code>—achieving <code>r = +0.990, &rho; = +0.988, LOO = 0.85%</code> across all 10 published OpenAI models and <code>r = +0.911, LOO = 2.87%, LOLO = 3.41%</code> across Elie’s 14 open models (7 labs), with zero statistically significant ceiling curvature across 4 independent datasets.</p>
+          <p><strong>Extrapolation above anchor ranges.</strong> On OpenAI’s ruler, <code>Claude Fable 5.2</code> (<code>0.8550</code>) and <code>Gemini 4 Carbon</code> (<code>0.8482</code>) exceed top anchor <code>GPT-6.2 Astra</code> (<code>0.8444</code>); on Elie’s open ruler, the top closed tier exceeds <code>Kimi K3.1 Pro</code> (<code>0.7518</code>). Every model outside its anchor span is flagged <code>EXTRAP</code> with exact exponentiated Student-<i>t</i> intervals.</p>
+          <p><strong>100% Zero-CoT enforcement &amp; template-bypass rule.</strong> All 99 native-chat endpoints answered at <code>0</code> reasoning tokens on standard <code>/api/v1/chat/completions</code>. Mandatory-reasoning endpoints that reject zero-CoT on chat APIs (<code>Muse Spark Open</code>, <code>Inkling 2 Small</code>, <code>Reflection Beam 1.0</code>, <code>gpt-oss-120b/20b</code>) were evaluated via raw <code>/api/v1/completions</code> zero-think templates and remain visible here (badged <code>BYPASS</code>), but are excluded from the 14-anchor OLS ruler by default (cold-start bypass tax; blind holdouts <code>+3.5% / +5.9% / +6.4%</code>; 17-anchor sensitivity LOLO = <code>3.65%</code>).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Editorial Explainers -->
+  <section id="methodology" class="exp-grid">
+    <div class="exp-col" id="how-calculated">
+      <h2>How is this calculated?</h2>
+      <p class="sec-sub">Black-box 8-choice continuation ranking across 5 Nov-2026 domains—no logprobs, no echo prompts, strictly audited 8-letter permutations.</p>
+      <ol>
+        <li><strong>Post-cutoff multi-domain corpus (N=954, 908 unique source URLs):</strong> All documents carry Nov-2026 timestamps across 5 domains—<code>199</code> News/Speeches (UK Hansard &amp; BBC), <code>198</code> Papers (arXiv &amp; bioRxiv), <code>198</code> Essays (Guardian &amp; LessWrong), <code>197</code> newly created Wikipedia articles, and <code>162</code> newly added systems code blocks (116 distinct commits across CPython, Linux, Postgres, Go, LLVM, PyTorch, etc.).</li>
+        <li><strong>Neutral 24B cloud decoys (K=8):</strong> At a cut point inside each document, we keep the authentic next snippet (~6 prose words or ~36 chars of single-line code) and sample <strong>7 distinct <code>T = 1.0</code> raw continuations</strong> from <code>mistral-small-24b-instruct-2501</code> (zero family overlap with any ranked model, trailing-space BPE bug fixed). Decoys in v1 were length-filtered around the gold length (see Code length caveat).</li>
+        <li><strong>Zero-logprob 8-way ranking &amp; RL sharpening note:</strong> Each API receives the shuffled 8 choices <code>A..H</code> and must return a strict 8-distinct-letter permutation (<code>C,A,F,B,H,D,E,G</code>). Global monotone temperature sharpening of a model’s distribution preserves the ordering of candidate likelihoods <code>p(y|x)</code> (unlike raw top-token cross-entropy)—though note it does <i>not</i> preserve likelihood-ratio ordering <code>p(y|x)/q(y|x)</code> when <code>q</code> is nonuniform, and rankings alone do not uniquely identify absolute generative loss without anchor calibration.</li>
+        <li><strong>Native AUC &amp; Thurstone log-BPB rulers:</strong> Native score is pairwise rank <code>AUC = (8 &minus; mean_rank) / 7</code> (exact probability of preferring the real continuation over a random decoy; chance = <code>0.500</code>, zero fitted parameters) with source-URL cluster bootstrap CIs; <code>MRR</code> and <code>Top-1</code> remain reported alongside it. External OpenAI and Elie views fit a 2-parameter log-BPB OLS ruler <code>ln(BPB) = a + b&middot;(&minus;d&prime;)</code> where <code>d&prime; = &radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC)</code>, with exact exponentiated Student-<i>t</i> outer intervals and strict <code>EXTRAP</code> badges outside the anchor range.</li>
+      </ol>
+      <div class="note-box">
+        <strong>Trace hygiene &amp; telemetry:</strong> Both the standalone runner and this dashboard require an exact 8-distinct-letter permutation. Models that wrote truncated prose preambles on &gt;10 items were retried identically with a strict no-prose rule at <code>r_tok = 0</code> (verified not to inflate scores: Fable 5.2 moved <code>0.7367 &rarr; 0.7356</code> MRR). OpenRouter omits reasoning-token fields on endpoints that do not report them (defaulting to <code>0</code>); exact positive-<code>r_tok</code> item counts are shown in the ledger.
+      </div>
+    </div>
+
+    <div class="exp-col" id="does-it-hold-up">
+      <h2>Does this hold up against other evals?</h2>
+      <p class="sec-sub">Zero-fit pairwise AUC and Thurstone <i>d&prime;</i> strongly track published OpenAI base losses, Bakouch’s open-weight index, and cross-decoy runs—with transparent caveats verified by independent audit.</p>
+      <table class="clean" style="margin-bottom:12px;">
+        <thead>
+          <tr><th>Audit / External Check</th><th>Result</th><th>Interpretation</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>OpenAI Nov-22 Base Chart</b><br/><span class="ci-dim">10 models (GPT-4o &rarr; GPT-6.2 Astra)</span></td>
+            <td><b>r = +0.990</b><br/><b>&rho; = +0.988</b><br/>LOO 0.85%</td>
+            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Near-perfect monotonic recovery across all 10 OpenAI base checkpoints (jumping &rho; from +0.891 on MRR to +0.988 on AUC, and blind GPT-4o..5.6 &rarr; GPT-6/6.2 upward extrap = 1.44%).</td>
+          </tr>
+          <tr>
+            <td><b>Elie Pre-training Index</b><br/><span class="ci-dim">14 native-chat open models, 7 labs</span></td>
+            <td>LOO 2.87%<br/><b>LOLO 3.41%</b><br/><span class="ci-dim">max 7.65%</span></td>
+            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Leave-one-lab-out across 7 independent labs on Oct-2026 Uncheatable Eval BPB (apples-to-apples native <code>/chat/completions</code> anchors; including the 3 <code>BYPASS</code> endpoints gives <code>3.65%</code> LOLO across 9 labs).</td>
+          </tr>
+          <tr>
+            <td><b>Blind Open Holdout</b><br/><span class="ci-dim">Gemma 4 26B-A4B (exact 0.5904)</span></td>
+            <td>Pred 0.5794<br/><b>Err 1.86%</b></td>
+            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Frozen 13-anchor log-BPB line predicted an unseen open model within 0.011 BPB without refitting.</td>
+          </tr>
+          <tr>
+            <td><b>Cross-Decoy / Corpus</b><br/><span class="ci-dim">OLMo-1B Hansard vs Mistral-24B</span></td>
+            <td><b>&rho; = +0.950</b><br/>r = +0.919<br/><span class="ci-dim">n = 24 models</span></td>
+            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Pairwise AUC rankings hold across different texts and decoy model families (24&times; size change), with zero statistically significant ceiling curvature even at AUC = 0.94.</td>
+          </tr>
+          <tr>
+            <td><b>Length &amp; Surface Shortcuts</b><br/><span class="ci-dim">Closest-to-median length (no LLM)</span></td>
+            <td>Prose 12.1&ndash;14.1%<br/><b>Code 22.7%</b><br/><span class="ci-dim">chance 12.5%</span></td>
+            <td style="font-family:var(--sans);font-size:12.5px;color:var(--ink-2);">Symmetric &plusmn;10-char decoy filter centered gold length in Code (prose at chance; Papers linear surface test 18.7%). <b>Sensitivity check:</b> removing all 162 Code items preserves <b>r = +0.998, &rho; = +0.996</b> across all 105 models and the exact top-9 AUC set &amp; top-9 MRR ordering (100% unchanged).</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note-box">
+        <strong>Remaining limits:</strong> (1) <em>Ranking &ne; exact loss:</em> prompted 8-way discrimination can diverge from raw generative BPB on RL-tuned smaller models (e.g. <code>Qwen3.6-27B</code> on BPBench) and chat vs. base checkpoints (<code>DeepSeek V4 Pro/Flash</code>). (2) <em>Extrapolation:</em> Fable 5.2 and Carbon exceed every published anchor on both rulers. (3) <em>Provenance &amp; telemetry:</em> Nov-2026 timestamps do not prove first-ever publication of quoted passages; all 105 live endpoints emit zero chain-of-thought on 100% of clean items (<code>Muse Wonder</code> on Google Vertex bills Meta&rsquo;s fixed empty-thought ATEM channel header, <code>raw_r_tok&le;7, rd_bytes=672</code>, identical byte-for-byte to &ldquo;Reply OK&rdquo;).
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: Full Model Ledger -->
+  <section id="ledger">
+    <div class="sec-head">
+      <h2 class="sec-title">Full ledger</h2>
+    </div>
+    <p class="sec-sub">All 116 open and closed models with pairwise AUC, MRR, Win%, per-domain Top-1 accuracy (Code, Papers, News, Reference, Essays), clean item coverage, and positive reasoning-token counts.</p>
+    <div class="tbl-wrap">
+      <table class="clean" id="ledgerTbl">
+        <thead>
+          <tr>
+            <th>#</th><th>Model</th><th>Lab</th><th>Tags</th>
+            <th class="num">AUC</th><th class="num">MRR</th><th class="num">Win%</th><th class="num">Top-1</th>
+            <th class="num">OAI Scale</th><th class="num">Elie Unch</th>
+            <th class="num">Clean N</th><th class="num">CoT</th>
+            <th class="num">Code</th><th class="num">Pap</th><th class="num">News</th><th class="num">Ref</th><th class="num">Ess</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      Open BPB ground truth: <a href="https://eliebak.com/pretraining-index" target="_blank">eliebak.com/pretraining-index</a> (26 Nov 2026) &middot;
+      OpenAI base chart: <a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank">openai.com</a> (22 Nov 2026)
+    </div>
+    <div>
+      Reproduce: <code>python3 build_anpaure_index_v1.py &amp;&amp; python3 audit_v1.py</code>
+    </div>
+  </footer>
+</main>
+
+<script id="index-data" type="application/json">{"meta": {"title": "Anpaure Pretraining Index v1", "built": "2026-11-26", "scoring_rule": "pairwise_auc_thurstone_probit_log_bpb", "n_items": 954, "n_unique_source_urls": 908, "common_all29_n": 754, "common_top6_n": 953, "domain_counts": {"news": 199, "papers": 198, "code": 162, "reference": 197, "essays": 198}, "k_candidates": 8, "decoy_model": "mistralai/mistral-small-24b-instruct-2501", "total_eval_cost": 119.42, "calibration": {"transform": "ln(BPB) = intercept + slope * (-d'), d' = sqrt(2) * Phi^{-1}(AUC)", "include_template_bypass_anchors": false, "n_open_anchors": 14, "unch_bpb": {"r": 0.9113, "rho": 0.8418, "loo_pct": 2.87, "loo_max_pct": 7.08, "slope": 0.35099549425724014, "intercept": -0.41409350752221125, "log_y": true, "lolo_pct": 3.41, "lolo_max_pct": 7.65, "n_labs": 7}, "unch_bpb_with_bypass": {"r": 0.8927, "rho": 0.8775, "loo_pct": 3.27, "loo_max_pct": 7.26, "slope": 0.3657682416960953, "intercept": -0.41486722744915416, "log_y": true, "lolo_pct": 3.65, "lolo_max_pct": 9.39, "n_labs": 9}, "index_5050": {"r": 0.91, "rho": 0.8242, "loo_pct": 3.83, "loo_max_pct": 10.81, "slope": 0.49069269511250896, "intercept": -0.4903872643797357, "log_y": true, "lolo_pct": 4.2, "lolo_max_pct": 11.62, "n_labs": 7}, "oai_bpb": {"r": 0.9895, "rho": 0.9879, "loo_pct": 0.85, "loo_max_pct": 1.79, "slope": 0.19656264405425256, "intercept": 0.005690008377835027, "log_y": true}}, "paired_showdowns": [{"n": 954, "n_clusters": 908, "wins_a": 211, "wins_b": 185, "ties": 558, "auc_diff": 0.007, "auc_ci95": [-0.006, 0.0206], "p_auc": 0.3124, "dom_auc_diff": {"code": -0.0018, "papers": -0.0123, "news": 0.0079, "reference": -0.0123, "essays": 0.0519}, "mrr_diff": 0.0053, "mrr_ci95": [-0.0141, 0.0253], "t1_diff_pct": 0.31, "t1_ci95_pct": [-2.73, 3.44], "p_mrr": 0.6084, "dom_mrr_diff": {"code": 0.0024, "papers": -0.0226, "news": 0.0059, "reference": -0.0281, "essays": 0.0683}, "model_a": "Claude Fable 5.2", "model_b": "Gemini 4 Carbon"}, {"n": 954, "n_clusters": 908, "wins_a": 237, "wins_b": 184, "ties": 533, "auc_diff": 0.0108, "auc_ci95": [-0.0023, 0.0238], "p_auc": 0.1056, "dom_auc_diff": {"code": 0.0026, "papers": 0.0166, "news": -0.0029, "reference": 0.0036, "essays": 0.0325}, "mrr_diff": 0.0239, "mrr_ci95": [0.0035, 0.0439], "t1_diff_pct": 3.77, "t1_ci95_pct": [0.42, 7.02], "p_mrr": 0.0228, "dom_mrr_diff": {"code": 0.0081, "papers": 0.0361, "news": 0.002, "reference": 0.0131, "essays": 0.0575}, "model_a": "Claude Fable 5.2", "model_b": "GPT-6.2 Astra"}, {"n": 954, "n_clusters": 908, "wins_a": 222, "wins_b": 180, "ties": 552, "auc_diff": 0.012, "auc_ci95": [-0.0009, 0.0251], "p_auc": 0.0672, "dom_auc_diff": {"code": 0.0168, "papers": 0.0195, "news": -0.0093, "reference": -0.0123, "essays": 0.0462}, "mrr_diff": 0.0148, "mrr_ci95": [-0.0055, 0.0345], "t1_diff_pct": 1.57, "t1_ci95_pct": [-1.66, 4.69], "p_mrr": 0.1524, "dom_mrr_diff": {"code": 0.0294, "papers": 0.0287, "news": -0.0153, "reference": -0.0416, "essays": 0.0752}, "model_a": "Claude Fable 5.2", "model_b": "Gemini 4 Argon"}, {"n": 954, "n_clusters": 908, "wins_a": 222, "wins_b": 156, "ties": 576, "auc_diff": 0.0261, "auc_ci95": [0.0127, 0.0396], "p_auc": 0.0, "dom_auc_diff": {"code": 0.0185, "papers": 0.018, "news": 0.0122, "reference": 0.0007, "essays": 0.0794}, "mrr_diff": 0.0281, "mrr_ci95": [0.0096, 0.0472], "t1_diff_pct": 3.46, "t1_ci95_pct": [0.53, 6.33], "p_mrr": 0.0012, "dom_mrr_diff": {"code": 0.0327, "papers": 0.0192, "news": 0.0107, "reference": -0.0241, "essays": 0.1025}, "model_a": "Claude Fable 5.2", "model_b": "Gemini 4 Neon"}, {"n": 953, "n_clusters": 907, "wins_a": 262, "wins_b": 165, "ties": 526, "auc_diff": 0.037, "auc_ci95": [0.0232, 0.0508], "p_auc": 0.0, "dom_auc_diff": {"code": 0.0282, "papers": 0.0276, "news": 0.023, "reference": 0.0522, "essays": 0.0527}, "mrr_diff": 0.0491, "mrr_ci95": [0.0293, 0.0693], "t1_diff_pct": 6.51, "t1_ci95_pct": [3.36, 9.76], "p_mrr": 0.0, "dom_mrr_diff": {"code": 0.0604, "papers": 0.0291, "news": 0.0196, "reference": 0.0732, "essays": 0.0656}, "model_a": "Claude Fable 5.2", "model_b": "Claude Opus 5.5"}, {"n": 954, "n_clusters": 908, "wins_a": 222, "wins_b": 193, "ties": 539, "auc_diff": 0.0037, "auc_ci95": [-0.0093, 0.0167], "p_auc": 0.5816, "dom_auc_diff": {"code": 0.0044, "papers": 0.0289, "news": -0.0108, "reference": 0.016, "essays": -0.0195}, "mrr_diff": 0.0186, "mrr_ci95": [-0.0016, 0.0385], "t1_diff_pct": 3.46, "t1_ci95_pct": [0.21, 6.59], "p_mrr": 0.0708, "dom_mrr_diff": {"code": 0.0058, "papers": 0.0587, "news": -0.0039, "reference": 0.0412, "essays": -0.0107}, "model_a": "Gemini 4 Carbon", "model_b": "GPT-6.2 Astra"}, {"n": 954, "n_clusters": 908, "wins_a": 172, "wins_b": 145, "ties": 637, "auc_diff": 0.0049, "auc_ci95": [-0.0062, 0.0157], "p_auc": 0.3984, "dom_auc_diff": {"code": 0.0185, "papers": 0.0317, "news": -0.0172, "reference": 0.0, "essays": -0.0058}, "mrr_diff": 0.0094, "mrr_ci95": [-0.0082, 0.0261], "t1_diff_pct": 1.26, "t1_ci95_pct": [-1.57, 3.97], "p_mrr": 0.3048, "dom_mrr_diff": {"code": 0.0271, "papers": 0.0513, "news": -0.0212, "reference": -0.0136, "essays": 0.0069}, "model_a": "Gemini 4 Carbon", "model_b": "Gemini 4 Argon"}, {"n": 954, "n_clusters": 908, "wins_a": 204, "wins_b": 213, "ties": 537, "auc_diff": 0.0012, "auc_ci95": [-0.0118, 0.0148], "p_auc": 0.8676, "dom_auc_diff": {"code": 0.0141, "papers": 0.0029, "news": -0.0065, "reference": -0.016, "essays": 0.0137}, "mrr_diff": -0.0092, "mrr_ci95": [-0.029, 0.0113], "t1_diff_pct": -2.2, "t1_ci95_pct": [-5.42, 1.05], "p_mrr": 0.3728, "dom_mrr_diff": {"code": 0.0213, "papers": -0.0074, "news": -0.0173, "reference": -0.0548, "essays": 0.0176}, "model_a": "GPT-6.2 Astra", "model_b": "Gemini 4 Argon"}, {"n": 954, "n_clusters": 908, "wins_a": 217, "wins_b": 213, "ties": 524, "auc_diff": 0.0153, "auc_ci95": [0.0019, 0.029], "p_auc": 0.024, "dom_auc_diff": {"code": 0.0159, "papers": 0.0014, "news": 0.0151, "reference": -0.0029, "essays": 0.0469}, "mrr_diff": 0.0041, "mrr_ci95": [-0.0159, 0.0247], "t1_diff_pct": -0.31, "t1_ci95_pct": [-3.5, 2.93], "p_mrr": 0.6788, "dom_mrr_diff": {"code": 0.0245, "papers": -0.0168, "news": 0.0086, "reference": -0.0372, "essays": 0.045}, "model_a": "GPT-6.2 Astra", "model_b": "Gemini 4 Neon"}, {"n": 953, "n_clusters": 907, "wins_a": 248, "wins_b": 191, "ties": 514, "auc_diff": 0.0264, "auc_ci95": [0.0126, 0.0401], "p_auc": 0.0008, "dom_auc_diff": {"code": 0.0256, "papers": 0.0116, "news": 0.0258, "reference": 0.0486, "essays": 0.0202}, "mrr_diff": 0.0257, "mrr_ci95": [0.0049, 0.0455], "t1_diff_pct": 2.83, "t1_ci95_pct": [-0.42, 5.97], "p_mrr": 0.0124, "dom_mrr_diff": {"code": 0.0523, "papers": -0.0046, "news": 0.0176, "reference": 0.06, "essays": 0.008}, "model_a": "GPT-6.2 Astra", "model_b": "Claude Opus 5.5"}, {"n": 954, "n_clusters": 908, "wins_a": 221, "wins_b": 144, "ties": 589, "auc_diff": 0.0276, "auc_ci95": [0.0176, 0.0377], "p_auc": 0.0, "dom_auc_diff": {"code": 0.0194, "papers": 0.0065, "news": 0.0416, "reference": 0.0297, "essays": 0.039}, "mrr_diff": 0.0291, "mrr_ci95": [0.0131, 0.0456], "t1_diff_pct": 2.94, "t1_ci95_pct": [0.41, 5.63], "p_mrr": 0.0004, "dom_mrr_diff": {"code": 0.0402, "papers": -0.0079, "news": 0.046, "reference": 0.0169, "essays": 0.0521}, "model_a": "GPT-6.2 Astra", "model_b": "GPT-6 Astra"}, {"n": 954, "n_clusters": 908, "wins_a": 401, "wins_b": 147, "ties": 406, "auc_diff": 0.1032, "auc_ci95": [0.0864, 0.1198], "p_auc": 0.0, "dom_auc_diff": {"code": 0.1287, "papers": 0.0931, "news": 0.0818, "reference": 0.0834, "essays": 0.1335}, "mrr_diff": 0.1478, "mrr_ci95": [0.1236, 0.1714], "t1_diff_pct": 19.6, "t1_ci95_pct": [15.95, 23.24], "p_mrr": 0.0, "dom_mrr_diff": {"code": 0.2144, "papers": 0.1315, "news": 0.1116, "reference": 0.1097, "essays": 0.1839}, "model_a": "Claude Fable 5.2", "model_b": "Kimi K3.1 Pro"}, {"n": 954, "n_clusters": 908, "wins_a": 269, "wins_b": 306, "ties": 379, "auc_diff": -0.0079, "auc_ci95": [-0.0243, 0.0081], "p_auc": 0.346, "dom_auc_diff": {"code": 0.06, "papers": 0.0029, "news": -0.0273, "reference": -0.0399, "essays": -0.0231}, "mrr_diff": -0.0111, "mrr_ci95": [-0.0345, 0.0112], "t1_diff_pct": -1.47, "t1_ci95_pct": [-4.98, 1.91], "p_mrr": 0.3384, "dom_mrr_diff": {"code": 0.0766, "papers": 0.0069, "news": -0.0302, "reference": -0.061, "essays": -0.032}, "model_a": "Claude Sonnet 5.5", "model_b": "Kimi K3.1 Pro"}]}, "models": [{"name": "Qwen3.8-Flash-Next", "lab": "Qwen", "access": "open", "kind": "post", "unch_bpb": 0.6271, "unch_ci": null, "unch_sci": null, "index_5050": 0.5362, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "OLMo 3 32B", "lab": "AI2", "access": "open", "kind": "base", "unch_bpb": 0.6505, "unch_ci": null, "unch_sci": null, "index_5050": 0.5791, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "ERNIE 5.5 Flash Base", "lab": "Baidu", "access": "open", "kind": "base", "unch_bpb": 0.5186, "unch_ci": null, "unch_sci": null, "index_5050": 0.4382, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "DeepSeek V4 Flash Base", "lab": "DeepSeek", "access": "open", "kind": "base", "unch_bpb": 0.5327, "unch_ci": null, "unch_sci": null, "index_5050": 0.4565, "index_ci": null, "index_sci": null, "oai_bpb": 0.9123, "oai_ci": [0.8916, 0.9336], "oai_sci": [0.8992, 0.9257], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.4957, "neg_d_prime": -0.4957, "d_prime": 0.4957, "auc": 0.637, "auc_ci": [0.6168, 0.6562], "prose_auc": 0.6147, "top1_pct": 21.8, "mrr": 0.4462, "mrr_ci": [0.4259, 0.4664], "win_rate": 43.1, "prose_mrr": 0.4241, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.746, "papers": 0.6595, "news": 0.5815, "reference": 0.6302, "essays": 0.588}, "dom_t1": {"code": 33.3, "papers": 22.7, "news": 17.1, "reference": 21.3, "essays": 16.7}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "DeepSeek V4 Pro Base", "lab": "DeepSeek", "access": "open", "kind": "base", "unch_bpb": 0.5133, "unch_ci": null, "unch_sci": null, "index_5050": 0.4273, "index_ci": null, "index_sci": null, "oai_bpb": 0.9045, "oai_ci": [0.8838, 0.9258], "oai_sci": [0.891, 0.9183], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5394, "neg_d_prime": -0.5394, "d_prime": 0.5394, "auc": 0.6485, "auc_ci": [0.6284, 0.6684], "prose_auc": 0.6329, "top1_pct": 25.47, "mrr": 0.4663, "mrr_ci": [0.4454, 0.4877], "win_rate": 45.7, "prose_mrr": 0.446, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7249, "papers": 0.6688, "news": 0.5865, "reference": 0.6374, "essays": 0.6392}, "dom_t1": {"code": 38.3, "papers": 26.8, "news": 18.6, "reference": 25.4, "essays": 20.7}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "DeepSeek V4.1 Flash (1017)", "lab": "DeepSeek", "access": "open", "kind": "post", "unch_bpb": 0.5388, "unch_ci": null, "unch_sci": null, "index_5050": 0.4584, "index_ci": null, "index_sci": null, "oai_bpb": 0.9005, "oai_ci": [0.8799, 0.9215], "oai_sci": [0.887, 0.9142], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5623, "neg_d_prime": -0.5623, "d_prime": 0.5623, "auc": 0.6545, "auc_ci": [0.6349, 0.6747], "prose_auc": 0.6405, "top1_pct": 27.57, "mrr": 0.4809, "mrr_ci": [0.4602, 0.5021], "win_rate": 46.0, "prose_mrr": 0.4641, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7231, "papers": 0.6645, "news": 0.603, "reference": 0.6512, "essays": 0.6436}, "dom_t1": {"code": 37.7, "papers": 29.3, "news": 21.6, "reference": 25.4, "essays": 25.8}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Gemma 4 26B-A4B", "lab": "Google", "access": "open", "kind": "post", "unch_bpb": 0.5904, "unch_ci": null, "unch_sci": null, "index_5050": 0.5259, "index_ci": null, "index_sci": null, "oai_bpb": 0.9353, "oai_ci": [0.9129, 0.9582], "oai_sci": [0.9217, 0.949], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.3694, "neg_d_prime": -0.3694, "d_prime": 0.3694, "auc": 0.603, "auc_ci": [0.5831, 0.6231], "prose_auc": 0.5916, "top1_pct": 19.08, "mrr": 0.417, "mrr_ci": [0.3982, 0.4363], "win_rate": 40.1, "prose_mrr": 0.4066, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6587, "papers": 0.6154, "news": 0.5815, "reference": 0.6106, "essays": 0.5592}, "dom_t1": {"code": 24.1, "papers": 22.2, "news": 14.6, "reference": 20.3, "essays": 15.2}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Gemma 4 31B", "lab": "Google", "access": "open", "kind": "post", "unch_bpb": 0.5673, "unch_ci": null, "unch_sci": null, "index_5050": 0.5047, "index_ci": null, "index_sci": null, "oai_bpb": 0.9046, "oai_ci": [0.8841, 0.9257], "oai_sci": [0.8913, 0.9181], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5388, "neg_d_prime": -0.5388, "d_prime": 0.5388, "auc": 0.6484, "auc_ci": [0.6282, 0.6679], "prose_auc": 0.6293, "top1_pct": 24.74, "mrr": 0.4647, "mrr_ci": [0.4439, 0.4852], "win_rate": 44.6, "prose_mrr": 0.4466, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7416, "papers": 0.6739, "news": 0.5858, "reference": 0.6497, "essays": 0.6082}, "dom_t1": {"code": 33.3, "papers": 29.8, "news": 20.1, "reference": 21.3, "essays": 20.7}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Marin 32B base", "lab": "Marin", "access": "open", "kind": "base", "unch_bpb": 0.6568, "unch_ci": null, "unch_sci": null, "index_5050": 0.5813, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Muse Spark Open", "lab": "Meta", "access": "open", "kind": "post", "unch_bpb": 0.5009, "unch_ci": null, "unch_sci": null, "index_5050": 0.4363, "index_ci": null, "index_sci": null, "oai_bpb": 0.8779, "oai_ci": [0.8587, 0.8976], "oai_sci": [0.8651, 0.891], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6912, "neg_d_prime": -0.6912, "d_prime": 0.6912, "auc": 0.6875, "auc_ci": [0.6686, 0.7061], "prose_auc": 0.6737, "top1_pct": 25.79, "mrr": 0.4885, "mrr_ci": [0.4679, 0.5092], "win_rate": 47.8, "prose_mrr": 0.4763, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7549, "papers": 0.7287, "news": 0.6482, "reference": 0.657, "essays": 0.6609}, "dom_t1": {"code": 30.9, "papers": 28.8, "news": 25.6, "reference": 23.4, "essays": 21.2}, "is_anchor": false, "template_bypass": true, "extrapolated": false}, {"name": "Mistral Large 4", "lab": "Mistral", "access": "open", "kind": "post", "unch_bpb": 0.6131, "unch_ci": null, "unch_sci": null, "index_5050": 0.5195, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Kimi K3", "lab": "Moonshot", "access": "open", "kind": "post", "unch_bpb": 0.4873, "unch_ci": null, "unch_sci": null, "index_5050": 0.3961, "index_ci": null, "index_sci": null, "oai_bpb": 0.8474, "oai_ci": [0.8284, 0.8669], "oai_sci": [0.8344, 0.8607], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.8712, "neg_d_prime": -0.8712, "d_prime": 0.8712, "auc": 0.7311, "auc_ci": [0.7131, 0.7494], "prose_auc": 0.7103, "top1_pct": 37.21, "mrr": 0.5641, "mrr_ci": [0.5423, 0.5868], "win_rate": 55.6, "prose_mrr": 0.5372, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8325, "papers": 0.7431, "news": 0.6604, "reference": 0.723, "essays": 0.715}, "dom_t1": {"code": 53.7, "papers": 40.4, "news": 28.1, "reference": 33.0, "essays": 33.8}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Kimi K3.1 Pro", "lab": "Moonshot", "access": "open", "kind": "post", "unch_bpb": 0.484, "unch_ci": null, "unch_sci": null, "index_5050": 0.3924, "index_ci": null, "index_sci": null, "oai_bpb": 0.8323, "oai_ci": [0.8133, 0.8517], "oai_sci": [0.8194, 0.8454], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9629, "neg_d_prime": -0.9629, "d_prime": 0.9629, "auc": 0.752, "auc_ci": [0.7339, 0.7692], "prose_auc": 0.7363, "top1_pct": 39.94, "mrr": 0.5875, "mrr_ci": [0.5648, 0.6095], "win_rate": 57.9, "prose_mrr": 0.5644, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8289, "papers": 0.7756, "news": 0.6899, "reference": 0.7447, "essays": 0.7352}, "dom_t1": {"code": 55.6, "papers": 44.9, "news": 30.2, "reference": 37.1, "essays": 34.8}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Nemotron 3 Nano Base", "lab": "NVIDIA", "access": "open", "kind": "base", "unch_bpb": 0.6421, "unch_ci": null, "unch_sci": null, "index_5050": 0.576, "index_ci": null, "index_sci": null, "oai_bpb": 0.9788, "oai_ci": [0.953, 1.0054], "oai_sci": [0.965, 0.9929], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.1377, "neg_d_prime": -0.1377, "d_prime": 0.1377, "auc": 0.5388, "auc_ci": [0.5183, 0.5588], "prose_auc": 0.5298, "top1_pct": 15.2, "mrr": 0.3699, "mrr_ci": [0.3521, 0.3878], "win_rate": 35.7, "prose_mrr": 0.3593, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.5829, "papers": 0.5418, "news": 0.5183, "reference": 0.546, "essays": 0.513}, "dom_t1": {"code": 21.6, "papers": 14.1, "news": 12.6, "reference": 14.7, "essays": 14.1}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Nemotron 3 Super Base", "lab": "NVIDIA", "access": "open", "kind": "base", "unch_bpb": 0.5672, "unch_ci": null, "unch_sci": null, "index_5050": 0.4973, "index_ci": null, "index_sci": null, "oai_bpb": 0.9394, "oai_ci": [0.9165, 0.9629], "oai_sci": [0.9255, 0.9535], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.3469, "neg_d_prime": -0.3469, "d_prime": 0.3469, "auc": 0.5969, "auc_ci": [0.576, 0.6177], "prose_auc": 0.5837, "top1_pct": 21.7, "mrr": 0.4282, "mrr_ci": [0.4078, 0.4495], "win_rate": 40.0, "prose_mrr": 0.4164, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6614, "papers": 0.5967, "news": 0.542, "reference": 0.5859, "essays": 0.6104}, "dom_t1": {"code": 27.2, "papers": 23.7, "news": 16.6, "reference": 20.8, "essays": 21.2}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Nemotron 3 Ultra Base", "lab": "NVIDIA", "access": "open", "kind": "base", "unch_bpb": 0.5346, "unch_ci": null, "unch_sci": null, "index_5050": 0.4617, "index_ci": null, "index_sci": null, "oai_bpb": 0.9023, "oai_ci": [0.8816, 0.9235], "oai_sci": [0.8887, 0.9161], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.552, "neg_d_prime": -0.552, "d_prime": 0.552, "auc": 0.6518, "auc_ci": [0.6315, 0.6721], "prose_auc": 0.6356, "top1_pct": 27.04, "mrr": 0.4776, "mrr_ci": [0.4563, 0.4991], "win_rate": 46.1, "prose_mrr": 0.4563, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.731, "papers": 0.6905, "news": 0.5973, "reference": 0.6309, "essays": 0.6241}, "dom_t1": {"code": 40.1, "papers": 29.3, "news": 21.6, "reference": 21.3, "essays": 25.3}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Nemotron 3.5 Super VL Base", "lab": "NVIDIA", "access": "open", "kind": "base", "unch_bpb": 0.5621, "unch_ci": null, "unch_sci": null, "index_5050": 0.4927, "index_ci": null, "index_sci": null, "oai_bpb": 0.9152, "oai_ci": [0.8941, 0.9368], "oai_sci": [0.9018, 0.9287], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.4799, "neg_d_prime": -0.4799, "d_prime": 0.4799, "auc": 0.6328, "auc_ci": [0.6126, 0.6523], "prose_auc": 0.6194, "top1_pct": 22.75, "mrr": 0.4472, "mrr_ci": [0.4271, 0.4679], "win_rate": 43.6, "prose_mrr": 0.4338, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6984, "papers": 0.6385, "news": 0.5556, "reference": 0.6526, "essays": 0.6313}, "dom_t1": {"code": 29.0, "papers": 23.2, "news": 19.6, "reference": 22.8, "essays": 20.2}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Marin Mochi 535B (final)", "lab": "Marin", "access": "open", "kind": "base", "unch_bpb": 0.5354, "unch_ci": null, "unch_sci": null, "index_5050": 0.4579, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Laguna M.1 base", "lab": "Poolside", "access": "open", "kind": "base", "unch_bpb": 0.5942, "unch_ci": null, "unch_sci": null, "index_5050": 0.5085, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Reflection Beam 1.0", "lab": "Reflection", "access": "open", "kind": "post", "unch_bpb": 0.5157, "unch_ci": null, "unch_sci": null, "index_5050": 0.4422, "index_ci": null, "index_sci": null, "oai_bpb": 0.9059, "oai_ci": [0.8853, 0.9269], "oai_sci": [0.8926, 0.9193], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.532, "neg_d_prime": -0.532, "d_prime": 0.532, "auc": 0.6466, "auc_ci": [0.6265, 0.6665], "prose_auc": 0.6311, "top1_pct": 26.31, "mrr": 0.4699, "mrr_ci": [0.4492, 0.4914], "win_rate": 45.0, "prose_mrr": 0.4538, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7222, "papers": 0.6739, "news": 0.6059, "reference": 0.6026, "essays": 0.6421}, "dom_t1": {"code": 34.6, "papers": 30.8, "news": 24.6, "reference": 18.3, "essays": 24.7}, "is_anchor": false, "template_bypass": true, "extrapolated": false}, {"name": "Ripple 65B Base", "lab": "RicursiveAI", "access": "open", "kind": "base", "unch_bpb": 0.578, "unch_ci": null, "unch_sci": null, "index_5050": 0.5039, "index_ci": null, "index_sci": null, "oai_bpb": 0.9312, "oai_ci": [0.9091, 0.9539], "oai_sci": [0.9177, 0.9449], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.3914, "neg_d_prime": -0.3914, "d_prime": 0.3914, "auc": 0.609, "auc_ci": [0.5892, 0.6292], "prose_auc": 0.594, "top1_pct": 21.17, "mrr": 0.428, "mrr_ci": [0.4085, 0.4479], "win_rate": 40.3, "prose_mrr": 0.4149, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6825, "papers": 0.6205, "news": 0.565, "reference": 0.6012, "essays": 0.5895}, "dom_t1": {"code": 27.2, "papers": 23.2, "news": 20.6, "reference": 18.3, "essays": 17.7}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Ripple 65B", "lab": "RicursiveAI", "access": "open", "kind": "post", "unch_bpb": 0.6731, "unch_ci": null, "unch_sci": null, "index_5050": 0.5948, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Step 3.5 Flash", "lab": "StepFun", "access": "open", "kind": "post", "unch_bpb": 0.5967, "unch_ci": null, "unch_sci": null, "index_5050": 0.5217, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Step 3.5 Flash Base", "lab": "StepFun", "access": "open", "kind": "base", "unch_bpb": 0.5654, "unch_ci": null, "unch_sci": null, "index_5050": 0.4882, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Step 3.5 Flash Base (midtrain)", "lab": "StepFun", "access": "open", "kind": "base", "unch_bpb": 0.579, "unch_ci": null, "unch_sci": null, "index_5050": 0.5048, "index_ci": null, "index_sci": null, "oai_bpb": null, "oai_ci": null, "oai_sci": null, "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": null, "neg_d_prime": null, "d_prime": null, "auc": null, "auc_ci": null, "prose_auc": null, "top1_pct": null, "mrr": null, "mrr_ci": null, "win_rate": null, "prose_mrr": null, "n_ok": null, "r_tok": null, "n_pos_rtok": null, "pct_pos_rtok": null, "cot_flagged": false, "strict_zero_cot": false, "dom_auc": null, "dom_t1": null, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Inkling 2 Mini", "lab": "Thinking Machines", "access": "open", "kind": "post", "unch_bpb": 0.6082, "unch_ci": null, "unch_sci": null, "index_5050": 0.5429, "index_ci": null, "index_sci": null, "oai_bpb": 0.927, "oai_ci": [0.9055, 0.949], "oai_sci": [0.9139, 0.9403], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.4146, "neg_d_prime": -0.4146, "d_prime": 0.4146, "auc": 0.6153, "auc_ci": [0.5961, 0.635], "prose_auc": 0.5992, "top1_pct": 19.18, "mrr": 0.4219, "mrr_ci": [0.403, 0.4409], "win_rate": 41.0, "prose_mrr": 0.4088, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.694, "papers": 0.6494, "news": 0.5872, "reference": 0.5613, "essays": 0.5988}, "dom_t1": {"code": 24.1, "papers": 23.7, "news": 18.1, "reference": 13.7, "essays": 17.2}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Inkling 2 Small", "lab": "Thinking Machines", "access": "open", "kind": "post", "unch_bpb": 0.5128, "unch_ci": null, "unch_sci": null, "index_5050": 0.447, "index_ci": null, "index_sci": null, "oai_bpb": 0.897, "oai_ci": [0.8768, 0.9177], "oai_sci": [0.8838, 0.9104], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5819, "neg_d_prime": -0.5819, "d_prime": 0.5819, "auc": 0.6596, "auc_ci": [0.6408, 0.6793], "prose_auc": 0.64, "top1_pct": 26.0, "mrr": 0.4735, "mrr_ci": [0.4525, 0.4954], "win_rate": 45.9, "prose_mrr": 0.4502, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7557, "papers": 0.715, "news": 0.593, "reference": 0.6222, "essays": 0.6299}, "dom_t1": {"code": 39.5, "papers": 31.3, "news": 19.6, "reference": 21.3, "essays": 20.7}, "is_anchor": false, "template_bypass": true, "extrapolated": false}, {"name": "GLM-5.3 Flash", "lab": "Zhipu", "access": "open", "kind": "post", "unch_bpb": 0.5484, "unch_ci": null, "unch_sci": null, "index_5050": 0.4719, "index_ci": null, "index_sci": null, "oai_bpb": 0.9112, "oai_ci": [0.8904, 0.9325], "oai_sci": [0.8979, 0.9246], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5022, "neg_d_prime": -0.5022, "d_prime": 0.5022, "auc": 0.6387, "auc_ci": [0.6188, 0.6582], "prose_auc": 0.6162, "top1_pct": 25.92, "mrr": 0.4631, "mrr_ci": [0.4415, 0.4849], "win_rate": 44.3, "prose_mrr": 0.4368, "n_ok": 953, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7498, "papers": 0.6688, "news": 0.5671, "reference": 0.6113, "essays": 0.6176}, "dom_t1": {"code": 41.0, "papers": 25.8, "news": 20.1, "reference": 20.8, "essays": 24.7}, "is_anchor": true, "template_bypass": false, "extrapolated": false}, {"name": "Claude Fable 5.2", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.3907, "unch_ci": [0.3443, 0.4434], "unch_sci": [0.3783, 0.4036], "index_5050": 0.2937, "index_ci": [0.2458, 0.3509], "index_sci": [0.2807, 0.3073], "oai_bpb": 0.7492, "oai_est": 0.7492, "oai_ci": [0.7273, 0.7719], "oai_sci": [0.7358, 0.763], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -1.4976, "neg_d_prime": -1.4976, "d_prime": 1.4976, "auc": 0.8552, "auc_ci": [0.8405, 0.8699], "prose_auc": 0.8342, "top1_pct": 59.54, "mrr": 0.7353, "mrr_ci": [0.7143, 0.7569], "win_rate": 69.5, "prose_mrr": 0.6986, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9577, "papers": 0.8687, "news": 0.7717, "reference": 0.8281, "essays": 0.8687}, "dom_t1": {"code": 86.4, "papers": 61.6, "news": 44.7, "reference": 51.3, "essays": 58.6}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Gemini 4 Carbon", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.3967, "unch_ci": [0.3507, 0.4486], "unch_sci": [0.3841, 0.4096], "index_5050": 0.2999, "index_ci": [0.2522, 0.3567], "index_sci": [0.2867, 0.3137], "oai_bpb": 0.7556, "oai_est": 0.7556, "oai_ci": [0.7339, 0.778], "oai_sci": [0.7421, 0.7694], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -1.4546, "neg_d_prime": -1.4546, "d_prime": 1.4546, "auc": 0.8482, "auc_ci": [0.833, 0.8635], "prose_auc": 0.8254, "top1_pct": 59.22, "mrr": 0.73, "mrr_ci": [0.7087, 0.7514], "win_rate": 68.5, "prose_mrr": 0.6927, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9594, "papers": 0.881, "news": 0.7638, "reference": 0.8405, "essays": 0.8167}, "dom_t1": {"code": 85.8, "papers": 65.2, "news": 44.2, "reference": 55.8, "essays": 50.0}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "GPT-6.2 Astra", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.3998, "unch_ci": [0.3542, 0.4512], "unch_sci": [0.3875, 0.4125], "index_5050": 0.3033, "index_ci": [0.2557, 0.3597], "index_sci": [0.2903, 0.3168], "oai_bpb": 0.761, "oai_est": 0.7589, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -1.4323, "neg_d_prime": -1.4323, "d_prime": 1.4323, "auc": 0.8444, "auc_ci": [0.8291, 0.8591], "prose_auc": 0.8218, "top1_pct": 55.77, "mrr": 0.7114, "mrr_ci": [0.6904, 0.7334], "win_rate": 67.6, "prose_mrr": 0.6715, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.955, "papers": 0.8521, "news": 0.7746, "reference": 0.8245, "essays": 0.8362}, "dom_t1": {"code": 84.6, "papers": 57.1, "news": 43.7, "reference": 48.7, "essays": 50.0}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Gemini 4 Argon", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4008, "unch_ci": [0.3553, 0.4521], "unch_sci": [0.3884, 0.4136], "index_5050": 0.3043, "index_ci": [0.2568, 0.3607], "index_sci": [0.2912, 0.318], "oai_bpb": 0.76, "oai_est": 0.76, "oai_ci": [0.7387, 0.7819], "oai_sci": [0.7467, 0.7735], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.4252, "neg_d_prime": -1.4252, "d_prime": 1.4252, "auc": 0.8432, "auc_ci": [0.8282, 0.8585], "prose_auc": 0.8232, "top1_pct": 57.97, "mrr": 0.7206, "mrr_ci": [0.7002, 0.7422], "win_rate": 67.6, "prose_mrr": 0.6869, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9409, "papers": 0.8492, "news": 0.781, "reference": 0.8405, "essays": 0.8225}, "dom_t1": {"code": 81.5, "papers": 58.6, "news": 47.7, "reference": 57.9, "essays": 48.5}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Gemini 4 Neon", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4123, "unch_ci": [0.3674, 0.4626], "unch_sci": [0.3989, 0.4261], "index_5050": 0.3166, "index_ci": [0.2692, 0.3724], "index_sci": [0.3023, 0.3315], "oai_bpb": 0.7721, "oai_est": 0.7721, "oai_ci": [0.7505, 0.7943], "oai_sci": [0.758, 0.7865], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.3446, "neg_d_prime": -1.3446, "d_prime": 1.3446, "auc": 0.8291, "auc_ci": [0.8124, 0.8461], "prose_auc": 0.8066, "top1_pct": 56.08, "mrr": 0.7073, "mrr_ci": [0.6858, 0.7294], "win_rate": 66.8, "prose_mrr": 0.6715, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9392, "papers": 0.8506, "news": 0.7595, "reference": 0.8274, "essays": 0.7893}, "dom_t1": {"code": 80.9, "papers": 59.6, "news": 43.7, "reference": 55.8, "essays": 44.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Opus 5.5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4212, "unch_ci": [0.3772, 0.4702], "unch_sci": [0.4083, 0.4344], "index_5050": 0.3262, "index_ci": [0.2793, 0.3809], "index_sci": [0.3123, 0.3406], "oai_bpb": 0.7814, "oai_est": 0.7814, "oai_ci": [0.7608, 0.8026], "oai_sci": [0.768, 0.7951], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.2839, "neg_d_prime": -1.2839, "d_prime": 1.2839, "auc": 0.818, "auc_ci": [0.8012, 0.8344], "prose_auc": 0.7952, "top1_pct": 52.99, "mrr": 0.6859, "mrr_ci": [0.6647, 0.7077], "win_rate": 65.4, "prose_mrr": 0.6514, "n_ok": 953, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9295, "papers": 0.8405, "news": 0.7487, "reference": 0.7759, "essays": 0.816}, "dom_t1": {"code": 76.5, "papers": 59.4, "news": 41.7, "reference": 41.6, "essays": 50.0}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "GPT-6 Astra", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4221, "unch_ci": [0.3783, 0.4709], "unch_sci": [0.4094, 0.4351], "index_5050": 0.3271, "index_ci": [0.2804, 0.3817], "index_sci": [0.3135, 0.3414], "oai_bpb": 0.783, "oai_est": 0.7823, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -1.2777, "neg_d_prime": -1.2777, "d_prime": 1.2777, "auc": 0.8169, "auc_ci": [0.8007, 0.8335], "prose_auc": 0.7926, "top1_pct": 52.83, "mrr": 0.6823, "mrr_ci": [0.6607, 0.7049], "win_rate": 64.2, "prose_mrr": 0.6446, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9356, "papers": 0.8456, "news": 0.733, "reference": 0.7948, "essays": 0.7973}, "dom_t1": {"code": 78.4, "papers": 58.6, "news": 39.2, "reference": 48.7, "essays": 43.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "GPT-6.1 Sol", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.426, "unch_ci": [0.3824, 0.4745], "unch_sci": [0.413, 0.4393], "index_5050": 0.3314, "index_ci": [0.2847, 0.3858], "index_sci": [0.3174, 0.346], "oai_bpb": 0.7864, "oai_est": 0.7864, "oai_ci": [0.7659, 0.8074], "oai_sci": [0.7729, 0.8001], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.2516, "neg_d_prime": -1.2516, "d_prime": 1.2516, "auc": 0.8119, "auc_ci": [0.7951, 0.8283], "prose_auc": 0.7897, "top1_pct": 50.63, "mrr": 0.6703, "mrr_ci": [0.6483, 0.6926], "win_rate": 63.5, "prose_mrr": 0.6353, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9206, "papers": 0.8297, "news": 0.733, "reference": 0.7977, "essays": 0.7987}, "dom_t1": {"code": 74.7, "papers": 54.5, "news": 39.7, "reference": 43.7, "essays": 44.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Fable 5.1", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.429, "unch_ci": [0.3856, 0.4774], "unch_sci": [0.4156, 0.443], "index_5050": 0.3347, "index_ci": [0.2879, 0.3891], "index_sci": [0.3201, 0.35], "oai_bpb": 0.7895, "oai_est": 0.7895, "oai_ci": [0.7687, 0.8109], "oai_sci": [0.7756, 0.8038], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.2311, "neg_d_prime": -1.2311, "d_prime": 1.2311, "auc": 0.808, "auc_ci": [0.7908, 0.8255], "prose_auc": 0.7836, "top1_pct": 52.73, "mrr": 0.677, "mrr_ci": [0.6538, 0.6999], "win_rate": 64.7, "prose_mrr": 0.6388, "n_ok": 933, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9242, "papers": 0.8071, "news": 0.7466, "reference": 0.781, "essays": 0.8023}, "dom_t1": {"code": 78.4, "papers": 50.8, "news": 42.2, "reference": 45.7, "essays": 51.0}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Fable 5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4407, "unch_ci": [0.3983, 0.4877], "unch_sci": [0.4275, 0.4543], "index_5050": 0.3475, "index_ci": [0.3013, 0.4009], "index_sci": [0.3331, 0.3626], "oai_bpb": 0.8015, "oai_est": 0.8015, "oai_ci": [0.7815, 0.8221], "oai_sci": [0.788, 0.8153], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.1545, "neg_d_prime": -1.1545, "d_prime": 1.1545, "auc": 0.7929, "auc_ci": [0.7754, 0.8103], "prose_auc": 0.7701, "top1_pct": 47.23, "mrr": 0.6444, "mrr_ci": [0.6211, 0.6668], "win_rate": 61.5, "prose_mrr": 0.6111, "n_ok": 940, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9021, "papers": 0.7935, "news": 0.7394, "reference": 0.7665, "essays": 0.7828}, "dom_t1": {"code": 69.1, "papers": 44.6, "news": 40.2, "reference": 43.7, "essays": 42.4}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Gemini 3.1 Pro", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4426, "unch_ci": [0.4003, 0.4895], "unch_sci": [0.4293, 0.4564], "index_5050": 0.3496, "index_ci": [0.3034, 0.4029], "index_sci": [0.335, 0.3649], "oai_bpb": 0.8034, "oai_est": 0.8034, "oai_ci": [0.7833, 0.8241], "oai_sci": [0.7898, 0.8173], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.1423, "neg_d_prime": -1.1423, "d_prime": 1.1423, "auc": 0.7904, "auc_ci": [0.7723, 0.8077], "prose_auc": 0.7752, "top1_pct": 46.21, "mrr": 0.6406, "mrr_ci": [0.6183, 0.6624], "win_rate": 60.9, "prose_mrr": 0.6145, "n_ok": 950, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8642, "papers": 0.7908, "news": 0.7421, "reference": 0.7846, "essays": 0.7828}, "dom_t1": {"code": 65.4, "papers": 46.5, "news": 35.4, "reference": 43.7, "essays": 43.4}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "GPT-6.2 Sol", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4434, "unch_ci": [0.4013, 0.49], "unch_sci": [0.4306, 0.4566], "index_5050": 0.3505, "index_ci": [0.3045, 0.4035], "index_sci": [0.3364, 0.3652], "oai_bpb": 0.8043, "oai_est": 0.8043, "oai_ci": [0.7847, 0.8244], "oai_sci": [0.7912, 0.8176], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.1371, "neg_d_prime": -1.1371, "d_prime": 1.1371, "auc": 0.7893, "auc_ci": [0.7725, 0.8059], "prose_auc": 0.7614, "top1_pct": 46.96, "mrr": 0.6398, "mrr_ci": [0.6177, 0.6614], "win_rate": 61.3, "prose_mrr": 0.5968, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9259, "papers": 0.8052, "news": 0.72, "reference": 0.7389, "essays": 0.7814}, "dom_t1": {"code": 75.9, "papers": 49.0, "news": 36.2, "reference": 37.6, "essays": 41.4}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Gemini 3.8 Flash", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4497, "unch_ci": [0.4079, 0.4957], "unch_sci": [0.4366, 0.4632], "index_5050": 0.3574, "index_ci": [0.3116, 0.4101], "index_sci": [0.343, 0.3726], "oai_bpb": 0.8106, "oai_est": 0.8106, "oai_ci": [0.7909, 0.8308], "oai_sci": [0.7973, 0.8242], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.0972, "neg_d_prime": -1.0972, "d_prime": 1.0972, "auc": 0.7811, "auc_ci": [0.7635, 0.7991], "prose_auc": 0.7576, "top1_pct": 45.28, "mrr": 0.6295, "mrr_ci": [0.6076, 0.6521], "win_rate": 60.7, "prose_mrr": 0.5964, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8959, "papers": 0.7922, "news": 0.705, "reference": 0.7912, "essays": 0.7424}, "dom_t1": {"code": 66.7, "papers": 47.0, "news": 33.7, "reference": 44.7, "essays": 38.4}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Gemini 4 Hydrogen", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4529, "unch_ci": [0.4112, 0.4987], "unch_sci": [0.4396, 0.4665], "index_5050": 0.361, "index_ci": [0.3151, 0.4135], "index_sci": [0.3463, 0.3763], "oai_bpb": 0.8138, "oai_est": 0.8138, "oai_ci": [0.7941, 0.834], "oai_sci": [0.8003, 0.8275], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.0772, "neg_d_prime": -1.0772, "d_prime": 1.0772, "auc": 0.7769, "auc_ci": [0.7591, 0.7947], "prose_auc": 0.7527, "top1_pct": 45.7, "mrr": 0.6286, "mrr_ci": [0.6064, 0.6512], "win_rate": 60.2, "prose_mrr": 0.5908, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8951, "papers": 0.7987, "news": 0.6963, "reference": 0.7933, "essays": 0.7229}, "dom_t1": {"code": 71.0, "papers": 48.5, "news": 31.2, "reference": 46.7, "essays": 35.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "GPT-6.1 Terra", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4539, "unch_ci": [0.4124, 0.4995], "unch_sci": [0.4407, 0.4674], "index_5050": 0.3621, "index_ci": [0.3164, 0.4145], "index_sci": [0.3475, 0.3773], "oai_bpb": 0.8148, "oai_est": 0.8148, "oai_ci": [0.7953, 0.8348], "oai_sci": [0.8015, 0.8283], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.0708, "neg_d_prime": -1.0708, "d_prime": 1.0708, "auc": 0.7755, "auc_ci": [0.7583, 0.7933], "prose_auc": 0.7531, "top1_pct": 44.55, "mrr": 0.6215, "mrr_ci": [0.5996, 0.6436], "win_rate": 60.4, "prose_mrr": 0.5893, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8854, "papers": 0.8268, "news": 0.6906, "reference": 0.7534, "essays": 0.7417}, "dom_t1": {"code": 65.4, "papers": 52.5, "news": 34.2, "reference": 37.6, "essays": 36.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Gemini 3.7 Flash", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4559, "unch_ci": [0.4146, 0.5014], "unch_sci": [0.4428, 0.4694], "index_5050": 0.3644, "index_ci": [0.3187, 0.4166], "index_sci": [0.3498, 0.3796], "oai_bpb": 0.8169, "oai_est": 0.8169, "oai_ci": [0.7974, 0.8368], "oai_sci": [0.8036, 0.8303], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.0581, "neg_d_prime": -1.0581, "d_prime": 1.0581, "auc": 0.7728, "auc_ci": [0.7546, 0.7905], "prose_auc": 0.7457, "top1_pct": 47.03, "mrr": 0.6317, "mrr_ci": [0.6093, 0.6536], "win_rate": 59.6, "prose_mrr": 0.5957, "n_ok": 942, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.9066, "papers": 0.781, "news": 0.7035, "reference": 0.7626, "essays": 0.7368}, "dom_t1": {"code": 69.2, "papers": 46.2, "news": 38.7, "reference": 42.7, "essays": 42.6}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Opus 5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4583, "unch_ci": [0.417, 0.5036], "unch_sci": [0.4449, 0.472], "index_5050": 0.367, "index_ci": [0.3213, 0.4192], "index_sci": [0.3522, 0.3825], "oai_bpb": 0.8192, "oai_est": 0.8192, "oai_ci": [0.7996, 0.8393], "oai_sci": [0.8058, 0.8329], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.0435, "neg_d_prime": -1.0435, "d_prime": 1.0435, "auc": 0.7697, "auc_ci": [0.752, 0.7876], "prose_auc": 0.7453, "top1_pct": 43.08, "mrr": 0.6133, "mrr_ci": [0.5915, 0.6364], "win_rate": 58.6, "prose_mrr": 0.5768, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8889, "papers": 0.79, "news": 0.6999, "reference": 0.7484, "essays": 0.7431}, "dom_t1": {"code": 67.9, "papers": 45.5, "news": 33.2, "reference": 37.6, "essays": 35.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Opus 4.6", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4621, "unch_ci": [0.4211, 0.507], "unch_sci": [0.4489, 0.4756], "index_5050": 0.3713, "index_ci": [0.3258, 0.4231], "index_sci": [0.3566, 0.3865], "oai_bpb": 0.823, "oai_est": 0.823, "oai_ci": [0.8037, 0.8428], "oai_sci": [0.8098, 0.8364], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -1.0199, "neg_d_prime": -1.0199, "d_prime": 1.0199, "auc": 0.7646, "auc_ci": [0.7473, 0.7829], "prose_auc": 0.7404, "top1_pct": 40.99, "mrr": 0.602, "mrr_ci": [0.5803, 0.6245], "win_rate": 58.7, "prose_mrr": 0.569, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8827, "papers": 0.7734, "news": 0.7006, "reference": 0.7368, "essays": 0.7511}, "dom_t1": {"code": 62.3, "papers": 37.9, "news": 36.7, "reference": 34.5, "essays": 37.4}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Opus 4.7", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.466, "unch_ci": [0.4253, 0.5105], "unch_sci": [0.4529, 0.4794], "index_5050": 0.3757, "index_ci": [0.3303, 0.4273], "index_sci": [0.361, 0.3909], "oai_bpb": 0.8269, "oai_est": 0.8269, "oai_ci": [0.8077, 0.8465], "oai_sci": [0.8138, 0.8402], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9959, "neg_d_prime": -0.9959, "d_prime": 0.9959, "auc": 0.7594, "auc_ci": [0.7426, 0.7777], "prose_auc": 0.7381, "top1_pct": 40.57, "mrr": 0.5962, "mrr_ci": [0.5748, 0.6183], "win_rate": 56.9, "prose_mrr": 0.5625, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8633, "papers": 0.7864, "news": 0.6992, "reference": 0.7273, "essays": 0.7395}, "dom_t1": {"code": 64.2, "papers": 44.9, "news": 31.2, "reference": 33.5, "essays": 33.3}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Opus 4.5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4662, "unch_ci": [0.4254, 0.5109], "unch_sci": [0.4528, 0.48], "index_5050": 0.3759, "index_ci": [0.3304, 0.4277], "index_sci": [0.3609, 0.3915], "oai_bpb": 0.8271, "oai_est": 0.8271, "oai_ci": [0.8077, 0.847], "oai_sci": [0.8137, 0.8407], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9946, "neg_d_prime": -0.9946, "d_prime": 0.9946, "auc": 0.7591, "auc_ci": [0.7411, 0.7773], "prose_auc": 0.7339, "top1_pct": 42.14, "mrr": 0.6044, "mrr_ci": [0.5829, 0.6268], "win_rate": 58.3, "prose_mrr": 0.5677, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8818, "papers": 0.7763, "news": 0.6999, "reference": 0.7302, "essays": 0.7294}, "dom_t1": {"code": 67.3, "papers": 39.9, "news": 35.2, "reference": 36.0, "essays": 36.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Opus 4.1", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4667, "unch_ci": [0.4261, 0.5112], "unch_sci": [0.4537, 0.4801], "index_5050": 0.3765, "index_ci": [0.3312, 0.4281], "index_sci": [0.362, 0.3917], "oai_bpb": 0.8277, "oai_est": 0.8277, "oai_ci": [0.8086, 0.8472], "oai_sci": [0.8147, 0.8409], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9912, "neg_d_prime": -0.9912, "d_prime": 0.9912, "auc": 0.7583, "auc_ci": [0.7409, 0.7756], "prose_auc": 0.7368, "top1_pct": 39.83, "mrr": 0.5931, "mrr_ci": [0.5713, 0.6154], "win_rate": 57.3, "prose_mrr": 0.5644, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8633, "papers": 0.7691, "news": 0.6899, "reference": 0.7346, "essays": 0.754}, "dom_t1": {"code": 58.6, "papers": 37.9, "news": 28.1, "reference": 37.1, "essays": 40.9}, "is_anchor": false, "template_bypass": false, "extrapolated": true}, {"name": "Claude Opus 4.8", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4745, "unch_ci": [0.434, 0.5187], "unch_sci": [0.4607, 0.4887], "index_5050": 0.3853, "index_ci": [0.3398, 0.4369], "index_sci": [0.3697, 0.4016], "oai_bpb": 0.8353, "oai_est": 0.8353, "oai_ci": [0.8157, 0.8555], "oai_sci": [0.8216, 0.8493], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9442, "neg_d_prime": -0.9442, "d_prime": 0.9442, "auc": 0.7478, "auc_ci": [0.7292, 0.7675], "prose_auc": 0.7255, "top1_pct": 40.57, "mrr": 0.5908, "mrr_ci": [0.5686, 0.6146], "win_rate": 56.2, "prose_mrr": 0.558, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8571, "papers": 0.7792, "news": 0.664, "reference": 0.7215, "essays": 0.7374}, "dom_t1": {"code": 63.0, "papers": 45.5, "news": 27.6, "reference": 34.5, "essays": 36.4}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Gemini 3.6 Flash", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.475, "unch_ci": [0.4346, 0.5192], "unch_sci": [0.4612, 0.4893], "index_5050": 0.3859, "index_ci": [0.3405, 0.4375], "index_sci": [0.3703, 0.4022], "oai_bpb": 0.8359, "oai_est": 0.8359, "oai_ci": [0.8162, 0.856], "oai_sci": [0.8222, 0.8498], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9409, "neg_d_prime": -0.9409, "d_prime": 0.9409, "auc": 0.7471, "auc_ci": [0.7288, 0.7659], "prose_auc": 0.7266, "top1_pct": 41.72, "mrr": 0.5964, "mrr_ci": [0.5739, 0.619], "win_rate": 56.0, "prose_mrr": 0.5706, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8474, "papers": 0.7641, "news": 0.6762, "reference": 0.731, "essays": 0.7352}, "dom_t1": {"code": 57.4, "papers": 44.9, "news": 32.7, "reference": 40.1, "essays": 36.4}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Claude Sonnet 5.5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4772, "unch_ci": [0.4371, 0.5211], "unch_sci": [0.4638, 0.4911], "index_5050": 0.3884, "index_ci": [0.3431, 0.4397], "index_sci": [0.3732, 0.4043], "oai_bpb": 0.8381, "oai_est": 0.8381, "oai_ci": [0.8188, 0.8578], "oai_sci": [0.8248, 0.8516], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9277, "neg_d_prime": -0.9277, "d_prime": 0.9277, "auc": 0.7441, "auc_ci": [0.7251, 0.7622], "prose_auc": 0.7145, "top1_pct": 38.47, "mrr": 0.5764, "mrr_ci": [0.5527, 0.5998], "win_rate": 56.4, "prose_mrr": 0.5354, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8889, "papers": 0.7785, "news": 0.6626, "reference": 0.7049, "essays": 0.7121}, "dom_t1": {"code": 65.4, "papers": 45.5, "news": 27.1, "reference": 29.4, "essays": 29.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-6 Sol", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4779, "unch_ci": [0.4378, 0.5217], "unch_sci": [0.4645, 0.4917], "index_5050": 0.3892, "index_ci": [0.3439, 0.4404], "index_sci": [0.374, 0.405], "oai_bpb": 0.8387, "oai_est": 0.8387, "oai_ci": [0.8195, 0.8584], "oai_sci": [0.8254, 0.8522], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9238, "neg_d_prime": -0.9238, "d_prime": 0.9238, "auc": 0.7432, "auc_ci": [0.7247, 0.7615], "prose_auc": 0.7188, "top1_pct": 39.52, "mrr": 0.5798, "mrr_ci": [0.5575, 0.6022], "win_rate": 56.4, "prose_mrr": 0.5455, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8624, "papers": 0.7835, "news": 0.6813, "reference": 0.6896, "essays": 0.7208}, "dom_t1": {"code": 61.1, "papers": 45.5, "news": 28.6, "reference": 33.0, "essays": 33.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Gemini 3.5 Flash", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.478, "unch_ci": [0.4378, 0.5219], "unch_sci": [0.4645, 0.492], "index_5050": 0.3893, "index_ci": [0.344, 0.4406], "index_sci": [0.374, 0.4053], "oai_bpb": 0.8388, "oai_est": 0.8388, "oai_ci": [0.8195, 0.8586], "oai_sci": [0.8254, 0.8524], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9231, "neg_d_prime": -0.9231, "d_prime": 0.9231, "auc": 0.743, "auc_ci": [0.7249, 0.7622], "prose_auc": 0.7224, "top1_pct": 39.62, "mrr": 0.5847, "mrr_ci": [0.5635, 0.6073], "win_rate": 55.6, "prose_mrr": 0.5603, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8439, "papers": 0.759, "news": 0.6805, "reference": 0.7411, "essays": 0.7092}, "dom_t1": {"code": 54.3, "papers": 43.9, "news": 30.2, "reference": 42.6, "essays": 29.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Gemini 3 Flash", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4799, "unch_ci": [0.4399, 0.5235], "unch_sci": [0.4666, 0.4936], "index_5050": 0.3915, "index_ci": [0.3463, 0.4426], "index_sci": [0.3764, 0.4071], "oai_bpb": 0.8407, "oai_est": 0.8407, "oai_ci": [0.8216, 0.8602], "oai_sci": [0.8275, 0.854], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.912, "neg_d_prime": -0.912, "d_prime": 0.912, "auc": 0.7405, "auc_ci": [0.722, 0.7591], "prose_auc": 0.7219, "top1_pct": 37.63, "mrr": 0.5739, "mrr_ci": [0.5524, 0.5964], "win_rate": 55.2, "prose_mrr": 0.549, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8316, "papers": 0.7525, "news": 0.6604, "reference": 0.7397, "essays": 0.7352}, "dom_t1": {"code": 53.1, "papers": 41.9, "news": 26.1, "reference": 39.1, "essays": 30.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Claude Sonnet 4.5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4802, "unch_ci": [0.4402, 0.5238], "unch_sci": [0.467, 0.4938], "index_5050": 0.3918, "index_ci": [0.3466, 0.4429], "index_sci": [0.3768, 0.4074], "oai_bpb": 0.841, "oai_est": 0.841, "oai_ci": [0.8219, 0.8604], "oai_sci": [0.8279, 0.8542], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.9101, "neg_d_prime": -0.9101, "d_prime": 0.9101, "auc": 0.7401, "auc_ci": [0.722, 0.7587], "prose_auc": 0.7155, "top1_pct": 35.68, "mrr": 0.5651, "mrr_ci": [0.5443, 0.5873], "win_rate": 55.9, "prose_mrr": 0.5323, "n_ok": 953, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8598, "papers": 0.736, "news": 0.6892, "reference": 0.7049, "essays": 0.7323}, "dom_t1": {"code": 56.2, "papers": 35.5, "news": 27.1, "reference": 29.4, "essays": 33.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.6 Sol", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4804, "unch_ci": [0.4405, 0.524], "unch_sci": [0.4672, 0.494], "index_5050": 0.3921, "index_ci": [0.3469, 0.4431], "index_sci": [0.3771, 0.4077], "oai_bpb": 0.828, "oai_est": 0.8412, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.9087, "neg_d_prime": -0.9087, "d_prime": 0.9087, "auc": 0.7397, "auc_ci": [0.7217, 0.7576], "prose_auc": 0.7179, "top1_pct": 37.11, "mrr": 0.5681, "mrr_ci": [0.5465, 0.5906], "win_rate": 55.7, "prose_mrr": 0.5378, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8466, "papers": 0.7814, "news": 0.6554, "reference": 0.7092, "essays": 0.7258}, "dom_t1": {"code": 56.2, "papers": 41.9, "news": 27.1, "reference": 29.9, "essays": 33.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.5", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4859, "unch_ci": [0.4462, 0.5292], "unch_sci": [0.4726, 0.4996], "index_5050": 0.3984, "index_ci": [0.3532, 0.4493], "index_sci": [0.3832, 0.4142], "oai_bpb": 0.848, "oai_est": 0.8466, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.8763, "neg_d_prime": -0.8763, "d_prime": 0.8763, "auc": 0.7323, "auc_ci": [0.714, 0.7507], "prose_auc": 0.7101, "top1_pct": 34.59, "mrr": 0.5533, "mrr_ci": [0.5318, 0.5763], "win_rate": 55.1, "prose_mrr": 0.5245, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8404, "papers": 0.7583, "news": 0.6648, "reference": 0.6991, "essays": 0.7186}, "dom_t1": {"code": 53.1, "papers": 37.9, "news": 23.6, "reference": 31.5, "essays": 30.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Muse Wonder", "lab": "Meta", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4861, "unch_ci": [0.4464, 0.5293], "unch_sci": [0.473, 0.4996], "index_5050": 0.3986, "index_ci": [0.3535, 0.4494], "index_sci": [0.3836, 0.4141], "oai_bpb": 0.8468, "oai_est": 0.8468, "oai_ci": [0.8279, 0.8661], "oai_sci": [0.8339, 0.8598], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.8752, "neg_d_prime": -0.8752, "d_prime": 0.8752, "auc": 0.732, "auc_ci": [0.7138, 0.7504], "prose_auc": 0.7137, "top1_pct": 35.17, "mrr": 0.5548, "mrr_ci": [0.5323, 0.5777], "win_rate": 54.9, "prose_mrr": 0.5305, "n_ok": 944, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8201, "papers": 0.7549, "news": 0.6573, "reference": 0.7249, "essays": 0.7186}, "dom_t1": {"code": 49.4, "papers": 38.6, "news": 26.8, "reference": 34.4, "essays": 29.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Gemini 2.5 Pro", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4881, "unch_ci": [0.4484, 0.5313], "unch_sci": [0.4748, 0.5019], "index_5050": 0.4009, "index_ci": [0.3557, 0.4518], "index_sci": [0.3856, 0.4168], "oai_bpb": 0.8487, "oai_est": 0.8487, "oai_ci": [0.8296, 0.8682], "oai_sci": [0.8356, 0.862], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.8635, "neg_d_prime": -0.8635, "d_prime": 0.8635, "auc": 0.7293, "auc_ci": [0.711, 0.7486], "prose_auc": 0.7137, "top1_pct": 36.06, "mrr": 0.5588, "mrr_ci": [0.5371, 0.5814], "win_rate": 54.8, "prose_mrr": 0.5376, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8051, "papers": 0.7381, "news": 0.6906, "reference": 0.723, "essays": 0.7035}, "dom_t1": {"code": 49.4, "papers": 36.9, "news": 25.6, "reference": 35.5, "essays": 35.4}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Claude Sonnet 4.6", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4899, "unch_ci": [0.4503, 0.5329], "unch_sci": [0.4768, 0.5034], "index_5050": 0.4029, "index_ci": [0.3578, 0.4536], "index_sci": [0.3879, 0.4185], "oai_bpb": 0.8504, "oai_est": 0.8504, "oai_ci": [0.8316, 0.8697], "oai_sci": [0.8376, 0.8634], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.8533, "neg_d_prime": -0.8533, "d_prime": 0.8533, "auc": 0.7269, "auc_ci": [0.7086, 0.7446], "prose_auc": 0.7006, "top1_pct": 34.17, "mrr": 0.5472, "mrr_ci": [0.5259, 0.5688], "win_rate": 53.9, "prose_mrr": 0.5134, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8554, "papers": 0.7338, "news": 0.6762, "reference": 0.6795, "essays": 0.7128}, "dom_t1": {"code": 54.9, "papers": 34.8, "news": 26.1, "reference": 27.4, "essays": 31.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen4 Max", "lab": "Qwen", "access": "closed", "kind": "closed_est", "unch_bpb": 0.4901, "unch_ci": [0.4506, 0.5331], "unch_sci": [0.4771, 0.5035], "index_5050": 0.4031, "index_ci": [0.3581, 0.4538], "index_sci": [0.3882, 0.4186], "oai_bpb": 0.8506, "oai_est": 0.8506, "oai_ci": [0.8319, 0.8698], "oai_sci": [0.8379, 0.8636], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.852, "neg_d_prime": -0.852, "d_prime": 0.852, "auc": 0.7266, "auc_ci": [0.7084, 0.7444], "prose_auc": 0.7042, "top1_pct": 34.91, "mrr": 0.5504, "mrr_ci": [0.5288, 0.5723], "win_rate": 53.7, "prose_mrr": 0.5197, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.836, "papers": 0.7518, "news": 0.6569, "reference": 0.723, "essays": 0.6854}, "dom_t1": {"code": 54.3, "papers": 36.9, "news": 26.1, "reference": 33.0, "essays": 27.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Tencent Hy4", "lab": "Tencent", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5045, "unch_ci": [0.4651, 0.5473], "unch_sci": [0.4907, 0.5187], "index_5050": 0.4198, "index_ci": [0.3743, 0.4708], "index_sci": [0.4039, 0.4364], "oai_bpb": 0.8645, "oai_est": 0.8645, "oai_ci": [0.8451, 0.8844], "oai_sci": [0.8512, 0.8781], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.7694, "neg_d_prime": -0.7694, "d_prime": 0.7694, "auc": 0.7068, "auc_ci": [0.6876, 0.726], "prose_auc": 0.6834, "top1_pct": 32.91, "mrr": 0.5324, "mrr_ci": [0.5111, 0.5545], "win_rate": 52.5, "prose_mrr": 0.5004, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.821, "papers": 0.7345, "news": 0.6418, "reference": 0.6991, "essays": 0.6587}, "dom_t1": {"code": 53.1, "papers": 39.9, "news": 22.1, "reference": 29.4, "essays": 23.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Claude Sonnet 5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5126, "unch_ci": [0.473, 0.5555], "unch_sci": [0.4981, 0.5274], "index_5050": 0.4292, "index_ci": [0.3832, 0.4807], "index_sci": [0.4124, 0.4467], "oai_bpb": 0.8723, "oai_est": 0.8723, "oai_ci": [0.8522, 0.8928], "oai_sci": [0.8584, 0.8863], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.7243, "neg_d_prime": -0.7243, "d_prime": 0.7243, "auc": 0.6957, "auc_ci": [0.6758, 0.7159], "prose_auc": 0.6668, "top1_pct": 31.45, "mrr": 0.5224, "mrr_ci": [0.5008, 0.5444], "win_rate": 50.1, "prose_mrr": 0.4875, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8369, "papers": 0.7013, "news": 0.6375, "reference": 0.6715, "essays": 0.6573}, "dom_t1": {"code": 52.5, "papers": 33.3, "news": 22.1, "reference": 27.4, "essays": 25.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Grok 4.7", "lab": "xAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5126, "unch_ci": [0.4732, 0.5553], "unch_sci": [0.4986, 0.527], "index_5050": 0.4293, "index_ci": [0.3835, 0.4805], "index_sci": [0.413, 0.4462], "oai_bpb": 0.8723, "oai_est": 0.8723, "oai_ci": [0.8526, 0.8924], "oai_sci": [0.8589, 0.8859], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.7241, "neg_d_prime": -0.7241, "d_prime": 0.7241, "auc": 0.6957, "auc_ci": [0.676, 0.7155], "prose_auc": 0.6682, "top1_pct": 31.09, "mrr": 0.5172, "mrr_ci": [0.4959, 0.5394], "win_rate": 51.1, "prose_mrr": 0.4817, "n_ok": 952, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8305, "papers": 0.7229, "news": 0.6118, "reference": 0.6751, "essays": 0.6631}, "dom_t1": {"code": 52.2, "papers": 33.3, "news": 23.2, "reference": 24.4, "essays": 26.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Grok 4.6", "lab": "xAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.513, "unch_ci": [0.4737, 0.5556], "unch_sci": [0.4993, 0.5271], "index_5050": 0.4297, "index_ci": [0.3841, 0.4808], "index_sci": [0.4138, 0.4463], "oai_bpb": 0.8727, "oai_est": 0.8727, "oai_ci": [0.8533, 0.8925], "oai_sci": [0.8596, 0.886], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.7218, "neg_d_prime": -0.7218, "d_prime": 0.7218, "auc": 0.6951, "auc_ci": [0.6762, 0.7141], "prose_auc": 0.6699, "top1_pct": 30.71, "mrr": 0.5162, "mrr_ci": [0.4941, 0.5389], "win_rate": 51.1, "prose_mrr": 0.4847, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8183, "papers": 0.7143, "news": 0.6152, "reference": 0.6751, "essays": 0.6753}, "dom_t1": {"code": 49.4, "papers": 32.8, "news": 23.6, "reference": 25.4, "essays": 25.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen3.8 2.4T-A95B", "lab": "Qwen", "access": "open", "kind": "post", "unch_bpb": 0.5138, "unch_ci": [0.4742, 0.5566], "unch_sci": [0.4995, 0.5284], "index_5050": 0.4306, "index_ci": [0.3847, 0.482], "index_sci": [0.414, 0.4479], "oai_bpb": 0.8734, "oai_est": 0.8734, "oai_ci": [0.8535, 0.8937], "oai_sci": [0.8598, 0.8872], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.7177, "neg_d_prime": -0.7177, "d_prime": 0.7177, "auc": 0.6941, "auc_ci": [0.6734, 0.7135], "prose_auc": 0.6701, "top1_pct": 30.2, "mrr": 0.5117, "mrr_ci": [0.4882, 0.5335], "win_rate": 49.8, "prose_mrr": 0.4814, "n_ok": 884, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8059, "papers": 0.7037, "news": 0.6491, "reference": 0.6548, "essays": 0.6742}, "dom_t1": {"code": 48.1, "papers": 33.0, "news": 24.6, "reference": 23.2, "essays": 24.9}, "is_anchor": false, "template_bypass": true, "extrapolated": false}, {"name": "Grok 4.5", "lab": "xAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5153, "unch_ci": [0.4761, 0.5577], "unch_sci": [0.5018, 0.5291], "index_5050": 0.4324, "index_ci": [0.3868, 0.4834], "index_sci": [0.4167, 0.4487], "oai_bpb": 0.8748, "oai_est": 0.8748, "oai_ci": [0.8556, 0.8945], "oai_sci": [0.862, 0.8879], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.7092, "neg_d_prime": -0.7092, "d_prime": 0.7092, "auc": 0.692, "auc_ci": [0.6733, 0.7107], "prose_auc": 0.6652, "top1_pct": 29.56, "mrr": 0.5079, "mrr_ci": [0.4853, 0.5295], "win_rate": 50.5, "prose_mrr": 0.4727, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8228, "papers": 0.7136, "news": 0.6037, "reference": 0.6679, "essays": 0.676}, "dom_t1": {"code": 51.2, "papers": 31.8, "news": 20.1, "reference": 24.9, "essays": 23.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.6 Terra", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5163, "unch_ci": [0.477, 0.5587], "unch_sci": [0.5028, 0.5302], "index_5050": 0.4336, "index_ci": [0.3879, 0.4847], "index_sci": [0.4178, 0.45], "oai_bpb": 0.8758, "oai_est": 0.8758, "oai_ci": [0.8565, 0.8955], "oai_sci": [0.8629, 0.8889], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.7037, "neg_d_prime": -0.7037, "d_prime": 0.7037, "auc": 0.6906, "auc_ci": [0.6725, 0.7092], "prose_auc": 0.6696, "top1_pct": 28.09, "mrr": 0.5012, "mrr_ci": [0.48, 0.522], "win_rate": 49.6, "prose_mrr": 0.4772, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7937, "papers": 0.7273, "news": 0.6296, "reference": 0.6432, "essays": 0.6782}, "dom_t1": {"code": 41.4, "papers": 30.8, "news": 22.6, "reference": 21.8, "essays": 26.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.3 Codex", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5173, "unch_ci": [0.478, 0.5598], "unch_sci": [0.5036, 0.5313], "index_5050": 0.4347, "index_ci": [0.3889, 0.4859], "index_sci": [0.4188, 0.4513], "oai_bpb": 0.8767, "oai_est": 0.8767, "oai_ci": [0.8573, 0.8965], "oai_sci": [0.8637, 0.8899], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6983, "neg_d_prime": -0.6983, "d_prime": 0.6983, "auc": 0.6893, "auc_ci": [0.6705, 0.7081], "prose_auc": 0.6652, "top1_pct": 27.36, "mrr": 0.4974, "mrr_ci": [0.4766, 0.5187], "win_rate": 49.7, "prose_mrr": 0.4669, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8069, "papers": 0.6861, "news": 0.6461, "reference": 0.6788, "essays": 0.6501}, "dom_t1": {"code": 46.9, "papers": 26.8, "news": 20.6, "reference": 24.9, "essays": 21.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.4", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5199, "unch_ci": [0.4806, 0.5624], "unch_sci": [0.5063, 0.5338], "index_5050": 0.4378, "index_ci": [0.3919, 0.4891], "index_sci": [0.4219, 0.4543], "oai_bpb": 0.871, "oai_est": 0.8792, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.684, "neg_d_prime": -0.684, "d_prime": 0.684, "auc": 0.6857, "auc_ci": [0.6674, 0.7047], "prose_auc": 0.6593, "top1_pct": 27.57, "mrr": 0.4962, "mrr_ci": [0.4757, 0.5184], "win_rate": 49.4, "prose_mrr": 0.4651, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.8148, "papers": 0.7035, "news": 0.6224, "reference": 0.6606, "essays": 0.6508}, "dom_t1": {"code": 45.7, "papers": 29.3, "news": 18.6, "reference": 23.4, "essays": 24.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.2", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5221, "unch_ci": [0.4827, 0.5646], "unch_sci": [0.5083, 0.5362], "index_5050": 0.4404, "index_ci": [0.3943, 0.4918], "index_sci": [0.4242, 0.4571], "oai_bpb": 0.888, "oai_est": 0.8812, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.6721, "neg_d_prime": -0.6721, "d_prime": 0.6721, "auc": 0.6827, "auc_ci": [0.6636, 0.7022], "prose_auc": 0.6596, "top1_pct": 27.36, "mrr": 0.4933, "mrr_ci": [0.4725, 0.5143], "win_rate": 49.0, "prose_mrr": 0.468, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7954, "papers": 0.6962, "news": 0.626, "reference": 0.6505, "essays": 0.6659}, "dom_t1": {"code": 41.4, "papers": 29.8, "news": 21.6, "reference": 20.8, "essays": 25.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5238, "unch_ci": [0.4842, 0.5666], "unch_sci": [0.5096, 0.5384], "index_5050": 0.4424, "index_ci": [0.3961, 0.4942], "index_sci": [0.4258, 0.4597], "oai_bpb": 0.893, "oai_est": 0.8829, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.6626, "neg_d_prime": -0.6626, "d_prime": 0.6626, "auc": 0.6803, "auc_ci": [0.6598, 0.6995], "prose_auc": 0.6611, "top1_pct": 28.72, "mrr": 0.5003, "mrr_ci": [0.4779, 0.5227], "win_rate": 49.5, "prose_mrr": 0.4786, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7743, "papers": 0.7085, "news": 0.6145, "reference": 0.6708, "essays": 0.6508}, "dom_t1": {"code": 40.7, "papers": 30.3, "news": 21.1, "reference": 25.9, "essays": 27.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "MiMo-V2.6-Pro", "lab": "Xiaomi", "access": "open", "kind": "post", "unch_bpb": 0.5246, "unch_ci": [0.4851, 0.5673], "unch_sci": [0.5106, 0.5389], "index_5050": 0.4433, "index_ci": [0.397, 0.495], "index_sci": [0.4269, 0.4604], "oai_bpb": 0.8836, "oai_est": 0.8836, "oai_ci": [0.8638, 0.9039], "oai_sci": [0.8703, 0.8971], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6585, "neg_d_prime": -0.6585, "d_prime": 0.6585, "auc": 0.6792, "auc_ci": [0.6595, 0.6984], "prose_auc": 0.6579, "top1_pct": 28.0, "mrr": 0.4937, "mrr_ci": [0.4718, 0.516], "win_rate": 48.5, "prose_mrr": 0.4665, "n_ok": 950, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7831, "papers": 0.6962, "news": 0.6104, "reference": 0.6662, "essays": 0.6589}, "dom_t1": {"code": 44.4, "papers": 29.3, "news": 20.2, "reference": 25.0, "essays": 24.0}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Kimi K2.6", "lab": "Moonshot", "access": "open", "kind": "post", "unch_bpb": 0.5251, "unch_ci": [0.4855, 0.5679], "unch_sci": [0.511, 0.5396], "index_5050": 0.444, "index_ci": [0.3976, 0.4958], "index_sci": [0.4273, 0.4612], "oai_bpb": 0.8841, "oai_est": 0.8841, "oai_ci": [0.8642, 0.9045], "oai_sci": [0.8707, 0.8977], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6555, "neg_d_prime": -0.6555, "d_prime": 0.6555, "auc": 0.6785, "auc_ci": [0.6588, 0.698], "prose_auc": 0.6558, "top1_pct": 27.57, "mrr": 0.4931, "mrr_ci": [0.4723, 0.5151], "win_rate": 48.4, "prose_mrr": 0.466, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7892, "papers": 0.7071, "news": 0.6102, "reference": 0.6672, "essays": 0.6392}, "dom_t1": {"code": 43.2, "papers": 29.3, "news": 21.6, "reference": 24.4, "essays": 22.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen3.7 Max", "lab": "Qwen", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5252, "unch_ci": [0.4857, 0.5679], "unch_sci": [0.5112, 0.5396], "index_5050": 0.4441, "index_ci": [0.3978, 0.4958], "index_sci": [0.4276, 0.4612], "oai_bpb": 0.8842, "oai_est": 0.8842, "oai_ci": [0.8644, 0.9045], "oai_sci": [0.871, 0.8977], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6549, "neg_d_prime": -0.6549, "d_prime": 0.6549, "auc": 0.6783, "auc_ci": [0.6594, 0.6982], "prose_auc": 0.6595, "top1_pct": 29.35, "mrr": 0.4996, "mrr_ci": [0.4785, 0.5218], "win_rate": 48.5, "prose_mrr": 0.4737, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7707, "papers": 0.7071, "news": 0.603, "reference": 0.6613, "essays": 0.6667}, "dom_t1": {"code": 45.1, "papers": 32.8, "news": 20.6, "reference": 25.9, "essays": 25.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GLM-5", "lab": "Zhipu", "access": "open", "kind": "post", "unch_bpb": 0.5274, "unch_ci": [0.488, 0.5701], "unch_sci": [0.5136, 0.5417], "index_5050": 0.4467, "index_ci": [0.4003, 0.4985], "index_sci": [0.4304, 0.4637], "oai_bpb": 0.8863, "oai_est": 0.8863, "oai_ci": [0.8666, 0.9065], "oai_sci": [0.8732, 0.8997], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6428, "neg_d_prime": -0.6428, "d_prime": 0.6428, "auc": 0.6753, "auc_ci": [0.6548, 0.6936], "prose_auc": 0.6579, "top1_pct": 25.74, "mrr": 0.4847, "mrr_ci": [0.463, 0.505], "win_rate": 47.8, "prose_mrr": 0.4624, "n_ok": 952, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7601, "papers": 0.7143, "news": 0.6167, "reference": 0.6516, "essays": 0.6494}, "dom_t1": {"code": 38.9, "papers": 22.8, "news": 21.6, "reference": 21.4, "essays": 26.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GLM-5.1", "lab": "Zhipu", "access": "open", "kind": "post", "unch_bpb": 0.5275, "unch_ci": [0.4879, 0.5703], "unch_sci": [0.5134, 0.5419], "index_5050": 0.4468, "index_ci": [0.4003, 0.4987], "index_sci": [0.4302, 0.464], "oai_bpb": 0.8864, "oai_est": 0.8864, "oai_ci": [0.8665, 0.9068], "oai_sci": [0.8731, 0.8999], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6425, "neg_d_prime": -0.6425, "d_prime": 0.6425, "auc": 0.6752, "auc_ci": [0.6555, 0.6941], "prose_auc": 0.6558, "top1_pct": 27.04, "mrr": 0.49, "mrr_ci": [0.4685, 0.5111], "win_rate": 47.3, "prose_mrr": 0.4667, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7698, "papers": 0.7027, "news": 0.6324, "reference": 0.6628, "essays": 0.6255}, "dom_t1": {"code": 40.7, "papers": 26.8, "news": 24.6, "reference": 22.3, "essays": 23.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GLM-5.3 Prime", "lab": "Zhipu", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5286, "unch_ci": [0.4889, 0.5714], "unch_sci": [0.5143, 0.5432], "index_5050": 0.448, "index_ci": [0.4014, 0.5001], "index_sci": [0.4312, 0.4655], "oai_bpb": 0.8874, "oai_est": 0.8874, "oai_ci": [0.8673, 0.9079], "oai_sci": [0.8739, 0.9011], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6368, "neg_d_prime": -0.6368, "d_prime": 0.6368, "auc": 0.6738, "auc_ci": [0.654, 0.6932], "prose_auc": 0.6552, "top1_pct": 27.63, "mrr": 0.4925, "mrr_ci": [0.4712, 0.5134], "win_rate": 47.5, "prose_mrr": 0.4719, "n_ok": 941, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7662, "papers": 0.7026, "news": 0.6004, "reference": 0.6747, "essays": 0.6436}, "dom_t1": {"code": 38.9, "papers": 29.6, "news": 20.3, "reference": 24.1, "essays": 27.6}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "o3", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5293, "unch_ci": [0.4898, 0.5721], "unch_sci": [0.5155, 0.5435], "index_5050": 0.449, "index_ci": [0.4025, 0.5009], "index_sci": [0.4327, 0.4659], "oai_bpb": 0.8881, "oai_est": 0.8881, "oai_ci": [0.8684, 0.9083], "oai_sci": [0.8751, 0.9014], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6325, "neg_d_prime": -0.6325, "d_prime": 0.6325, "auc": 0.6727, "auc_ci": [0.653, 0.6921], "prose_auc": 0.6479, "top1_pct": 28.41, "mrr": 0.492, "mrr_ci": [0.4704, 0.5132], "win_rate": 48.1, "prose_mrr": 0.4651, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7937, "papers": 0.6732, "news": 0.608, "reference": 0.6548, "essays": 0.6558}, "dom_t1": {"code": 43.2, "papers": 30.3, "news": 21.6, "reference": 25.4, "essays": 24.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GLM-5 Turbo", "lab": "Zhipu", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5301, "unch_ci": [0.4905, 0.5729], "unch_sci": [0.5162, 0.5445], "index_5050": 0.4499, "index_ci": [0.4033, 0.5019], "index_sci": [0.4334, 0.467], "oai_bpb": 0.8889, "oai_est": 0.8889, "oai_ci": [0.869, 0.9092], "oai_sci": [0.8757, 0.9023], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6283, "neg_d_prime": -0.6283, "d_prime": 0.6283, "auc": 0.6716, "auc_ci": [0.6522, 0.6903], "prose_auc": 0.6521, "top1_pct": 25.89, "mrr": 0.4822, "mrr_ci": [0.4613, 0.5031], "win_rate": 47.0, "prose_mrr": 0.4569, "n_ok": 950, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7663, "papers": 0.7085, "news": 0.6232, "reference": 0.6374, "essays": 0.6389}, "dom_t1": {"code": 41.4, "papers": 24.7, "news": 24.0, "reference": 20.3, "essays": 21.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GLM-5.2", "lab": "Zhipu", "access": "open", "kind": "post", "unch_bpb": 0.5303, "unch_ci": [0.4907, 0.5731], "unch_sci": [0.5164, 0.5447], "index_5050": 0.4502, "index_ci": [0.4035, 0.5022], "index_sci": [0.4337, 0.4673], "oai_bpb": 0.889, "oai_est": 0.889, "oai_ci": [0.8692, 0.9094], "oai_sci": [0.8758, 0.9024], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6272, "neg_d_prime": -0.6272, "d_prime": 0.6272, "auc": 0.6713, "auc_ci": [0.6519, 0.6911], "prose_auc": 0.6524, "top1_pct": 26.31, "mrr": 0.485, "mrr_ci": [0.4635, 0.5062], "win_rate": 47.2, "prose_mrr": 0.4622, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7637, "papers": 0.7172, "news": 0.6195, "reference": 0.6302, "essays": 0.6429}, "dom_t1": {"code": 40.1, "papers": 29.3, "news": 19.6, "reference": 19.3, "essays": 25.8}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.1", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5315, "unch_ci": [0.4917, 0.5746], "unch_sci": [0.517, 0.5465], "index_5050": 0.4516, "index_ci": [0.4046, 0.504], "index_sci": [0.4344, 0.4694], "oai_bpb": 0.893, "oai_est": 0.8902, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.6208, "neg_d_prime": -0.6208, "d_prime": 0.6208, "auc": 0.6697, "auc_ci": [0.6493, 0.6895], "prose_auc": 0.6512, "top1_pct": 29.45, "mrr": 0.4991, "mrr_ci": [0.4772, 0.5212], "win_rate": 48.4, "prose_mrr": 0.4796, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7601, "papers": 0.7006, "news": 0.6159, "reference": 0.6563, "essays": 0.632}, "dom_t1": {"code": 39.5, "papers": 34.8, "news": 22.1, "reference": 28.4, "essays": 24.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Grok 4.20", "lab": "xAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5325, "unch_ci": [0.4929, 0.5753], "unch_sci": [0.5186, 0.5468], "index_5050": 0.4527, "index_ci": [0.406, 0.5049], "index_sci": [0.4362, 0.4699], "oai_bpb": 0.8911, "oai_est": 0.8911, "oai_ci": [0.8712, 0.9115], "oai_sci": [0.8779, 0.9044], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6156, "neg_d_prime": -0.6156, "d_prime": 0.6156, "auc": 0.6683, "auc_ci": [0.6487, 0.6876], "prose_auc": 0.6448, "top1_pct": 26.39, "mrr": 0.4799, "mrr_ci": [0.4585, 0.5011], "win_rate": 46.8, "prose_mrr": 0.4522, "n_ok": 951, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7835, "papers": 0.6866, "news": 0.6123, "reference": 0.6555, "essays": 0.6255}, "dom_t1": {"code": 42.2, "papers": 27.6, "news": 23.1, "reference": 22.3, "essays": 19.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Gemini 3.1 Flash-Lite", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5341, "unch_ci": [0.4944, 0.5771], "unch_sci": [0.5201, 0.5485], "index_5050": 0.4547, "index_ci": [0.4078, 0.507], "index_sci": [0.4381, 0.4719], "oai_bpb": 0.8926, "oai_est": 0.8926, "oai_ci": [0.8726, 0.9131], "oai_sci": [0.8794, 0.906], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6068, "neg_d_prime": -0.6068, "d_prime": 0.6068, "auc": 0.6661, "auc_ci": [0.6465, 0.6856], "prose_auc": 0.6492, "top1_pct": 27.36, "mrr": 0.4868, "mrr_ci": [0.467, 0.5078], "win_rate": 47.5, "prose_mrr": 0.4722, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7487, "papers": 0.6645, "news": 0.6274, "reference": 0.6621, "essays": 0.6429}, "dom_t1": {"code": 33.3, "papers": 27.3, "news": 23.6, "reference": 26.4, "essays": 27.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Grok 4.3", "lab": "xAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.535, "unch_ci": [0.4952, 0.578], "unch_sci": [0.5209, 0.5496], "index_5050": 0.4557, "index_ci": [0.4087, 0.5082], "index_sci": [0.439, 0.4731], "oai_bpb": 0.8934, "oai_est": 0.8934, "oai_ci": [0.8733, 0.9141], "oai_sci": [0.8801, 0.907], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.6022, "neg_d_prime": -0.6022, "d_prime": 0.6022, "auc": 0.6649, "auc_ci": [0.6452, 0.685], "prose_auc": 0.6432, "top1_pct": 26.83, "mrr": 0.4822, "mrr_ci": [0.4604, 0.5034], "win_rate": 46.0, "prose_mrr": 0.4561, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7707, "papers": 0.676, "news": 0.6123, "reference": 0.6439, "essays": 0.6407}, "dom_t1": {"code": 42.0, "papers": 28.8, "news": 20.6, "reference": 23.4, "essays": 22.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-4.1", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5367, "unch_ci": [0.4968, 0.5797], "unch_sci": [0.5225, 0.5512], "index_5050": 0.4577, "index_ci": [0.4105, 0.5103], "index_sci": [0.4409, 0.4751], "oai_bpb": 0.902, "oai_est": 0.895, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.5935, "neg_d_prime": -0.5935, "d_prime": 0.5935, "auc": 0.6626, "auc_ci": [0.6432, 0.6824], "prose_auc": 0.6503, "top1_pct": 26.21, "mrr": 0.4774, "mrr_ci": [0.4564, 0.4991], "win_rate": 46.6, "prose_mrr": 0.4643, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7231, "papers": 0.7085, "news": 0.5994, "reference": 0.6439, "essays": 0.6494}, "dom_t1": {"code": 33.3, "papers": 29.3, "news": 23.6, "reference": 22.3, "essays": 23.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GLM-5.3", "lab": "Zhipu", "access": "open", "kind": "post", "unch_bpb": 0.537, "unch_ci": [0.4971, 0.58], "unch_sci": [0.5229, 0.5515], "index_5050": 0.4581, "index_ci": [0.4109, 0.5107], "index_sci": [0.4413, 0.4755], "oai_bpb": 0.8953, "oai_est": 0.8953, "oai_ci": [0.8751, 0.9159], "oai_sci": [0.882, 0.9087], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5917, "neg_d_prime": -0.5917, "d_prime": 0.5917, "auc": 0.6622, "auc_ci": [0.6426, 0.6821], "prose_auc": 0.6389, "top1_pct": 25.68, "mrr": 0.477, "mrr_ci": [0.4561, 0.4986], "win_rate": 46.3, "prose_mrr": 0.4517, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.776, "papers": 0.6804, "news": 0.5951, "reference": 0.6505, "essays": 0.6299}, "dom_t1": {"code": 40.1, "papers": 26.8, "news": 19.1, "reference": 23.4, "essays": 21.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Claude Haiku 4.5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5402, "unch_ci": [0.5002, 0.5834], "unch_sci": [0.526, 0.5547], "index_5050": 0.4619, "index_ci": [0.4144, 0.5147], "index_sci": [0.445, 0.4793], "oai_bpb": 0.8982, "oai_est": 0.8982, "oai_ci": [0.878, 0.919], "oai_sci": [0.885, 0.9117], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.575, "neg_d_prime": -0.575, "d_prime": 0.575, "auc": 0.6578, "auc_ci": [0.6382, 0.6766], "prose_auc": 0.6338, "top1_pct": 25.37, "mrr": 0.4705, "mrr_ci": [0.4495, 0.491], "win_rate": 45.7, "prose_mrr": 0.4444, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7751, "papers": 0.6833, "news": 0.5994, "reference": 0.6207, "essays": 0.632}, "dom_t1": {"code": 40.1, "papers": 25.8, "news": 21.1, "reference": 19.3, "essays": 23.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Gemini 2.5 Flash", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5441, "unch_ci": [0.504, 0.5874], "unch_sci": [0.5302, 0.5584], "index_5050": 0.4666, "index_ci": [0.4189, 0.5197], "index_sci": [0.45, 0.4838], "oai_bpb": 0.9019, "oai_est": 0.9019, "oai_ci": [0.8817, 0.9225], "oai_sci": [0.8889, 0.9151], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5543, "neg_d_prime": -0.5543, "d_prime": 0.5543, "auc": 0.6524, "auc_ci": [0.6334, 0.6724], "prose_auc": 0.6319, "top1_pct": 23.38, "mrr": 0.4612, "mrr_ci": [0.4422, 0.4813], "win_rate": 44.6, "prose_mrr": 0.4387, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7531, "papers": 0.6652, "news": 0.5922, "reference": 0.6389, "essays": 0.6313}, "dom_t1": {"code": 35.2, "papers": 26.3, "news": 17.6, "reference": 21.3, "essays": 18.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-6 Luna", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.545, "unch_ci": [0.5049, 0.5882], "unch_sci": [0.5313, 0.559], "index_5050": 0.4676, "index_ci": [0.4199, 0.5207], "index_sci": [0.4512, 0.4846], "oai_bpb": 0.9027, "oai_est": 0.9027, "oai_ci": [0.8827, 0.9232], "oai_sci": [0.8899, 0.9157], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5497, "neg_d_prime": -0.5497, "d_prime": 0.5497, "auc": 0.6512, "auc_ci": [0.6323, 0.6695], "prose_auc": 0.634, "top1_pct": 24.95, "mrr": 0.4634, "mrr_ci": [0.443, 0.4842], "win_rate": 44.5, "prose_mrr": 0.4456, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7354, "papers": 0.676, "news": 0.5951, "reference": 0.665, "essays": 0.6003}, "dom_t1": {"code": 34.0, "papers": 27.8, "news": 19.1, "reference": 24.9, "essays": 20.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GLM-4.7", "lab": "Zhipu", "access": "open", "kind": "post", "unch_bpb": 0.5451, "unch_ci": [0.5049, 0.5884], "unch_sci": [0.5311, 0.5594], "index_5050": 0.4677, "index_ci": [0.4199, 0.521], "index_sci": [0.4511, 0.485], "oai_bpb": 0.9028, "oai_est": 0.9028, "oai_ci": [0.8826, 0.9235], "oai_sci": [0.8898, 0.916], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5491, "neg_d_prime": -0.5491, "d_prime": 0.5491, "auc": 0.6511, "auc_ci": [0.632, 0.6705], "prose_auc": 0.634, "top1_pct": 23.69, "mrr": 0.4606, "mrr_ci": [0.4405, 0.4812], "win_rate": 45.3, "prose_mrr": 0.4431, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7346, "papers": 0.6811, "news": 0.5922, "reference": 0.6142, "essays": 0.6486}, "dom_t1": {"code": 32.7, "papers": 26.3, "news": 19.6, "reference": 20.3, "essays": 21.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.6 Luna", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5464, "unch_ci": [0.5063, 0.5897], "unch_sci": [0.5328, 0.5604], "index_5050": 0.4693, "index_ci": [0.4215, 0.5225], "index_sci": [0.4531, 0.4862], "oai_bpb": 0.904, "oai_est": 0.904, "oai_ci": [0.884, 0.9245], "oai_sci": [0.8913, 0.9169], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5422, "neg_d_prime": -0.5422, "d_prime": 0.5422, "auc": 0.6493, "auc_ci": [0.6304, 0.6683], "prose_auc": 0.6349, "top1_pct": 22.43, "mrr": 0.4507, "mrr_ci": [0.4304, 0.4705], "win_rate": 43.9, "prose_mrr": 0.4342, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7196, "papers": 0.6825, "news": 0.5966, "reference": 0.6461, "essays": 0.6147}, "dom_t1": {"code": 32.1, "papers": 26.8, "news": 17.1, "reference": 20.8, "essays": 17.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen3.8 Flash", "lab": "Qwen", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5466, "unch_ci": [0.5062, 0.5903], "unch_sci": [0.5321, 0.5615], "index_5050": 0.4696, "index_ci": [0.4214, 0.5233], "index_sci": [0.4523, 0.4876], "oai_bpb": 0.9042, "oai_est": 0.9042, "oai_ci": [0.8835, 0.9255], "oai_sci": [0.8907, 0.918], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5411, "neg_d_prime": -0.5411, "d_prime": 0.5411, "auc": 0.649, "auc_ci": [0.6292, 0.6692], "prose_auc": 0.625, "top1_pct": 25.68, "mrr": 0.4705, "mrr_ci": [0.4494, 0.4925], "win_rate": 45.3, "prose_mrr": 0.4444, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7663, "papers": 0.676, "news": 0.5757, "reference": 0.6251, "essays": 0.6234}, "dom_t1": {"code": 39.5, "papers": 29.3, "news": 21.1, "reference": 19.8, "essays": 21.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "MiMo-V2.6-Flash", "lab": "Xiaomi", "access": "open", "kind": "post", "unch_bpb": 0.5477, "unch_ci": [0.5075, 0.5912], "unch_sci": [0.5338, 0.5619], "index_5050": 0.4709, "index_ci": [0.4229, 0.5244], "index_sci": [0.4543, 0.4881], "oai_bpb": 0.9052, "oai_est": 0.9052, "oai_ci": [0.885, 0.926], "oai_sci": [0.8923, 0.9183], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5354, "neg_d_prime": -0.5354, "d_prime": 0.5354, "auc": 0.6475, "auc_ci": [0.6286, 0.6669], "prose_auc": 0.6288, "top1_pct": 22.96, "mrr": 0.4552, "mrr_ci": [0.4355, 0.4758], "win_rate": 44.2, "prose_mrr": 0.4344, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.739, "papers": 0.6739, "news": 0.5937, "reference": 0.6447, "essays": 0.6032}, "dom_t1": {"code": 34.6, "papers": 23.2, "news": 17.1, "reference": 22.3, "essays": 19.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen3.8-27B", "lab": "Qwen", "access": "open", "kind": "post", "unch_bpb": 0.5486, "unch_ci": [0.5083, 0.5921], "unch_sci": [0.5348, 0.5627], "index_5050": 0.472, "index_ci": [0.4239, 0.5255], "index_sci": [0.4554, 0.4891], "oai_bpb": 0.9061, "oai_est": 0.9061, "oai_ci": [0.8858, 0.9267], "oai_sci": [0.8932, 0.9191], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5308, "neg_d_prime": -0.5308, "d_prime": 0.5308, "auc": 0.6463, "auc_ci": [0.6277, 0.6654], "prose_auc": 0.6261, "top1_pct": 23.27, "mrr": 0.4546, "mrr_ci": [0.4344, 0.4759], "win_rate": 44.4, "prose_mrr": 0.4313, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7451, "papers": 0.6616, "news": 0.5908, "reference": 0.6258, "essays": 0.6263}, "dom_t1": {"code": 35.8, "papers": 24.7, "news": 21.6, "reference": 18.8, "essays": 17.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Gemini 3.5 Flash-Lite", "lab": "Google", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5495, "unch_ci": [0.5087, 0.5935], "unch_sci": [0.5345, 0.5648], "index_5050": 0.473, "index_ci": [0.4243, 0.5273], "index_sci": [0.4551, 0.4916], "oai_bpb": 0.9069, "oai_est": 0.9069, "oai_ci": [0.8857, 0.9286], "oai_sci": [0.893, 0.921], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5263, "neg_d_prime": -0.5263, "d_prime": 0.5263, "auc": 0.6451, "auc_ci": [0.6247, 0.6659], "prose_auc": 0.6232, "top1_pct": 26.21, "mrr": 0.4749, "mrr_ci": [0.4537, 0.4959], "win_rate": 45.7, "prose_mrr": 0.4496, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7522, "papers": 0.6739, "news": 0.5894, "reference": 0.6432, "essays": 0.5866}, "dom_t1": {"code": 41.4, "papers": 26.3, "news": 19.1, "reference": 25.4, "essays": 21.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-5.4 Mini", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5511, "unch_ci": [0.5105, 0.5949], "unch_sci": [0.537, 0.5656], "index_5050": 0.475, "index_ci": [0.4265, 0.529], "index_sci": [0.458, 0.4926], "oai_bpb": 0.9084, "oai_est": 0.9084, "oai_ci": [0.8878, 0.9295], "oai_sci": [0.8953, 0.9217], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5178, "neg_d_prime": -0.5178, "d_prime": 0.5178, "auc": 0.6429, "auc_ci": [0.6233, 0.6623], "prose_auc": 0.625, "top1_pct": 22.54, "mrr": 0.4502, "mrr_ci": [0.4294, 0.47], "win_rate": 43.7, "prose_mrr": 0.4347, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7302, "papers": 0.6638, "news": 0.5736, "reference": 0.6512, "essays": 0.6118}, "dom_t1": {"code": 29.0, "papers": 26.3, "news": 16.1, "reference": 23.4, "essays": 19.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "DeepSeek V3.2", "lab": "DeepSeek", "access": "open", "kind": "post", "unch_bpb": 0.5517, "unch_ci": [0.5111, 0.5955], "unch_sci": [0.5375, 0.5661], "index_5050": 0.4757, "index_ci": [0.4271, 0.5298], "index_sci": [0.4587, 0.4932], "oai_bpb": 0.9089, "oai_est": 0.9089, "oai_ci": [0.8883, 0.93], "oai_sci": [0.8958, 0.9222], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.5149, "neg_d_prime": -0.5149, "d_prime": 0.5149, "auc": 0.6421, "auc_ci": [0.6235, 0.6616], "prose_auc": 0.619, "top1_pct": 22.64, "mrr": 0.452, "mrr_ci": [0.4325, 0.4722], "win_rate": 43.9, "prose_mrr": 0.4287, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7549, "papers": 0.6753, "news": 0.5994, "reference": 0.6106, "essays": 0.5909}, "dom_t1": {"code": 33.3, "papers": 29.3, "news": 15.6, "reference": 19.3, "essays": 17.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Claude Haiku 5.5", "lab": "Anthropic", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5552, "unch_ci": [0.5143, 0.5993], "unch_sci": [0.541, 0.5698], "index_5050": 0.4799, "index_ci": [0.4309, 0.5345], "index_sci": [0.4628, 0.4976], "oai_bpb": 0.9121, "oai_est": 0.9121, "oai_ci": [0.8914, 0.9334], "oai_sci": [0.899, 0.9255], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.4968, "neg_d_prime": -0.4968, "d_prime": 0.4968, "auc": 0.6373, "auc_ci": [0.6177, 0.6568], "prose_auc": 0.605, "top1_pct": 21.7, "mrr": 0.4419, "mrr_ci": [0.4217, 0.4624], "win_rate": 42.9, "prose_mrr": 0.4045, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7954, "papers": 0.6515, "news": 0.5635, "reference": 0.6157, "essays": 0.5895}, "dom_t1": {"code": 42.6, "papers": 24.2, "news": 13.1, "reference": 16.2, "essays": 16.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen3.6-27B", "lab": "Qwen", "access": "open", "kind": "post", "unch_bpb": 0.5555, "unch_ci": [0.5144, 0.5999], "unch_sci": [0.5408, 0.5706], "index_5050": 0.4803, "index_ci": [0.431, 0.5352], "index_sci": [0.4626, 0.4987], "oai_bpb": 0.9124, "oai_est": 0.9124, "oai_ci": [0.8912, 0.9341], "oai_sci": [0.8988, 0.9263], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.4951, "neg_d_prime": -0.4951, "d_prime": 0.4951, "auc": 0.6369, "auc_ci": [0.6169, 0.6571], "prose_auc": 0.6138, "top1_pct": 24.74, "mrr": 0.4592, "mrr_ci": [0.4375, 0.4806], "win_rate": 44.0, "prose_mrr": 0.4349, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7496, "papers": 0.6847, "news": 0.5793, "reference": 0.612, "essays": 0.5794}, "dom_t1": {"code": 37.7, "papers": 32.3, "news": 17.1, "reference": 21.3, "essays": 17.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Mistral Medium 3.5", "lab": "Mistral", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5559, "unch_ci": [0.5153, 0.5999], "unch_sci": [0.5423, 0.57], "index_5050": 0.4808, "index_ci": [0.432, 0.5352], "index_sci": [0.4644, 0.4979], "oai_bpb": 0.9128, "oai_est": 0.9128, "oai_ci": [0.8925, 0.9337], "oai_sci": [0.9002, 0.9257], "oai_exact": false, "oai_extrap": false, "nce_doc_bpb": -0.4929, "neg_d_prime": -0.4929, "d_prime": 0.4929, "auc": 0.6363, "auc_ci": [0.6173, 0.6548], "prose_auc": 0.6212, "top1_pct": 20.65, "mrr": 0.4372, "mrr_ci": [0.4173, 0.4569], "win_rate": 42.5, "prose_mrr": 0.4203, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7099, "papers": 0.6443, "news": 0.57, "reference": 0.6309, "essays": 0.64}, "dom_t1": {"code": 29.6, "papers": 21.2, "news": 15.1, "reference": 17.8, "essays": 21.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-4o", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5563, "unch_ci": [0.5154, 0.6004], "unch_sci": [0.5422, 0.5707], "index_5050": 0.4812, "index_ci": [0.4321, 0.5359], "index_sci": [0.4643, 0.4988], "oai_bpb": 0.904, "oai_est": 0.9132, "oai_ci": null, "oai_sci": null, "oai_exact": true, "oai_extrap": false, "nce_doc_bpb": -0.4912, "neg_d_prime": -0.4912, "d_prime": 0.4912, "auc": 0.6358, "auc_ci": [0.6162, 0.655], "prose_auc": 0.6172, "top1_pct": 22.12, "mrr": 0.4438, "mrr_ci": [0.4236, 0.4646], "win_rate": 43.3, "prose_mrr": 0.425, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7266, "papers": 0.6392, "news": 0.57, "reference": 0.6287, "essays": 0.6313}, "dom_t1": {"code": 31.5, "papers": 20.2, "news": 17.6, "reference": 20.3, "essays": 22.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Step 5 Preview", "lab": "StepFun", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5564, "unch_ci": [0.5149, 0.6011], "unch_sci": [0.5409, 0.5722], "index_5050": 0.4813, "index_ci": [0.4316, 0.5368], "index_sci": [0.4628, 0.5006], "oai_bpb": 0.9132, "oai_est": 0.9132, "oai_ci": [0.8914, 0.9356], "oai_sci": [0.899, 0.9277], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.4908, "neg_d_prime": -0.4908, "d_prime": 0.4908, "auc": 0.6357, "auc_ci": [0.6138, 0.6565], "prose_auc": 0.6153, "top1_pct": 26.14, "mrr": 0.4655, "mrr_ci": [0.4431, 0.4876], "win_rate": 44.5, "prose_mrr": 0.443, "n_ok": 880, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7401, "papers": 0.6335, "news": 0.5949, "reference": 0.6085, "essays": 0.623}, "dom_t1": {"code": 38.9, "papers": 28.3, "news": 23.3, "reference": 19.8, "essays": 22.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Mistral Large 3", "lab": "Mistral", "access": "open", "kind": "post", "unch_bpb": 0.5566, "unch_ci": [0.5156, 0.6009], "unch_sci": [0.5423, 0.5713], "index_5050": 0.4816, "index_ci": [0.4324, 0.5365], "index_sci": [0.4644, 0.4995], "oai_bpb": 0.9135, "oai_est": 0.9135, "oai_ci": [0.8925, 0.9349], "oai_sci": [0.9002, 0.9269], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.4895, "neg_d_prime": -0.4895, "d_prime": 0.4895, "auc": 0.6354, "auc_ci": [0.6159, 0.6555], "prose_auc": 0.6126, "top1_pct": 21.49, "mrr": 0.4404, "mrr_ci": [0.4207, 0.4606], "win_rate": 43.4, "prose_mrr": 0.4164, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7469, "papers": 0.6284, "news": 0.5721, "reference": 0.6091, "essays": 0.6407}, "dom_t1": {"code": 34.6, "papers": 21.2, "news": 15.1, "reference": 17.3, "essays": 21.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen3.7-Plus", "lab": "Qwen", "access": "open", "kind": "post", "unch_bpb": 0.5583, "unch_ci": [0.5169, 0.6029], "unch_sci": [0.5433, 0.5736], "index_5050": 0.4836, "index_ci": [0.4339, 0.5391], "index_sci": [0.4656, 0.5024], "oai_bpb": 0.915, "oai_est": 0.915, "oai_ci": [0.8935, 0.937], "oai_sci": [0.9012, 0.929], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.481, "neg_d_prime": -0.481, "d_prime": 0.481, "auc": 0.6331, "auc_ci": [0.6128, 0.6529], "prose_auc": 0.608, "top1_pct": 25.89, "mrr": 0.4664, "mrr_ci": [0.4458, 0.4873], "win_rate": 44.1, "prose_mrr": 0.4425, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7557, "papers": 0.6414, "news": 0.5564, "reference": 0.612, "essays": 0.6227}, "dom_t1": {"code": 37.0, "papers": 30.3, "news": 16.6, "reference": 24.4, "essays": 23.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Qwen3.6 Plus", "lab": "Qwen", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5587, "unch_ci": [0.5172, 0.6035], "unch_sci": [0.5436, 0.5742], "index_5050": 0.4842, "index_ci": [0.4343, 0.5398], "index_sci": [0.466, 0.5031], "oai_bpb": 0.9154, "oai_est": 0.9154, "oai_ci": [0.8938, 0.9375], "oai_sci": [0.9014, 0.9295], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.4788, "neg_d_prime": -0.4788, "d_prime": 0.4788, "auc": 0.6325, "auc_ci": [0.6113, 0.6535], "prose_auc": 0.6086, "top1_pct": 25.26, "mrr": 0.4637, "mrr_ci": [0.4427, 0.4849], "win_rate": 43.7, "prose_mrr": 0.4385, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7496, "papers": 0.6566, "news": 0.5578, "reference": 0.6099, "essays": 0.6104}, "dom_t1": {"code": 38.3, "papers": 29.3, "news": 16.1, "reference": 23.9, "essays": 21.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Llama 4 Maverick", "lab": "Meta", "access": "open", "kind": "post", "unch_bpb": 0.5602, "unch_ci": [0.5189, 0.6049], "unch_sci": [0.5456, 0.5752], "index_5050": 0.486, "index_ci": [0.4362, 0.5416], "index_sci": [0.4684, 0.5043], "oai_bpb": 0.9168, "oai_est": 0.9168, "oai_ci": [0.8955, 0.9386], "oai_sci": [0.9033, 0.9305], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.4709, "neg_d_prime": -0.4709, "d_prime": 0.4709, "auc": 0.6304, "auc_ci": [0.6101, 0.6503], "prose_auc": 0.6104, "top1_pct": 21.59, "mrr": 0.4416, "mrr_ci": [0.4214, 0.4617], "win_rate": 42.9, "prose_mrr": 0.419, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.7284, "papers": 0.6558, "news": 0.5664, "reference": 0.6287, "essays": 0.5909}, "dom_t1": {"code": 34.0, "papers": 24.2, "news": 15.6, "reference": 19.3, "essays": 17.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Inkling", "lab": "Thinking Machines", "access": "open", "kind": "post", "unch_bpb": 0.5622, "unch_ci": [0.5207, 0.607], "unch_sci": [0.5478, 0.5771], "index_5050": 0.4885, "index_ci": [0.4384, 0.5442], "index_sci": [0.471, 0.5066], "oai_bpb": 0.9186, "oai_est": 0.9186, "oai_ci": [0.8974, 0.9404], "oai_sci": [0.9053, 0.9321], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.4608, "neg_d_prime": -0.4608, "d_prime": 0.4608, "auc": 0.6277, "auc_ci": [0.608, 0.6471], "prose_auc": 0.6225, "top1_pct": 20.96, "mrr": 0.4403, "mrr_ci": [0.4204, 0.46], "win_rate": 42.9, "prose_mrr": 0.4353, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6534, "papers": 0.6522, "news": 0.5894, "reference": 0.6048, "essays": 0.6436}, "dom_t1": {"code": 22.2, "papers": 22.2, "news": 18.6, "reference": 18.8, "essays": 23.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "MiniMax M3", "lab": "MiniMax", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5773, "unch_ci": [0.5344, 0.6236], "unch_sci": [0.5629, 0.592], "index_5050": 0.5068, "index_ci": [0.4546, 0.5651], "index_sci": [0.4892, 0.525], "oai_bpb": 0.9323, "oai_est": 0.9323, "oai_ci": [0.9104, 0.9547], "oai_sci": [0.9192, 0.9456], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.3856, "neg_d_prime": -0.3856, "d_prime": 0.3856, "auc": 0.6074, "auc_ci": [0.5875, 0.6267], "prose_auc": 0.5924, "top1_pct": 17.83, "mrr": 0.4136, "mrr_ci": [0.3953, 0.432], "win_rate": 39.1, "prose_mrr": 0.4006, "n_ok": 948, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6826, "papers": 0.6227, "news": 0.565, "reference": 0.6012, "essays": 0.5809}, "dom_t1": {"code": 22.8, "papers": 20.7, "news": 13.6, "reference": 16.8, "essays": 16.3}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "GPT-4o-mini", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.5931, "unch_ci": [0.5481, 0.6417], "unch_sci": [0.5782, 0.6083], "index_5050": 0.5263, "index_ci": [0.4709, 0.5882], "index_sci": [0.508, 0.5453], "oai_bpb": 0.9465, "oai_est": 0.9465, "oai_ci": [0.9235, 0.9701], "oai_sci": [0.9331, 0.96], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.3087, "neg_d_prime": -0.3087, "d_prime": 0.3087, "auc": 0.5864, "auc_ci": [0.566, 0.6058], "prose_auc": 0.5718, "top1_pct": 17.51, "mrr": 0.402, "mrr_ci": [0.3827, 0.4206], "win_rate": 39.5, "prose_mrr": 0.3854, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6578, "papers": 0.5779, "news": 0.542, "reference": 0.6012, "essays": 0.5664}, "dom_t1": {"code": 26.5, "papers": 15.2, "news": 11.6, "reference": 20.3, "essays": 15.7}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Mistral Small 4", "lab": "Mistral", "access": "open", "kind": "post", "unch_bpb": 0.6001, "unch_ci": [0.5542, 0.6498], "unch_sci": [0.5854, 0.6151], "index_5050": 0.535, "index_ci": [0.4783, 0.5985], "index_sci": [0.5168, 0.5539], "oai_bpb": 0.9528, "oai_est": 0.9528, "oai_ci": [0.9295, 0.9766], "oai_sci": [0.9396, 0.9661], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.2752, "neg_d_prime": -0.2752, "d_prime": 0.2752, "auc": 0.5771, "auc_ci": [0.5576, 0.597], "prose_auc": 0.5731, "top1_pct": 15.58, "mrr": 0.3845, "mrr_ci": [0.3664, 0.4024], "win_rate": 36.7, "prose_mrr": 0.3839, "n_ok": 950, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.5976, "papers": 0.6039, "news": 0.5291, "reference": 0.591, "essays": 0.5685}, "dom_t1": {"code": 13.9, "papers": 21.7, "news": 8.0, "reference": 16.8, "essays": 17.2}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "gpt-oss-120b", "lab": "OpenAI", "access": "open", "kind": "post", "unch_bpb": 0.6048, "unch_ci": [0.5581, 0.6554], "unch_sci": [0.5897, 0.6203], "index_5050": 0.5409, "index_ci": [0.483, 0.6058], "index_sci": [0.5221, 0.5603], "oai_bpb": 0.9569, "oai_est": 0.9569, "oai_ci": [0.9331, 0.9814], "oai_sci": [0.9435, 0.9706], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.253, "neg_d_prime": -0.253, "d_prime": 0.253, "auc": 0.571, "auc_ci": [0.5506, 0.5905], "prose_auc": 0.5505, "top1_pct": 17.84, "mrr": 0.3955, "mrr_ci": [0.3765, 0.4147], "win_rate": 38.0, "prose_mrr": 0.3721, "n_ok": 953, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6717, "papers": 0.6212, "news": 0.5212, "reference": 0.57, "essays": 0.4899}, "dom_t1": {"code": 31.7, "papers": 20.2, "news": 15.1, "reference": 15.2, "essays": 9.6}, "is_anchor": false, "template_bypass": true, "extrapolated": false}, {"name": "gpt-oss-20b", "lab": "OpenAI", "access": "open", "kind": "post", "unch_bpb": 0.6071, "unch_ci": [0.5598, 0.6584], "unch_sci": [0.5914, 0.6231], "index_5050": 0.5438, "index_ci": [0.4851, 0.6096], "index_sci": [0.5243, 0.564], "oai_bpb": 0.959, "oai_est": 0.959, "oai_ci": [0.9346, 0.9839], "oai_sci": [0.945, 0.9731], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.2422, "neg_d_prime": -0.2422, "d_prime": 0.2422, "auc": 0.568, "auc_ci": [0.5473, 0.5881], "prose_auc": 0.5528, "top1_pct": 18.07, "mrr": 0.3978, "mrr_ci": [0.3788, 0.4162], "win_rate": 38.6, "prose_mrr": 0.3856, "n_ok": 952, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6424, "papers": 0.6154, "news": 0.5492, "reference": 0.5248, "essays": 0.5216}, "dom_t1": {"code": 23.0, "papers": 24.7, "news": 13.6, "reference": 13.3, "essays": 16.7}, "is_anchor": false, "template_bypass": true, "extrapolated": false}, {"name": "GPT-5.4 Nano", "lab": "OpenAI", "access": "closed", "kind": "closed_est", "unch_bpb": 0.6073, "unch_ci": [0.5601, 0.6585], "unch_sci": [0.592, 0.623], "index_5050": 0.5441, "index_ci": [0.4854, 0.6098], "index_sci": [0.525, 0.5638], "oai_bpb": 0.9592, "oai_est": 0.9592, "oai_ci": [0.935, 0.9839], "oai_sci": [0.9456, 0.9729], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.2411, "neg_d_prime": -0.2411, "d_prime": 0.2411, "auc": 0.5677, "auc_ci": [0.5471, 0.587], "prose_auc": 0.5575, "top1_pct": 16.46, "mrr": 0.3858, "mrr_ci": [0.3675, 0.4047], "win_rate": 37.8, "prose_mrr": 0.3714, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.6173, "papers": 0.6025, "news": 0.5427, "reference": 0.5518, "essays": 0.5332}, "dom_t1": {"code": 26.5, "papers": 17.7, "news": 11.6, "reference": 15.7, "essays": 12.6}, "is_anchor": false, "template_bypass": false, "extrapolated": false}, {"name": "Nemotron 3.5 Lightning", "lab": "NVIDIA", "access": "open", "kind": "post", "unch_bpb": 0.6233, "unch_ci": [0.5731, 0.6779], "unch_sci": [0.6072, 0.6399], "index_5050": 0.5642, "index_ci": [0.5013, 0.635], "index_sci": [0.5439, 0.5852], "oai_bpb": 0.9732, "oai_est": 0.9732, "oai_ci": [0.9475, 0.9996], "oai_sci": [0.959, 0.9876], "oai_exact": false, "oai_extrap": true, "nce_doc_bpb": -0.1671, "neg_d_prime": -0.1671, "d_prime": 0.1671, "auc": 0.547, "auc_ci": [0.5267, 0.5675], "prose_auc": 0.5429, "top1_pct": 15.62, "mrr": 0.3761, "mrr_ci": [0.3582, 0.3958], "win_rate": 36.0, "prose_mrr": 0.3722, "n_ok": 954, "r_tok": 0.0, "n_pos_rtok": 0, "pct_pos_rtok": 0.0, "cot_flagged": false, "strict_zero_cot": true, "dom_auc": {"code": 0.567, "papers": 0.5339, "news": 0.5305, "reference": 0.562, "essays": 0.5455}, "dom_t1": {"code": 17.3, "papers": 15.2, "news": 16.1, "reference": 15.7, "essays": 14.1}, "is_anchor": false, "template_bypass": false, "extrapolated": false}]}</script>
+<script>
+const DATA = JSON.parse(document.getElementById("index-data").textContent);
+
+// Clean minimalist brand SVG marks (inspired by DeepRSI & Elie)
+const ICONS = {
+  Anthropic: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 7.1 5.6-4.7-4.7 5.6L22 12l-7.5 1.6 4.7 5.6-5.6-4.7L12 22l-1.6-7.5-5.6 4.7 4.7-5.6L2 12l7.5-1.6-4.7-5.6 5.6 4.7z"/></svg>`,
+  OpenAI: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="3.2"/><path d="M12 3a4.5 4.5 0 0 1 4.5 4.5v4.5M19.8 7.5a4.5 4.5 0 0 1-1.6 6.1l-3.9 2.3M19.8 16.5a4.5 4.5 0 0 1-6.1 1.6L9.8 15.8M12 21a4.5 4.5 0 0 1-4.5-4.5V12M4.2 16.5a4.5 4.5 0 0 1 1.6-6.1l3.9-2.3M4.2 7.5a4.5 4.5 0 0 1 6.1-1.6l3.9 2.3"/></svg>`,
+  Google: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10z"/></svg>`,
+  Moonshot: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" opacity="0.16"/><path d="M8 7h2.4v4.3L14.8 7h3l-4.7 4.8L18 17h-3.1l-3.5-4-1 1V17H8V7z"/></svg>`,
+  DeepSeek: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 13.5C4 8.8 7.8 5 12.5 5c4.2 0 7.5 2.7 7.5 6.8 0 3.7-3.1 6.7-7.4 6.7-2.6 0-4.9-.8-6.4-2.1L4 17.8v-4.3zm8.2-4.8a2.3 2.3 0 1 0 0 4.6 2.3 2.3 0 0 0 0-4.6z"/></svg>`,
+  NVIDIA: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c2.8-4.5 6.4-6.5 10.5-6.5 3.3 0 5.8 1.7 7.5 4.3-2.1 4.4-5.9 7.2-10.4 7.2-2.7 0-5.1-1.1-7.6-5z"/><circle cx="12" cy="11.5" r="2.2" fill="currentColor" stroke="none"/></svg>`,
+  Zhipu: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 6h14v2.6L9.4 15.4H19V18H5v-2.6l9.6-6.8H5V6z"/></svg>`,
+  Qwen: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,3 20,7.5 20,16.5 12,21 4,16.5 4,7.5"/><circle cx="12" cy="12" r="2.8" fill="currentColor" stroke="none"/></svg>`,
+  "Thinking Machines": `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M12 9v7"/></svg>`,
+  RicursiveAI: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>`,
+  Reflection: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,3 21,12 12,21 3,12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>`,
+  Meta: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 15.6c0-3.8 2.2-7.6 4.4-7.6 1.9 0 3.4 2.5 5 5.4 1.2 2.1 2.4 3.6 3.7 3.6 1.5 0 2.5-1.3 2.5-3.4 0-3.2-1.8-6.6-4.2-6.6-1.8 0-3.2 1.8-4.8 4.4-1.3 2.2-2.6 5.6-4.1 5.6-1.5 0-2.5-1-2.5-1.4z"/></svg>`,
+  xAI: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 4h3.2l4.4 6.1L16.7 4h2.8l-5.9 7.8L20 20h-3.2l-4.8-6.6L6.9 20H4.1l6.3-8.3L4.5 4z"/></svg>`,
+  Mistral: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h4v4H4V5zm12 0h4v4h-4V5zM4 9h8v4H4V9zm8 0h8v4h-8V9zM4 13h4v6H4v-6zm6 0h4v6h-4v-6zm6 0h4v6h-4v-6z"/></svg>`,
+  MiniMax: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M4 18V7l4.5 6L12 8l3.5 5L20 7v11"/></svg>`,
+  Xiaomi: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 16V9.5c0-1 .8-1.5 2-1.5h2.5c1.2 0 1.8.7 1.8 1.8V16M11 11v5M16.5 8v8"/></svg>`,
+  Tencent: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 6h14M12 6v13M8 10h8"/></svg>`,
+  StepFun: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M4 18h5v-5h5V8h6"/></svg>`,
+  _default: `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5" opacity="0.65"/></svg>`
+};
+
+function labColor(lab) {
+  const map = {
+    Anthropic: "var(--lab-anthropic)",
+    OpenAI: "var(--lab-openai)",
+    Google: "var(--lab-google)",
+    Moonshot: "var(--lab-moonshot)",
+    DeepSeek: "var(--lab-deepseek)",
+    NVIDIA: "var(--lab-nvidia)",
+    Zhipu: "var(--lab-zhipu)",
+    Qwen: "var(--lab-qwen)",
+    "Thinking Machines": "var(--lab-tm)",
+    RicursiveAI: "var(--lab-ricursive)",
+    Reflection: "var(--lab-reflection)",
+    Meta: "var(--lab-meta)",
+    xAI: "var(--lab-xai)",
+    Mistral: "var(--lab-mistral)",
+    MiniMax: "var(--lab-minimax)",
+    Xiaomi: "var(--lab-xiaomi)",
+    Tencent: "var(--lab-tencent)",
+    StepFun: "var(--lab-stepfun)",
+  };
+  return map[lab] || "var(--lab-other)";
+}
+function iconFor(lab) {
+  return `<span class="lb-icon" style="color:${labColor(lab)}">${ICONS[lab] || ICONS._default}</span>`;
+}
+
+let metric = "auc";
+let accessFilter = "all";
+let scatterMetric = "unch_bpb";
+
+const CFG = {
+  auc: {
+    title: "Leaderboard — Native Anpaure Pairwise AUC",
+    hint: "Zero-fit pairwise rank AUC = (8 − mean_rank) / 7 on 954 post-cutoff Nov-2026 items (908 unique source URLs) against Mistral-Small-24B T=1.0 decoys (chance = 0.500, higher is better). Captures full tail-rank pretraining signal; hover any bar or click a row for 95% cluster CIs.",
+    colLabel: "Native AUC (↑)",
+    col4: "MRR",
+    ci: "auc_ci", sci: "auc_ci", higherBetter: true
+  },
+  oai_bpb: {
+    title: "Leaderboard — OpenAI Nov-22 Base Scale",
+    hint: "PUB marks OpenAI’s published Nov-22 base values (10 anchors, 0.85% within-OpenAI LOO, r=+0.990, ρ=+0.988); other rows are 2-parameter Thurstone d' → log-BPB translations with exact Student-t (df=8) outer whiskers. Lower is better.",
+    colLabel: "Log-Perplexity (↓)",
+    col4: "AUC",
+    ci: "oai_ci", sci: "oai_sci", higherBetter: false
+  },
+  unch_bpb: {
+    title: "Leaderboard — Elie Oct-2026 Uncheatable Eval",
+    hint: "Exact teacher-forced BPB for all 27 open models; closed frontier endpoints translated via all 14 open anchors using ln(BPB) = a − b·d' (2.87% LOO / 3.41% leave-one-lab-out across 7 labs, exact Student-t df=12 whiskers). Lower is better.",
+    colLabel: "Bits per Byte (↓)",
+    col4: "AUC",
+    ci: "unch_ci", sci: "unch_sci", higherBetter: false
+  },
+  index_5050: {
+    title: "Leaderboard — Elie Default Index (50/50)",
+    hint: "Exact 50% HQ + 50% Uncheatable BPB for all 27 open models; closed endpoints translated via all 14 open anchors using ln(BPB) = a − b·d' (3.83% LOO / 4.20% LOLO). Lower is better.",
+    colLabel: "Bits per Byte (↓)",
+    col4: "AUC",
+    ci: "index_ci", sci: "index_sci", higherBetter: false
+  },
+  mrr: {
+    title: "Leaderboard — Native Anpaure MRR",
+    hint: "Zero-fit Mean Reciprocal Rank on 954 post-cutoff Nov-2026 items (908 unique source URLs) against Mistral-Small-24B T=1.0 decoys (random chance = 0.340, higher is better). Hover any bar or click a row for 95% cluster CIs.",
+    colLabel: "Native MRR (↑)",
+    col4: "Top-1",
+    ci: "mrr_ci", sci: "mrr_ci", higherBetter: true
+  }
+};
+
+function tagsHTML(m, forMetric) {
+  let out = [];
+  if (forMetric === "oai_bpb" && m.oai_exact) {
+    out.push(`<span class="micro pub" title="Published OpenAI value (Anpaure est: ${m.oai_est})">PUB</span>`);
+  } else if (m.access === "open") {
+    out.push(`<span class="micro">${m.kind === "base" ? "BASE" : "POST"}</span>`);
+  }
+  if (forMetric === "oai_bpb" && m.oai_extrap) out.push(`<span class="micro extrap">EXTRAP</span>`);
+  if ((forMetric === "unch_bpb" || forMetric === "index_5050") && m.extrapolated) out.push(`<span class="micro extrap">EXTRAP</span>`);
+  if (m.template_bypass) out.push(`<span class="micro bypass" title="Mandatory-reasoning endpoint forced to 0-CoT via raw /api/v1/completions template bypass; kept visible, excluded from OLS anchor fit by default">BYPASS</span>`);
+  if (m.cot_flagged) out.push(`<span class="micro cot" title="${m.n_pos_rtok}/${m.n_ok} items with r_tok>0 (mean ${m.r_tok})">COT</span>`);
+  return out.join(" ");
+}
+
+let pinnedModels = new Set();
+let currentList = [];
+
+function ciDetailsHTML(m, forMetric, isPopover) {
+  const c = CFG[forMetric];
+  const v = m[forMetric];
+  const ci = m[c.ci];
+  const sci = m[c.sci];
+  const isBpb = (forMetric === "oai_bpb" || forMetric === "unch_bpb" || forMetric === "index_5050");
+  const outerLbl = isBpb ? "95% Student-t CI" : "95% Cluster CI";
+  const fmtCI = arr => {
+    const hw = 0.5 * (arr[1] - arr[0]);
+    return `[${arr[0].toFixed(3)}, ${arr[1].toFixed(3)}] (±${hw.toFixed(3)})`;
+  };
+  const hasDual = Boolean(ci && sci && (ci[0] !== sci[0] || ci[1] !== sci[1]));
+
+  if (isPopover) {
+    let rows = `<div class="pop-title">${iconFor(m.lab)}<span>${m.name}</span></div>`
+      + `<div class="pop-sub">${m.lab} · ${m.access === "closed" ? "Closed API" : (m.kind === "base" ? "Open Base" : "Open Post-trained")}${m.n_ok != null ? ` · ${m.n_ok}/954 clean` : ""}</div>`
+      + `<div class="pop-row"><span>Score</span><b>${v.toFixed(4)}</b></div>`;
+    if (ci) {
+      rows += `<div class="pop-row"><span>${outerLbl}</span><b>${fmtCI(ci)}</b></div>`;
+    } else {
+      rows += `<div class="pop-row"><span>Uncertainty</span><b>Exact published value</b></div>`;
+    }
+    if (hasDual) {
+      rows += `<div class="pop-row"><span>95% Sampling CI</span><b>${fmtCI(sci)}</b></div>`;
+    }
+    if (forMetric === "oai_bpb" && m.oai_exact && m.oai_est != null) {
+      rows += `<div class="pop-row"><span>Anpaure fit est</span><b>${m.oai_est.toFixed(3)}</b></div>`;
+    }
+    if (m.auc != null) {
+      rows += `<div class="pop-div"></div>`
+        + `<div class="pop-row"><span>AUC / d&prime;</span><b>${m.auc.toFixed(4)} (${m.d_prime >= 0 ? "+" : ""}${m.d_prime.toFixed(2)})</b></div>`
+        + `<div class="pop-row"><span>MRR / Top-1</span><b>${m.mrr.toFixed(4)} · ${m.top1_pct.toFixed(1)}%</b></div>`
+        + `<div class="pop-row"><span>Win rate / CoT</span><b>${m.win_rate != null ? m.win_rate.toFixed(1) + "%" : "—"} · ${m.n_pos_rtok}/${m.n_ok}</b></div>`;
+    }
+    rows += `<div class="pop-hint">Click row to pin details</div>`;
+    return rows;
+  }
+
+  // Compact inline drawer when clicked/pinned
+  let parts = [];
+  if (ci) {
+    parts.push(`<span><span class="k">${outerLbl}</span><b>${fmtCI(ci)}</b></span>`);
+  } else {
+    parts.push(`<span><span class="k">Ground truth</span><b>Exact published value</b></span>`);
+  }
+  if (hasDual) {
+    parts.push(`<span><span class="k">Sampling CI</span><b>${fmtCI(sci)}</b></span>`);
+  }
+  if (forMetric === "oai_bpb" && m.oai_exact && m.oai_est != null) {
+    parts.push(`<span><span class="k">Anpaure est</span><b>${m.oai_est.toFixed(3)}</b></span>`);
+  }
+  if (m.auc != null) {
+    parts.push(`<span><span class="k">AUC</span><b>${m.auc.toFixed(4)}</b></span>`);
+    parts.push(`<span><span class="k">d&prime;</span><b>${m.d_prime >= 0 ? "+" : ""}${m.d_prime.toFixed(3)}</b></span>`);
+    parts.push(`<span><span class="k">MRR</span><b>${m.mrr.toFixed(4)}</b></span>`);
+    parts.push(`<span><span class="k">Top-1</span><b>${m.top1_pct.toFixed(1)}%</b></span>`);
+    parts.push(`<span><span class="k">Win%</span><b>${m.win_rate != null ? m.win_rate.toFixed(1) + "%" : "—"}</b></span>`);
+    parts.push(`<span><span class="k">Clean N</span><b>${m.n_ok}/954</b></span>`);
+    parts.push(`<span><span class="k">CoT</span><b>${m.n_pos_rtok}/${m.n_ok}</b></span>`);
+  }
+  return parts.join("");
+}
+
+const ciPop = document.getElementById("ciPopover");
+function positionPopover(e) {
+  const pad = 16;
+  const w = ciPop.offsetWidth || 280;
+  const h = ciPop.offsetHeight || 160;
+  let x = e.clientX + 16;
+  let y = e.clientY + 14;
+  if (x + w + pad > window.innerWidth) x = Math.max(pad, e.clientX - w - 16);
+  if (y + h + pad > window.innerHeight) y = Math.max(pad, e.clientY - h - 14);
+  ciPop.style.left = `${x}px`;
+  ciPop.style.top = `${y}px`;
+}
+function hidePopover() {
+  ciPop.classList.remove("show");
+  ciPop.setAttribute("aria-hidden", "true");
+}
+
+const OAI_MILESTONES = [
+  { val: 0.690, disp: "0.68–0.70", ref: "limit band", label: "? Common-limit window", cls: "band" },
+  { val: 0.732, disp: "0.732",     ref: "Nov 2026",   label: "OpenAI internal model", cls: "internal" },
+  { val: 0.761, disp: "0.761",     ref: "GPT-6.2 Astra", label: "Solved a Millennium Prize math problem", anchor: "GPT-6.2 Astra" },
+  { val: 0.828, disp: "0.828",     ref: "GPT-5.6 Sol",   label: "Cybersecurity expert", anchor: "GPT-5.6 Sol" },
+  { val: 0.871, disp: "0.871",     ref: "GPT-5.3 / 5.4", label: "Useful coder", anchor: "GPT-5.4" },
+  { val: 0.913, disp: "0.913",     ref: "GPT-4",         label: "Benefits from thinking before answering" },
+  { val: 0.986, disp: "0.986",     ref: "GPT-3.5",       label: "Fluent conversation" },
+];
+
+function renderMilestones() {
+  const shell = document.querySelector(".lb-shell");
+  if (shell && shell.classList.contains("no-milestones")) return;
+  const box = document.getElementById("oaiMilestones");
+  const topSlot = document.getElementById("oaiAbove");
+  if (!box) return;
+  const rows = Array.from(document.querySelectorAll("#bars .lb-row"));
+  const barsEl = document.getElementById("bars");
+  const totalH = Math.max(440, barsEl ? barsEl.offsetHeight : 440);
+
+  // Render compact above-frontier block FIRST so boxTop reflects its exact rendered height!
+  const above = OAI_MILESTONES.filter(ms => ms.val < 0.745);
+  const inList = OAI_MILESTONES.filter(ms => ms.val >= 0.745);
+  if (topSlot) {
+    topSlot.innerHTML = `<div class="oai-above">` + above.map(ms => `<div class="oai-above-row${ms.cls ? " " + ms.cls : ""}">
+      <b>${ms.disp}</b><span>${ms.label}</span>
+    </div>`).join("") + `</div>`;
+  }
+
+  // Collect (oai_bpb, centerY in #oaiMilestones local coordinates) using exact bounding rects!
+  const pts = [];
+  const byNameY = {};
+  const boxTop = box.getBoundingClientRect().top;
+  rows.forEach(row => {
+    const idx = Number(row.dataset.idx);
+    const m = currentList[idx];
+    if (!m) return;
+    const r = row.getBoundingClientRect();
+    const cy = (r.top + r.height / 2) - boxTop;
+    byNameY[m.name] = cy;
+    if (m.oai_bpb != null) pts.push({ bpb: m.oai_bpb, y: cy });
+  });
+
+  pts.sort((a, b) => a.bpb - b.bpb);
+  function yForBpb(target, anchorName) {
+    if (anchorName && byNameY[anchorName] != null) return byNameY[anchorName];
+    if (!pts.length) return 32;
+    if (target <= pts[0].bpb) return Math.max(22, pts[0].y - 12);
+    if (target >= pts[pts.length - 1].bpb) return Math.min(totalH - 90, pts[pts.length - 1].y + 42);
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i], b = pts[i + 1];
+      if (target >= a.bpb && target <= b.bpb) {
+        const t = (b.bpb === a.bpb) ? 0.5 : (target - a.bpb) / (b.bpb - a.bpb);
+        return a.y + t * (b.y - a.y);
+      }
+    }
+    return totalH * 0.5;
+  }
+
+  const items = inList.map(ms => ({ ...ms, y: yForBpb(ms.val, ms.anchor) }));
+  const minGap = 58;
+  for (let i = 0; i < items.length; i++) {
+    if (i === 0) items[i].y = Math.max(24, items[i].y);
+    else if (items[i].y < items[i - 1].y + minGap) items[i].y = items[i - 1].y + minGap;
+  }
+  const aboveH = topSlot ? topSlot.offsetHeight : 0;
+  const neededH = Math.max(totalH - aboveH - 42, items.length ? items[items.length - 1].y + 38 : 360);
+  box.style.minHeight = `${Math.ceil(neededH)}px`;
+
+  box.innerHTML = items.map(ms => `<div class="oai-ms${ms.cls ? " " + ms.cls : ""}" style="top:${ms.y.toFixed(1)}px;">
+    <div class="oai-ms-val"><span>${ms.disp}</span><span class="oai-ms-ref">${ms.ref}</span></div>
+    <div class="oai-ms-lbl">${ms.label}</div>
+  </div>`).join("");
+}
+window.addEventListener("resize", () => requestAnimationFrame(renderMilestones));
+
+function renderLeaderboard() {
+  const c = CFG[metric];
+  document.getElementById("chartTitle").textContent = c.title;
+  document.getElementById("chartHint").textContent = c.hint;
+  document.getElementById("barColLabel").textContent = c.colLabel;
+  document.getElementById("col4Label").textContent = c.col4;
+  hidePopover();
+
+  const list = DATA.models
+    .filter(m => m[metric] != null)
+    .filter(m => accessFilter === "all" || m.access === accessFilter)
+    .slice()
+    .sort((a, b) => c.higherBetter ? (b[metric] - a[metric]) : (a[metric] - b[metric]));
+  currentList = list;
+
+  const valsMax = list.map(m => m[c.ci] ? m[c.ci][1] : m[metric]);
+  const valsMin = list.map(m => m[c.ci] ? m[c.ci][0] : m[metric]);
+  const maxV = metric === "auc"
+    ? Math.min(0.95, Math.max(...valsMax) * 1.03)
+    : (metric === "mrr" ? Math.min(0.84, Math.max(...valsMax) * 1.07) : Math.max(...valsMax) * 1.04);
+  const minV = metric === "auc"
+    ? 0.48
+    : (metric === "mrr" ? 0.32 : Math.max(0.18, Math.min(...valsMin) * 0.90));
+  const pct = v => Math.max(1, Math.min(100, ((v - minV) / (maxV - minV)) * 100));
+
+  document.getElementById("bars").innerHTML = list.map((m, i) => {
+    const v = m[metric];
+    const ci = m[c.ci];
+    const sci = m[c.sci];
+    let wHTML = "";
+    if (ci) {
+      const l = pct(ci[0]), r = pct(ci[1]);
+      wHTML += `<div class="ci-outer" style="left:${l}%;width:${Math.max(0.5, r - l)}%"></div>`
+             + `<div class="ci-outer-cap" style="left:${l}%"></div>`
+             + `<div class="ci-outer-cap" style="left:${r}%"></div>`;
+    }
+    if (sci) {
+      const sl = pct(sci[0]), sr = pct(sci[1]);
+      wHTML += `<div class="ci-inner" style="left:${sl}%;width:${Math.max(0.6, sr - sl)}%"></div>`;
+    }
+    const hatch = m.cot_flagged || (m.access === "open" && m.kind === "post") ? " hatched" : "";
+    let col4Val = "&mdash;";
+    if (metric === "auc") col4Val = m.mrr != null ? m.mrr.toFixed(3) : "&mdash;";
+    else if (metric === "mrr") col4Val = m.top1_pct != null ? m.top1_pct.toFixed(1) + "%" : "&mdash;";
+    else col4Val = m.auc != null ? m.auc.toFixed(3) : "&mdash;";
+    const isPinned = pinnedModels.has(m.name);
+    return `<div class="lb-row${isPinned ? " pinned" : ""}" data-idx="${i}">
+      <div class="lb-rank">${i + 1}</div>
+      <div class="lb-model">
+        ${iconFor(m.lab)}
+        <span class="lb-name">${m.name}</span>
+        ${tagsHTML(m, metric)}
+      </div>
+      <div class="lb-bar-cell">
+        <div class="lb-track">
+          <div class="lb-fill${hatch}" style="width:${pct(v)}%;background-color:${labColor(m.lab)};"></div>
+          ${wHTML}
+        </div>
+        <div class="lb-val">${v.toFixed(3)}</div>
+      </div>
+      <div class="lb-sub">${col4Val}</div>
+    </div>
+    <div class="lb-detail${isPinned ? " open" : ""}" data-detail-idx="${i}">${ciDetailsHTML(m, metric, false)}</div>`;
+  }).join("");
+
+  document.querySelectorAll("#bars .lb-row").forEach(row => {
+    const idx = Number(row.dataset.idx);
+    const m = currentList[idx];
+    const barCell = row.querySelector(".lb-bar-cell");
+    if (barCell) {
+      barCell.addEventListener("mouseenter", e => {
+        if (pinnedModels.has(m.name)) return;
+        ciPop.innerHTML = ciDetailsHTML(m, metric, true);
+        ciPop.classList.add("show");
+        ciPop.setAttribute("aria-hidden", "false");
+        positionPopover(e);
+      });
+      barCell.addEventListener("mousemove", e => {
+        if (!ciPop.classList.contains("show")) return;
+        positionPopover(e);
+      });
+      barCell.addEventListener("mouseleave", hidePopover);
+    }
+    row.addEventListener("click", () => {
+      const det = document.querySelector(`#bars .lb-detail[data-detail-idx="${idx}"]`);
+      if (pinnedModels.has(m.name)) {
+        pinnedModels.delete(m.name);
+        row.classList.remove("pinned");
+        if (det) det.classList.remove("open");
+      } else {
+        pinnedModels.add(m.name);
+        row.classList.add("pinned");
+        if (det) det.classList.add("open");
+        hidePopover();
+      }
+      requestAnimationFrame(renderMilestones);
+    });
+  });
+  requestAnimationFrame(renderMilestones);
+
+  // Sync full ledger
+  const fmtD = (m, k) => (m.dom_t1 && m.dom_t1[k] != null) ? m.dom_t1[k].toFixed(0) + "%" : "&mdash;";
+  document.querySelector("#ledgerTbl tbody").innerHTML = list.map((m, i) => `<tr>
+    <td class="ci-dim">${i + 1}</td>
+    <td class="name-cell"><span style="display:inline-flex;align-items:center;gap:7px;">${iconFor(m.lab)}<span>${m.name}</span></span></td>
+    <td class="ci-dim">${m.lab}</td>
+    <td>${tagsHTML(m, metric)}</td>
+    <td class="num">${m.auc != null ? m.auc.toFixed(4) : "&mdash;"}</td>
+    <td class="num">${m.mrr != null ? m.mrr.toFixed(4) : "&mdash;"}</td>
+    <td class="num">${m.win_rate != null ? m.win_rate.toFixed(1) + "%" : "&mdash;"}</td>
+    <td class="num">${m.top1_pct != null ? m.top1_pct.toFixed(1) + "%" : "&mdash;"}</td>
+    <td class="num">${m.oai_bpb != null ? m.oai_bpb.toFixed(3) : "&mdash;"}</td>
+    <td class="num">${m.unch_bpb != null ? m.unch_bpb.toFixed(3) : "&mdash;"}</td>
+    <td class="num ci-dim">${m.n_ok != null ? `${m.n_ok}/954` : "&mdash;"}</td>
+    <td class="num ci-dim" title="${m.r_tok != null ? 'Mean r_tok: ' + m.r_tok : ''}">${m.n_pos_rtok != null ? `${m.n_pos_rtok}/${m.n_ok}` : "&mdash;"}</td>
+    <td class="num">${fmtD(m, "code")}</td>
+    <td class="num">${fmtD(m, "papers")}</td>
+    <td class="num">${fmtD(m, "news")}</td>
+    <td class="num">${fmtD(m, "reference")}</td>
+    <td class="num">${fmtD(m, "essays")}</td>
+  </tr>`).join("");
+}
+
+function renderWinChart() {
+  const svg = document.getElementById("winChart");
+  const list = DATA.models
+    .filter(m => m.win_rate != null)
+    .slice()
+    .sort((a, b) => b.win_rate - a.win_rate);
+
+  const n = list.length;
+  const W = Math.max(1120, n * 20 + 74), H = 445, padL = 42, padR = 16, padT = 18, barBottom = 290;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.style.minWidth = `${Math.max(740, n * 16)}px`;
+  const plotH = barBottom - padT;
+  const maxW = 82;
+  const step = (W - padL - padR) / n;
+  const barW = Math.max(12, step * 0.74);
+  const pctFs = n > 50 ? "7.8" : (n > 34 ? "8.4" : "9.5");
+  const nameFs = n > 50 ? "9.2" : (n > 34 ? "9.6" : "10.5");
+
+  let parts = [];
+  parts.push(`<defs>
+    <pattern id="diagHatch" width="7" height="7" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="rgba(255,255,255,0.28)" stroke-width="2.4"/>
+    </pattern>
+  </defs>`);
+
+  // Dotted horizontal gridlines (Elie style!)
+  for (const pctv of [20, 40, 60, 80]) {
+    const y = barBottom - (pctv / maxW) * plotH;
+    parts.push(`<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="var(--line)" stroke-dasharray="2,3"/>`);
+  }
+  parts.push(`<line x1="${padL}" y1="${barBottom}" x2="${W - padR}" y2="${barBottom}" stroke="var(--line-strong)"/>`);
+
+  list.forEach((m, i) => {
+    const x = padL + i * step + (step - barW) / 2;
+    const h = Math.max(12, (m.win_rate / maxW) * plotH);
+    const y = barBottom - h;
+    const col = labColor(m.lab);
+    parts.push(`<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="4" fill="${col}"><title>${m.name}: ${m.win_rate.toFixed(1)}% pairwise win rate (AUC ${m.auc}, MRR ${m.mrr})</title></rect>`);
+    if (m.cot_flagged) {
+      parts.push(`<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="4" fill="url(#diagHatch)" pointer-events="none"/>`);
+    }
+    const lblY = h > 36 ? (y + h / 2 + 4) : (y - 5);
+    const lblFill = h > 36 ? "#ffffff" : "var(--ink-2)";
+    parts.push(`<text x="${x + barW / 2}" y="${lblY}" text-anchor="middle" font-family="var(--mono)" font-size="${pctFs}" font-weight="500" fill="${lblFill}">${Math.round(m.win_rate)}%</text>`);
+    // Tiny lab dot beneath bar
+    parts.push(`<circle cx="${x + barW / 2}" cy="${barBottom + 13}" r="3.6" fill="${col}"/>`);
+    // Angled model name (Elie style)
+    const tx = x + barW / 2 + 3, ty = barBottom + 27;
+    const shortName = m.name.replace(" Base", "").replace("Nemotron ", "Nem ");
+    parts.push(`<text x="${tx}" y="${ty}" text-anchor="end" font-family="var(--sans)" font-size="${nameFs}" fill="var(--ink-2)" transform="rotate(-48 ${tx} ${ty})">${shortName}</text>`);
+  });
+
+  svg.innerHTML = parts.join("");
+}
+
+function renderShowdown() {
+  const tbody = document.querySelector("#showdown tbody");
+  tbody.innerHTML = (DATA.meta.paired_showdowns || []).map(p => {
+    const cls = p.p_auc < 0.05 ? "sig" : "ns";
+    const fD = v => v == null ? "&mdash;" : (v >= 0 ? `+${v.toFixed(3)}` : v.toFixed(3));
+    return `<tr>
+      <td class="name-cell"><b>${p.model_a}</b> <span class="ci-dim" style="font-family:var(--sans);font-size:12px;">vs.</span> ${p.model_b} <span class="ci-dim">(${p.n_clusters} cl)</span></td>
+      <td class="num">${p.wins_a}/${p.wins_b}/${p.ties}</td>
+      <td class="num ${cls}">${p.auc_diff >= 0 ? "+" : ""}${p.auc_diff.toFixed(4)} <span class="ci-dim">[${p.auc_ci95[0].toFixed(3)}, ${p.auc_ci95[1].toFixed(3)}]</span></td>
+      <td class="num">${p.t1_diff_pct >= 0 ? "+" : ""}${p.t1_diff_pct.toFixed(1)}%</td>
+      <td class="num ${cls}">${p.p_auc < 0.0001 ? "<0.0001" : p.p_auc.toFixed(4)}</td>
+      <td class="num">${fD(p.dom_auc_diff.code)}</td>
+      <td class="num">${fD(p.dom_auc_diff.papers)}</td>
+      <td class="num">${fD(p.dom_auc_diff.news)}</td>
+      <td class="num">${fD(p.dom_auc_diff.reference)}</td>
+      <td class="num">${fD(p.dom_auc_diff.essays)}</td>
+    </tr>`;
+  }).join("");
+}
+
+function renderScatter() {
+  const svg = document.getElementById("scatter");
+  const W = 600, H = 350, padL = 52, padR = 18, padT = 16, padB = 42;
+  const isOai = (scatterMetric === "oai_bpb");
+  const anchors = DATA.models.filter(m => isOai ? m.oai_exact : m.is_anchor);
+  const others = DATA.models.filter(m => m.nce_doc_bpb != null && !(isOai ? m.oai_exact : m.is_anchor));
+  const allPts = anchors.concat(others);
+  const xs = allPts.map(m => m.nce_doc_bpb), ys = allPts.map(m => m[scatterMetric]);
+  const xMin = Math.min(...xs) - 0.12, xMax = Math.max(...xs) + 0.12;
+  const yMin = Math.min(...ys) - 0.025, yMax = Math.max(...ys) + 0.025;
+  const sx = x => padL + ((x - xMin) / (xMax - xMin)) * (W - padL - padR);
+  const sy = y => H - padB - ((y - yMin) / (yMax - yMin)) * (H - padT - padB);
+
+  const cal = DATA.meta.calibration[scatterMetric];
+  const curvePts = [];
+  for (let i = 0; i <= 48; i++) {
+    const xv = xMin + (i / 48) * (xMax - xMin);
+    const yv = cal.log_y ? Math.exp(cal.intercept + cal.slope * xv) : (cal.intercept + cal.slope * xv);
+    curvePts.push(`${sx(xv).toFixed(1)},${sy(yv).toFixed(1)}`);
+  }
+
+  let parts = [];
+  for (let i = 0; i <= 4; i++) {
+    const yv = yMin + (i / 4) * (yMax - yMin), yp = sy(yv);
+    parts.push(`<line x1="${padL}" y1="${yp}" x2="${W - padR}" y2="${yp}" stroke="var(--line)" stroke-dasharray="2,3"/>`);
+    parts.push(`<text x="${padL - 8}" y="${yp + 3.5}" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--faint)">${yv.toFixed(2)}</text>`);
+  }
+  for (let i = 0; i <= 4; i++) {
+    const xv = xMin + (i / 4) * (xMax - xMin), xp = sx(xv);
+    parts.push(`<text x="${xp}" y="${H - padB + 16}" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--faint)">${xv.toFixed(2)}</text>`);
+  }
+  parts.push(`<line x1="${padL}" y1="${H - padB}" x2="${W - padR}" y2="${H - padB}" stroke="var(--line-strong)"/>`);
+  parts.push(`<text x="${(padL + W - padR) / 2}" y="${H - 7}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)">Thurstone &minus;d&prime; = &minus;&radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC) &nbsp;(lower = better)</text>`);
+  parts.push(`<text x="14" y="${(padT + H - padB) / 2}" text-anchor="middle" font-family="var(--serif)" font-style="italic" font-size="13.5" fill="var(--ink-2)" transform="rotate(-90 14 ${(padT + H - padB) / 2})">${isOai ? "OpenAI Nov-22 Base Log-PPL" : "Elie Uncheatable Eval BPB"}</text>`);
+  parts.push(`<polyline points="${curvePts.join(' ')}" fill="none" stroke="var(--ink)" stroke-width="1.35" stroke-dasharray="4,4" opacity="0.65"/>`);
+
+  for (const m of anchors) {
+    const cx = sx(m.nce_doc_bpb), cy = sy(m[scatterMetric]);
+    parts.push(`<circle cx="${cx}" cy="${cy}" r="5" fill="${labColor(m.lab)}" stroke="var(--surface)" stroke-width="1.4"><title>${m.name} (anchor): AUC=${m.auc}, -d'=${m.nce_doc_bpb}, Exact=${m[scatterMetric]}</title></circle>`);
+    if (["GPT-6.2 Astra", "GPT-5.6 Sol", "GPT-4o", "Kimi K3.1 Pro", "Nemotron 3 Nano Base"].includes(m.name)) {
+      const right = m.name === "Nemotron 3 Nano Base";
+      parts.push(`<text x="${cx + (right ? -8 : 8)}" y="${cy + 3.5}" text-anchor="${right ? 'end' : 'start'}" font-family="var(--sans)" font-size="9.5" font-weight="500" fill="var(--ink-2)">${m.name.replace(" Base", "")}</text>`);
+    }
+  }
+  const labelOffsets = {
+    "Claude Fable 5.2": { dx: 8, dy: -11, anchor: "start" },
+    "Gemini 4 Carbon":  { dx: 8, dy: 14, anchor: "start" },
+    "Claude Opus 5.5":  { dx: -8, dy: -8, anchor: "end" },
+  };
+  for (const m of others) {
+    const cx = sx(m.nce_doc_bpb), cy = sy(m[scatterMetric]);
+    parts.push(`<polygon points="${cx},${cy - 5} ${cx + 5},${cy} ${cx},${cy + 5} ${cx - 5},${cy}" fill="${labColor(m.lab)}" stroke="var(--surface)" stroke-width="1"><title>${m.name} (est): AUC=${m.auc}, -d'=${m.nce_doc_bpb}, Est=${m[scatterMetric]}, CoT=${m.n_pos_rtok}/${m.n_ok}</title></polygon>`);
+    const off = labelOffsets[m.name];
+    if (off) {
+      parts.push(`<text x="${cx + off.dx}" y="${cy + off.dy}" text-anchor="${off.anchor}" font-family="var(--sans)" font-size="9.5" font-weight="500" fill="${labColor(m.lab)}">${m.name}</text>`);
+    }
+  }
+  const lbl = isOai
+    ? `${anchors.length} OpenAI anchors · r = +${cal.r.toFixed(3)} · ρ = +${cal.rho.toFixed(3)} · LOO = ${cal.loo_pct.toFixed(2)}%`
+    : `${DATA.meta.calibration.n_open_anchors} open anchors · r = +${cal.r.toFixed(3)} · LOO = ${cal.loo_pct.toFixed(2)}% · LOLO = ${cal.lolo_pct.toFixed(2)}%`;
+  parts.push(`<text x="${padL + 8}" y="${padT + 14}" font-family="var(--mono)" font-size="10.2" fill="var(--ink-2)">${lbl}</text>`);
+  svg.innerHTML = parts.join("");
+}
+
+// Controls
+document.querySelectorAll("#metricBtns button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#metricBtns button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    metric = btn.dataset.metric;
+    if (metric === "oai_bpb" || metric === "unch_bpb") {
+      scatterMetric = metric;
+      document.querySelectorAll("#scatterBtns button").forEach(b => b.classList.toggle("active", b.dataset.sc === scatterMetric));
+      renderScatter();
+    }
+    renderLeaderboard();
+  });
+});
+document.querySelectorAll("#accessBtns button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#accessBtns button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    accessFilter = btn.dataset.access;
+    renderLeaderboard();
+  });
+});
+document.querySelectorAll("#scatterBtns button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#scatterBtns button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    scatterMetric = btn.dataset.sc;
+    renderScatter();
+  });
+});
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const root = document.documentElement;
+  root.setAttribute("data-theme", root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+});
+
+renderLeaderboard();
+renderWinChart();
+renderShowdown();
+renderScatter();
+</script>
+</body>
+</html>

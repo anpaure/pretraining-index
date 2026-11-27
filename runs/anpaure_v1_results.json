@@ -1,0 +1,3748 @@
+{
+  "bench": "runs/anpaure_v1_n1000.json",
+  "decoy_model": "mistralai/mistral-small-24b-instruct-2501",
+  "n_items": 954,
+  "models": {
+    "moonshotai/kimi-k3.1-pro": {
+      "model_id": "moonshotai/kimi-k3.1-pro",
+      "role": "open_anchor",
+      "elie_id": "moonshotai__Kimi-K3.1-Pro",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.802117,
+      "mrr": 0.5875,
+      "top1_pct": 39.94,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.39937106918238996,
+        "top2_accuracy": 0.5733752620545073,
+        "mrr": 0.5875099830288509,
+        "mean_rank": 2.7358490566037736,
+        "info_gain_bits": 0.4726088563717856,
+        "info_gain_ci95": [
+          0.3972704918471836,
+          0.5451870082954225
+        ],
+        "nce_chunk_bpb": 0.5872894438154408,
+        "nce_doc_bpb": 0.5872894438154408,
+        "nce_doc_bpb_ci95": [
+          0.5853374941950318,
+          0.5893156278410516
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.5599999999999998,
+        "zipf_mandelbrot_delta_mean": 0.9
+      }
+    },
+    "moonshotai/kimi-k3": {
+      "model_id": "moonshotai/kimi-k3",
+      "role": "open_anchor",
+      "elie_id": "moonshotai__Kimi-K3",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.543745,
+      "mrr": 0.5641,
+      "top1_pct": 37.21,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.3721174004192872,
+        "top2_accuracy": 0.5419287211740041,
+        "mrr": 0.5641496955176201,
+        "mean_rank": 2.8825995807127884,
+        "info_gain_bits": 0.3923890617608752,
+        "info_gain_ci95": [
+          0.3226569981759109,
+          0.4586541836491761
+        ],
+        "nce_chunk_bpb": 0.5894469112280143,
+        "nce_doc_bpb": 0.5894469112280143,
+        "nce_doc_bpb_ci95": [
+          0.587664747090626,
+          0.5913223168623191
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3,
+        "zipf_mandelbrot_delta_mean": 0.6
+      }
+    },
+    "thinkingmachines/inkling-2-small": {
+      "model_id": "thinkingmachines/inkling-2-small",
+      "role": "open_template_bypass",
+      "elie_id": "thinkingmachines__Inkling-2-Small",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.188507,
+      "mrr": 0.4735,
+      "top1_pct": 26.0,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.25052410901467503,
+        "top2_accuracy": 0.4119496855345912,
+        "mrr": 0.4664595188180094,
+        "mean_rank": 3.4224318658280923,
+        "info_gain_bits": 0.15751350627741934,
+        "info_gain_ci95": [
+          0.1166887845591702,
+          0.19858597585886234
+        ],
+        "nce_chunk_bpb": 0.5957637605720383,
+        "nce_doc_bpb": 0.5957637605720383,
+        "nce_doc_bpb_ci95": [
+          0.5946591390119149,
+          0.5968617190891563
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1600000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "deepseek/deepseek-v4-pro": {
+      "model_id": "deepseek/deepseek-v4-pro",
+      "role": "open_anchor",
+      "elie_id": "deepseek-ai__DeepSeek-V4-Pro-Base",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.324134,
+      "mrr": 0.4663,
+      "top1_pct": 25.47,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.25471698113207547,
+        "top2_accuracy": 0.4077568134171908,
+        "mrr": 0.46627358490566034,
+        "mean_rank": 3.460167714884696,
+        "info_gain_bits": 0.14936072129860234,
+        "info_gain_ci95": [
+          0.11002427377833328,
+          0.1903839485501515
+        ],
+        "nce_chunk_bpb": 0.5959830252560084,
+        "nce_doc_bpb": 0.5959830252560084,
+        "nce_doc_bpb_ci95": [
+          0.5948797280413609,
+          0.5970409574542024
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1199999999999999,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "reflection/beam-1.0-501b-a23b": {
+      "model_id": "reflection/beam-1.0-501b-a23b",
+      "role": "open_template_bypass",
+      "elie_id": "reflection__Beam-1.0-501B-A23B",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.141578,
+      "mrr": 0.4699,
+      "top1_pct": 26.31,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2631027253668763,
+        "top2_accuracy": 0.4109014675052411,
+        "mrr": 0.46991115104322656,
+        "mean_rank": 3.4737945492662474,
+        "info_gain_bits": 0.14803674770840125,
+        "info_gain_ci95": [
+          0.10724783915199208,
+          0.1906725081308318
+        ],
+        "nce_chunk_bpb": 0.5960186328001292,
+        "nce_doc_bpb": 0.5960186328001292,
+        "nce_doc_bpb_ci95": [
+          0.59487196738958,
+          0.5971156281418866
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.9600000000000002,
+        "zipf_mandelbrot_delta_mean": 1.25
+      }
+    },
+    "deepseek/deepseek-v4-flash": {
+      "model_id": "deepseek/deepseek-v4-flash",
+      "role": "open_anchor",
+      "elie_id": "deepseek-ai__DeepSeek-V4-Flash-Base",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.040913,
+      "mrr": 0.4462,
+      "top1_pct": 21.8,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2180293501048218,
+        "top2_accuracy": 0.40985324947589097,
+        "mrr": 0.44621518418688233,
+        "mean_rank": 3.540880503144654,
+        "info_gain_bits": 0.1232223688574301,
+        "info_gain_ci95": [
+          0.08619739313043526,
+          0.15924958917327933
+        ],
+        "nce_chunk_bpb": 0.5966860019201063,
+        "nce_doc_bpb": 0.5966860019201063,
+        "nce_doc_bpb_ci95": [
+          0.5957170695739933,
+          0.5976817683511942
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.04,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "deepseek/deepseek-v4.1-flash-1017": {
+      "model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "role": "open_anchor",
+      "elie_id": "deepseek-ai__DeepSeek-V4.1-Flash-1017",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.05165,
+      "mrr": 0.4809,
+      "top1_pct": 27.57,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27568134171907754,
+        "top2_accuracy": 0.43186582809224316,
+        "mrr": 0.4808562942996905,
+        "mean_rank": 3.4182389937106916,
+        "info_gain_bits": 0.16852615489686862,
+        "info_gain_ci95": [
+          0.12482663363621223,
+          0.21272849707697122
+        ],
+        "nce_chunk_bpb": 0.5954675814227669,
+        "nce_doc_bpb": 0.5954675814227669,
+        "nce_doc_bpb_ci95": [
+          0.5942787836543914,
+          0.5966428560980788
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.86,
+        "zipf_mandelbrot_delta_mean": 0.7
+      }
+    },
+    "nvidia/nemotron-3-ultra-550b-a55b": {
+      "model_id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "role": "open_anchor",
+      "elie_id": "nvidia__NVIDIA-Nemotron-3-Ultra-550B-A55B-Base-BF16",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.237872,
+      "mrr": 0.4776,
+      "top1_pct": 27.04,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27044025157232704,
+        "top2_accuracy": 0.429769392033543,
+        "mrr": 0.47760931416591795,
+        "mean_rank": 3.4371069182389937,
+        "info_gain_bits": 0.16188055338142648,
+        "info_gain_ci95": [
+          0.11804151946838073,
+          0.20866368715674705
+        ],
+        "nce_chunk_bpb": 0.5956463112334832,
+        "nce_doc_bpb": 0.5956463112334832,
+        "nce_doc_bpb_ci95": [
+          0.594388104489526,
+          0.596825338025123
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.9,
+        "zipf_mandelbrot_delta_mean": 0.85
+      }
+    },
+    "z-ai/glm-5.3-flash": {
+      "model_id": "z-ai/glm-5.3-flash",
+      "role": "open_anchor",
+      "elie_id": "zai-org__GLM-5.3-Flash",
+      "n_total": 954,
+      "n_ok": 953,
+      "mean_r_tok": 0.0,
+      "cost": 0.021525,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2589098532494759,
+        "top2_accuracy": 0.40461215932914046,
+        "mrr": 0.46286687631027257,
+        "mean_rank": 3.529350104821803,
+        "info_gain_bits": 0.12973350555066077,
+        "info_gain_ci95": [
+          0.08712814401070193,
+          0.16938862575333125
+        ],
+        "nce_chunk_bpb": 0.5965108884670914,
+        "nce_doc_bpb": 0.5965108884670914,
+        "nce_doc_bpb_ci95": [
+          0.5954443857417491,
+          0.5976567363163563
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.8800000000000001,
+        "zipf_mandelbrot_delta_mean": 1.1
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.4074074074074074,
+          "mrr": 0.5905202821869489,
+          "mean_rank": 2.759259259259259
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.2474747474747475,
+          "mrr": 0.44779341029341035,
+          "mean_rank": 3.676767676767677
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.20100502512562815,
+          "mrr": 0.40196219191194066,
+          "mean_rank": 4.030150753768845
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.25757575757575757,
+          "mrr": 0.47584776334776335,
+          "mean_rank": 3.3181818181818183
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.20812182741116753,
+          "mrr": 0.42151921682378535,
+          "mean_rank": 3.720812182741117
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4631,
+      "top1_pct": 25.92
+    },
+    "nvidia/nemotron-3.5-super-vl": {
+      "model_id": "nvidia/nemotron-3.5-super-vl",
+      "role": "open_anchor",
+      "elie_id": "nvidia__NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-Base-BF16",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.062669,
+      "mrr": 0.4472,
+      "top1_pct": 22.75,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.22746331236897274,
+        "top2_accuracy": 0.3867924528301887,
+        "mrr": 0.4471922731356694,
+        "mean_rank": 3.570230607966457,
+        "info_gain_bits": 0.11826026096387254,
+        "info_gain_ci95": [
+          0.08369258531103091,
+          0.15500492742687677
+        ],
+        "nce_chunk_bpb": 0.5968194550924804,
+        "nce_doc_bpb": 0.5968194550924804,
+        "nce_doc_bpb_ci95": [
+          0.5958312274254274,
+          0.5977491337847676
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.02,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "model_id": "nvidia/nemotron-3-super-120b-a12b",
+      "role": "open_anchor",
+      "elie_id": "nvidia__NVIDIA-Nemotron-3-Super-120B-A12B-Base-BF16",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.039827,
+      "mrr": 0.4282,
+      "top1_pct": 21.7,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2169811320754717,
+        "top2_accuracy": 0.3637316561844864,
+        "mrr": 0.42817335529599687,
+        "mean_rank": 3.8218029350104823,
+        "info_gain_bits": 0.06840188335401942,
+        "info_gain_ci95": [
+          0.0390908635408309,
+          0.09702867393956621
+        ],
+        "nce_chunk_bpb": 0.5981603688340174,
+        "nce_doc_bpb": 0.5981603688340174,
+        "nce_doc_bpb_ci95": [
+          0.5973904669897849,
+          0.5989486726483436
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.48,
+        "zipf_mandelbrot_delta_mean": 0.2
+      }
+    },
+    "ricursiveai/ripple-65b-preview": {
+      "model_id": "ricursiveai/ripple-65b-preview",
+      "role": "open_anchor",
+      "elie_id": "ricursiveAI__Ripple-65B-Base-Preview__tok-from-Preview",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.087062,
+      "mrr": 0.428,
+      "top1_pct": 21.17,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.21174004192872117,
+        "top2_accuracy": 0.36268343815513626,
+        "mrr": 0.428004891684137,
+        "mean_rank": 3.7368972746331237,
+        "info_gain_bits": 0.07885532333644552,
+        "info_gain_ci95": [
+          0.0487637351110776,
+          0.10872940226699299
+        ],
+        "nce_chunk_bpb": 0.5978792292945713,
+        "nce_doc_bpb": 0.5978792292945713,
+        "nce_doc_bpb_ci95": [
+          0.5970757823138613,
+          0.598688526068562
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.82,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "google/gemma-4-31b-it": {
+      "model_id": "google/gemma-4-31b-it",
+      "role": "open_anchor",
+      "elie_id": "google__gemma-4-31B",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.057244,
+      "mrr": 0.4647,
+      "top1_pct": 24.74,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.24737945492662475,
+        "top2_accuracy": 0.42452830188679247,
+        "mrr": 0.4646950184686034,
+        "mean_rank": 3.461215932914046,
+        "info_gain_bits": 0.15067746230507462,
+        "info_gain_ci95": [
+          0.10999401482470751,
+          0.18992882979293182
+        ],
+        "nce_chunk_bpb": 0.5959476122282633,
+        "nce_doc_bpb": 0.5959476122282633,
+        "nce_doc_bpb_ci95": [
+          0.5948919682109141,
+          0.5970417712521772
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "google/gemma-4-26b-a4b-it": {
+      "model_id": "google/gemma-4-26b-a4b-it",
+      "role": "open_anchor",
+      "elie_id": "google__gemma-4-26B-A4B",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.045181,
+      "mrr": 0.417,
+      "top1_pct": 19.08,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.19077568134171907,
+        "top2_accuracy": 0.3658280922431866,
+        "mrr": 0.41698113207547177,
+        "mean_rank": 3.7788259958071277,
+        "info_gain_bits": 0.06868607981686159,
+        "info_gain_ci95": [
+          0.03946948362028072,
+          0.09522502408847064
+        ],
+        "nce_chunk_bpb": 0.5981527255258997,
+        "nce_doc_bpb": 0.5981527255258997,
+        "nce_doc_bpb_ci95": [
+          0.5974389751640617,
+          0.598938489868805
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.78,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "thinkingmachines/inkling-2-mini": {
+      "model_id": "thinkingmachines/inkling-2-mini",
+      "role": "open_anchor",
+      "elie_id": "thinkingmachines__Inkling-2-Mini",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.038344,
+      "mrr": 0.4219,
+      "top1_pct": 19.18,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.1918238993710692,
+        "top2_accuracy": 0.370020964360587,
+        "mrr": 0.42190026954177895,
+        "mean_rank": 3.692872117400419,
+        "info_gain_bits": 0.08296654607753151,
+        "info_gain_ci95": [
+          0.0546581307832907,
+          0.11253878940255871
+        ],
+        "nce_chunk_bpb": 0.5977686602120555,
+        "nce_doc_bpb": 0.5977686602120555,
+        "nce_doc_bpb_ci95": [
+          0.5969733309345387,
+          0.59852999952731
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.8400000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "nvidia/nemotron-3-nano-30b-a3b": {
+      "model_id": "nvidia/nemotron-3-nano-30b-a3b",
+      "role": "open_anchor",
+      "elie_id": "nvidia__NVIDIA-Nemotron-3-Nano-30B-A3B-Base-BF16",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.027505,
+      "mrr": 0.3699,
+      "top1_pct": 15.2,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.1519916142557652,
+        "top2_accuracy": 0.2914046121593291,
+        "mrr": 0.3698674752920036,
+        "mean_rank": 4.228511530398323,
+        "info_gain_bits": 0.007830635536522745,
+        "info_gain_ci95": [
+          -0.002529435807674407,
+          0.019314659942523692
+        ],
+        "nce_chunk_bpb": 0.5997893993487302,
+        "nce_doc_bpb": 0.5997893993487302,
+        "nce_doc_bpb_ci95": [
+          0.5994805428060113,
+          0.6000680277898207
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.26,
+        "zipf_mandelbrot_delta_mean": 1.6
+      }
+    },
+    "moonshotai/kimi-k2.6": {
+      "model_id": "moonshotai/kimi-k2.6",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.261463,
+      "mrr": 0.4931,
+      "top1_pct": 27.57,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27568134171907754,
+        "top2_accuracy": 0.46226415094339623,
+        "mrr": 0.49309299191374667,
+        "mean_rank": 3.250524109014675,
+        "info_gain_bits": 0.2202012175666237,
+        "info_gain_ci95": [
+          0.16943552569206935,
+          0.2716388668510618
+        ],
+        "nce_chunk_bpb": 0.5940778089321561,
+        "nce_doc_bpb": 0.5940778089321561,
+        "nce_doc_bpb_ci95": [
+          0.5926944215444319,
+          0.5954431243935996
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3800000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "z-ai/glm-5.2": {
+      "model_id": "z-ai/glm-5.2",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.251355,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2631027253668763,
+        "top2_accuracy": 0.46540880503144655,
+        "mrr": 0.4850267046021763,
+        "mean_rank": 3.30083857442348,
+        "info_gain_bits": 0.19998523003753288,
+        "info_gain_ci95": [
+          0.15163797701712523,
+          0.24762222086088165
+        ],
+        "nce_chunk_bpb": 0.5946215068376238,
+        "nce_doc_bpb": 0.5946215068376238,
+        "nce_doc_bpb_ci95": [
+          0.5933403360763058,
+          0.5959217797114812
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.4012345679012346,
+          "mrr": 0.5968033509700176,
+          "mean_rank": 2.654320987654321
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.25757575757575757,
+          "mrr": 0.46392496392496396,
+          "mean_rank": 3.5
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.19597989949748743,
+          "mrr": 0.4306113902847571,
+          "mean_rank": 3.663316582914573
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.29292929292929293,
+          "mrr": 0.5263648388648389,
+          "mean_rank": 2.9797979797979797
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.19289340101522842,
+          "mrr": 0.42773749093546043,
+          "mean_rank": 3.5888324873096447
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.485,
+      "top1_pct": 26.31
+    },
+    "z-ai/glm-5.3": {
+      "model_id": "z-ai/glm-5.3",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.284375,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.25681341719077566,
+        "top2_accuracy": 0.4444444444444444,
+        "mrr": 0.4769566736547869,
+        "mean_rank": 3.3647798742138364,
+        "info_gain_bits": 0.18045150771522467,
+        "info_gain_ci95": [
+          0.13419342031847595,
+          0.22621478333465514
+        ],
+        "nce_chunk_bpb": 0.5951468555942624,
+        "nce_doc_bpb": 0.5951468555942624,
+        "nce_doc_bpb_ci95": [
+          0.5939160773764868,
+          0.5963909415036134
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.26,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.4012345679012346,
+          "mrr": 0.6003086419753086,
+          "mean_rank": 2.567901234567901
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.21717171717171718,
+          "mrr": 0.4430916305916306,
+          "mean_rank": 3.590909090909091
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.19095477386934673,
+          "mrr": 0.41311318497248156,
+          "mean_rank": 3.8341708542713566
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.2676767676767677,
+          "mrr": 0.4953463203463203,
+          "mean_rank": 3.2373737373737375
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.233502538071066,
+          "mrr": 0.45556562726613486,
+          "mean_rank": 3.446700507614213
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.477,
+      "top1_pct": 25.68
+    },
+    "qwen/qwen3.7-plus": {
+      "model_id": "qwen/qwen3.7-plus",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.140717,
+      "mrr": 0.4664,
+      "top1_pct": 25.89,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2589098532494759,
+        "top2_accuracy": 0.4224318658280922,
+        "mrr": 0.466444544274733,
+        "mean_rank": 3.5681341719077566,
+        "info_gain_bits": 0.13459157687709888,
+        "info_gain_ci95": [
+          0.09581578030249005,
+          0.17407110124196298
+        ],
+        "nce_chunk_bpb": 0.5963802333011741,
+        "nce_doc_bpb": 0.5963802333011741,
+        "nce_doc_bpb_ci95": [
+          0.5953184531296563,
+          0.5974230870994425
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.6000000000000001,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "z-ai/glm-5.1": {
+      "model_id": "z-ai/glm-5.1",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.532068,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27044025157232704,
+        "top2_accuracy": 0.46645702306079667,
+        "mrr": 0.4900119796346211,
+        "mean_rank": 3.2735849056603774,
+        "info_gain_bits": 0.21138324634369665,
+        "info_gain_ci95": [
+          0.16104081560642786,
+          0.25912254115610367
+        ],
+        "nce_chunk_bpb": 0.5943149634356144,
+        "nce_doc_bpb": 0.5943149634356144,
+        "nce_doc_bpb_ci95": [
+          0.593031041264577,
+          0.5956688955207337
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.34,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.4074074074074074,
+          "mrr": 0.6038212815990595,
+          "mean_rank": 2.611111111111111
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.23232323232323232,
+          "mrr": 0.44761303511303524,
+          "mean_rank": 3.621212121212121
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.24623115577889448,
+          "mrr": 0.4596015793251974,
+          "mean_rank": 3.5728643216080402
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.2676767676767677,
+          "mrr": 0.5032227032227032,
+          "mean_rank": 3.080808080808081
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.2233502538071066,
+          "mrr": 0.4564781242446217,
+          "mean_rank": 3.3604060913705585
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.49,
+      "top1_pct": 27.04
+    },
+    "thinkingmachines/inkling": {
+      "model_id": "thinkingmachines/inkling",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.816129,
+      "mrr": 0.4403,
+      "top1_pct": 20.96,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.20964360587002095,
+        "top2_accuracy": 0.40670859538784065,
+        "mrr": 0.44025157232704404,
+        "mean_rank": 3.6058700209643604,
+        "info_gain_bits": 0.10967619570656106,
+        "info_gain_ci95": [
+          0.07386179286624477,
+          0.1441312437499171
+        ],
+        "nce_chunk_bpb": 0.5970503188231828,
+        "nce_doc_bpb": 0.5970503188231828,
+        "nce_doc_bpb_ci95": [
+          0.5961236691887286,
+          0.5980135275599234
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.96,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "qwen/qwen3.6-27b": {
+      "model_id": "qwen/qwen3.6-27b",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.19176,
+      "mrr": 0.4592,
+      "top1_pct": 24.74,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.24737945492662475,
+        "top2_accuracy": 0.4109014675052411,
+        "mrr": 0.45922057502246183,
+        "mean_rank": 3.541928721174004,
+        "info_gain_bits": 0.12730263974213285,
+        "info_gain_ci95": [
+          0.08612296414106316,
+          0.16852806045817345
+        ],
+        "nce_chunk_bpb": 0.5965762652708053,
+        "nce_doc_bpb": 0.5965762652708053,
+        "nce_doc_bpb_ci95": [
+          0.5954675301737399,
+          0.5976837700780735
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.9800000000000001,
+        "zipf_mandelbrot_delta_mean": 1.6
+      }
+    },
+    "anthropic/claude-fable-5.2": {
+      "model_id": "anthropic/claude-fable-5.2",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 6.677688,
+      "mrr": 0.7353,
+      "top1_pct": 59.54,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5953878406708596,
+        "top2_accuracy": 0.7526205450733753,
+        "mrr": 0.7353112209244285,
+        "mean_rank": 2.0136268343815513,
+        "info_gain_bits": 1.0600813299988892,
+        "info_gain_ci95": [
+          0.9613518206515815,
+          1.1664453155554253
+        ],
+        "nce_chunk_bpb": 0.5714896935944141,
+        "nce_doc_bpb": 0.5714896935944141,
+        "nce_doc_bpb_ci95": [
+          0.5686290924943652,
+          0.5741449696407981
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.7399999999999998,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "anthropic/claude-fable-5.1": {
+      "model_id": "anthropic/claude-fable-5.1",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 933,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 8.46072,
+      "mrr": 0.677,
+      "top1_pct": 52.73,
+      "summary": {
+        "n_valid": 933,
+        "n_documents": 933,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5273311897106109,
+        "top2_accuracy": 0.6634512325830654,
+        "mrr": 0.6769751952227836,
+        "mean_rank": 2.3440514469453375,
+        "info_gain_bits": 0.7779995065791825,
+        "info_gain_ci95": [
+          0.6794940447878525,
+          0.8657436125672278
+        ],
+        "nce_chunk_bpb": 0.5790761296437601,
+        "nce_doc_bpb": 0.5790761296437601,
+        "nce_doc_bpb_ci95": [
+          0.5767163000003063,
+          0.5817253800539126
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.4400000000000002,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "anthropic/claude-fable-5": {
+      "model_id": "anthropic/claude-fable-5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 940,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 8.53833,
+      "mrr": 0.6444,
+      "top1_pct": 47.23,
+      "summary": {
+        "n_valid": 940,
+        "n_documents": 940,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.4723404255319149,
+        "top2_accuracy": 0.6468085106382979,
+        "mrr": 0.6444047619047618,
+        "mean_rank": 2.45,
+        "info_gain_bits": 0.669758464305529,
+        "info_gain_ci95": [
+          0.5845102628130825,
+          0.7610205915982555
+        ],
+        "nce_chunk_bpb": 0.5819872131555177,
+        "nce_doc_bpb": 0.5819872131555177,
+        "nce_doc_bpb_ci95": [
+          0.5795327682570834,
+          0.5842799168154127
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.44,
+        "zipf_mandelbrot_delta_mean": 0.15
+      }
+    },
+    "anthropic/claude-opus-5.5": {
+      "model_id": "anthropic/claude-opus-5.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 953,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 2.904448,
+      "mrr": 0.6859,
+      "top1_pct": 52.99,
+      "summary": {
+        "n_valid": 953,
+        "n_documents": 953,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5299055613850997,
+        "top2_accuracy": 0.6977964323189927,
+        "mrr": 0.6858866736621198,
+        "mean_rank": 2.273871983210913,
+        "info_gain_bits": 0.8307141565294986,
+        "info_gain_ci95": [
+          0.7367248495090776,
+          0.9209193912482484
+        ],
+        "nce_chunk_bpb": 0.5776583980229718,
+        "nce_doc_bpb": 0.5776583980229718,
+        "nce_doc_bpb_ci95": [
+          0.5752323776710975,
+          0.5801861889255846
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.5,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "anthropic/claude-opus-5": {
+      "model_id": "anthropic/claude-opus-5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 3.82253,
+      "mrr": 0.6133,
+      "top1_pct": 43.08,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.4308176100628931,
+        "top2_accuracy": 0.610062893081761,
+        "mrr": 0.6133098732155335,
+        "mean_rank": 2.6121593291404612,
+        "info_gain_bits": 0.5571057987979229,
+        "info_gain_ci95": [
+          0.4809734632011881,
+          0.6434961764147111
+        ],
+        "nce_chunk_bpb": 0.5850169448564158,
+        "nce_doc_bpb": 0.5850169448564158,
+        "nce_doc_bpb_ci95": [
+          0.5826935229956124,
+          0.5870644822988855
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.36,
+        "zipf_mandelbrot_delta_mean": 0.25
+      }
+    },
+    "anthropic/claude-opus-4.8": {
+      "model_id": "anthropic/claude-opus-4.8",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 3.810885,
+      "mrr": 0.5908,
+      "top1_pct": 40.57,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.4056603773584906,
+        "top2_accuracy": 0.5796645702306079,
+        "mrr": 0.5907881601277827,
+        "mean_rank": 2.7651991614255764,
+        "info_gain_bits": 0.47223399970910807,
+        "info_gain_ci95": [
+          0.39907185048056704,
+          0.5455479887399837
+        ],
+        "nce_chunk_bpb": 0.5872995253799479,
+        "nce_doc_bpb": 0.5872995253799479,
+        "nce_doc_bpb_ci95": [
+          0.5853277858238063,
+          0.5892671812878196
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1600000000000001,
+        "zipf_mandelbrot_delta_mean": 0.1
+      }
+    },
+    "anthropic/claude-opus-4.7": {
+      "model_id": "anthropic/claude-opus-4.7",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 3.88723,
+      "mrr": 0.5962,
+      "top1_pct": 40.57,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.4056603773584906,
+        "top2_accuracy": 0.5932914046121593,
+        "mrr": 0.5961989617649995,
+        "mean_rank": 2.6844863731656186,
+        "info_gain_bits": 0.5056749598557211,
+        "info_gain_ci95": [
+          0.429485144637667,
+          0.5848641187513747
+        ],
+        "nce_chunk_bpb": 0.5864001490837178,
+        "nce_doc_bpb": 0.5864001490837178,
+        "nce_doc_bpb_ci95": [
+          0.5842704000538788,
+          0.588449232409102
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.5200000000000002,
+        "zipf_mandelbrot_delta_mean": 0.7
+      }
+    },
+    "anthropic/claude-opus-4.6": {
+      "model_id": "anthropic/claude-opus-4.6",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 2.874895,
+      "mrr": 0.602,
+      "top1_pct": 40.99,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.40985324947589097,
+        "top2_accuracy": 0.6058700209643606,
+        "mrr": 0.6020078366776479,
+        "mean_rank": 2.647798742138365,
+        "info_gain_bits": 0.5289815901811901,
+        "info_gain_ci95": [
+          0.4468788579339327,
+          0.6057453118092727
+        ],
+        "nce_chunk_bpb": 0.5857733300340309,
+        "nce_doc_bpb": 0.5857733300340309,
+        "nce_doc_bpb_ci95": [
+          0.5837088118102716,
+          0.5879814380224129
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.6200000000000003,
+        "zipf_mandelbrot_delta_mean": 0.8
+      }
+    },
+    "anthropic/claude-opus-4.5": {
+      "model_id": "anthropic/claude-opus-4.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 2.870125,
+      "mrr": 0.6044,
+      "top1_pct": 42.14,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.42138364779874216,
+        "top2_accuracy": 0.60062893081761,
+        "mrr": 0.6043750623939304,
+        "mean_rank": 2.6865828092243187,
+        "info_gain_bits": 0.5177561147506133,
+        "info_gain_ci95": [
+          0.4367666879066397,
+          0.5912056779961501
+        ],
+        "nce_chunk_bpb": 0.5860752330437504,
+        "nce_doc_bpb": 0.5860752330437504,
+        "nce_doc_bpb_ci95": [
+          0.5840998472934052,
+          0.5882533992934446
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3,
+        "zipf_mandelbrot_delta_mean": 0.2
+      }
+    },
+    "anthropic/claude-opus-4.1": {
+      "model_id": "anthropic/claude-opus-4.1",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 8.610375,
+      "mrr": 0.5931,
+      "top1_pct": 39.83,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.39832285115303984,
+        "top2_accuracy": 0.5985324947589099,
+        "mrr": 0.5931042228212039,
+        "mean_rank": 2.691823899371069,
+        "info_gain_bits": 0.49837844886436855,
+        "info_gain_ci95": [
+          0.42831001981209105,
+          0.5719994841707314
+        ],
+        "nce_chunk_bpb": 0.5865963847480659,
+        "nce_doc_bpb": 0.5865963847480659,
+        "nce_doc_bpb_ci95": [
+          0.584616387350618,
+          0.5884808367472728
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.7,
+        "zipf_mandelbrot_delta_mean": 1.1
+      }
+    },
+    "anthropic/claude-sonnet-5.5": {
+      "model_id": "anthropic/claude-sonnet-5.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.934066,
+      "mrr": 0.5764,
+      "top1_pct": 38.47,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.38469601677148846,
+        "top2_accuracy": 0.5587002096436059,
+        "mrr": 0.5764163422182291,
+        "mean_rank": 2.791404612159329,
+        "info_gain_bits": 0.43734417648175006,
+        "info_gain_ci95": [
+          0.3633422359744764,
+          0.5081138667143422
+        ],
+        "nce_chunk_bpb": 0.5882378680547026,
+        "nce_doc_bpb": 0.5882378680547026,
+        "nce_doc_bpb_ci95": [
+          0.5863345560203687,
+          0.5902281096887785
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.54,
+        "zipf_mandelbrot_delta_mean": 1.0
+      }
+    },
+    "anthropic/claude-sonnet-5": {
+      "model_id": "anthropic/claude-sonnet-5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.524354,
+      "mrr": 0.5224,
+      "top1_pct": 31.45,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.31446540880503143,
+        "top2_accuracy": 0.5073375262054507,
+        "mrr": 0.5224356094639114,
+        "mean_rank": 3.129979035639413,
+        "info_gain_bits": 0.27788529538684914,
+        "info_gain_ci95": [
+          0.21932669299325985,
+          0.3342194402804754
+        ],
+        "nce_chunk_bpb": 0.5925264272722414,
+        "nce_doc_bpb": 0.5925264272722414,
+        "nce_doc_bpb_ci95": [
+          0.5910113513185731,
+          0.5941013287912841
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3400000000000003,
+        "zipf_mandelbrot_delta_mean": 1.4
+      }
+    },
+    "anthropic/claude-sonnet-4.6": {
+      "model_id": "anthropic/claude-sonnet-4.6",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.724937,
+      "mrr": 0.5472,
+      "top1_pct": 34.17,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.3417190775681342,
+        "top2_accuracy": 0.519916142557652,
+        "mrr": 0.5471797943496056,
+        "mean_rank": 2.911949685534591,
+        "info_gain_bits": 0.36756158824642293,
+        "info_gain_ci95": [
+          0.303819735956247,
+          0.4332812813790566
+        ],
+        "nce_chunk_bpb": 0.5901146325217893,
+        "nce_doc_bpb": 0.5901146325217893,
+        "nce_doc_bpb_ci95": [
+          0.5883471373918691,
+          0.5918289347061835
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.78,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "anthropic/claude-sonnet-4.5": {
+      "model_id": "anthropic/claude-sonnet-4.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 953,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.731636,
+      "mrr": 0.5651,
+      "top1_pct": 35.68,
+      "summary": {
+        "n_valid": 953,
+        "n_documents": 953,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.3567681007345226,
+        "top2_accuracy": 0.5697796432318992,
+        "mrr": 0.5651476540248839,
+        "mean_rank": 2.819517313746065,
+        "info_gain_bits": 0.4219656188740051,
+        "info_gain_ci95": [
+          0.35910743260728767,
+          0.4881762258943842
+        ],
+        "nce_chunk_bpb": 0.5886514659335307,
+        "nce_doc_bpb": 0.5886514659335307,
+        "nce_doc_bpb_ci95": [
+          0.5868707679436388,
+          0.5903420024045063
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.9400000000000002,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "anthropic/claude-haiku-5.5": {
+      "model_id": "anthropic/claude-haiku-5.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.076313,
+      "mrr": 0.4419,
+      "top1_pct": 21.7,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2169811320754717,
+        "top2_accuracy": 0.3867924528301887,
+        "mrr": 0.4418663272436858,
+        "mean_rank": 3.538784067085954,
+        "info_gain_bits": 0.11838023923289676,
+        "info_gain_ci95": [
+          0.08322307513002239,
+          0.1505308529567894
+        ],
+        "nce_chunk_bpb": 0.5968162283426877,
+        "nce_doc_bpb": 0.5968162283426877,
+        "nce_doc_bpb_ci95": [
+          0.595951555206338,
+          0.5977617610037764
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.9800000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "anthropic/claude-haiku-4.5": {
+      "model_id": "anthropic/claude-haiku-4.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.574025,
+      "mrr": 0.4705,
+      "top1_pct": 25.37,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.25366876310272535,
+        "top2_accuracy": 0.4161425576519916,
+        "mrr": 0.4704939103524009,
+        "mean_rank": 3.3951781970649897,
+        "info_gain_bits": 0.16932254334444963,
+        "info_gain_ci95": [
+          0.12637631774455854,
+          0.21199914043271761
+        ],
+        "nce_chunk_bpb": 0.5954461629919202,
+        "nce_doc_bpb": 0.5954461629919202,
+        "nce_doc_bpb_ci95": [
+          0.5942983993016234,
+          0.5966011781932705
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.2000000000000002,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-6.2-astra": {
+      "model_id": "openai/gpt-6.2-astra",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 3.66624,
+      "mrr": 0.7114,
+      "top1_pct": 55.77,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5576519916142557,
+        "top2_accuracy": 0.7285115303983228,
+        "mrr": 0.7113706698612359,
+        "mean_rank": 2.089098532494759,
+        "info_gain_bits": 0.964071577841882,
+        "info_gain_ci95": [
+          0.869617749941788,
+          1.0547500109732597
+        ],
+        "nce_chunk_bpb": 0.5740718232616949,
+        "nce_doc_bpb": 0.5740718232616949,
+        "nce_doc_bpb_ci95": [
+          0.5716330764978436,
+          0.5766121071987915
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.92,
+        "zipf_mandelbrot_delta_mean": 0.35
+      }
+    },
+    "openai/gpt-6-astra": {
+      "model_id": "openai/gpt-6-astra",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 4.75129,
+      "mrr": 0.6823,
+      "top1_pct": 52.83,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5283018867924528,
+        "top2_accuracy": 0.6834381551362684,
+        "mrr": 0.6822751322751323,
+        "mean_rank": 2.2819706498951784,
+        "info_gain_bits": 0.8154789554884849,
+        "info_gain_ci95": [
+          0.7302192761110005,
+          0.9064309439985992
+        ],
+        "nce_chunk_bpb": 0.5780681404055025,
+        "nce_doc_bpb": 0.5780681404055025,
+        "nce_doc_bpb_ci95": [
+          0.5756220365196587,
+          0.5803611527568252
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.5,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "openai/gpt-6.2-sol": {
+      "model_id": "openai/gpt-6.2-sol",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.888468,
+      "mrr": 0.6398,
+      "top1_pct": 46.96,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.469601677148847,
+        "top2_accuracy": 0.6320754716981132,
+        "mrr": 0.6397960966357193,
+        "mean_rank": 2.4748427672955975,
+        "info_gain_bits": 0.6508386265980404,
+        "info_gain_ci95": [
+          0.562600080271665,
+          0.7377709350686135
+        ],
+        "nce_chunk_bpb": 0.5824960518218727,
+        "nce_doc_bpb": 0.5824960518218727,
+        "nce_doc_bpb_ci95": [
+          0.5801580550277555,
+          0.584869179167254
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.48,
+        "zipf_mandelbrot_delta_mean": 0.25
+      }
+    },
+    "openai/gpt-6.1-sol": {
+      "model_id": "openai/gpt-6.1-sol",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.950258,
+      "mrr": 0.6703,
+      "top1_pct": 50.63,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5062893081761006,
+        "top2_accuracy": 0.6792452830188679,
+        "mrr": 0.6703366776479984,
+        "mean_rank": 2.3165618448637315,
+        "info_gain_bits": 0.774177325520677,
+        "info_gain_ci95": [
+          0.6856214215111887,
+          0.8670438492116759
+        ],
+        "nce_chunk_bpb": 0.5791789251086286,
+        "nce_doc_bpb": 0.5791789251086286,
+        "nce_doc_bpb_ci95": [
+          0.5766813308483328,
+          0.5815605876149731
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.58,
+        "zipf_mandelbrot_delta_mean": 0.2
+      }
+    },
+    "openai/gpt-6-sol": {
+      "model_id": "openai/gpt-6-sol",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.88157,
+      "mrr": 0.5798,
+      "top1_pct": 39.52,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.3951781970649895,
+        "top2_accuracy": 0.5482180293501048,
+        "mrr": 0.5797768793051812,
+        "mean_rank": 2.79769392033543,
+        "info_gain_bits": 0.4384007459078654,
+        "info_gain_ci95": [
+          0.36367840249989103,
+          0.503475385101037
+        ],
+        "nce_chunk_bpb": 0.5882094521990273,
+        "nce_doc_bpb": 0.5882094521990273,
+        "nce_doc_bpb_ci95": [
+          0.5864593054412949,
+          0.5902190686743094
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.28,
+        "zipf_mandelbrot_delta_mean": 0.4
+      }
+    },
+    "openai/gpt-6-luna": {
+      "model_id": "openai/gpt-6-luna",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.044169,
+      "mrr": 0.4634,
+      "top1_pct": 24.95,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.24947589098532494,
+        "top2_accuracy": 0.40670859538784065,
+        "mrr": 0.46336852351003294,
+        "mean_rank": 3.441299790356394,
+        "info_gain_bits": 0.1507092263838703,
+        "info_gain_ci95": [
+          0.11220186721653423,
+          0.1913443698594242
+        ],
+        "nce_chunk_bpb": 0.5959467579507721,
+        "nce_doc_bpb": 0.5959467579507721,
+        "nce_doc_bpb_ci95": [
+          0.5948538980365953,
+          0.5969823922720857
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1199999999999999,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-6.1-terra": {
+      "model_id": "openai/gpt-6.1-terra",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.440785,
+      "mrr": 0.6215,
+      "top1_pct": 44.55,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.44549266247379454,
+        "top2_accuracy": 0.6069182389937107,
+        "mrr": 0.6215483677747828,
+        "mean_rank": 2.5712788259958073,
+        "info_gain_bits": 0.5823349614938622,
+        "info_gain_ci95": [
+          0.49758568253267055,
+          0.663753729395011
+        ],
+        "nce_chunk_bpb": 0.5843384203522456,
+        "nce_doc_bpb": 0.5843384203522456,
+        "nce_doc_bpb_ci95": [
+          0.5821487072101139,
+          0.5866177057640909
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.36,
+        "zipf_mandelbrot_delta_mean": 0.2
+      }
+    },
+    "openai/gpt-5.6-sol": {
+      "model_id": "openai/gpt-5.6-sol",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.76314,
+      "mrr": 0.5681,
+      "top1_pct": 37.11,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.3710691823899371,
+        "top2_accuracy": 0.549266247379455,
+        "mrr": 0.56805056404113,
+        "mean_rank": 2.8218029350104823,
+        "info_gain_bits": 0.4191968477483563,
+        "info_gain_ci95": [
+          0.3485795694523569,
+          0.48646228777669925
+        ],
+        "nce_chunk_bpb": 0.5887259305155634,
+        "nce_doc_bpb": 0.5887259305155634,
+        "nce_doc_bpb_ci95": [
+          0.5869168633700109,
+          0.5906251435143902
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.7400000000000002,
+        "zipf_mandelbrot_delta_mean": 1.6
+      }
+    },
+    "openai/gpt-5.6-terra": {
+      "model_id": "openai/gpt-5.6-terra",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.904466,
+      "mrr": 0.5012,
+      "top1_pct": 28.09,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2809224318658281,
+        "top2_accuracy": 0.480083857442348,
+        "mrr": 0.5011892283118698,
+        "mean_rank": 3.1656184486373165,
+        "info_gain_bits": 0.24872182396854692,
+        "info_gain_ci95": [
+          0.1999847250179536,
+          0.29881657486059504
+        ],
+        "nce_chunk_bpb": 0.5933107628533493,
+        "nce_doc_bpb": 0.5933107628533493,
+        "nce_doc_bpb_ci95": [
+          0.5919634919819292,
+          0.5946215204198486
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.48,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.6-luna": {
+      "model_id": "openai/gpt-5.6-luna",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.090447,
+      "mrr": 0.4507,
+      "top1_pct": 22.43,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.22431865828092243,
+        "top2_accuracy": 0.39622641509433965,
+        "mrr": 0.4507162823200559,
+        "mean_rank": 3.4549266247379453,
+        "info_gain_bits": 0.14251963512847476,
+        "info_gain_ci95": [
+          0.10513594926048324,
+          0.18039804841464868
+        ],
+        "nce_chunk_bpb": 0.5961670125193796,
+        "nce_doc_bpb": 0.5961670125193796,
+        "nce_doc_bpb_ci95": [
+          0.5951482933528537,
+          0.597172426263123
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.5": {
+      "model_id": "openai/gpt-5.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 2.261165,
+      "mrr": 0.5533,
+      "top1_pct": 34.59,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.34591194968553457,
+        "top2_accuracy": 0.5408805031446541,
+        "mrr": 0.5533168613357292,
+        "mean_rank": 2.8742138364779874,
+        "info_gain_bits": 0.3878917825467312,
+        "info_gain_ci95": [
+          0.31983101828844884,
+          0.4541916517959744
+        ],
+        "nce_chunk_bpb": 0.5895678630877993,
+        "nce_doc_bpb": 0.5895678630877993,
+        "nce_doc_bpb_ci95": [
+          0.5877847644391813,
+          0.5913983200426483
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.8399999999999999,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.4": {
+      "model_id": "openai/gpt-5.4",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.130583,
+      "mrr": 0.4962,
+      "top1_pct": 27.57,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27568134171907754,
+        "top2_accuracy": 0.46645702306079667,
+        "mrr": 0.49622516721573323,
+        "mean_rank": 3.20020964360587,
+        "info_gain_bits": 0.23720960283220327,
+        "info_gain_ci95": [
+          0.18681207600142302,
+          0.2837318900645586
+        ],
+        "nce_chunk_bpb": 0.5936203777316779,
+        "nce_doc_bpb": 0.5936203777316779,
+        "nce_doc_bpb_ci95": [
+          0.5923691863125398,
+          0.5949757915960375
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.4000000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.4-mini": {
+      "model_id": "openai/gpt-5.4-mini",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.361693,
+      "mrr": 0.4502,
+      "top1_pct": 22.54,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.22536687631027252,
+        "top2_accuracy": 0.4025157232704403,
+        "mrr": 0.4502246181491465,
+        "mean_rank": 3.5,
+        "info_gain_bits": 0.13287787639809823,
+        "info_gain_ci95": [
+          0.09243664967504031,
+          0.17054603279788835
+        ],
+        "nce_chunk_bpb": 0.596426322336384,
+        "nce_doc_bpb": 0.596426322336384,
+        "nce_doc_bpb_ci95": [
+          0.5954132579135886,
+          0.5975139669657761
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.08,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.4-nano": {
+      "model_id": "openai/gpt-5.4-nano",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.091019,
+      "mrr": 0.3858,
+      "top1_pct": 16.46,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.16457023060796647,
+        "top2_accuracy": 0.30922431865828093,
+        "mrr": 0.38579165418788064,
+        "mean_rank": 4.026205450733753,
+        "info_gain_bits": 0.028148975321000247,
+        "info_gain_ci95": [
+          0.011314798241931823,
+          0.045963756967225905
+        ],
+        "nce_chunk_bpb": 0.5992429487354467,
+        "nce_doc_bpb": 0.5992429487354467,
+        "nce_doc_bpb_ci95": [
+          0.5987638299462469,
+          0.5996956947022214
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.5,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.3-codex": {
+      "model_id": "openai/gpt-5.3-codex",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.831476,
+      "mrr": 0.4974,
+      "top1_pct": 27.36,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27358490566037735,
+        "top2_accuracy": 0.4758909853249476,
+        "mrr": 0.49744184885694326,
+        "mean_rank": 3.1750524109014675,
+        "info_gain_bits": 0.24438443523669395,
+        "info_gain_ci95": [
+          0.1933997804814008,
+          0.29315374084011464
+        ],
+        "nce_chunk_bpb": 0.593427414546239,
+        "nce_doc_bpb": 0.593427414546239,
+        "nce_doc_bpb_ci95": [
+          0.5921157907994624,
+          0.5947986188943601
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.4200000000000004,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.2": {
+      "model_id": "openai/gpt-5.2",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.831476,
+      "mrr": 0.4933,
+      "top1_pct": 27.36,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27358490566037735,
+        "top2_accuracy": 0.46331236897274636,
+        "mrr": 0.493290156733553,
+        "mean_rank": 3.2211740041928723,
+        "info_gain_bits": 0.22840070087159958,
+        "info_gain_ci95": [
+          0.17921490130720472,
+          0.2757866463835549
+        ],
+        "nce_chunk_bpb": 0.5938572883222962,
+        "nce_doc_bpb": 0.5938572883222962,
+        "nce_doc_bpb_ci95": [
+          0.5925828692870457,
+          0.5951801134458988
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.4000000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-5.1": {
+      "model_id": "openai/gpt-5.1",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.651151,
+      "mrr": 0.4991,
+      "top1_pct": 29.45,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2945492662473795,
+        "top2_accuracy": 0.46016771488469604,
+        "mrr": 0.4990778177098932,
+        "mean_rank": 3.3123689727463312,
+        "info_gain_bits": 0.20936617391280254,
+        "info_gain_ci95": [
+          0.15793640050512786,
+          0.25673416202061006
+        ],
+        "nce_chunk_bpb": 0.5943692114932111,
+        "nce_doc_bpb": 0.5943692114932111,
+        "nce_doc_bpb_ci95": [
+          0.5930952754125038,
+          0.5957523870635462
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.9000000000000001,
+        "zipf_mandelbrot_delta_mean": 0.5
+      }
+    },
+    "openai/gpt-5": {
+      "model_id": "openai/gpt-5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.729996,
+      "mrr": 0.5003,
+      "top1_pct": 28.72,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.28721174004192873,
+        "top2_accuracy": 0.4727463312368973,
+        "mrr": 0.5002757811720075,
+        "mean_rank": 3.237945492662474,
+        "info_gain_bits": 0.2261028075538185,
+        "info_gain_ci95": [
+          0.17103766920526692,
+          0.27596901462501644
+        ],
+        "nce_chunk_bpb": 0.5939190889037453,
+        "nce_doc_bpb": 0.5939190889037453,
+        "nce_doc_bpb_ci95": [
+          0.5925779645931364,
+          0.5954000356218475
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3800000000000001,
+        "zipf_mandelbrot_delta_mean": 1.8
+      }
+    },
+    "openai/gpt-4.1": {
+      "model_id": "openai/gpt-4.1",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.837686,
+      "mrr": 0.4774,
+      "top1_pct": 26.21,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2620545073375262,
+        "top2_accuracy": 0.4350104821802935,
+        "mrr": 0.47736847359488876,
+        "mean_rank": 3.361635220125786,
+        "info_gain_bits": 0.17989243505194485,
+        "info_gain_ci95": [
+          0.130310800966236,
+          0.22242880718013774
+        ],
+        "nce_chunk_bpb": 0.5951618915471483,
+        "nce_doc_bpb": 0.5951618915471483,
+        "nce_doc_bpb_ci95": [
+          0.5940178991303041,
+          0.5964953624232693
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.24,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-4o": {
+      "model_id": "openai/gpt-4o",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.047017,
+      "mrr": 0.4438,
+      "top1_pct": 22.12,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.22117400419287211,
+        "top2_accuracy": 0.38469601677148846,
+        "mrr": 0.4437755815114306,
+        "mean_rank": 3.549266247379455,
+        "info_gain_bits": 0.12007742728884185,
+        "info_gain_ci95": [
+          0.08361336892949008,
+          0.15322158660496804
+        ],
+        "nce_chunk_bpb": 0.5967705834000463,
+        "nce_doc_bpb": 0.5967705834000463,
+        "nce_doc_bpb_ci95": [
+          0.5958791893994941,
+          0.5977512642659356
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.0,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-4o-mini": {
+      "model_id": "openai/gpt-4o-mini",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.064544,
+      "mrr": 0.402,
+      "top1_pct": 17.51,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.1750524109014675,
+        "top2_accuracy": 0.34276729559748426,
+        "mrr": 0.40195792153339327,
+        "mean_rank": 3.8951781970649897,
+        "info_gain_bits": 0.04676546397611103,
+        "info_gain_ci95": [
+          0.02177297987568024,
+          0.06987335226245846
+        ],
+        "nce_chunk_bpb": 0.5987422684756086,
+        "nce_doc_bpb": 0.5987422684756086,
+        "nce_doc_bpb_ci95": [
+          0.5981207944841457,
+          0.5994144276386615
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.6400000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "openai/gpt-oss-120b": {
+      "model_id": "openai/gpt-oss-120b",
+      "role": "open_template_bypass",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 953,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.016109,
+      "mrr": 0.3955,
+      "top1_pct": 17.84,
+      "summary": {
+        "n_valid": 953,
+        "n_documents": 953,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.1783840503672613,
+        "top2_accuracy": 0.323189926547744,
+        "mrr": 0.3954791885274571,
+        "mean_rank": 4.003147953830011,
+        "info_gain_bits": 0.03224748301791669,
+        "info_gain_ci95": [
+          0.013886998218314451,
+          0.05025568358078708
+        ],
+        "nce_chunk_bpb": 0.5991327216170756,
+        "nce_doc_bpb": 0.5991327216170756,
+        "nce_doc_bpb_ci95": [
+          0.5986484009321135,
+          0.5996265167935195
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.48,
+        "zipf_mandelbrot_delta_mean": 1.7
+      }
+    },
+    "openai/gpt-oss-20b": {
+      "model_id": "openai/gpt-oss-20b",
+      "role": "open_template_bypass",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 952,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.01871,
+      "mrr": 0.3978,
+      "top1_pct": 18.07,
+      "summary": {
+        "n_valid": 952,
+        "n_documents": 952,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.18067226890756302,
+        "top2_accuracy": 0.328781512605042,
+        "mrr": 0.397842887154862,
+        "mean_rank": 4.024159663865547,
+        "info_gain_bits": 0.0313973982856357,
+        "info_gain_ci95": [
+          0.012472659196751446,
+          0.04873688657558347
+        ],
+        "nce_chunk_bpb": 0.5991555841800716,
+        "nce_doc_bpb": 0.5991555841800716,
+        "nce_doc_bpb_ci95": [
+          0.5986892481452101,
+          0.5996645546663931
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.42000000000000004,
+        "zipf_mandelbrot_delta_mean": 1.1
+      }
+    },
+    "openai/o3": {
+      "model_id": "openai/o3",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.251802,
+      "mrr": 0.492,
+      "top1_pct": 28.41,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2840670859538784,
+        "top2_accuracy": 0.44339622641509435,
+        "mrr": 0.4919736448038335,
+        "mean_rank": 3.291404612159329,
+        "info_gain_bits": 0.20478275625217712,
+        "info_gain_ci95": [
+          0.15244283486887364,
+          0.2523032519019636
+        ],
+        "nce_chunk_bpb": 0.5944924799993071,
+        "nce_doc_bpb": 0.5944924799993071,
+        "nce_doc_bpb_ci95": [
+          0.5932144423118382,
+          0.5959001335006511
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.36,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "google/gemini-4-carbon": {
+      "model_id": "google/gemini-4-carbon",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.994476,
+      "mrr": 0.73,
+      "top1_pct": 59.22,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5922431865828093,
+        "top2_accuracy": 0.7442348008385744,
+        "mrr": 0.7300014974543276,
+        "mean_rank": 2.0628930817610063,
+        "info_gain_bits": 1.0258355616361245,
+        "info_gain_ci95": [
+          0.925385723076048,
+          1.1299278194629734
+        ],
+        "nce_chunk_bpb": 0.5724107147665521,
+        "nce_doc_bpb": 0.5724107147665521,
+        "nce_doc_bpb_ci95": [
+          0.5696112105388003,
+          0.5751122581243079
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.7,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "google/gemini-4-neon": {
+      "model_id": "google/gemini-4-neon",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 3.133917,
+      "mrr": 0.7073,
+      "top1_pct": 56.08,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.560796645702306,
+        "top2_accuracy": 0.7190775681341719,
+        "mrr": 0.7072501747030048,
+        "mean_rank": 2.1960167714884697,
+        "info_gain_bits": 0.912508933905829,
+        "info_gain_ci95": [
+          0.8113553360281317,
+          1.0101409054379096
+        ],
+        "nce_chunk_bpb": 0.5754585723120725,
+        "nce_doc_bpb": 0.5754585723120725,
+        "nce_doc_bpb_ci95": [
+          0.5728328139437369,
+          0.578179042890989
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.58,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "google/gemini-4-argon": {
+      "model_id": "google/gemini-4-argon",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.77079,
+      "mrr": 0.7206,
+      "top1_pct": 57.97,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.5796645702306079,
+        "top2_accuracy": 0.7253668763102725,
+        "mrr": 0.720555056404113,
+        "mean_rank": 2.09748427672956,
+        "info_gain_bits": 0.9834218628106295,
+        "info_gain_ci95": [
+          0.8832360802703816,
+          1.079706347128533
+        ],
+        "nce_chunk_bpb": 0.5735514079521499,
+        "nce_doc_bpb": 0.5735514079521499,
+        "nce_doc_bpb_ci95": [
+          0.5709618895139653,
+          0.576245849667965
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.6800000000000002,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "google/gemini-4-hydrogen": {
+      "model_id": "google/gemini-4-hydrogen",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.573711,
+      "mrr": 0.6286,
+      "top1_pct": 45.7,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.4570230607966457,
+        "top2_accuracy": 0.6142557651991615,
+        "mrr": 0.6286213437156833,
+        "mean_rank": 2.561844863731656,
+        "info_gain_bits": 0.6011612624858382,
+        "info_gain_ci95": [
+          0.5178220781819126,
+          0.6800136652296417
+        ],
+        "nce_chunk_bpb": 0.5838320973045926,
+        "nce_doc_bpb": 0.5838320973045926,
+        "nce_doc_bpb_ci95": [
+          0.5817114051469023,
+          0.586073458993416
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3,
+        "zipf_mandelbrot_delta_mean": 0.05
+      }
+    },
+    "meta/muse-spark-open": {
+      "model_id": "meta/muse-spark-open",
+      "role": "open_anchor",
+      "elie_id": "meta-models__Muse-Spark-Open-816B-A42B",
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.423759,
+      "mrr": 0.4885,
+      "top1_pct": 25.79,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2578616352201258,
+        "top2_accuracy": 0.4643605870020964,
+        "mrr": 0.4884521313766597,
+        "mean_rank": 3.1876310272536688,
+        "info_gain_bits": 0.23463563688414402,
+        "info_gain_ci95": [
+          0.18401278468327736,
+          0.2849769837139431
+        ],
+        "nce_chunk_bpb": 0.59368960313522,
+        "nce_doc_bpb": 0.59368960313522,
+        "nce_doc_bpb_ci95": [
+          0.5923357002011981,
+          0.5950510770019214
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.4200000000000004,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "google/gemini-3.6-flash": {
+      "model_id": "google/gemini-3.6-flash",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.377343,
+      "mrr": 0.5964,
+      "top1_pct": 41.72,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.4171907756813417,
+        "top2_accuracy": 0.5838574423480084,
+        "mrr": 0.5964123490066887,
+        "mean_rank": 2.770440251572327,
+        "info_gain_bits": 0.4800925431354379,
+        "info_gain_ci95": [
+          0.4001854797032519,
+          0.5527981722282652
+        ],
+        "nce_chunk_bpb": 0.5870881741612762,
+        "nce_doc_bpb": 0.5870881741612762,
+        "nce_doc_bpb_ci95": [
+          0.5851327961122642,
+          0.5892372308401865
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1199999999999999,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "google/gemini-3.5-flash": {
+      "model_id": "google/gemini-3.5-flash",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.772964,
+      "mrr": 0.5847,
+      "top1_pct": 39.62,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.39622641509433965,
+        "top2_accuracy": 0.5828092243186582,
+        "mrr": 0.5846710591993611,
+        "mean_rank": 2.79874213836478,
+        "info_gain_bits": 0.4508705636862018,
+        "info_gain_ci95": [
+          0.3745837816676311,
+          0.5210219173734842
+        ],
+        "nce_chunk_bpb": 0.5878740832838115,
+        "nce_doc_bpb": 0.5878740832838115,
+        "nce_doc_bpb_ci95": [
+          0.5859874010719918,
+          0.589925774478154
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1800000000000002,
+        "zipf_mandelbrot_delta_mean": 0.15
+      }
+    },
+    "google/gemini-3-flash-preview": {
+      "model_id": "google/gemini-3-flash-preview",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.257765,
+      "mrr": 0.5739,
+      "top1_pct": 37.63,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.37631027253668764,
+        "top2_accuracy": 0.5765199161425576,
+        "mrr": 0.5739467904562244,
+        "mean_rank": 2.8165618448637315,
+        "info_gain_bits": 0.4292632153335161,
+        "info_gain_ci95": [
+          0.35673442203984546,
+          0.49560520345110676
+        ],
+        "nce_chunk_bpb": 0.5884552010761115,
+        "nce_doc_bpb": 0.5884552010761115,
+        "nce_doc_bpb_ci95": [
+          0.586670969663612,
+          0.590405823223218
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.44,
+        "zipf_mandelbrot_delta_mean": 0.8
+      }
+    },
+    "google/gemini-3.1-flash-lite": {
+      "model_id": "google/gemini-3.1-flash-lite",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.128895,
+      "mrr": 0.4868,
+      "top1_pct": 27.36,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.27358490566037735,
+        "top2_accuracy": 0.4591194968553459,
+        "mrr": 0.48680368373764604,
+        "mean_rank": 3.3375262054507338,
+        "info_gain_bits": 0.19366225122507164,
+        "info_gain_ci95": [
+          0.1460704741187611,
+          0.24182600711442181
+        ],
+        "nce_chunk_bpb": 0.5947915598875531,
+        "nce_doc_bpb": 0.5947915598875531,
+        "nce_doc_bpb_ci95": [
+          0.5934962220684721,
+          0.5960715146507302
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3,
+        "zipf_mandelbrot_delta_mean": 2.0
+      }
+    },
+    "google/gemini-3.5-flash-lite": {
+      "model_id": "google/gemini-3.5-flash-lite",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.164366,
+      "mrr": 0.4749,
+      "top1_pct": 26.21,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2620545073375262,
+        "top2_accuracy": 0.449685534591195,
+        "mrr": 0.47488644304682043,
+        "mean_rank": 3.4842767295597485,
+        "info_gain_bits": 0.15313106211199168,
+        "info_gain_ci95": [
+          0.1105232620239515,
+          0.1966657893398033
+        ],
+        "nce_chunk_bpb": 0.595881624006122,
+        "nce_doc_bpb": 0.595881624006122,
+        "nce_doc_bpb_ci95": [
+          0.5947107813760101,
+          0.597027537438801
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.8000000000000002,
+        "zipf_mandelbrot_delta_mean": 0.6
+      }
+    },
+    "google/gemini-3.1-pro-preview": {
+      "model_id": "google/gemini-3.1-pro-preview",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 950,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.198452,
+      "mrr": 0.6406,
+      "top1_pct": 46.21,
+      "summary": {
+        "n_valid": 950,
+        "n_documents": 950,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.46210526315789474,
+        "top2_accuracy": 0.6536842105263158,
+        "mrr": 0.6405902255639098,
+        "mean_rank": 2.4673684210526314,
+        "info_gain_bits": 0.6622566571612234,
+        "info_gain_ci95": [
+          0.5753282306075317,
+          0.7445753079020886
+        ],
+        "nce_chunk_bpb": 0.5821889701473892,
+        "nce_doc_bpb": 0.5821889701473892,
+        "nce_doc_bpb_ci95": [
+          0.5799750551494532,
+          0.5845268625394794
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.52,
+        "zipf_mandelbrot_delta_mean": 0.3
+      }
+    },
+    "google/gemini-3.8-flash": {
+      "model_id": "google/gemini-3.8-flash",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.554608,
+      "mrr": 0.6295,
+      "top1_pct": 45.28,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.4528301886792453,
+        "top2_accuracy": 0.629979035639413,
+        "mrr": 0.6295173205550565,
+        "mean_rank": 2.5324947589098534,
+        "info_gain_bits": 0.6138985469105269,
+        "info_gain_ci95": [
+          0.5304049695902522,
+          0.694806087166925
+        ],
+        "nce_chunk_bpb": 0.583489535020505,
+        "nce_doc_bpb": 0.583489535020505,
+        "nce_doc_bpb_ci95": [
+          0.5813135710657068,
+          0.58573504902489
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.34,
+        "zipf_mandelbrot_delta_mean": 0.1
+      }
+    },
+    "google/gemini-3.7-flash": {
+      "model_id": "google/gemini-3.7-flash",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 942,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.932642,
+      "mrr": 0.6317,
+      "top1_pct": 47.03,
+      "summary": {
+        "n_valid": 942,
+        "n_documents": 942,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.470276008492569,
+        "top2_accuracy": 0.6072186836518046,
+        "mrr": 0.631718228692751,
+        "mean_rank": 2.5902335456475583,
+        "info_gain_bits": 0.5956586405016226,
+        "info_gain_ci95": [
+          0.5152013625823523,
+          0.677370731231132
+        ],
+        "nce_chunk_bpb": 0.5839800873072127,
+        "nce_doc_bpb": 0.5839800873072127,
+        "nce_doc_bpb_ci95": [
+          0.5817824854083643,
+          0.5861439417032148
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.26,
+        "zipf_mandelbrot_delta_mean": 0.0
+      }
+    },
+    "qwen/qwen3.8-27b": {
+      "model_id": "qwen/qwen3.8-27b",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.052519,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.23270440251572327,
+        "top2_accuracy": 0.4088050314465409,
+        "mrr": 0.4545659878207048,
+        "mean_rank": 3.4758909853249476,
+        "info_gain_bits": 0.13908870915073912,
+        "info_gain_ci95": [
+          0.10123113436477768,
+          0.17769827863438012
+        ],
+        "nce_chunk_bpb": 0.5962592853932734,
+        "nce_doc_bpb": 0.5962592853932734,
+        "nce_doc_bpb_ci95": [
+          0.5952209021815178,
+          0.5972774441197564
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.08,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.35802469135802467,
+          "mrr": 0.5683641975308641,
+          "mean_rank": 2.7839506172839505
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.17676767676767677,
+          "mrr": 0.4112854737854738,
+          "mean_rank": 3.6161616161616164
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.21608040201005024,
+          "mrr": 0.42177554438860976,
+          "mean_rank": 3.864321608040201
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.2474747474747475,
+          "mrr": 0.47064694564694576,
+          "mean_rank": 3.3686868686868685
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.18781725888324874,
+          "mrr": 0.42144670050761424,
+          "mean_rank": 3.6192893401015227
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4546,
+      "top1_pct": 23.27
+    },
+    "qwen/qwen3.8-flash": {
+      "model_id": "qwen/qwen3.8-flash",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.065057,
+      "summary": {
+        "n_valid": 953,
+        "n_documents": 953,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2570828961175236,
+        "top2_accuracy": 0.4260230849947534,
+        "mrr": 0.47079273472243044,
+        "mean_rank": 3.454354669464848,
+        "info_gain_bits": 0.15577891740672722,
+        "info_gain_ci95": [
+          0.1133406826167536,
+          0.19833802288404156
+        ],
+        "nce_chunk_bpb": 0.5958104113890951,
+        "nce_doc_bpb": 0.5958104113890951,
+        "nce_doc_bpb_ci95": [
+          0.5946658075712851,
+          0.5969517644560108
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.06,
+        "zipf_mandelbrot_delta_mean": 1.6
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.3950617283950617,
+          "mrr": 0.5979570840681951,
+          "mean_rank": 2.6358024691358026
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.21212121212121213,
+          "mrr": 0.4332972582972583,
+          "mean_rank": 3.6363636363636362
+        },
+        "news": {
+          "n": 198,
+          "top1": 0.21212121212121213,
+          "mrr": 0.41511544011544016,
+          "mean_rank": 3.95959595959596
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.29292929292929293,
+          "mrr": 0.5022186147186147,
+          "mean_rank": 3.2676767676767677
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.19796954314720813,
+          "mrr": 0.42828136330674405,
+          "mean_rank": 3.6243654822335025
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4705,
+      "top1_pct": 25.68
+    },
+    "x-ai/grok-4.20": {
+      "model_id": "x-ai/grok-4.20",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 951,
+      "mean_r_tok": 0.0,
+      "cost": 0.479584,
+      "summary": {
+        "n_valid": 903,
+        "n_documents": 903,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.26688815060908083,
+        "top2_accuracy": 0.4374307862679956,
+        "mrr": 0.4821296735748563,
+        "mean_rank": 3.3056478405315612,
+        "info_gain_bits": 0.19550811118327083,
+        "info_gain_ci95": [
+          0.14868500083581515,
+          0.24284135298409235
+        ],
+        "nce_chunk_bpb": 0.5947419164955785,
+        "nce_doc_bpb": 0.5947419164955785,
+        "nce_doc_bpb_ci95": [
+          0.5934689148977552,
+          0.5960011983875347
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.28,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 153,
+          "top1": 0.43137254901960786,
+          "mrr": 0.6234126984126985,
+          "mean_rank": 2.457516339869281
+        },
+        "essays": {
+          "n": 188,
+          "top1": 0.19680851063829788,
+          "mrr": 0.4259815096251266,
+          "mean_rank": 3.6117021276595747
+        },
+        "news": {
+          "n": 193,
+          "top1": 0.23316062176165803,
+          "mrr": 0.44197508018751547,
+          "mean_rank": 3.6580310880829017
+        },
+        "papers": {
+          "n": 181,
+          "top1": 0.287292817679558,
+          "mrr": 0.4963233359642199,
+          "mean_rank": 3.1878453038674035
+        },
+        "reference": {
+          "n": 188,
+          "top1": 0.21808510638297873,
+          "mrr": 0.4508548632218845,
+          "mean_rank": 3.4414893617021276
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4799,
+      "top1_pct": 26.39
+    },
+    "x-ai/grok-4.3": {
+      "model_id": "x-ai/grok-4.3",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.468719,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2578616352201258,
+        "top2_accuracy": 0.4412997903563941,
+        "mrr": 0.47224218827992415,
+        "mean_rank": 3.452830188679245,
+        "info_gain_bits": 0.1560498734607645,
+        "info_gain_ci95": [
+          0.11369633119790477,
+          0.19602371590718573
+        ],
+        "nce_chunk_bpb": 0.595803124174516,
+        "nce_doc_bpb": 0.595803124174516,
+        "nce_doc_bpb_ci95": [
+          0.5947280495890996,
+          0.5969421994823296
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.9799999999999999,
+        "zipf_mandelbrot_delta_mean": 1.3
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.42592592592592593,
+          "mrr": 0.6131466784244562,
+          "mean_rank": 2.5925925925925926
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.2222222222222222,
+          "mrr": 0.4466871091871092,
+          "mean_rank": 3.580808080808081
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.19597989949748743,
+          "mrr": 0.4191672648959081,
+          "mean_rank": 3.829145728643216
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.2828282828282828,
+          "mrr": 0.4844035594035594,
+          "mean_rank": 3.4242424242424243
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.19289340101522842,
+          "mrr": 0.42344694222866813,
+          "mean_rank": 3.6802030456852792
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4822,
+      "top1_pct": 26.83
+    },
+    "qwen/qwen3.6-plus": {
+      "model_id": "qwen/qwen3.6-plus",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.147876,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2526205450733753,
+        "top2_accuracy": 0.42452830188679247,
+        "mrr": 0.46373415194169915,
+        "mean_rank": 3.5723270440251573,
+        "info_gain_bits": 0.1311265855264825,
+        "info_gain_ci95": [
+          0.08998713655954912,
+          0.17211315099081967
+        ],
+        "nce_chunk_bpb": 0.5964734223446023,
+        "nce_doc_bpb": 0.5964734223446023,
+        "nce_doc_bpb_ci95": [
+          0.5953711111286298,
+          0.5975798452785912
+        ],
+        "zipf_mandelbrot_alpha_mean": 0.6200000000000001,
+        "zipf_mandelbrot_delta_mean": 0.05
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.38271604938271603,
+          "mrr": 0.5870884773662551,
+          "mean_rank": 2.753086419753086
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.21212121212121213,
+          "mrr": 0.4311387686387686,
+          "mean_rank": 3.727272727272727
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.16080402010050251,
+          "mrr": 0.38479301268245997,
+          "mean_rank": 4.0954773869346734
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.29292929292929293,
+          "mrr": 0.494486531986532,
+          "mean_rank": 3.404040404040404
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.23857868020304568,
+          "mrr": 0.44389050036258165,
+          "mean_rank": 3.730964467005076
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4637,
+      "top1_pct": 25.26
+    },
+    "qwen/qwen3.7-max": {
+      "model_id": "qwen/qwen3.7-max",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.637359,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.29350104821802936,
+        "top2_accuracy": 0.4580712788259958,
+        "mrr": 0.49955076370170715,
+        "mean_rank": 3.251572327044025,
+        "info_gain_bits": 0.22107417093795734,
+        "info_gain_ci95": [
+          0.17197550409265255,
+          0.27175758610381745
+        ],
+        "nce_chunk_bpb": 0.5940543313296456,
+        "nce_doc_bpb": 0.5940543313296456,
+        "nce_doc_bpb_ci95": [
+          0.5926912286551915,
+          0.5953748130665203
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.36,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.4506172839506173,
+          "mrr": 0.6258744855967079,
+          "mean_rank": 2.6049382716049383
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.25252525252525254,
+          "mrr": 0.476509139009139,
+          "mean_rank": 3.3333333333333335
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.20603015075376885,
+          "mrr": 0.417133285474994,
+          "mean_rank": 3.778894472361809
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.3282828282828283,
+          "mrr": 0.5290824915824915,
+          "mean_rank": 3.0505050505050506
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.25888324873096447,
+          "mrr": 0.47240149867053416,
+          "mean_rank": 3.3705583756345177
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4996,
+      "top1_pct": 29.35
+    },
+    "qwen/qwen4-max": {
+      "model_id": "qwen/qwen4-max",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.638423,
+      "summary": {
+        "n_valid": 947,
+        "n_documents": 947,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.3495248152059134,
+        "top2_accuracy": 0.5332629355860612,
+        "mrr": 0.5503293608890231,
+        "mean_rank": 2.9165786694825764,
+        "info_gain_bits": 0.3667652023439669,
+        "info_gain_ci95": [
+          0.30469146106503814,
+          0.4328465826637351
+        ],
+        "nce_chunk_bpb": 0.5901360508841863,
+        "nce_doc_bpb": 0.5901360508841863,
+        "nce_doc_bpb_ci95": [
+          0.5883588283755863,
+          0.5918054901371209
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.78,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 160,
+          "top1": 0.55,
+          "mrr": 0.704360119047619,
+          "mean_rank": 2.1375
+        },
+        "essays": {
+          "n": 197,
+          "top1": 0.27411167512690354,
+          "mrr": 0.49317138022721774,
+          "mean_rank": 3.213197969543147
+        },
+        "news": {
+          "n": 198,
+          "top1": 0.26262626262626265,
+          "mrr": 0.4737734487734488,
+          "mean_rank": 3.409090909090909
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.3686868686868687,
+          "mrr": 0.5723725348725349,
+          "mean_rank": 2.7373737373737375
+        },
+        "reference": {
+          "n": 194,
+          "top1": 0.32989690721649484,
+          "mrr": 0.5369722631320569,
+          "mean_rank": 2.9381443298969074
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.5504,
+      "top1_pct": 34.91
+    },
+    "z-ai/glm-4.7": {
+      "model_id": "z-ai/glm-4.7",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "mean_r_tok": 0.0,
+      "cost": 0.172416,
+      "summary": {
+        "n_valid": 954,
+        "n_documents": 954,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.23689727463312368,
+        "top2_accuracy": 0.4224318658280922,
+        "mrr": 0.4606469002695418,
+        "mean_rank": 3.442348008385744,
+        "info_gain_bits": 0.15110766794650354,
+        "info_gain_ci95": [
+          0.10860825978020626,
+          0.19163890299077976
+        ],
+        "nce_chunk_bpb": 0.5959360420833061,
+        "nce_doc_bpb": 0.5959360420833061,
+        "nce_doc_bpb_ci95": [
+          0.5948459767294428,
+          0.5970790403746528
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.1400000000000001,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.3271604938271605,
+          "mrr": 0.5463624338624339,
+          "mean_rank": 2.8580246913580245
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.21212121212121213,
+          "mrr": 0.44457671957671957,
+          "mean_rank": 3.45959595959596
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.19597989949748743,
+          "mrr": 0.4155599425699929,
+          "mean_rank": 3.8542713567839195
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.26262626262626265,
+          "mrr": 0.4896464646464647,
+          "mean_rank": 3.2323232323232323
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.20304568527918782,
+          "mrr": 0.42270969301426164,
+          "mean_rank": 3.700507614213198
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4606,
+      "top1_pct": 23.69
+    },
+    "z-ai/glm-5": {
+      "model_id": "z-ai/glm-5",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 952,
+      "mean_r_tok": 0.0,
+      "cost": 0.316518,
+      "summary": {
+        "n_valid": 952,
+        "n_documents": 952,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.25735294117647056,
+        "top2_accuracy": 0.4737394957983193,
+        "mrr": 0.4847351440576231,
+        "mean_rank": 3.273109243697479,
+        "info_gain_bits": 0.20905211239136134,
+        "info_gain_ci95": [
+          0.1614900306893485,
+          0.2559745097673275
+        ],
+        "nce_chunk_bpb": 0.5943776580057127,
+        "nce_doc_bpb": 0.5943776580057127,
+        "nce_doc_bpb_ci95": [
+          0.5931157058435377,
+          0.5956568141272655
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3599999999999999,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.3888888888888889,
+          "mrr": 0.5937169312169314,
+          "mean_rank": 2.6790123456790123
+        },
+        "essays": {
+          "n": 198,
+          "top1": 0.26262626262626265,
+          "mrr": 0.4711099086099086,
+          "mean_rank": 3.4545454545454546
+        },
+        "news": {
+          "n": 199,
+          "top1": 0.21608040201005024,
+          "mrr": 0.43623474515434313,
+          "mean_rank": 3.6834170854271355
+        },
+        "papers": {
+          "n": 197,
+          "top1": 0.22842639593908629,
+          "mrr": 0.49153372008701957,
+          "mean_rank": 3.0
+        },
+        "reference": {
+          "n": 196,
+          "top1": 0.21428571428571427,
+          "mrr": 0.4508321185617104,
+          "mean_rank": 3.438775510204082
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4847,
+      "top1_pct": 25.74
+    },
+    "z-ai/glm-5-turbo": {
+      "model_id": "z-ai/glm-5-turbo",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 950,
+      "mean_r_tok": 0.0,
+      "cost": 0.485157,
+      "summary": {
+        "n_valid": 950,
+        "n_documents": 950,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.25894736842105265,
+        "top2_accuracy": 0.4568421052631579,
+        "mrr": 0.4821654135338346,
+        "mean_rank": 3.298947368421053,
+        "info_gain_bits": 0.20123286639913962,
+        "info_gain_ci95": [
+          0.1553652220247444,
+          0.2458305186973035
+        ],
+        "nce_chunk_bpb": 0.5945879523414305,
+        "nce_doc_bpb": 0.5945879523414305,
+        "nce_doc_bpb_ci95": [
+          0.5933885229240745,
+          0.5958215374996727
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3,
+        "zipf_mandelbrot_delta_mean": 2.0
+      },
+      "domain_stats": {
+        "code": {
+          "n": 162,
+          "top1": 0.41358024691358025,
+          "mrr": 0.6049970605526162,
+          "mean_rank": 2.6358024691358026
+        },
+        "essays": {
+          "n": 197,
+          "top1": 0.2182741116751269,
+          "mrr": 0.44525018129079047,
+          "mean_rank": 3.527918781725888
+        },
+        "news": {
+          "n": 196,
+          "top1": 0.23979591836734693,
+          "mrr": 0.45023688046647237,
+          "mean_rank": 3.6377551020408165
+        },
+        "papers": {
+          "n": 198,
+          "top1": 0.2474747474747475,
+          "mrr": 0.49924242424242427,
+          "mean_rank": 3.04040404040404
+        },
+        "reference": {
+          "n": 197,
+          "top1": 0.20304568527918782,
+          "mrr": 0.43267464346144546,
+          "mean_rank": 3.5380710659898478
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4822,
+      "top1_pct": 25.89
+    },
+    "z-ai/glm-5.3-prime": {
+      "model_id": "z-ai/glm-5.3-prime",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 941,
+      "mean_r_tok": 0.0,
+      "cost": 0.733664,
+      "summary": {
+        "n_valid": 862,
+        "n_documents": 862,
+        "k_candidates": 8,
+        "max_resolvable_gain_bpb": 0.08068335588633288,
+        "top1_accuracy": 0.2888631090487239,
+        "top2_accuracy": 0.4733178654292343,
+        "mrr": 0.500685007181527,
+        "mean_rank": 3.2436194895591646,
+        "info_gain_bits": 0.22780474655303795,
+        "info_gain_ci95": [
+          0.1721672957484327,
+          0.28123738163113915
+        ],
+        "nce_chunk_bpb": 0.5938733161870884,
+        "nce_doc_bpb": 0.5938733161870884,
+        "nce_doc_bpb_ci95": [
+          0.5924362747497715,
+          0.5953696549350472
+        ],
+        "zipf_mandelbrot_alpha_mean": 1.3400000000000003,
+        "zipf_mandelbrot_delta_mean": 1.8
+      },
+      "domain_stats": {
+        "code": {
+          "n": 133,
+          "top1": 0.41353383458646614,
+          "mrr": 0.6074829931972788,
+          "mean_rank": 2.5789473684210527
+        },
+        "essays": {
+          "n": 185,
+          "top1": 0.31351351351351353,
+          "mrr": 0.5093564993564994,
+          "mean_rank": 3.2756756756756755
+        },
+        "news": {
+          "n": 191,
+          "top1": 0.20418848167539266,
+          "mrr": 0.4198267265021192,
+          "mean_rank": 3.769633507853403
+        },
+        "papers": {
+          "n": 181,
+          "top1": 0.287292817679558,
+          "mrr": 0.5146540384109445,
+          "mean_rank": 3.149171270718232
+        },
+        "reference": {
+          "n": 172,
+          "top1": 0.2616279069767442,
+          "mrr": 0.4838662790697674,
+          "mean_rank": 3.238372093023256
+        }
+      },
+      "n_pos_rtok": 0,
+      "mrr": 0.4925,
+      "top1_pct": 27.63
+    },
+    "x-ai/grok-4.7": {
+      "model_id": "x-ai/grok-4.7",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 952,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 2.057488,
+      "mrr": 0.5172,
+      "top1_pct": 31.09
+    },
+    "x-ai/grok-4.5": {
+      "model_id": "x-ai/grok-4.5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.278897,
+      "mrr": 0.5079,
+      "top1_pct": 29.56
+    },
+    "x-ai/grok-4.6": {
+      "model_id": "x-ai/grok-4.6",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.53688,
+      "mrr": 0.5162,
+      "top1_pct": 30.71
+    },
+    "meta-llama/llama-4-maverick": {
+      "model_id": "meta-llama/llama-4-maverick",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.135402,
+      "mrr": 0.4416,
+      "top1_pct": 21.59
+    },
+    "minimax/minimax-m3": {
+      "model_id": "minimax/minimax-m3",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 948,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.11174,
+      "mrr": 0.4136,
+      "top1_pct": 17.83
+    },
+    "xiaomi/mimo-v2.6-pro": {
+      "model_id": "xiaomi/mimo-v2.6-pro",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 950,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.170809,
+      "mrr": 0.4937,
+      "top1_pct": 28.0
+    },
+    "xiaomi/mimo-v2.6-flash": {
+      "model_id": "xiaomi/mimo-v2.6-flash",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.134074,
+      "mrr": 0.4552,
+      "top1_pct": 22.96
+    },
+    "tencent/hy4": {
+      "model_id": "tencent/hy4",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.340958,
+      "mrr": 0.5324,
+      "top1_pct": 32.91
+    },
+    "deepseek/deepseek-v3.2": {
+      "model_id": "deepseek/deepseek-v3.2",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.102013,
+      "mrr": 0.452,
+      "top1_pct": 22.64
+    },
+    "mistralai/mistral-large-2512": {
+      "model_id": "mistralai/mistral-large-2512",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.217758,
+      "mrr": 0.4404,
+      "top1_pct": 21.49
+    },
+    "mistralai/mistral-medium-3-5": {
+      "model_id": "mistralai/mistral-medium-3-5",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.691487,
+      "mrr": 0.4372,
+      "top1_pct": 20.65
+    },
+    "mistralai/mistral-small-2603": {
+      "model_id": "mistralai/mistral-small-2603",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 950,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.066677,
+      "mrr": 0.3845,
+      "top1_pct": 15.58
+    },
+    "nvidia/nemotron-3.5-lightning": {
+      "model_id": "nvidia/nemotron-3.5-lightning",
+      "role": "open_bpbench",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.028751,
+      "mrr": 0.3761,
+      "top1_pct": 15.62
+    },
+    "google/gemini-2.5-pro": {
+      "model_id": "google/gemini-2.5-pro",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.593018,
+      "mrr": 0.5588,
+      "top1_pct": 36.06
+    },
+    "google/gemini-2.5-flash": {
+      "model_id": "google/gemini-2.5-flash",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 954,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.152045,
+      "mrr": 0.4612,
+      "top1_pct": 23.38
+    },
+    "stepfun/step-5-preview": {
+      "model_id": "stepfun/step-5-preview",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 880,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 0.678257,
+      "mrr": 0.4655,
+      "top1_pct": 26.14
+    },
+    "meta/muse-wonder": {
+      "model_id": "meta/muse-wonder",
+      "role": "closed",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 944,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 2.920052,
+      "mrr": 0.5548,
+      "top1_pct": 35.17
+    },
+    "qwen/qwen3.8-2.4t-a95b": {
+      "model_id": "qwen/qwen3.8-2.4t-a95b",
+      "role": "open_bypass",
+      "elie_id": null,
+      "n_total": 954,
+      "n_ok": 884,
+      "n_pos_rtok": 0,
+      "mean_r_tok": 0.0,
+      "cost": 1.00577,
+      "mrr": 0.5117,
+      "top1_pct": 30.2
+    }
+  }
+}

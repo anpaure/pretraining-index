@@ -1,0 +1,4695 @@
+{
+  "deepseek/deepseek-v4-pro": {
+    "bpbench_hansard": 0.56,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.425,
+      "top2_accuracy": 0.6,
+      "mrr": 0.6141666666666665,
+      "mean_rank": 2.475,
+      "info_gain_bits": 0.5565794254926599,
+      "info_gain_ci95": [
+        0.16990160034792973,
+        0.9142643902269771
+      ],
+      "nce_chunk_bpb": 0.6947713320324652,
+      "nce_doc_bpb": 0.7270117517556455,
+      "nce_doc_bpb_ci95": [
+        0.7169361189462281,
+        0.7379040848583139
+      ],
+      "zipf_mandelbrot_alpha_mean": 2.38,
+      "zipf_mandelbrot_delta_mean": 2.0
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 0.0,
+    "cost": 0.014244223016,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00036929845,
+        "raw": "H,G,A,D,C,E,F,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00040611281,
+        "raw": "C,E,F,G,B,H,A,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00037766535,
+        "raw": "A,C,F,H,E,D,G,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00040192936,
+        "raw": "F,G,H,A,B,E,D,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00039690922,
+        "raw": "E,A,H,F,C,G,B,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.000158215764,
+        "raw": "B,A,D,C,F,E,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00037013514,
+        "raw": "A,G,B,D,F,C,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00037850204,
+        "raw": "C,H,A,E,G,D,F,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00037264521,
+        "raw": "F,C,G,B,H,E,A,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00040862288,
+        "raw": "A,E,B,D,C,G,F,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00041698978,
+        "raw": "D,C,E,H,F,B,G,A"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00025550861,
+        "raw": "H,A,C,F,B,E,G,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00034419775,
+        "raw": "A,B,H,D,G,F,C,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00039774591,
+        "raw": "A,D,G,C,E,H,B,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00035591141,
+        "raw": "B,E,H,F,A,C,G,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00031156684,
+        "raw": "F,B,E,H,C,G,A,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00037515528,
+        "raw": "F,A,G,C,H,D,B,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.0004069495,
+        "raw": "E,G,B,F,H,C,D,A"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00038268549,
+        "raw": "D,A,H,G,F,B,C,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0003818488,
+        "raw": "A,C,E,F,B,H,G,D"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00040192936,
+        "raw": "B,D,F,G,C,E,A,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00034921789,
+        "raw": "B,G,A,H,E,C,D,F"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00036093155,
+        "raw": "G,A,H,B,C,D,E,F"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00039439915,
+        "raw": "D,H,A,F,C,E,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00041280633,
+        "raw": "C,F,A,H,E,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00039272577,
+        "raw": "H,C,G,A,F,E,B,D"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00032913733,
+        "raw": "E,C,A,G,D,F,B,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00039105239,
+        "raw": "G,B,F,C,D,H,E,A"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00029734311,
+        "raw": "D,A,H,F,E,G,B,C"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.0003149136,
+        "raw": "B,F,D,H,A,E,G,C"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00034754451,
+        "raw": "D,G,E,B,C,A,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00027056903,
+        "raw": "A,E,F,C,H,D,G,B"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00038352218,
+        "raw": "E,H,D,G,C,F,A,B"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00037682866,
+        "raw": "D,C,G,H,E,F,A,B"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00040443943,
+        "raw": "G,A,B,D,H,C,F,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000109561072,
+        "raw": "C,E,F,G,A,H,B,D"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00039523584,
+        "raw": "D,C,E,G,A,H,F,B"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00027893593,
+        "raw": "C,A,B,E,F,G,H,D"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00036929845,
+        "raw": "D,F,A,H,C,E,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00039523584,
+        "raw": "H,B,G,A,D,E,C,F"
+      }
+    ]
+  },
+  "moonshotai/kimi-k2.6": {
+    "bpbench_hansard": 0.569,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.55,
+      "top2_accuracy": 0.65,
+      "mrr": 0.6752976190476191,
+      "mean_rank": 2.525,
+      "info_gain_bits": 0.6345475875276096,
+      "info_gain_ci95": [
+        0.1597583047947201,
+        1.103922383763388
+      ],
+      "nce_chunk_bpb": 0.6925750457779596,
+      "nce_doc_bpb": 0.7248154655011398,
+      "nce_doc_bpb_ci95": [
+        0.7115936402550617,
+        0.7381898114936156
+      ],
+      "zipf_mandelbrot_alpha_mean": 1.3800000000000001,
+      "zipf_mandelbrot_delta_mean": 0.0
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 0.0,
+    "cost": 0.011307022,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00031149,
+        "raw": "G,H,C,D,A,B,E,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000295587,
+        "raw": "C,B,F,E,G,A,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 0.0003381,
+        "raw": "H,A,F,G,D,E,C,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00030289,
+        "raw": "F,H,A,G,C,D,E,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00030979,
+        "raw": "H,F,A,E,C,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00031264,
+        "raw": "A,D,B,E,F,C,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00031084,
+        "raw": "B,C,A,D,G,F,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00028599,
+        "raw": "H,C,E,G,A,F,D,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.0003122,
+        "raw": "C,G,B,F,E,A,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00034139,
+        "raw": "E,G,A,C,F,B,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00031654,
+        "raw": "C,G,B,A,D,E,F,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000172722,
+        "raw": "H,B,A,C,E,F,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000232665,
+        "raw": "B,A,H,D,E,G,C,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.000268857,
+        "raw": "A,E,G,C,D,B,F,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00034598,
+        "raw": "B,E,F,H,A,G,D,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00023399,
+        "raw": "F,B,E,H,C,A,G,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002535885,
+        "raw": "F,G,A,D,H,B,C,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.0003647,
+        "raw": "E,G,F,B,H,D,C,A"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0003206,
+        "raw": "D,H,A,F,G,B,C,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00028729,
+        "raw": "A,C,E,B,H,D,F,G"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000271119,
+        "raw": "B,G,D,F,A,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00026064,
+        "raw": "B,G,A,H,E,C,D,F"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000246237,
+        "raw": "A,G,H,C,D,E,F,B"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.000265464,
+        "raw": "C,F,A,D,H,B,E,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 0.00031329,
+        "raw": "C,F,A,D,E,B,H,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00032839,
+        "raw": "H,A,C,G,F,B,E,D"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00024569,
+        "raw": "E,C,A,F,G,D,B,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002648985,
+        "raw": "G,B,F,A,D,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 0.0002492,
+        "raw": "D,F,H,A,E,B,G,C"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002117415,
+        "raw": "D,B,F,A,G,E,C,H"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00029199,
+        "raw": "E,B,D,A,C,G,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000182901,
+        "raw": "H,E,A,F,B,G,C,D"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00026094,
+        "raw": "D,E,H,C,G,F,A,B"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00031864,
+        "raw": "C,D,G,H,A,F,B,E"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0003409,
+        "raw": "G,D,A,B,C,F,H,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00027574,
+        "raw": "C,G,F,E,A,B,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00029704,
+        "raw": "B,D,A,C,G,E,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001891215,
+        "raw": "B,C,A,F,E,G,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00027754,
+        "raw": "F,E,A,H,C,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00029769,
+        "raw": "H,G,B,A,D,E,C,F"
+      }
+    ]
+  },
+  "nvidia/nemotron-3-ultra-550b-a55b": {
+    "bpbench_hansard": 0.574,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.475,
+      "top2_accuracy": 0.65,
+      "mrr": 0.645,
+      "mean_rank": 2.375,
+      "info_gain_bits": 0.6684757403631889,
+      "info_gain_ci95": [
+        0.2733796180298622,
+        1.0456688079810554
+      ],
+      "nce_chunk_bpb": 0.6916193231628729,
+      "nce_doc_bpb": 0.7238597428860531,
+      "nce_doc_bpb_ci95": [
+        0.713234586051747,
+        0.7349892111207947
+      ],
+      "zipf_mandelbrot_alpha_mean": 2.04,
+      "zipf_mandelbrot_delta_mean": 1.2
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 0.0,
+    "cost": 0.0098303,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.0002443,
+        "raw": "G,C,D,A,H,B,E,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002673,
+        "raw": "C,E,G,A,F,B,H,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002448,
+        "raw": "C,A,F,H,E,G,D,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00025935,
+        "raw": "F,A,G,D,B,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002568,
+        "raw": "H,A,E,F,B,C,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002703,
+        "raw": "A,B,D,E,F,C,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002418,
+        "raw": "A,G,C,B,F,D,E,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00024335,
+        "raw": "H,C,A,E,G,D,F,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00024435,
+        "raw": "C,F,B,A,E,G,H,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00026335,
+        "raw": "B,A,C,D,E,F,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.0002728,
+        "raw": "C,E,D,F,A,B,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00017085,
+        "raw": "H,A,B,F,E,C,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00022585,
+        "raw": "D,H,A,B,G,C,E,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00025535,
+        "raw": "A,G,E,C,B,F,H,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002343,
+        "raw": "B,F,E,G,H,A,C,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00020835,
+        "raw": "F,B,E,H,G,A,C,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0003687,
+        "raw": "F,A,G,D,C,H,B,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00026335,
+        "raw": "E,F,G,B,H,A,C,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00024985,
+        "raw": "D,A,H,F,G,B,C,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002523,
+        "raw": "A,C,E,G,B,D,F,H"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002593,
+        "raw": "B,G,A,C,D,E,F,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.0002363,
+        "raw": "B,G,A,E,H,C,D,F"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00024335,
+        "raw": "G,A,C,H,D,E,F,B"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00025735,
+        "raw": "D,A,F,H,C,E,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.0003246,
+        "raw": "C,F,A,D,E,H,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002598,
+        "raw": "H,A,C,G,B,D,F,E"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.0002148,
+        "raw": "C,E,A,G,F,B,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00025685,
+        "raw": "G,B,C,F,A,D,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00019585,
+        "raw": "F,A,E,G,B,H,D,C"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00020685,
+        "raw": "D,F,B,A,G,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00022685,
+        "raw": "E,B,D,G,A,C,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00018235,
+        "raw": "F,A,E,H,C,B,G,D"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.0002548,
+        "raw": "C,D,H,E,G,A,F,B"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002478,
+        "raw": "D,G,C,A,H,F,E,B"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00026985,
+        "raw": "G,D,A,C,B,F,H,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00021235,
+        "raw": "E,F,G,H,A,C,B,D"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00025835,
+        "raw": "C,A,D,G,B,E,F,H"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00018585,
+        "raw": "A,C,B,E,F,G,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00024535,
+        "raw": "A,E,C,D,F,H,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.0002543,
+        "raw": "B,G,H,A,E,C,D,F"
+      }
+    ]
+  },
+  "deepseek/deepseek-v4-flash": {
+    "bpbench_hansard": 0.592,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.275,
+      "top2_accuracy": 0.5,
+      "mrr": 0.5208333333333334,
+      "mean_rank": 2.7,
+      "info_gain_bits": 0.3510963606631283,
+      "info_gain_ci95": [
+        0.09006203901132712,
+        0.6013999975578769
+      ],
+      "nce_chunk_bpb": 0.700559587379776,
+      "nce_doc_bpb": 0.7328000071029562,
+      "nce_doc_bpb_ci95": [
+        0.7257492004298648,
+        0.7401530865861056
+      ],
+      "zipf_mandelbrot_alpha_mean": 1.9,
+      "zipf_mandelbrot_delta_mean": 2.0
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 0.0,
+    "cost": 0.00164,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 2.53e-05,
+        "raw": "G,A,D,H,C,B,F,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 5.781e-05,
+        "raw": "C,E,F,A,G,H,B,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 2.58e-05,
+        "raw": "A,E,F,H,C,G,D,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 2.725e-05,
+        "raw": "G,B,F,A,D,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 2.695e-05,
+        "raw": "E,A,B,F,H,C,G,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 5.913e-05,
+        "raw": "A,B,C,D,E,F,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 2.535e-05,
+        "raw": "B,G,A,C,F,D,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 5.385e-05,
+        "raw": "C,A,H,E,G,D,F,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 2.55e-05,
+        "raw": "F,B,C,D,A,E,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 5.817e-05,
+        "raw": "E,A,G,B,C,F,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 4.5e-05,
+        "raw": "G,C,A,E,H,F,B,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 1.85e-05,
+        "raw": "C,A,H,F,B,E,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 4.893e-05,
+        "raw": "B,E,A,H,D,F,C,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 5.661e-05,
+        "raw": "A,G,E,B,H,C,F,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 5.061e-05,
+        "raw": "B,F,E,A,H,C,G,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 2.185e-05,
+        "raw": "F,B,E,C,A,H,G,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 2.565e-05,
+        "raw": "A,C,F,G,B,D,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 5.793e-05,
+        "raw": "E,G,F,B,C,A,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 2.61e-05,
+        "raw": "D,H,A,G,F,B,E,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 5.433e-05,
+        "raw": "A,C,E,B,H,F,G,D"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 6.748e-05,
+        "raw": "B,A,F,D,G,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 4.965e-05,
+        "raw": "G,B,A,E,C,F,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 3.031e-05,
+        "raw": "B,A,H,C,D,G,E,F"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 5.613e-05,
+        "raw": "A,D,H,B,C,F,E,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 5.877e-05,
+        "raw": "C,A,F,E,H,B,D,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 2.67e-05,
+        "raw": "H,A,C,F,G,E,B,D"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 2.29e-05,
+        "raw": "E,A,F,C,G,B,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 5.565e-05,
+        "raw": "B,G,E,D,F,C,A,H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 4.998e-05,
+        "raw": "F,D,A,E,G,H,B,C"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 3.402e-05,
+        "raw": "B,D,F,A,G,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 4.941e-05,
+        "raw": "B,E,D,A,G,H,C,F"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 1.985e-05,
+        "raw": "E,A,F,H,C,B,G,D"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 2.615e-05,
+        "raw": "D,G,H,F,E,B,C,A"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 5.361e-05,
+        "raw": "C,G,A,F,D,H,B,E"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 2.74e-05,
+        "raw": "G,B,A,F,D,C,H,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 4.617e-05,
+        "raw": "E,C,G,A,H,F,B,D"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 2.685e-05,
+        "raw": "B,D,G,F,A,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 3.957e-05,
+        "raw": "A,B,C,F,E,G,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 5.253e-05,
+        "raw": "E,A,F,B,C,D,H,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 5.625e-05,
+        "raw": "G,H,B,A,D,C,F,E"
+      }
+    ]
+  },
+  "z-ai/glm-5.2": {
+    "bpbench_hansard": 0.594,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.325,
+      "top2_accuracy": 0.475,
+      "mrr": 0.5267261904761904,
+      "mean_rank": 2.9,
+      "info_gain_bits": 0.3081809816645471,
+      "info_gain_ci95": [
+        0.02570966356226768,
+        0.5958051412903757
+      ],
+      "nce_chunk_bpb": 0.701768471295229,
+      "nce_doc_bpb": 0.7340088910184093,
+      "nce_doc_bpb_ci95": [
+        0.7259068020148648,
+        0.7419658295565017
+      ],
+      "zipf_mandelbrot_alpha_mean": 1.7,
+      "zipf_mandelbrot_delta_mean": 2.0
+    },
+    "perm_pct": 97.5,
+    "mean_r_tok": 0.0,
+    "cost": 0.010358744,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00015211,
+        "raw": "G,A,D,H,B,C,E,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00016699,
+        "raw": "F,B,G,C,A,E,H,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00015521,
+        "raw": "A,F,H,E,D,C,G,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00030884,
+        "raw": "A,F,G,H,C,D,E,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 6.4343e-05,
+        "raw": "F,A,E,H,C,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016823,
+        "raw": "A,B,D,E,F,C,H,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00015273,
+        "raw": "A,B,C,D,F,G,E,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00029815,
+        "raw": "C,E,A,H,G,D,F,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.000293043,
+        "raw": "C,F,B,E,G,A,H,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.0006948,
+        "raw": "E,A,B,D,C,F,H,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.000328371,
+        "raw": "B,E,H,F,A,D,C,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001257,
+        "raw": "H,A,B,C,D,F,E,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00026482,
+        "raw": "A,H,D,B,E,C,G,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.0006766,
+        "raw": "A,E,C,G,B,H,F,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00014839,
+        "raw": "B,F,E,A,H,C,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00047344,
+        "raw": "F,E,C,B,H,G,A,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00056584,
+        "raw": "F,D,A,B,G,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00027998,
+        "raw": "E,F,D,C,B,A,H,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.000300079,
+        "raw": "D,A,H,F,G,B,E,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00058124,
+        "raw": "A,C,E,F,B,D,G,H"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 6.442e-05,
+        "raw": "B,A,C,E,F,D,G,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00014436,
+        "raw": "B,G,A,E,C,D,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 6.4091e-05,
+        "raw": "C,A,D,G,E,H,F,B"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00016172,
+        "raw": "D,F,A,H,C,E,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 6.4532e-05,
+        "raw": "C,A,F,H,E,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016172,
+        "raw": "H,C,A,B,E,D,F,G"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00022232,
+        "raw": "E,C,A,G,D,F,B,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00015705,
+        "raw": "G,B,F,C,A,E,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00012514,
+        "raw": "A,E,F,G,B,D,H,C"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00046084,
+        "raw": "D,F,B,H,A,C,E,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00052104,
+        "raw": "B,A,D,C,G,E,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00017954,
+        "raw": "A,E,F,H,C,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 6.4315e-05,
+        "raw": "H,D,E,F,G,C,A,B"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00015446,
+        "raw": "C,D,A,H,B,E,G,F"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016544,
+        "raw": "G,B,D,A,C,H,F,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00048464,
+        "raw": "F,E,A,C,G,H,B,D"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 0.00015743,
+        "raw": "A,C,F,D,B,H,G,E"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00011925,
+        "raw": "A,F,C,B,E,G,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 5.729e-05,
+        "raw": "A,F,H,C,D,B,E"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00063024,
+        "raw": "G, B, H, A, D, E, C, F"
+      }
+    ]
+  },
+  "qwen/qwen3.7-plus": {
+    "bpbench_hansard": 0.596,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.4,
+      "top2_accuracy": 0.5,
+      "mrr": 0.5761309523809524,
+      "mean_rank": 2.8,
+      "info_gain_bits": 0.40587296115867844,
+      "info_gain_ci95": [
+        0.07509768705052569,
+        0.7341312778636614
+      ],
+      "nce_chunk_bpb": 0.6990165845489155,
+      "nce_doc_bpb": 0.7312570042720957,
+      "nce_doc_bpb_ci95": [
+        0.7220102911254764,
+        0.740574617627255
+      ],
+      "zipf_mandelbrot_alpha_mean": 1.4400000000000002,
+      "zipf_mandelbrot_delta_mean": 0.85
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 0.0,
+    "cost": 0.00615008,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00015584,
+        "raw": "G,C,H,D,A,B,E,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001712,
+        "raw": "C,E,B,F,G,A,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00015584,
+        "raw": "A,F,D,H,E,C,G,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.0001664,
+        "raw": "G,D,F,A,H,B,E,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00016256,
+        "raw": "E,A,H,C,D,B,F,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016928,
+        "raw": "A,D,B,C,F,E,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00015264,
+        "raw": "A,D,G,B,C,F,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00015776,
+        "raw": "C,H,A,E,G,D,F,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00015488,
+        "raw": "B,C,F,D,A,E,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00016928,
+        "raw": "E,A,B,C,D,F,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00017344,
+        "raw": "C,A,B,D,E,F,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001088,
+        "raw": "H,A,B,C,D,E,F,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00014304,
+        "raw": "A,H,D,B,C,E,F,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 0.00016288,
+        "raw": "A,D,B,C,E,F,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00014848,
+        "raw": "B,G,E,A,F,H,D,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00013536,
+        "raw": "F,B,E,H,C,G,A,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00015616,
+        "raw": "F,A,G,D,B,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00016896,
+        "raw": "E,G,F,A,B,C,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00015968,
+        "raw": "A,D,H,B,C,E,F,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00015904,
+        "raw": "A,C,B,E,H,D,F,G"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016576,
+        "raw": "B,A,D,F,C,E,G,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.000152,
+        "raw": "B,G,A,E,C,D,F,H"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00015616,
+        "raw": "A,H,C,B,D,E,F,G"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 0.00016288,
+        "raw": "D,A,F,C,E,B,H,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00017152,
+        "raw": "C,A,H,F,E,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016448,
+        "raw": "H,C,A,D,B,E,F,G"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00013728,
+        "raw": "E,C,A,D,G,B,F,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016384,
+        "raw": "G,B,A,F,D,E,C,H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00012448,
+        "raw": "A,E,G,F,B,D,C,H"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00013152,
+        "raw": "D,B,F,A,E,C,G,H"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00014496,
+        "raw": "E,D,B,A,C,G,F,H"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00011616,
+        "raw": "A,E,H,F,C,B,D,G"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00016032,
+        "raw": "E,F,H,D,C,G,A,B"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00015808,
+        "raw": "C,D,G,A,F,H,B,E"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00016992,
+        "raw": "G,C,A,B,H,D,F,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00013632,
+        "raw": "C,E,F,A,B,D,G,H"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 7,
+        "r_tok": 0,
+        "cost": 0.00016448,
+        "raw": "C,A,B,D,E,F,G,H"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.0001184,
+        "raw": "A,F,C,B,E,D,G,H"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00015744,
+        "raw": "E,A,D,F,B,C,H,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00016256,
+        "raw": "B,D,G,H,A,C,E,F"
+      }
+    ]
+  },
+  "minimax/minimax-m2.7": {
+    "bpbench_hansard": 0.692,
+    "ok": 0,
+    "cost": 0.0286338,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0007164,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 3,
+        "r_tok": 256,
+        "cost": 0.0007404,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 3,
+        "r_tok": 256,
+        "cost": 0.000723,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 6,
+        "r_tok": 256,
+        "cost": 0.000741,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0007326,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.0007488,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.0007188,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0007236,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.0007206,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.0007458,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.0007524,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0006366,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.0007002,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.0007344,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.0007092,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.0006756,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 6,
+        "r_tok": 256,
+        "cost": 0.0007224,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 6,
+        "r_tok": 256,
+        "cost": 0.0007416,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 4,
+        "r_tok": 256,
+        "cost": 0.000723,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.0007248,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.0007374,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.0007026,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.000711,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0007344,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0007476,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.000735,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.0006888,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.0007338,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.0006654,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 4,
+        "r_tok": 256,
+        "cost": 0.0006762,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.0007026,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0006474,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.0007278,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 4,
+        "r_tok": 256,
+        "cost": 0.0007218,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.0007398,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 3,
+        "r_tok": 256,
+        "cost": 0.000687,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.0007356,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.0006546,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.000717,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.0007368,
+        "raw": ""
+      }
+    ]
+  },
+  "qwen/qwen3.6-27b": {
+    "bpbench_hansard": 0.764,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.425,
+      "top2_accuracy": 0.575,
+      "mrr": 0.6041666666666666,
+      "mean_rank": 2.575,
+      "info_gain_bits": 0.5183457658987471,
+      "info_gain_ci95": [
+        0.1482745590398027,
+        0.8748305358060047
+      ],
+      "nce_chunk_bpb": 0.6958483365280684,
+      "nce_doc_bpb": 0.7280887562512487,
+      "nce_doc_bpb_ci95": [
+        0.7180469317468189,
+        0.7385132972895287
+      ],
+      "zipf_mandelbrot_alpha_mean": 2.0000000000000004,
+      "zipf_mandelbrot_delta_mean": 1.6
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 0.0,
+    "cost": 0.00789366,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00022635,
+        "raw": "G,D,C,A,H,E,B,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00021216,
+        "raw": "G, C, F, E, B, A, D, H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.0001968,
+        "raw": "A, H, F, E, C, D, G, B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.0001944,
+        "raw": "G, H, F, A, C, D, E, B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001908,
+        "raw": "H, E, A, F, C, G, D, B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.0001971,
+        "raw": "D, A, B, C, F, E, G, H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00022185,
+        "raw": "G,A,B,D,C,F,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001863,
+        "raw": "H, C, A, E, G, D, F, B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00026016,
+        "raw": "F,C,G,H,B,E,A,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00018784,
+        "raw": "B,A,C,D,E,F,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.000201,
+        "raw": "D, A, B, C, E, F, G, H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00014976,
+        "raw": "H, B, A, C, E, F, D, G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001725,
+        "raw": "B, H, A, D, C, G, F, E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00018144,
+        "raw": "A,E,C,G,B,F,H,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00028416,
+        "raw": "B, E, G, F, A, H, D, C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00017632,
+        "raw": "F, E, B, C, G, H, A, D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00019712,
+        "raw": "F, G, A, D, C, B, E, H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00020992,
+        "raw": "E, F, G, B, A, D, C, H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001881,
+        "raw": "D, A, H, F, G, B, C, E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002,
+        "raw": "A, C, B, E, H, G, F, D"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0001938,
+        "raw": "B, D, G, F, A, C, E, H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00019296,
+        "raw": "B, G, A, H, C, E, D, F"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00017472,
+        "raw": "A,C,G,D,E,F,H,B"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00020384,
+        "raw": "D, F, A, H, C, E, B, G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00019008,
+        "raw": "C,F,H,A,E,D,G,B"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00020544,
+        "raw": "H, A, D, F, C, G, E, B"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00017824,
+        "raw": "E, C, A, G, F, D, B, H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0002048,
+        "raw": "G, B, F, C, A, D, E, H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00016544,
+        "raw": "A, E, G, F, D, B, C, H"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00017248,
+        "raw": "D, F, B, E, G, A, C, H"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.0001519,
+        "raw": "E,A,G,B,D,C,F,H"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.00015712,
+        "raw": "D, E, H, A, F, C, G, B"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.00020128,
+        "raw": "F, H, E, C, D, G, A, B"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00019904,
+        "raw": "D, G, C, H, A, E, B, F"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00021088,
+        "raw": "G, B, A, D, C, H, E, F"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.00017728,
+        "raw": "E, F, G, C, A, H, B, D"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.00030816,
+        "raw": "C, A, E, D, G, B, H, F"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.0001926,
+        "raw": "A, C, E, B, F, G, D, H"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.000176,
+        "raw": "A,F,H,D,E,C,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00020352,
+        "raw": "G, H, B, E, A, C, D, F"
+      }
+    ]
+  },
+  "anthropic/claude-fable-5.2": {
+    "bpbench_hansard": null,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.675,
+      "top2_accuracy": 0.825,
+      "mrr": 0.8020833333333333,
+      "mean_rank": 1.6,
+      "info_gain_bits": 1.4496433457877658,
+      "info_gain_ci95": [
+        0.9867591649092073,
+        1.8903659992862603
+      ],
+      "nce_chunk_bpb": 0.6696146018833073,
+      "nce_doc_bpb": 0.7018550216064876,
+      "nce_doc_bpb_ci95": [
+        0.6894402989727272,
+        0.7148940126171511
+      ],
+      "zipf_mandelbrot_alpha_mean": 3.3600000000000003,
+      "zipf_mandelbrot_delta_mean": 1.2
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 0.0,
+    "cost": 0.264104,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.011472,
+        "raw": "The Justification of Practices Involving Ionising "
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0066,
+        "raw": "C,F,A,G,D,B,E,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 6,
+        "r_tok": 0,
+        "cost": 0.006112,
+        "raw": "D,G,H,A,F,C,E,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006416,
+        "raw": "F,H,G,A,D,E,B,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006328,
+        "raw": "H,F,C,E,A,D,G,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006536,
+        "raw": "A,D,B,F,C,E,H,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.005864,
+        "raw": "B,D,A,C,G,F,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.006216,
+        "raw": "C,H,E,A,D,F,G,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006456,
+        "raw": "E,G,F,D,A,B,C,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006664,
+        "raw": "B,A,E,G,F,D,C,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.011808,
+        "raw": "Lord Wilson of Dinton, former Cabinet Secretary, g"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.004248,
+        "raw": "B,A,C,H,E,D,F,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.005408,
+        "raw": "G,A,B,H,D,E,C,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006736,
+        "raw": "G,C,E,A,F,H,D,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.005888,
+        "raw": "B,F,E,A,H,C,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.009352,
+        "raw": "The Settle-Carlisle line opened to passengers on 1"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006288,
+        "raw": "F,G,A,D,C,B,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00656,
+        "raw": "F,E,A,G,B,D,C,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006552,
+        "raw": "D,H,B,A,F,G,C,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006424,
+        "raw": "A,E,C,G,F,B,H,D"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00648,
+        "raw": "B,D,A,G,E,F,C,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.0058,
+        "raw": "B,G,E,H,A,C,D,F"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00608,
+        "raw": "A,H,C,G,D,B,E,F"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006424,
+        "raw": "H,D,F,C,A,E,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00644,
+        "raw": "H,A,C,F,E,D,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006096,
+        "raw": "H,A,D,C,F,B,E,G"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.005456,
+        "raw": "E,C,A,F,D,G,B,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0062,
+        "raw": "G,B,F,C,A,D,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.005016,
+        "raw": "F,G,H,A,D,E,B,C"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.005224,
+        "raw": "D,B,F,E,G,H,A,C"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.005624,
+        "raw": "A,E,D,B,G,C,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.004536,
+        "raw": "H,A,F,E,C,G,D,B"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.006192,
+        "raw": "E,G,H,C,F,D,A,B"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.006176,
+        "raw": "G,D,C,F,H,A,E,B"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00648,
+        "raw": "G,A,B,D,C,H,F,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.005264,
+        "raw": "G,E,C,F,H,B,A,D"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.015616,
+        "raw": "\"The group has met for a full ...\" Candidates: \"we"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.004672,
+        "raw": "B,C,F,A,E,G,D,H"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006008,
+        "raw": "E,A,F,D,C,B,H,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.006392,
+        "raw": "H,G,B,A,E,D,C,F"
+      }
+    ]
+  },
+  "anthropic/claude-opus-5.5": {
+    "bpbench_hansard": null,
+    "summary": {
+      "n_valid": 40,
+      "n_documents": 40,
+      "k_candidates": 8,
+      "max_resolvable_gain_bpb": 0.08450704225352113,
+      "top1_accuracy": 0.775,
+      "top2_accuracy": 0.9,
+      "mrr": 0.8620833333333333,
+      "mean_rank": 1.45,
+      "info_gain_bits": 1.7269618117478829,
+      "info_gain_ci95": [
+        1.1125443151014422,
+        2.229571013338279
+      ],
+      "nce_chunk_bpb": 0.6618028141097829,
+      "nce_doc_bpb": 0.6940432338329632,
+      "nce_doc_bpb_ci95": [
+        0.6798852281543605,
+        0.7113507689497643
+      ],
+      "zipf_mandelbrot_alpha_mean": 2.88,
+      "zipf_mandelbrot_delta_mean": 0.25
+    },
+    "perm_pct": 100.0,
+    "mean_r_tok": 2.225,
+    "cost": 0.121752,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003036,
+        "raw": "H,G,A,D,C,E,B,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 4,
+        "r_tok": 0,
+        "cost": 0.0033,
+        "raw": "F,B,E,C,G,A,D,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.003056,
+        "raw": "B,A,H,F,C,E,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003208,
+        "raw": "F,G,H,A,D,E,B,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003164,
+        "raw": "H,F,A,E,C,B,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003268,
+        "raw": "A,D,B,F,C,E,H,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 3,
+        "r_tok": 0,
+        "cost": 0.002932,
+        "raw": "B,D,A,G,C,F,H,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003108,
+        "raw": "H,C,A,E,F,D,G,B"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003228,
+        "raw": "E,F,B,D,C,G,A,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.003332,
+        "raw": "A,B,F,E,C,D,G,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003364,
+        "raw": "E,C,H,F,D,A,B,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.002124,
+        "raw": "B,H,A,E,C,F,D,G"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002704,
+        "raw": "B,A,H,D,E,G,C,F"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 89,
+        "cost": 0.005148,
+        "raw": "G,A,E,C,F,D,B,H"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002944,
+        "raw": "B,F,E,H,A,G,C,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002616,
+        "raw": "B,F,E,H,C,G,A,D"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.003144,
+        "raw": "A,F,G,D,H,C,B,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00328,
+        "raw": "F,E,B,G,D,A,H,C"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003276,
+        "raw": "D,H,A,B,F,G,C,E"
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003212,
+        "raw": "A,G,E,C,F,D,B,H"
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00324,
+        "raw": "B,D,A,F,G,C,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 5,
+        "r_tok": 0,
+        "cost": 0.0029,
+        "raw": "B,G,H,A,E,C,D,F"
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00304,
+        "raw": "A,H,C,G,D,B,E,F"
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003212,
+        "raw": "H,D,F,C,A,E,B,G"
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.00322,
+        "raw": "C,H,A,F,E,D,G,B"
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003048,
+        "raw": "H,A,D,C,F,G,E,B"
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002728,
+        "raw": "E,C,A,G,D,F,B,H"
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.0031,
+        "raw": "G,B,F,C,D,A,E,H"
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 2,
+        "r_tok": 0,
+        "cost": 0.002508,
+        "raw": "F,G,A,E,H,D,B,C"
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002612,
+        "raw": "D,F,B,G,A,E,H,C"
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002812,
+        "raw": "A,E,B,D,G,C,H,F"
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002268,
+        "raw": "H,A,F,E,G,C,D,B"
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003096,
+        "raw": "G,E,F,H,C,D,B,A"
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003088,
+        "raw": "D,C,G,F,H,E,A,B"
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.00324,
+        "raw": "G,B,A,D,C,H,F,E"
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002632,
+        "raw": "C,E,F,G,H,A,B,D"
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003028,
+        "raw": "G,D,B,C,E,F,A,H"
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.002336,
+        "raw": "B,A,F,C,E,G,H,D"
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003004,
+        "raw": "E,F,A,D,B,C,H,G"
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": true,
+        "complete": true,
+        "gold_rank": 1,
+        "r_tok": 0,
+        "cost": 0.003196,
+        "raw": "H,G,B,E,A,D,F,C"
+      }
+    ]
+  },
+  "google/gemini-4-neon": {
+    "bpbench_hansard": null,
+    "ok": 0,
+    "cost": 0.25065,
+    "records": [
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-GrandCommittee-4__p206",
+        "doc_id": "hansard-2026-07-07-Lords-GrandCommittee-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.005271,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-7__p257",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-7",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 3,
+        "r_tok": 256,
+        "cost": 0.007509,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Lords-Debate-4__p240",
+        "doc_id": "hansard-2026-07-16-Lords-Debate-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 3,
+        "r_tok": 256,
+        "cost": 0.00528,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-02-Commons-WestHall-1__p267",
+        "doc_id": "hansard-2026-07-02-Commons-WestHall-1",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 6,
+        "r_tok": 256,
+        "cost": 0.007476,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-20__p250",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-20",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.007449,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-3__p266",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-3",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.007512,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-9__p235",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-9",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.007365,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-03-Lords-Debate-10__p239",
+        "doc_id": "hansard-2026-07-03-Lords-Debate-10",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.007389,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Lords-Debate-4__p228",
+        "doc_id": "hansard-2026-07-14-Lords-Debate-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.00738,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-4__p293",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-4",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.007512,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Lords-Debate-20__p266",
+        "doc_id": "hansard-2026-07-07-Lords-Debate-20",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.007533,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-WestHall-16__p105",
+        "doc_id": "hansard-2026-07-15-Commons-WestHall-16",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.004842,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-14-Commons-Debate-30__p201",
+        "doc_id": "hansard-2026-07-14-Commons-Debate-30",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.007266,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-15-Commons-Debate-30__p243",
+        "doc_id": "hansard-2026-07-15-Commons-Debate-30",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.005313,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Commons-Debate-8__p213",
+        "doc_id": "hansard-2026-07-08-Commons-Debate-8",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.005202,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-07-Commons-WestHall-6__p147",
+        "doc_id": "hansard-2026-07-07-Commons-WestHall-6",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.005091,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-08-Lords-GrandCommittee-7__p234",
+        "doc_id": "hansard-2026-07-08-Lords-GrandCommittee-7",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 6,
+        "r_tok": 256,
+        "cost": 0.007398,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-17-Lords-Debate-10__p262",
+        "doc_id": "hansard-2026-07-17-Lords-Debate-10",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 6,
+        "r_tok": 256,
+        "cost": 0.007509,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-13-Commons-Debate-5__p233",
+        "doc_id": "hansard-2026-07-13-Commons-Debate-5",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 4,
+        "r_tok": 256,
+        "cost": 0.00528,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_07__hansard-2026-07-16-Commons-Debate-26__p238",
+        "doc_id": "hansard-2026-07-16-Commons-Debate-26",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.007413,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__AA49834F-0205-4BBA-97A6-9E8E34EA2727__p261",
+        "doc_id": "AA49834F-0205-4BBA-97A6-9E8E34EA2727",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.005361,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__9696CEE9-A8C3-449D-9B15-89FA9F00CF8E__p197",
+        "doc_id": "9696CEE9-A8C3-449D-9B15-89FA9F00CF8E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.005244,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__49736587-DABE-4A53-BE46-A500C6A6CAC2__p177",
+        "doc_id": "49736587-DABE-4A53-BE46-A500C6A6CAC2",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.007377,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__7B14DC53-C0C7-47CB-8914-B375746B68F7__p254",
+        "doc_id": "7B14DC53-C0C7-47CB-8914-B375746B68F7",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.00744,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__963ABEEC-2E39-4E6A-845D-9EF967A445FD__p256",
+        "doc_id": "963ABEEC-2E39-4E6A-845D-9EF967A445FD",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.007542,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__C95D1B7E-B442-4839-9356-37DADA8245C5__p253",
+        "doc_id": "C95D1B7E-B442-4839-9356-37DADA8245C5",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.00747,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B__p175",
+        "doc_id": "B1C4DFB6-F4E7-4972-95CB-E93C63E2ED4B",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.005103,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__44F92727-AD1D-4B78-924F-5C9619487E54__p249",
+        "doc_id": "44F92727-AD1D-4B78-924F-5C9619487E54",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.005355,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__BDA6BF9C-6970-4783-ABEF-929A3F19DE27__p134",
+        "doc_id": "BDA6BF9C-6970-4783-ABEF-929A3F19DE27",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.004992,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__1592F505-C852-43DD-A485-353613B52767__p154",
+        "doc_id": "1592F505-C852-43DD-A485-353613B52767",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 4,
+        "r_tok": 256,
+        "cost": 0.005055,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E__p206",
+        "doc_id": "C816CD3A-5F59-4B22-93EF-A9AED3FB2D6E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 1,
+        "r_tok": 256,
+        "cost": 0.005517,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__D824D19B-F6AF-4976-B720-0D458F54B583__p102",
+        "doc_id": "D824D19B-F6AF-4976-B720-0D458F54B583",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.004911,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5__p253",
+        "doc_id": "CA742B0A-4E44-4AB5-A10D-10DA9A23B5B5",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.007419,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__46EBBE76-5681-4A73-B10B-268579B236EF__p229",
+        "doc_id": "46EBBE76-5681-4A73-B10B-268579B236EF",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 4,
+        "r_tok": 256,
+        "cost": 0.005286,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__97CF8880-DAD1-4C67-BD11-542031E03F8E__p257",
+        "doc_id": "97CF8880-DAD1-4C67-BD11-542031E03F8E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.005421,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__FF8B8F91-DD81-4762-B57C-336D8185F98E__p167",
+        "doc_id": "FF8B8F91-DD81-4762-B57C-336D8185F98E",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 3,
+        "r_tok": 256,
+        "cost": 0.005109,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__6351ABF7-2FFE-4488-AA86-BB12AF9DC746__p253",
+        "doc_id": "6351ABF7-2FFE-4488-AA86-BB12AF9DC746",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 7,
+        "r_tok": 256,
+        "cost": 0.00537,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__72DDCA36-66AE-4C51-874D-048D1B035615__p124",
+        "doc_id": "72DDCA36-66AE-4C51-874D-048D1B035615",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 2,
+        "r_tok": 256,
+        "cost": 0.007041,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__4255A77A-7234-4B79-8D5E-C27BFEDE9609__p214",
+        "doc_id": "4255A77A-7234-4B79-8D5E-C27BFEDE9609",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 5,
+        "r_tok": 256,
+        "cost": 0.005301,
+        "raw": ""
+      },
+      {
+        "position_id": "hansard_2026_11__2677E730-5599-4A4E-8C07-B9949BCA7E40__p249",
+        "doc_id": "2677E730-5599-4A4E-8C07-B9949BCA7E40",
+        "ok": false,
+        "complete": false,
+        "gold_rank": 8,
+        "r_tok": 256,
+        "cost": 0.005346,
+        "raw": ""
+      }
+    ]
+  }
+}

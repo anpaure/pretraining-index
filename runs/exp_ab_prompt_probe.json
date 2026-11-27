@@ -1,0 +1,141 @@
+{
+  "exp_a": [
+    {
+      "model": "gpt-4o",
+      "ok": true,
+      "label": "def+t1_nor",
+      "ret": "gpt-4o-2024-08-06",
+      "r_tok": 0,
+      "n_lp": 7
+    },
+    {
+      "model": "gpt-5",
+      "ok": false,
+      "err": "bare_lp20=HTTP400:logprobs are not supported with reasoning models."
+    },
+    {
+      "model": "gpt-5.1",
+      "ok": true,
+      "label": "flex+none+t1",
+      "ret": "gpt-5.1-2025-11-13",
+      "r_tok": 0,
+      "n_lp": 7
+    },
+    {
+      "model": "gpt-5.2",
+      "ok": true,
+      "label": "flex+none+t1",
+      "ret": "gpt-5.2-2025-12-11",
+      "r_tok": 0,
+      "n_lp": 8
+    },
+    {
+      "model": "gpt-5.5",
+      "ok": true,
+      "label": "flex+none+t1",
+      "ret": "gpt-5.5-2026-04-23",
+      "r_tok": 0,
+      "n_lp": 7
+    },
+    {
+      "model": "gpt-6-astra",
+      "ok": false,
+      "err": "bare_lp20=HTTP400:logprobs are not supported with reasoning models."
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "ok": false,
+      "err": "bare_lp20=HTTP400:logprobs are not supported with reasoning models."
+    }
+  ],
+  "exp_b": [
+    {
+      "model": "gpt-4.1",
+      "arm": "1_verbatim_8w",
+      "adh": 29,
+      "exact_pct": 89.7,
+      "raw_lb": 0.9645,
+      "ent20": 1.115,
+      "T_star": 3.2,
+      "head_cal_bpb": 0.5486,
+      "top1_pct": 44.8
+    },
+    {
+      "model": "gpt-4.1",
+      "arm": "2_natural_4w",
+      "adh": 29,
+      "exact_pct": 75.9,
+      "raw_lb": 0.901,
+      "ent20": 1.084,
+      "T_star": 2.55,
+      "head_cal_bpb": 0.4317,
+      "top1_pct": 44.8
+    },
+    {
+      "model": "gpt-4.1",
+      "arm": "3_fewshot_8w",
+      "adh": 29,
+      "exact_pct": 82.8,
+      "raw_lb": 1.0839,
+      "ent20": 1.107,
+      "T_star": 3.15,
+      "head_cal_bpb": 0.5048,
+      "top1_pct": 44.8
+    },
+    {
+      "model": "gpt-4.1",
+      "arm": "4_baselm_8w",
+      "adh": 11,
+      "exact_pct": 90.9,
+      "raw_lb": 0.9852,
+      "ent20": 1.191,
+      "T_star": 3.75,
+      "head_cal_bpb": 0.5981,
+      "top1_pct": 36.4
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "1_verbatim_8w",
+      "adh": 27,
+      "exact_pct": 92.6,
+      "raw_lb": 0.9519,
+      "ent20": 0.476,
+      "T_star": 3.1,
+      "head_cal_bpb": 0.4048,
+      "top1_pct": 59.3
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "2_natural_4w",
+      "adh": 28,
+      "exact_pct": 89.3,
+      "raw_lb": 1.0036,
+      "ent20": 0.455,
+      "T_star": 3.45,
+      "head_cal_bpb": 0.3894,
+      "top1_pct": 60.7
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "3_fewshot_8w",
+      "adh": 28,
+      "exact_pct": 85.7,
+      "raw_lb": 1.4316,
+      "ent20": 0.284,
+      "T_star": 3.8,
+      "head_cal_bpb": 0.4013,
+      "top1_pct": 57.1
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "arm": "4_baselm_8w",
+      "adh": 1,
+      "exact_pct": 100.0,
+      "raw_lb": 1.5268,
+      "ent20": 1.909,
+      "T_star": 4.0,
+      "head_cal_bpb": 0.782,
+      "top1_pct": 0.0
+    }
+  ]
+}

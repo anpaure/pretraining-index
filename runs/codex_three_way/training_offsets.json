@@ -1,0 +1,26 @@
+{
+  "training_families": [
+    "smol",
+    "qwen"
+  ],
+  "held_out_family": "olmo",
+  "base_raw_tolerance_bpb": 0.03,
+  "target_bytes": 4,
+  "training_offsets": {
+    "smol": {
+      "to_base_raw": 0.2800108483946325,
+      "to_instruct_raw": 0.2811642545175287,
+      "to_base_full_document": 0.04417765216040592
+    },
+    "qwen": {
+      "to_base_raw": 0.6067933857459071,
+      "to_instruct_raw": 0.6040189302070471,
+      "to_base_full_document": 0.3156308304231959
+    }
+  },
+  "apply_to_heldout_instruct_top20": {
+    "to_base_raw": 0.44340211707026983,
+    "to_instruct_raw": 0.4425915923622879,
+    "to_base_full_document": 0.1799042412918009
+  }
+}
