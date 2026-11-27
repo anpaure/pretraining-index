@@ -1,0 +1,368 @@
+{
+  "n_models": 14,
+  "correlations": {
+    "or_bb_vs_tinker_bb_all14": {
+      "r": 0.9916,
+      "rho": 0.9956,
+      "mean_abs_diff": 0.0062
+    },
+    "tinker_bb_vs_whitebox_oracle_all14": {
+      "r": 0.8725,
+      "rho": 0.9253
+    },
+    "tinker_bb_dprime_vs_ln_span_bpb_all14": {
+      "r": 0.7592,
+      "rho": 0.9385
+    },
+    "whitebox_dprime_vs_ln_doc_bpb_all14": {
+      "r": 0.8606,
+      "rho": 0.9341
+    },
+    "tinker_bb_dprime_vs_ln_doc_bpb_no_oss12": {
+      "r": 0.9054,
+      "rho": 0.8601
+    },
+    "or_bb_dprime_vs_ln_doc_bpb_native11": {
+      "r": 0.9163,
+      "rho": 0.8273
+    }
+  },
+  "models": [
+    {
+      "tinker_id": "moonshotai/Kimi-K3.1-Pro:peft:262144",
+      "name": "Kimi K3.1 Pro",
+      "bypass": false,
+      "or_bb_auc": 0.752,
+      "tk_bb_auc": 0.7531,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 39.41,
+      "wb_auc": 0.759659,
+      "wb_norm_auc": 0.771938,
+      "wb_top1": 39.308,
+      "span_bpb": 0.880547,
+      "doc_bpb": 0.533233,
+      "doc954_bpb": 0.541925,
+      "macro5_bpb": 0.517136,
+      "domains_bpb": {
+        "code": 0.313562,
+        "essays": 0.686529,
+        "news": 0.545497,
+        "papers": 0.570197,
+        "reference": 0.469895
+      },
+      "elie_bpb": 0.484
+    },
+    {
+      "tinker_id": "moonshotai/Kimi-K2.6",
+      "name": "Kimi K2.6",
+      "bypass": false,
+      "or_bb_auc": 0.6785,
+      "tk_bb_auc": 0.6785,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 27.88,
+      "wb_auc": 0.718329,
+      "wb_norm_auc": 0.731357,
+      "wb_top1": 32.495,
+      "span_bpb": 0.90645,
+      "doc_bpb": 0.589036,
+      "doc954_bpb": 0.597698,
+      "macro5_bpb": 0.576347,
+      "domains_bpb": {
+        "code": 0.375003,
+        "essays": 0.732533,
+        "news": 0.59341,
+        "papers": 0.650746,
+        "reference": 0.530041
+      },
+      "elie_bpb": null
+    },
+    {
+      "tinker_id": "zai-org/GLM-5.3:peft:262144",
+      "name": "GLM-5.3",
+      "bypass": false,
+      "or_bb_auc": 0.6622,
+      "tk_bb_auc": 0.6737,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 26.73,
+      "wb_auc": 0.726265,
+      "wb_norm_auc": 0.734501,
+      "wb_top1": 33.229,
+      "span_bpb": 0.923139,
+      "doc_bpb": 0.607793,
+      "doc954_bpb": 0.617085,
+      "macro5_bpb": 0.591824,
+      "domains_bpb": {
+        "code": 0.383034,
+        "essays": 0.765515,
+        "news": 0.615022,
+        "papers": 0.649446,
+        "reference": 0.546101
+      },
+      "elie_bpb": null
+    },
+    {
+      "tinker_id": "thinkingmachines/Inkling-2-Small",
+      "name": "Inkling 2 Small",
+      "bypass": true,
+      "or_bb_auc": 0.6596,
+      "tk_bb_auc": 0.6663,
+      "tk_bb_n_ok": 855,
+      "tk_bb_top1": 26.55,
+      "wb_auc": 0.733753,
+      "wb_norm_auc": 0.743786,
+      "wb_top1": 35.115,
+      "span_bpb": 0.915125,
+      "doc_bpb": 0.566744,
+      "doc954_bpb": 0.576308,
+      "macro5_bpb": 0.545338,
+      "domains_bpb": {
+        "code": 0.326839,
+        "essays": 0.730532,
+        "news": 0.581553,
+        "papers": 0.564462,
+        "reference": 0.523303
+      },
+      "elie_bpb": null
+    },
+    {
+      "tinker_id": "deepseek-ai/DeepSeek-V4.1-Flash-1017:peft:262144",
+      "name": "DeepSeek V4.1 Flash (1017)",
+      "bypass": false,
+      "or_bb_auc": 0.6545,
+      "tk_bb_auc": 0.6595,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 26.21,
+      "wb_auc": 0.728062,
+      "wb_norm_auc": 0.736897,
+      "wb_top1": 33.124,
+      "span_bpb": 0.955714,
+      "doc_bpb": 0.607714,
+      "doc954_bpb": 0.61759,
+      "macro5_bpb": 0.589971,
+      "domains_bpb": {
+        "code": 0.353693,
+        "essays": 0.765187,
+        "news": 0.619933,
+        "papers": 0.648342,
+        "reference": 0.562702
+      },
+      "elie_bpb": 0.5388
+    },
+    {
+      "tinker_id": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+      "name": "Nemotron 3 Ultra Base",
+      "bypass": false,
+      "or_bb_auc": 0.6518,
+      "tk_bb_auc": 0.656,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 26.42,
+      "wb_auc": 0.716981,
+      "wb_norm_auc": 0.72327,
+      "wb_top1": 32.075,
+      "span_bpb": 0.932179,
+      "doc_bpb": 0.597435,
+      "doc954_bpb": 0.606089,
+      "macro5_bpb": 0.581304,
+      "domains_bpb": {
+        "code": 0.393469,
+        "essays": 0.743323,
+        "news": 0.609753,
+        "papers": 0.621187,
+        "reference": 0.538787
+      },
+      "elie_bpb": 0.5346
+    },
+    {
+      "tinker_id": "zai-org/GLM-5.3-Flash:peft:262144",
+      "name": "GLM-5.3 Flash",
+      "bypass": false,
+      "or_bb_auc": 0.6387,
+      "tk_bb_auc": 0.6557,
+      "tk_bb_n_ok": 953,
+      "tk_bb_top1": 27.07,
+      "wb_auc": 0.714211,
+      "wb_norm_auc": 0.726864,
+      "wb_top1": 31.447,
+      "span_bpb": 0.926416,
+      "doc_bpb": 0.597786,
+      "doc954_bpb": 0.606489,
+      "macro5_bpb": 0.582501,
+      "domains_bpb": {
+        "code": 0.385257,
+        "essays": 0.7527,
+        "news": 0.603938,
+        "papers": 0.637908,
+        "reference": 0.532704
+      },
+      "elie_bpb": 0.5484
+    },
+    {
+      "tinker_id": "Qwen/Qwen3.8-27B",
+      "name": "Qwen3.8-27B",
+      "bypass": false,
+      "or_bb_auc": 0.6463,
+      "tk_bb_auc": 0.6511,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 22.96,
+      "wb_auc": 0.650195,
+      "wb_norm_auc": 0.660078,
+      "wb_top1": 24.109,
+      "span_bpb": 0.992564,
+      "doc_bpb": 0.656003,
+      "doc954_bpb": 0.666166,
+      "macro5_bpb": 0.630412,
+      "domains_bpb": {
+        "code": 0.39695,
+        "essays": 0.833166,
+        "news": 0.680347,
+        "papers": 0.631331,
+        "reference": 0.610267
+      },
+      "elie_bpb": null
+    },
+    {
+      "tinker_id": "thinkingmachines/Inkling",
+      "name": "Inkling",
+      "bypass": false,
+      "or_bb_auc": 0.6277,
+      "tk_bb_auc": 0.6303,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 22.64,
+      "wb_auc": 0.71204,
+      "wb_norm_auc": 0.720425,
+      "wb_top1": 31.761,
+      "span_bpb": 1.037718,
+      "doc_bpb": 0.635752,
+      "doc954_bpb": 0.644779,
+      "macro5_bpb": 0.621193,
+      "domains_bpb": {
+        "code": 0.43209,
+        "essays": 0.785522,
+        "news": 0.646014,
+        "papers": 0.678051,
+        "reference": 0.564288
+      },
+      "elie_bpb": null
+    },
+    {
+      "tinker_id": "thinkingmachines/Inkling-2-Mini:peft:65536:free",
+      "name": "Inkling 2 Mini",
+      "bypass": false,
+      "or_bb_auc": 0.6153,
+      "tk_bb_auc": 0.6144,
+      "tk_bb_n_ok": 940,
+      "tk_bb_top1": 18.62,
+      "wb_auc": 0.636718,
+      "wb_norm_auc": 0.651692,
+      "wb_top1": 23.061,
+      "span_bpb": 1.046928,
+      "doc_bpb": 0.667961,
+      "doc954_bpb": 0.678121,
+      "macro5_bpb": 0.64117,
+      "domains_bpb": {
+        "code": 0.407976,
+        "essays": 0.847551,
+        "news": 0.685813,
+        "papers": 0.628329,
+        "reference": 0.636181
+      },
+      "elie_bpb": 0.6082
+    },
+    {
+      "tinker_id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+      "name": "Nemotron 3 Super Base",
+      "bypass": false,
+      "or_bb_auc": 0.5969,
+      "tk_bb_auc": 0.6104,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 20.44,
+      "wb_auc": 0.680743,
+      "wb_norm_auc": 0.691524,
+      "wb_top1": 27.044,
+      "span_bpb": 0.972805,
+      "doc_bpb": 0.638696,
+      "doc954_bpb": 0.647484,
+      "macro5_bpb": 0.621114,
+      "domains_bpb": {
+        "code": 0.433505,
+        "essays": 0.795873,
+        "news": 0.646788,
+        "papers": 0.651152,
+        "reference": 0.578252
+      },
+      "elie_bpb": 0.5672
+    },
+    {
+      "tinker_id": "openai/gpt-oss-120b",
+      "name": "gpt-oss-120b",
+      "bypass": true,
+      "or_bb_auc": 0.571,
+      "tk_bb_auc": 0.5707,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 16.14,
+      "wb_auc": 0.587302,
+      "wb_norm_auc": 0.598982,
+      "wb_top1": 19.078,
+      "span_bpb": 1.37746,
+      "doc_bpb": 1.357323,
+      "doc954_bpb": 1.384819,
+      "macro5_bpb": 1.247828,
+      "domains_bpb": {
+        "code": 0.434385,
+        "essays": 1.894354,
+        "news": 1.410894,
+        "papers": 0.998336,
+        "reference": 1.501171
+      },
+      "elie_bpb": null
+    },
+    {
+      "tinker_id": "openai/gpt-oss-20b",
+      "name": "gpt-oss-20b",
+      "bypass": true,
+      "or_bb_auc": 0.568,
+      "tk_bb_auc": 0.5551,
+      "tk_bb_n_ok": 952,
+      "tk_bb_top1": 16.39,
+      "wb_auc": 0.569182,
+      "wb_norm_auc": 0.574723,
+      "wb_top1": 17.715,
+      "span_bpb": 1.532217,
+      "doc_bpb": 1.396555,
+      "doc954_bpb": 1.421206,
+      "macro5_bpb": 1.287548,
+      "domains_bpb": {
+        "code": 0.569259,
+        "essays": 1.834896,
+        "news": 1.569399,
+        "papers": 0.997344,
+        "reference": 1.466843
+      },
+      "elie_bpb": null
+    },
+    {
+      "tinker_id": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+      "name": "Nemotron 3.5 Lightning",
+      "bypass": false,
+      "or_bb_auc": 0.547,
+      "tk_bb_auc": 0.5409,
+      "tk_bb_n_ok": 954,
+      "tk_bb_top1": 14.88,
+      "wb_auc": 0.625936,
+      "wb_norm_auc": 0.643905,
+      "wb_top1": 21.384,
+      "span_bpb": 1.056263,
+      "doc_bpb": 0.698788,
+      "doc954_bpb": 0.707462,
+      "macro5_bpb": 0.681696,
+      "domains_bpb": {
+        "code": 0.500977,
+        "essays": 0.853315,
+        "news": 0.708174,
+        "papers": 0.711668,
+        "reference": 0.634347
+      },
+      "elie_bpb": null
+    }
+  ]
+}
