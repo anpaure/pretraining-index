@@ -1236,9 +1236,10 @@ def build() -> None:
       <a href="#how-calculated">Method</a>
       <a href="#ledger">Ledger</a>
       <a href="./writeup.html">Writeup</a>
+      <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener">GitHub</a>
     </div>
     <div class="nav-r">
-      <span class="upd">26 Nov 2026</span>
+      <span class="upd">27 Nov 2026</span>
       <button class="theme-btn" id="themeBtn" title="Toggle light / dark theme" aria-label="Toggle theme">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/>
@@ -1255,6 +1256,7 @@ def build() -> None:
       Black-box 8-choice continuation-ranking benchmark across <b>{n_items} post-cutoff Nov-2026 items</b> ({n_unique_urls} source URLs, 5 domains) with 24B neutral decoys—scored by pairwise rank <b>AUC</b> and calibrated via Thurstone <i>d&prime;</i> onto log-BPB.
     </p>
     <div class="hero-links">
+      <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener">GitHub repository &amp; raw traces &rarr;</a>
       <a href="./writeup.html">Read the technical writeup &rarr;</a>
       <a href="#how-calculated">How is this calculated? &rarr;</a>
       <a href="#does-it-hold-up">Does this hold up against other evals? &rarr;</a>
