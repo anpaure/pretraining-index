@@ -857,12 +857,12 @@ def build() -> None:
   }}
   .nav-mob a:hover {{ color: var(--ink); background: var(--row-hover); }}
   .upd {{ font: 400 11.5px/1 var(--mono); color: var(--faint); white-space: nowrap; }}
-  @media (max-width: 1060px) {{ .upd {{ display: none; }} }}
-  @media (max-width: 960px) {{
+  @media (max-width: 1120px) {{ .upd {{ display: none; }} }}
+  @media (max-width: 1040px) {{
     .nav-inner {{ gap: 12px; }}
     .nav-links a {{ font-size: 12.5px; padding: 5px 7px; }}
   }}
-  @media (max-width: 860px) {{
+  @media (max-width: 960px) {{
     .nav-links {{ display: none; }}
     .nav-mob {{ display: inline-flex; }}
   }}
@@ -1160,7 +1160,7 @@ def build() -> None:
   @media (max-width: 640px) {{
     .nav {{ height: 52px; }}
     .nav-inner {{ padding: 0 14px; gap: 10px; }}
-    .wordmark {{ font-size: 18px; }}
+    .wordmark {{ font-size: 15.5px; }}
     .wrap {{ padding: 0 14px 60px; }}
     .hero {{ padding: 24px 0 20px; }}
     .hero h1 {{ font-size: clamp(29px, 8.2vw, 38px); margin-bottom: 10px; }}
@@ -1321,7 +1321,7 @@ def build() -> None:
 <body>
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="wordmark">Anpaure (ANPI)</a>
+    <a href="#" class="wordmark">Anpaure Pretraining Index</a>
     <div class="nav-links">
       <a href="#leaderboard">Leaderboard</a>
       <a href="#oai-perplexity">Perplexity</a>
@@ -1353,9 +1353,9 @@ def build() -> None:
 
 <main class="wrap">
   <header class="hero">
-    <h1>Anpaure Pretraining Index (ANPI)</h1>
+    <h1>Anpaure Pretraining Index</h1>
     <p class="lead">
-      Black-box 8-choice continuation-ranking benchmark across <b>{n_items} post-cutoff Nov-2026 items</b> ({n_unique_urls} source URLs, 5 domains) with 24B neutral decoys—scored by pairwise rank <b>AUC</b> and calibrated via Thurstone <i>d&prime;</i> onto log-BPB.
+      <b>ANPI</b> — black-box 8-choice continuation-ranking benchmark across <b>{n_items} post-cutoff Nov-2026 items</b> ({n_unique_urls} source URLs, 5 domains) with 24B neutral decoys—scored by pairwise rank <b>AUC</b> and calibrated via Thurstone <i>d&prime;</i> onto log-BPB.
     </p>
     <div class="hero-links">
       <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener">GitHub repository &amp; raw traces &rarr;</a>
@@ -1537,8 +1537,8 @@ def build() -> None:
         <svg id="scatter" viewBox="0 0 600 360"></svg>
         <div class="prose-side">
           <p><strong>Why Pairwise AUC + Thurstone <i>d&prime;</i> onto log-BPB.</strong> Across all {sum(d['n_ok'] for d in eval_data.values()):,} real rank rows, candidate scores follow <b>Thurstone Case V</b> (Gaussian sums of token log-probs, <code>6.8&times;</code> lower KL than Plackett-Luce), and tail ranks <code>r &ge; 2</code> retain partial correlation <code>+0.73&ndash;+0.76</code> with true BPB after controlling for Top-1. Combining Thurstone <code>d&prime; = &radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC)</code> with Ruan et al. (NeurIPS 2024) yields the 2-parameter law <code>ln(BPB) = a &minus; b&middot;d&prime;</code>—achieving <code>r = {cal_oai['r']:+.3f}, &rho; = {cal_oai['rho']:+.3f}, LOO = {cal_oai['loo_pct']:.2f}%</code> across all {len(oai_mids)} published OpenAI models and <code>r = {cal_unch['r']:+.3f}, LOO = {cal_unch['loo_pct']:.2f}%, LOLO = {cal_unch['lolo_pct']:.2f}%</code> across Elie’s {len(anchors)} open models ({cal_unch['n_labs']} labs), with zero statistically significant ceiling curvature across 4 independent datasets.</p>
-          <p><strong>Extrapolation above anchor ranges.</strong> On OpenAI’s ruler, <code>Claude Fable 5.2</code> (<code>0.8550</code>) and <code>Gemini 4 Carbon</code> (<code>0.8482</code>) exceed top anchor <code>GPT-6.2 Astra</code> (<code>0.8444</code>); on Elie’s open ruler, the top closed tier exceeds <code>Kimi K3.1 Pro</code> (<code>0.7518</code>). Every model outside its anchor span is flagged <code>EXTRAP</code> with exact exponentiated Student-<i>t</i> intervals.</p>
-          <p><strong>100% Zero-CoT enforcement &amp; template-bypass rule.</strong> All {len(eval_data) - len(TEMPLATE_BYPASS_MODELS)} native-chat endpoints answered at <code>0</code> reasoning tokens on standard <code>/api/v1/chat/completions</code>. Mandatory-reasoning endpoints that reject zero-CoT on chat APIs (<code>Muse Spark Open</code>, <code>Inkling 2 Small</code>, <code>Reflection Beam 1.0</code>, <code>gpt-oss-120b/20b</code>) were evaluated via raw <code>/api/v1/completions</code> zero-think templates and remain visible here (badged <code>BYPASS</code>), but are excluded from the {len(anchors)}-anchor OLS ruler by default (cold-start bypass tax; blind holdouts <code>+3.5% / +5.9% / +6.4%</code>; {len(all_elie_open)}-anchor sensitivity LOLO = <code>{cal_unch_all['lolo_pct']:.2f}%</code>).</p>
+          <p><strong>Extrapolation above anchor ranges.</strong> On OpenAI’s ruler, <code>Claude Fable 5.2</code> (<code>0.8552</code>) and <code>Gemini 4 Carbon</code> (<code>0.8482</code>) exceed top anchor <code>GPT-6.2 Astra</code> (<code>0.8444</code>); on Elie’s open ruler, the top closed tier exceeds <code>Kimi K3.1 Pro</code> (<code>0.7520</code>). Every model outside its anchor span is flagged <code>EXTRAP</code> with exact exponentiated Student-<i>t</i> intervals.</p>
+          <p><strong>100% Zero-CoT enforcement &amp; template-bypass rule.</strong> All {len(eval_data) - len(TEMPLATE_BYPASS_MODELS)} native-chat endpoints answered at <code>0</code> reasoning tokens on standard <code>/api/v1/chat/completions</code>. Mandatory-reasoning endpoints that reject zero-CoT on chat APIs (<code>Qwen3.8 2.4T-A95B</code>, <code>Muse Spark Open</code>, <code>Inkling 2 Small</code>, <code>Reflection Beam 1.0</code>, <code>gpt-oss-120b/20b</code>) were evaluated via raw <code>/api/v1/completions</code> zero-think templates and remain visible here (badged <code>BYPASS</code>), but are excluded from the {len(anchors)}-anchor OLS ruler by default (cold-start bypass tax; blind holdouts <code>+3.5% / +5.9% / +6.4%</code>; {len(all_elie_open)}-anchor sensitivity LOLO = <code>{cal_unch_all['lolo_pct']:.2f}%</code>).</p>
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    margin: 0; min-height: 100vh;
+    margin: 0; min-height: 100vh; overflow-x: clip;
     background-color: var(--ground); background-image: var(--grain);
     color: var(--ink); font: 15.5px/1.68 var(--sans);
     -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
@@ -56,27 +56,27 @@
     border-bottom: 1px solid var(--line);
   }
   .nav-inner {
-    max-width: 860px; height: 100%; margin: 0 auto; padding: 0 clamp(18px, 3vw, 32px);
-    display: flex; align-items: center; gap: 18px;
+    max-width: 860px; height: 100%; margin: 0 auto; padding: 0 clamp(14px, 3vw, 32px);
+    display: flex; align-items: center; gap: 14px;
   }
   .wordmark { font: 500 19px/1 var(--serif); border: 0; white-space: nowrap; }
   .nav-links { display: flex; gap: 4px; }
-  .nav-links a { font-size: 13px; color: var(--ink-2); padding: 5px 9px; border-radius: 7px; border: 0; }
+  .nav-links a { font-size: 13px; color: var(--ink-2); padding: 5px 9px; border-radius: 7px; border: 0; white-space: nowrap; }
   .nav-links a:hover, .nav-links a.active { color: var(--ink); background: var(--row-hover); }
-  .nav-r { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-  .upd { font: 400 11.5px/1 var(--mono); color: var(--faint); }
+  .nav-r { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .upd { font: 400 11.5px/1 var(--mono); color: var(--faint); white-space: nowrap; }
   .theme-btn {
     width: 30px; height: 30px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-2);
     display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
   }
   .theme-btn:hover { background: var(--row-hover); color: var(--ink); }
 
-  article { max-width: 860px; margin: 0 auto; padding: 48px clamp(18px, 3vw, 32px) 92px; }
+  article { max-width: 860px; margin: 0 auto; padding: 48px clamp(16px, 3vw, 32px) 92px; }
   .kicker { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.09em; color: var(--faint); margin-bottom: 12px; }
-  h1 { font: 400 clamp(36px, 5vw, 50px)/1.07 var(--serif); letter-spacing: -0.02em; margin: 0 0 16px; }
-  .subtitle { font: 400 17.5px/1.55 var(--sans); color: var(--ink-2); margin: 0 0 22px; }
+  h1 { font: 400 clamp(32px, 5vw, 50px)/1.07 var(--serif); letter-spacing: -0.02em; margin: 0 0 16px; }
+  .subtitle { font: 400 17px/1.55 var(--sans); color: var(--ink-2); margin: 0 0 22px; }
   .meta-bar {
-    display: flex; flex-wrap: wrap; gap: 18px; align-items: center;
+    display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center;
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
     padding: 12px 0; margin-bottom: 36px; font: 400 12.5px/1.3 var(--mono); color: var(--faint);
   }
@@ -86,7 +86,7 @@
   p strong, li strong { color: var(--ink); font-weight: 500; }
   ul, ol { margin: 0 0 18px; padding-left: 22px; color: var(--ink-2); }
   li { margin-bottom: 8px; }
-  code { font: 400 12.5px/1.3 var(--mono); background: var(--subtle); padding: 1.5px 5px; border-radius: 4px; color: var(--ink); }
+  code { font: 400 12.5px/1.3 var(--mono); background: var(--subtle); padding: 1.5px 5px; border-radius: 4px; color: var(--ink); overflow-wrap: anywhere; }
   pre {
     background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
     padding: 16px 18px; overflow-x: auto; font: 400 12.5px/1.55 var(--mono); margin: 18px 0 22px;
@@ -104,18 +104,18 @@
   }
   .callout strong { color: var(--ink); }
 
-  .tbl-wrap { overflow-x: auto; margin: 20px 0 26px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+  .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0 26px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
   table { width: 100%; border-collapse: collapse; font: 400 12.5px/1.42 var(--mono); font-variant-numeric: tabular-nums; }
   th {
     text-align: left; padding: 9px 8px; font: 500 10.5px/1.2 var(--mono);
     letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint);
     border-bottom: 1px solid var(--line-strong); white-space: nowrap;
   }
-  td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--ink-2); }
+  td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--ink-2); white-space: nowrap; }
   tr:last-child td { border-bottom: 0; }
   tbody tr:hover { background: var(--row-hover); }
   td.num, th.num { text-align: right; }
-  td.lbl { font: 400 14.5px/1.3 var(--sans); color: var(--ink); }
+  td.lbl { font: 400 14px/1.3 var(--sans); color: var(--ink); white-space: normal; min-width: 150px; }
   td b { color: var(--ink); font-weight: 600; }
   .win { color: #15803d; font-weight: 600; }
   .bad { color: #b84438; font-weight: 500; }
@@ -124,24 +124,33 @@
   .dim { color: var(--faint); font-size: 11.5px; }
 
   footer {
-    max-width: 860px; margin: 0 auto; padding: 20px clamp(18px, 3vw, 32px) 54px;
+    max-width: 860px; margin: 0 auto; padding: 20px clamp(16px, 3vw, 32px) 54px;
     border-top: 1px solid var(--line); font: 400 12px/1.6 var(--mono); color: var(--faint);
     display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
   }
-  @media (max-width: 640px) { .upd { display: none; } }
+  @media (max-width: 680px) {
+    .upd { display: none; }
+    .nav-inner { gap: 8px; }
+    .wordmark { font-size: 15.5px; }
+    .nav-links { gap: 2px; }
+    .nav-links a { font-size: 12px; padding: 4px 6px; }
+    .nav-links a.active, .nav-links a.gh-nav { display: none; }
+    article { padding-top: 32px; }
+    h2 { font-size: 25px; }
+  }
 </style>
 </head>
 <body>
 <nav class="nav">
   <div class="nav-inner">
-    <a href="./index.html" class="wordmark">Anpaure (ANPI)</a>
+    <a href="./index.html" class="wordmark">Anpaure Pretraining Index</a>
     <div class="nav-links">
       <a href="./index.html">Leaderboard</a>
-      <a href="./comparison.html">Elie &amp; BPBench Diff</a>
       <a href="./writeup.html" class="active">Writeup</a>
+      <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener" class="gh-nav">GitHub</a>
     </div>
     <div class="nav-r">
-      <span class="upd">26 Nov 2026</span>
+      <span class="upd">27 Nov 2026</span>
       <button class="theme-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/>
@@ -155,20 +164,20 @@
   <div class="kicker">Technical Report &middot; Anpaure Pretraining Index (ANPI) v1</div>
   <h1>Measuring Pretraining Perplexity Through a Black Box</h1>
   <p class="subtitle">
-    A zero-logprob, strictly zero-CoT continuation-ranking benchmark across 954 post-cutoff Nov-2026 items—placing closed frontier APIs alongside open checkpoints with 0.85% within-OpenAI LOO and 3.46% cross-lab LOLO across 7 independent open labs.
+    A zero-logprob, strictly zero-CoT continuation-ranking benchmark across 954 post-cutoff Nov-2026 items—placing 105 live open and closed endpoints from 18 labs on one scale with 0.85% within-OpenAI LOO and 3.41% cross-lab LOLO across 7 independent open labs.
   </p>
   <div class="meta-bar">
-    <span>26 Nov 2026</span>
-    <span>46 live endpoints &middot; 0 / 43,417 CoT items</span>
-    <span>Total eval cost: $46.40</span>
-    <a href="https://github.com/anpaure/pretraining-index" target="_blank">GitHub repo &rarr;</a>
+    <span>27 Nov 2026</span>
+    <span>105 live endpoints (18 labs) &middot; 0 / 99,921 CoT items</span>
+    <span>Total eval cost: $119.42</span>
+    <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener">GitHub repo &rarr;</a>
   </div>
 
   <p>
-    On November 22, 2026, OpenAI’s chief scientist Jakub Pachocki argued in <a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank"><em>Perplexity and Intelligence</em></a> that base-model log-perplexity is the cleanest single-number measure of pretraining progress—but released no public dataset. Two days later, <a href="https://www.mercor.com/blog/a-simple-proxy-for-perplexity/" target="_blank">Mercor</a> proposed averaging six public multiple-choice exams as a proxy, showing a <code>&minus;0.98</code> Spearman correlation on nine OpenAI models and immediately raising the key question: <em>does a downstream exam average actually measure pretraining compression across labs, or mostly post-training and time trends?</em>
+    On November 22, 2026, OpenAI’s chief scientist Jakub Pachocki argued in <a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener"><em>Perplexity and Intelligence</em></a> that base-model log-perplexity is the cleanest single-number measure of pretraining progress—but released no public dataset. Two days later, <a href="https://www.mercor.com/blog/a-simple-proxy-for-perplexity/" target="_blank" rel="noopener">Mercor</a> proposed averaging six public multiple-choice exams as a proxy, showing a <code>&minus;0.98</code> Spearman correlation on nine OpenAI models and immediately raising the key question: <em>does a downstream exam average actually measure pretraining compression across labs, or mostly post-training and time trends?</em>
   </p>
   <p>
-    We built the <strong>Anpaure Pretraining Index</strong>: a direct black-box <strong>8-choice continuation-ranking</strong> evaluation over <code>N = 954</code> provably post-cutoff November 2026 items (<code>908</code> unique source URLs, 5 domains) against neutral 24B cloud decoys, audited at strict <code>0 / 43,417</code> reasoning tokens across <strong>46 live endpoints</strong>. Scoring models by zero-fit <strong>Pairwise Rank AUC</strong> and calibrating Thurstone Case V discriminability <code>d&prime; = &radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC)</code> onto <code>ln(BPB)</code> outperforms Mercor, <code>SimpleQA-Verified</code>, and <code>AA-Omniscience-Accuracy</code> on predictive error across both OpenAI and cross-lab open ground truth:
+    We built the <strong>Anpaure Pretraining Index (ANPI)</strong>: a direct black-box <strong>8-choice continuation-ranking</strong> evaluation over <code>N = 954</code> provably post-cutoff November 2026 items (<code>908</code> unique source URLs, 5 domains) against neutral 24B cloud decoys, audited at strict <code>0 / 99,921</code> reasoning tokens across <strong>105 live endpoints from 18 labs</strong> (68 closed frontier endpoints + 37 open-weight endpoints, alongside 11 Elie-only open checkpoints for 116 ranked models total). Scoring models by zero-fit <strong>Pairwise Rank AUC</strong> and calibrating Thurstone Case V discriminability <code>d&prime; = &radic;2&thinsp;&Phi;<sup>&minus;1</sup>(AUC)</code> onto <code>ln(BPB)</code> outperforms Mercor, <code>SimpleQA-Verified</code>, and <code>AA-Omniscience-Accuracy</code> on predictive error across both OpenAI and cross-lab open ground truth:
   </p>
 
   <div class="tbl-wrap">
@@ -176,7 +185,7 @@
       <thead>
         <tr>
           <th>Ground-Truth Test</th>
-          <th class="num">Anpaure (0-CoT AUC)</th>
+          <th class="num">ANPI (0-CoT AUC)</th>
           <th class="num">AA-Omniscience-Acc</th>
           <th class="num">SimpleQA-Verified</th>
           <th class="num">Mercor (6-MCQ)</th>
@@ -185,7 +194,7 @@
       <tbody>
         <tr>
           <td class="lbl">OpenAI 10-model <code>r / &rho;</code></td>
-          <td class="num win">+0.990 / +0.997</td>
+          <td class="num win">+0.990 / +0.988</td>
           <td class="num">+0.880 / +0.997</td>
           <td class="num">+0.913 / +0.900</td>
           <td class="num">+0.852 / +0.930</td>
@@ -219,15 +228,15 @@
           <td class="num bad">6.89% <span class="dim">(69.1 vs 48.1)</span></td>
         </tr>
         <tr>
-          <td class="lbl">Elie cross-lab <span class="dim">(13 shared native-chat, 6 labs)</span></td>
-          <td class="num win">LOLO 3.70% <span class="dim">(14/7: 3.46%)</span></td>
-          <td class="num">LOLO 4.72% <span class="dim">(&rho; +0.901)</span></td>
+          <td class="lbl">Elie cross-lab <span class="dim">(14 native-chat, 7 labs)</span></td>
+          <td class="num win">LOLO 3.41% <span class="dim">(LOO 2.87%)</span></td>
+          <td class="num">LOLO 4.72% <span class="dim">(13 shared)</span></td>
           <td class="num dim">only 6 shared</td>
           <td class="num dim">untested</td>
         </tr>
         <tr>
           <td class="lbl">CoT / effort purity</td>
-          <td class="num win">Strict 0 / 43,417</td>
+          <td class="num win">Strict 0 / 99,921</td>
           <td class="num">+8&ndash;10 pt drift</td>
           <td class="num">Leaks CoT</td>
           <td class="num bad">Leaks CoT</td>
@@ -252,18 +261,19 @@
 
   <h2>1. Why Direct Logprobs and MCQ Shortcuts Both Break</h2>
   <p>
-    On open weights, exact teacher-forced bits-per-byte (BPB) is straightforward—<a href="https://eliebak.com/pretraining-index" target="_blank">Elie Bakouch’s Pre-training Index</a> measures it cleanly across 27 open checkpoints. On closed frontier APIs, direct logprob evaluation fails twice over: first, Anthropic and Google omit logprobs completely and OpenAI disables <code>echo=true</code> prompt-token logprobs; second, post-training RL sharpening collapses raw next-token logprob BPB. In our early logprob experiments (<code>pplx_protocol_a/</code>), raw API BPB correlated <strong>negatively</strong> (<code>r = &minus;0.136</code>) with true pretraining quality across RL-tuned endpoints because overconfident wrong tokens blow up <code>&minus;log p</code>.
+    On open weights, exact teacher-forced bits-per-byte (BPB) is straightforward—<a href="https://eliebak.com/pretraining-index" target="_blank" rel="noopener">Elie Bakouch’s Pre-training Index</a> measures it cleanly across 27 open checkpoints. On closed frontier APIs, direct logprob evaluation fails twice over: first, Anthropic and Google omit logprobs completely and OpenAI disables <code>echo=true</code> prompt-token logprobs; second, post-training RL sharpening collapses raw next-token logprob BPB. In our early logprob experiments (<code>pplx_protocol_a/</code>), raw API BPB correlated <strong>negatively</strong> (<code>r = &minus;0.136</code>) with true pretraining quality across RL-tuned endpoints because overconfident wrong tokens blow up <code>&minus;log p</code>.
   </p>
   <p>
     Downstream exam averages avoid logprobs but run into three opposite problems: <strong>saturation</strong> (<code>Claude Fable 5.2</code> already hits <code>90.4%</code> on Mercor and <code>94.0%</code> on <code>SimpleQA-Verified</code>), <strong>reasoning leakage</strong> (Mercor’s <code>o3</code> scores <code>69.1%</code> vs. identical-base <code>GPT-4.1</code> at <code>48.1%</code>), and <strong>untested cross-lab validity</strong>.
   </p>
 
-  <h2>2. Method: Rank-Coded Continuation Ranking (Anpaure v1)</h2>
+  <h2>2. Method: Rank-Coded Continuation Ranking (ANPI v1)</h2>
   <ol>
     <li><strong>Provably post-cutoff 5-domain corpus (<code>N = 954</code>, <code>908</code> unique URLs):</strong> Every source document carries a November 2026 timestamp across News/Speeches (<code>199</code> Hansard &amp; BBC), Research Papers (<code>198</code> arXiv &amp; bioRxiv), Essays (<code>198</code> Guardian &amp; LessWrong), newly created Wikipedia articles (<code>197</code>), and newly added single-line code blocks (<code>162</code> across 116 distinct Nov-2026 commits in CPython, Linux, Postgres, Go, LLVM, PyTorch, ClickHouse, FFmpeg, etc.).</li>
-    <li><strong>Neutral 24B cloud decoys (<code>K = 8</code>):</strong> At each cut point, we keep the authentic next snippet (~6 prose words or ~36 bytes of code) and sample 7 distinct <code>T = 1.0</code> raw continuations from <code>mistral-small-24b-instruct-2501</code> via <code>/api/v1/completions</code> (fixing the trailing-space BPE boundary bug), with zero model-family overlap with any ranked frontier model or anchor.</li>
+    <li><strong>Neutral 24B cloud decoys (<code>K = 8</code>):</strong> At each cut point, we keep the authentic next snippet (~6 prose words or ~36 bytes of code) and sample 7 distinct <code>T = 1.0</code> raw continuations from <code>mistral-small-24b-instruct-2501</code> via <code>/api/v1/completions</code> (fixing the trailing-space BPE boundary bug), with zero model-family overlap with any calibration anchor.</li>
     <li><strong>Strict 8-letter permutation &amp; RL sharpening nuance:</strong> Each API receives the shuffled candidates <code>A..H</code> and must return an exact 8-distinct-letter permutation (<code>C,A,F,B,H,D,E,G</code>). Global monotone sharpening preserves the ordering of candidate likelihoods <code>p(y|x)</code>—though note it does <em>not</em> preserve likelihood-ratio ordering <code>p(y|x)/q(y|x)</code> when <code>q</code> is nonuniform, and rankings alone require empirical anchor calibration to map onto absolute BPB.</li>
-    <li><strong>Strict Zero-CoT across all 46 live endpoints (<code>0 / 43,417</code> items):</strong> Reasoning tokens are suppressed via explicit no-scratchpad prompting (verified zero shift on a 100-item <code>Gemini 4 Argon</code> control, <code>p = 0.85</code>), plus forced <code>tool_choice</code> on <code>o3</code>, <code>GLM-5.3 Flash</code>, and <code>Inkling</code>.</li>
+    <li><strong>Strict Zero-CoT across all 105 live endpoints (<code>0 / 99,921</code> items):</strong> Reasoning tokens are suppressed across every provider and verified with A/B zero-bias controls: explicit no-scratchpad prompting (100-item <code>Gemini 4 Argon</code> control, <code>p = 0.85</code>); forced <code>tool_choice</code> on <code>o3</code>, <code>GLM-5.3 Flash</code>, and <code>Inkling</code>; 6-shot + <code>effort: minimal</code> on <code>Grok 4.7</code> (100-item <code>Grok 4.20</code> A/B <code>z = &minus;0.85</code>); <code>named_tool</code> + empty thinking on <code>Grok 4.5 / 4.6</code> (<code>z = &minus;1.06</code>); <code>{"order":"</code> assistant prefill on <code>Gemini 2.5 Pro</code> &amp; <code>Step 5 Preview</code> (<code>Gemini 2.5 Flash</code> A/B <code>z = &minus;1.18</code>, <code>0/4</code> hard-math litmus); constant empty-ATEM header on <code>Meta Muse Wonder</code> (Vertex AI, byte-identical to <code>"Reply OK"</code>); and raw <code>/completions</code> zero-think templates on 6 mandatory-reasoning open endpoints (badged <code>BYPASS</code>).</li>
+    <li><strong>Automated 15-metric trace-health verification:</strong> Every live model is checked by <code>tests/test_trace_health.py</code> and Section 7 of <code>audit_v1.py</code> for slot primacy/recency bias, permutation diversity, prompt-example echo, single-domain collapse, and tail-rank inversion—with all top-25 frontier models 100% pathology-free.</li>
   </ol>
 
   <h2>3. Why Pairwise AUC + Thurstone <em>d&prime;</em> &rarr; ln(BPB)</h2>
@@ -273,7 +283,7 @@
 
   <h3>A. Real 8-way rank histograms follow Thurstone Case V (6.8&times; better than Plackett-Luce)</h3>
   <p>
-    Because each candidate snippet spans ~8&ndash;12 tokens, its log-probability <code>S<sub>m</sub>(y) = &Sigma; log p<sub>m</sub>(y<sub>t</sub> | x, y<sub>&lt;t</sub>)</code> is a sum of token log-probs—<strong>Gaussian by the Central Limit Theorem</strong>, not Gumbel. Matching a single number (<code>AUC</code>) per model and predicting its full 8-bin rank histogram <code>P(r = 1..8)</code> across all 41,510+ real rank rows gives mean <code>KL = 0.0057</code> nats under <strong>Thurstone Case V</strong> vs. <code>0.0391</code> nats under <strong>Plackett-Luce</strong> (<strong>6.8&times; better fit</strong>). Under Thurstone Case V, any global temperature scaling <code>&beta;<sub>m</sub></code> cancels identically in Signal Detection Theory’s discriminability:
+    Because each candidate snippet spans ~8&ndash;12 tokens, its log-probability <code>S<sub>m</sub>(y) = &Sigma; log p<sub>m</sub>(y<sub>t</sub> | x, y<sub>&lt;t</sub>)</code> is a sum of token log-probs—<strong>Gaussian by the Central Limit Theorem</strong>, not Gumbel. Matching a single number (<code>AUC</code>) per model and predicting its full 8-bin rank histogram <code>P(r = 1..8)</code> across real rank rows gives mean <code>KL = 0.0057</code> nats under <strong>Thurstone Case V</strong> vs. <code>0.0391</code> nats under <strong>Plackett-Luce</strong> (<strong>6.8&times; better fit</strong>). Under Thurstone Case V, any global temperature scaling <code>&beta;<sub>m</sub></code> cancels identically in Signal Detection Theory’s discriminability:
   </p>
   <div class="eq">
     AUC<sub>m</sub> = (8 &minus; r&#772;<sub>m</sub>) / 7 = P(S<sub>m</sub>(y<sub>true</sub>) &gt; S<sub>m</sub>(y<sub>decoy</sub>)), &nbsp;&nbsp;&nbsp; d&prime;<sub>m</sub> = &radic;2 &middot; &Phi;<sup>&minus;1</sup>(AUC<sub>m</sub>)
@@ -281,26 +291,26 @@
 
   <h3>B. Tail ranks (<code>r &ge; 2</code>) carry massive independent BPB signal</h3>
   <p>
-    Even after controlling for Top-1 accuracy, a model’s conditional mean rank among misses (<code>r &ge; 2</code>) retains a partial correlation of <strong><code>+0.730</code></strong> on <code>24B-OpenAI</code>, <strong><code>+0.761</code></strong> on <code>1B-Elie</code>, and <strong><code>+0.734</code></strong> on <code>1B-OpenAI</code> with true BPB. <code>MRR</code> puts ~75% of its variance on <code>r = 1</code> vs. <code>r &ge; 2</code>—and binary MCQ throws away ranks <code>2&ndash;8</code> entirely. Switching from <code>&minus;ln(MRR)</code> to pairwise <code>AUC</code> jumped our 10-model OpenAI Spearman correlation from <code>+0.891 &rarr; +0.997</code> and cut LOO error from <code>1.18% &rarr; 0.85%</code>.
+    Even after controlling for Top-1 accuracy, a model’s conditional mean rank among misses (<code>r &ge; 2</code>) retains a partial correlation of <strong><code>+0.730</code></strong> on <code>24B-OpenAI</code>, <strong><code>+0.761</code></strong> on <code>1B-Elie</code>, and <strong><code>+0.734</code></strong> on <code>1B-OpenAI</code> with true BPB. <code>MRR</code> puts ~75% of its variance on <code>r = 1</code> vs. <code>r &ge; 2</code>—and binary MCQ throws away ranks <code>2&ndash;8</code> entirely. Switching from <code>&minus;ln(MRR)</code> to pairwise <code>AUC</code> jumped our 10-model OpenAI Spearman correlation from <code>+0.891 &rarr; +0.988</code> and cut LOO error from <code>1.18% &rarr; 0.85%</code>.
   </p>
 
   <h3>C. Eliminating compute in Ruan et al. (NeurIPS 2024) gives exact log-BPB linearity</h3>
   <p>
-    In <a href="https://arxiv.org/abs/2405.10938" target="_blank">Ruan, Maddison &amp; Hashimoto (NeurIPS 2024)</a>, <code>ln(BPB) &prop; ln C</code> and <code>&sigma;<sup>&minus;1</sup>(Acc) &prop; ln C</code>. Eliminating compute yields the exact 2-parameter log-BPB law:
+    In <a href="https://arxiv.org/abs/2405.10938" target="_blank" rel="noopener">Ruan, Maddison &amp; Hashimoto (NeurIPS 2024)</a>, <code>ln(BPB) &prop; ln C</code> and <code>&sigma;<sup>&minus;1</sup>(Acc) &prop; ln C</code>. Eliminating compute yields the exact 2-parameter log-BPB law:
   </p>
   <div class="eq">
     ln(BPB<sub>m</sub>) = a + b &middot; (&minus;d&prime;<sub>m</sub>) = a &minus; b &middot; &radic;2 &middot; &Phi;<sup>&minus;1</sup>(AUC<sub>m</sub>)
   </div>
   <p>
-    Across all 4 independent datasets (including <code>OLMo-1B</code> where frontier models hit <code>AUC = 0.94</code>), <code>probit_auc [logY]</code> ranked <strong>#1 of 24 transforms</strong> (<code>3.11%</code> 4-dataset average vs. <code>4.02%</code> for <code>&minus;ln(MRR)</code>), showed <strong>zero statistically significant curvature on all 4 datasets</strong> (<code>mean |t<sub>2</sub>| = 1.09</code>), and beat every 3-parameter literature curve (<a href="https://arxiv.org/abs/2403.08540" target="_blank">Gadre et al. ICLR 2025</a> Eq. 5, Ruan floor-sigmoid, Chinchilla <code>E<sub>0</sub></code>), all of which overfitted on <code>n = 10&ndash;14</code> anchors.
+    Across all 4 independent datasets (including <code>OLMo-1B</code> where frontier models hit <code>AUC = 0.94</code>), <code>probit_auc [logY]</code> ranked <strong>#1 of 24 transforms</strong> (<code>3.11%</code> 4-dataset average vs. <code>4.02%</code> for <code>&minus;ln(MRR)</code>), showed <strong>zero statistically significant curvature on all 4 datasets</strong> (<code>mean |t<sub>2</sub>| = 1.09</code>), and beat every 3-parameter literature curve (<a href="https://arxiv.org/abs/2403.08540" target="_blank" rel="noopener">Gadre et al. ICLR 2025</a> Eq. 5, Ruan floor-sigmoid, Chinchilla <code>E<sub>0</sub></code>), all of which overfitted on <code>n = 10&ndash;14</code> anchors.
   </p>
 
   <h2>4. Validation &amp; Variance Decomposition</h2>
   <p>
-    On all <strong>10 published OpenAI Nov-22 base models</strong> (<code>GPT-4o &rarr; GPT-6.2 Astra</code>), Anpaure achieves <strong><code>r = +0.9896</code>, <code>&rho; = +0.9970</code>, and <code>0.85%</code> blind LOO error</strong> (max <code>1.79%</code>; blind upward extrapolation from <code>GPT-4o..5.6 Sol</code> to <code>GPT-6 / 6.2 Astra</code>: <strong><code>1.44%</code></strong>). Controlling for Epoch’s ECI across OpenAI models retains partial <code>r(Anpaure, log OAI | ECI) = +0.967</code>; on Elie’s open models, controlling for the AA Intelligence Index retains partial <code>r(Anpaure, Elie | AA Index) = +0.758</code> vs. <code>&minus;0.049</code> for AA Index.
+    On all <strong>10 published OpenAI Nov-22 base models</strong> (<code>GPT-4o &rarr; GPT-6.2 Astra</code>), ANPI achieves <strong><code>r = +0.9895</code>, <code>&rho; = +0.9879</code>, and <code>0.85%</code> blind LOO error</strong> (max <code>1.79%</code>; blind upward extrapolation from <code>GPT-4o..5.6 Sol</code> to <code>GPT-6 / 6.2 Astra</code>: <strong><code>1.44%</code></strong>). Controlling for Epoch’s ECI across OpenAI models retains partial <code>r(ANPI, log OAI | ECI) = +0.967</code>; on Elie’s open models, controlling for the AA Intelligence Index retains partial <code>r(ANPI, Elie | AA Index) = +0.758</code> vs. <code>&minus;0.049</code> for AA Index.
   </p>
   <p>
-    On <strong>Elie’s 14 native-chat open models across 7 labs</strong>, we obtain <strong><code>r = +0.9097</code>, <code>LOO = 2.91%</code>, and 7-lab Leave-One-Lab-Out <code>LOLO = 3.46%</code></strong>. Decomposing total residual variance reveals why within-lab error is `~0.9%` while cross-lab error floors around `~3.2%`:
+    On <strong>Elie’s 14 native-chat open models across 7 labs</strong>, we obtain <strong><code>r = +0.9113</code>, <code>&rho; = +0.8418</code>, <code>LOO = 2.87%</code>, and 7-lab Leave-One-Lab-Out <code>LOLO = 3.41%</code></strong> (including the 3 visible Elie <code>BYPASS</code> models across 9 labs: <code>LOO = 3.27%</code>, <code>LOLO = 3.65%</code>). Decomposing total residual variance reveals why within-lab error is <code>~0.9%</code> while cross-lab error floors around <code>~3.2%</code>:
   </p>
 
   <div class="tbl-wrap">
@@ -330,49 +340,54 @@
     Running an exact nonnegative SOCP and global <code>|I| &le; 3</code> subset search on Epoch AI’s Nov-25 database (<code>90</code> CSVs; <code>8</code> complete <code>11/11</code> OpenAI benchmarks) picks <b><code>ARC-AGI-2</code></b> alone (<code>r = +0.981</code> on OpenAI) or <code>0.74&middot;ARC-AGI-2 + 0.18&middot;SimpleQA + 0.08&middot;Chess</code> (<code>r = +0.989</code>). Cross-lab on Elie’s exact BPB, <b><code>ARC-AGI-2</code> collapses to <code>r = +0.088</code></b> (<code>&minus;0.210</code> at best effort), <code>Chess</code> and <code>AIME</code> go <b>negative</b> (<code>&minus;0.126</code>, <code>&minus;0.251</code>), and <code>GPQA</code> drops to <code>+0.221</code>. Worse, searching <code>|I| &le; 3</code> over 25&ndash;40 <em>pure Gaussian noise</em> columns on <code>n = 11</code> targets produces fake <code>r = +0.81&ndash;+0.88</code> (SOCP: <code>+0.991</code>).
   </div>
 
-  <h2>6. Headline Frontier Results</h2>
+  <h2>6. Headline Frontier Results (105 Live Models, 18 Labs)</h2>
   <div class="tbl-wrap">
     <table>
       <thead>
         <tr>
-          <th>#</th><th>Model</th><th>Lab</th><th class="num">AUC &uarr;</th><th class="num">MRR &uarr;</th><th class="num">Top-1</th><th class="num">OAI Scale &darr;</th><th class="num">Elie Unch &darr;</th>
+          <th>#</th><th>Model</th><th>Lab</th><th class="num">AUC &uarr;</th><th class="num">Top-1</th><th class="num">MRR &uarr;</th><th class="num">OAI Scale &darr;</th><th class="num">Elie Unch &darr;</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>1</td><td class="lbl"><b>Claude Fable 5.2</b></td><td>Anthropic</td><td class="num"><b>0.8550</b></td><td class="num">0.7350</td><td class="num">59.5%</td><td class="num">0.749 <span class="dim">EX</span></td><td class="num">0.391 <span class="dim">[0.344, 0.444]</span></td></tr>
-        <tr><td>2</td><td class="lbl"><b>Gemini 4 Carbon</b></td><td>Google</td><td class="num"><b>0.8482</b></td><td class="num">0.7300</td><td class="num">59.2%</td><td class="num">0.756 <span class="dim">EX</span></td><td class="num">0.396 <span class="dim">[0.350, 0.449]</span></td></tr>
-        <tr><td>3</td><td class="lbl"><b>GPT-6.2 Astra</b></td><td>OpenAI</td><td class="num"><b>0.8444</b></td><td class="num">0.7114</td><td class="num">55.8%</td><td class="num"><b>0.761</b> <span class="dim">PUB</span></td><td class="num">0.400 <span class="dim">[0.354, 0.451]</span></td></tr>
-        <tr><td>4</td><td class="lbl"><b>Gemini 4 Argon</b></td><td>Google</td><td class="num"><b>0.8433</b></td><td class="num">0.7208</td><td class="num">58.0%</td><td class="num">0.760</td><td class="num">0.400 <span class="dim">[0.354, 0.452]</span></td></tr>
-        <tr><td>5</td><td class="lbl"><b>Gemini 4 Neon</b></td><td>Google</td><td class="num"><b>0.8291</b></td><td class="num">0.7073</td><td class="num">56.1%</td><td class="num">0.772</td><td class="num">0.412 <span class="dim">[0.367, 0.463]</span></td></tr>
-        <tr><td>6</td><td class="lbl"><b>Claude Opus 5.5</b></td><td>Anthropic</td><td class="num"><b>0.8176</b></td><td class="num">0.6852</td><td class="num">52.9%</td><td class="num">0.782</td><td class="num">0.421 <span class="dim">[0.377, 0.471]</span></td></tr>
-        <tr><td>7</td><td class="lbl"><b>GPT-6 Astra</b></td><td>OpenAI</td><td class="num"><b>0.8169</b></td><td class="num">0.6823</td><td class="num">52.8%</td><td class="num"><b>0.783</b> <span class="dim">PUB</span></td><td class="num">0.422 <span class="dim">[0.378, 0.471]</span></td></tr>
-        <tr><td>8</td><td class="lbl"><b>GPT-6.1 Sol</b></td><td>OpenAI</td><td class="num"><b>0.8119</b></td><td class="num">0.6703</td><td class="num">50.6%</td><td class="num">0.786</td><td class="num">0.426 <span class="dim">[0.382, 0.475]</span></td></tr>
-        <tr><td>9</td><td class="lbl"><b>GPT-6.2 Sol</b></td><td>OpenAI</td><td class="num"><b>0.7901</b></td><td class="num">0.6410</td><td class="num">47.1%</td><td class="num">0.804</td><td class="num">0.443 <span class="dim">[0.400, 0.490]</span></td></tr>
-        <tr><td>10</td><td class="lbl"><b>GPT-6.1 Terra</b></td><td>OpenAI</td><td class="num"><b>0.7755</b></td><td class="num">0.6215</td><td class="num">44.5%</td><td class="num">0.815</td><td class="num">0.454 <span class="dim">[0.412, 0.500]</span></td></tr>
-        <tr><td>11</td><td class="lbl"><b>Kimi K3.1 Pro</b> <span class="dim">#1 Open</span></td><td>Moonshot</td><td class="num"><b>0.7518</b></td><td class="num">0.5875</td><td class="num">40.0%</td><td class="num">0.832</td><td class="num"><b>0.484</b> <span class="dim">EXACT</span></td></tr>
+        <tr><td>1</td><td class="lbl"><b>Claude Fable 5.2</b></td><td>Anthropic</td><td class="num"><b>0.8552</b></td><td class="num">59.5%</td><td class="num">0.7353</td><td class="num">0.749 <span class="dim">EX</span></td><td class="num">0.391 <span class="dim">[0.344, 0.443]</span></td></tr>
+        <tr><td>2</td><td class="lbl"><b>Gemini 4 Carbon</b></td><td>Google</td><td class="num"><b>0.8482</b></td><td class="num">59.2%</td><td class="num">0.7300</td><td class="num">0.756 <span class="dim">EX</span></td><td class="num">0.397 <span class="dim">[0.351, 0.449]</span></td></tr>
+        <tr><td>3</td><td class="lbl"><b>GPT-6.2 Astra</b></td><td>OpenAI</td><td class="num"><b>0.8444</b></td><td class="num">55.8%</td><td class="num">0.7114</td><td class="num"><b>0.761</b> <span class="dim">PUB</span></td><td class="num">0.400 <span class="dim">[0.354, 0.451]</span></td></tr>
+        <tr><td>4</td><td class="lbl"><b>Gemini 4 Argon</b></td><td>Google</td><td class="num"><b>0.8432</b></td><td class="num">58.0%</td><td class="num">0.7206</td><td class="num">0.760</td><td class="num">0.401 <span class="dim">[0.355, 0.452]</span></td></tr>
+        <tr><td>5</td><td class="lbl"><b>Gemini 4 Neon</b></td><td>Google</td><td class="num"><b>0.8291</b></td><td class="num">56.1%</td><td class="num">0.7073</td><td class="num">0.772</td><td class="num">0.412 <span class="dim">[0.367, 0.463]</span></td></tr>
+        <tr><td>6</td><td class="lbl"><b>Claude Opus 5.5</b></td><td>Anthropic</td><td class="num"><b>0.8180</b></td><td class="num">53.0%</td><td class="num">0.6859</td><td class="num">0.781</td><td class="num">0.421 <span class="dim">[0.377, 0.470]</span></td></tr>
+        <tr><td>7</td><td class="lbl"><b>GPT-6 Astra</b></td><td>OpenAI</td><td class="num"><b>0.8169</b></td><td class="num">52.8%</td><td class="num">0.6823</td><td class="num"><b>0.783</b> <span class="dim">PUB</span></td><td class="num">0.422 <span class="dim">[0.378, 0.471]</span></td></tr>
+        <tr><td>8</td><td class="lbl"><b>GPT-6.1 Sol</b></td><td>OpenAI</td><td class="num"><b>0.8119</b></td><td class="num">50.6%</td><td class="num">0.6703</td><td class="num">0.786</td><td class="num">0.426 <span class="dim">[0.382, 0.474]</span></td></tr>
+        <tr><td>9</td><td class="lbl"><b>Claude Fable 5.1</b></td><td>Anthropic</td><td class="num"><b>0.8080</b></td><td class="num">52.7%</td><td class="num">0.6770</td><td class="num">0.789</td><td class="num">0.429 <span class="dim">[0.386, 0.477]</span></td></tr>
+        <tr><td>10</td><td class="lbl"><b>Claude Fable 5</b></td><td>Anthropic</td><td class="num"><b>0.7929</b></td><td class="num">47.2%</td><td class="num">0.6444</td><td class="num">0.801</td><td class="num">0.441 <span class="dim">[0.398, 0.488]</span></td></tr>
+        <tr><td>11</td><td class="lbl"><b>Gemini 3.1 Pro</b></td><td>Google</td><td class="num"><b>0.7904</b></td><td class="num">46.2%</td><td class="num">0.6406</td><td class="num">0.803</td><td class="num">0.443 <span class="dim">[0.400, 0.489]</span></td></tr>
+        <tr><td>12</td><td class="lbl"><b>GPT-6.2 Sol</b></td><td>OpenAI</td><td class="num"><b>0.7893</b></td><td class="num">47.0%</td><td class="num">0.6398</td><td class="num">0.804</td><td class="num">0.443 <span class="dim">[0.401, 0.490]</span></td></tr>
+        <tr><td>23</td><td class="lbl"><b>Kimi K3.1 Pro</b> <span class="dim">#1 Open</span></td><td>Moonshot</td><td class="num"><b>0.7520</b></td><td class="num">39.9%</td><td class="num">0.5875</td><td class="num">0.832</td><td class="num"><b>0.484</b> <span class="dim">EXACT</span></td></tr>
       </tbody>
     </table>
   </div>
+  <p>
+    See the <a href="./index.html">interactive ANPI leaderboard</a> for all <strong>105 live models across 18 labs</strong> (including <code>Kimi K3.1 Pro</code>, <code>Kimi K3</code>, <code>Qwen3.8 2.4T-A95B</code>, <code>Muse Spark Open</code>, <code>MiMo-V2.6-Pro</code>, <code>GLM-5.3 Prime</code>, <code>Grok 4.7</code>, <code>Meta Muse Wonder</code>, <code>Mistral Large 3</code>, <code>Tencent Hy4</code>, <code>MiniMax M3</code>, and <code>Step 5 Preview</code>), the OpenAI Base Perplexity Scale graph, and interactive head-to-head cluster-bootstrapped significance testing.
+  </p>
 
   <h2>7. Honest Limitations &amp; Roadmap to v2</h2>
   <ul>
-    <li><strong>Code length shortcut (<code>22.7%</code> vs. <code>12.5%</code> chance):</strong> Symmetric <code>&plusmn;10</code>-char decoy filtering centered gold length in Code (prose domains sit at chance). Removing all 162 Code items preserves <code>r = +0.9986, &rho; = +0.9927</code> across all 46 models and the exact top-10 AUC set. Fixed in v2 by removing length filtering.</li>
-    <li><strong>Mandatory-reasoning zero-think tax (<code>BYPASS</code>):</strong> <code>Inkling 2 Small</code> and <code>Reflection Beam 1.0</code> reject 0-CoT on chat APIs and required raw <code>/completions</code> template bypasses—imposing a verified <code>&minus;0.071</code> AUC cold-start tax (<code>z = 2.07</code>). Kept visible on the leaderboard (badged <code>BYPASS</code>) and excluded from the 14-anchor native-chat OLS fit by default (<code>16</code>-anchor sensitivity LOLO = <code>3.94%</code>).</li>
-    <li><strong>Cross-lab rank order vs. <code>AA-Omniscience-Acc</code>:</strong> While Anpaure beats <code>AA-Omniscience-Acc</code> on predictive error across both OpenAI (<code>0.85%</code> vs. <code>3.27%</code>) and Elie (<code>3.70%</code> vs. <code>4.72%</code> LOLO on 13 shared native-chat models), <code>AA-Omniscience-Acc</code> slightly edges cross-lab Spearman <code>&rho;</code> (<code>+0.901</code> vs. <code>+0.835</code>).</li>
-    <li><strong>Anpaure v2 plan:</strong> Scale to <code>N = 2,500</code> (1 item per URL, cutting the 71% finite-N floor to <code>~0.55%</code>), replace single-model decoys with a 3&ndash;4 model <em>base</em>-checkpoint decoy ensemble, add fresh Fiction + multilingual slices (<code>ZH/DE/FR/JA</code>), and run rolling monthly snapshots.</li>
+    <li><strong>Code length shortcut (<code>22.7%</code> vs. <code>12.5%</code> chance):</strong> Symmetric <code>&plusmn;10</code>-char decoy filtering centered gold length in Code (prose domains sit at chance). Removing all 162 Code items preserves <code>r = +0.9979, &rho; = +0.9956</code> across all 105 live models, leaves the top-9 AUC set invariant, and leaves the top-9 MRR ordering 100% identical. Fixed in v2 by removing length filtering.</li>
+    <li><strong>Mandatory-reasoning zero-think tax (<code>BYPASS</code>):</strong> Six open endpoints (<code>Qwen3.8 2.4T-A95B</code>, <code>Muse Spark Open</code>, <code>Inkling 2 Small</code>, <code>Reflection Beam 1.0</code>, <code>gpt-oss-120b/20b</code>) reject 0-CoT on standard chat APIs and required raw <code>/completions</code> zero-think templates—imposing a verified <code>&minus;0.071</code> AUC cold-start tax (<code>z = 2.07</code>). Kept visible on the leaderboard (badged <code>BYPASS</code>) and excluded from the 14-anchor native-chat OLS fit by default (<code>17</code>-anchor sensitivity LOLO = <code>3.65%</code> across 9 labs).</li>
+    <li><strong>Cross-lab rank order vs. <code>AA-Omniscience-Acc</code>:</strong> While ANPI beats <code>AA-Omniscience-Acc</code> on predictive error across both OpenAI (<code>0.85%</code> vs. <code>3.27%</code>) and Elie (<code>3.41%</code> 14-model / <code>3.70%</code> 13-shared vs. <code>4.72%</code> LOLO), <code>AA-Omniscience-Acc</code> slightly edges cross-lab Spearman <code>&rho;</code> (<code>+0.901</code> vs. <code>+0.842</code>).</li>
+    <li><strong>ANPI v2 plan:</strong> Scale to <code>N = 2,500</code> (1 item per URL, cutting the 71% finite-N floor to <code>~0.55%</code>), replace single-model decoys with a 3&ndash;4 model <em>base</em>-checkpoint decoy ensemble, add fresh Fiction + multilingual slices (<code>ZH/DE/FR/JA</code>), and run rolling monthly snapshots.</li>
   </ul>
 
   <h2>8. Reproduce Everything Locally ($0)</h2>
   <pre><code>git clone https://github.com/anpaure/pretraining-index.git
 cd pretraining-index
 python3 build_anpaure_index_v1.py   # deterministic HTML + calibrated JSON rebuild
-python3 audit_v1.py                 # 43,417-row raw trace replay, parity, EXTRAP, LOLO, secret scan
+python3 audit_v1.py                 # 99,921-row raw trace replay, parity, EXTRAP, LOLO, health, secret scan
 python3 -m unittest discover -s tests -v</code></pre>
 </article>
 
 <footer>
-  <div>Anpaure Pretraining Index (ANPI) v1 &middot; <a href="./index.html">Leaderboard</a> &middot; <a href="./comparison.html">Elie &amp; BPBench Diff</a></div>
-  <div><a href="https://github.com/anpaure/pretraining-index/blob/main/WRITEUP.md" target="_blank">Markdown source (WRITEUP.md)</a></div>
+  <div>Anpaure Pretraining Index (ANPI) v1 &middot; <a href="./index.html">Leaderboard</a> &middot; <a href="https://github.com/anpaure/pretraining-index" target="_blank" rel="noopener">GitHub</a></div>
+  <div><a href="https://github.com/anpaure/pretraining-index/blob/main/WRITEUP.md" target="_blank" rel="noopener">Markdown source (WRITEUP.md)</a></div>
 </footer>
 
 <script>

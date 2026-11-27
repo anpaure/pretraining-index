@@ -1,11 +1,11 @@
 # Anpaure Pretraining Index (ANPI) & Black-Box Perplexity Harness
 
-**Live Interactive Leaderboard:** https://anpaure.github.io/pretraining-index/ · **Technical Writeup:** https://anpaure.github.io/pretraining-index/writeup.html (`WRITEUP.md`) · **Elie & BPBench Diff:** https://anpaure.github.io/pretraining-index/comparison.html
+**Live Interactive Leaderboard:** https://anpaure.github.io/pretraining-index/ · **Technical Writeup:** https://anpaure.github.io/pretraining-index/writeup.html (`WRITEUP.md`)
 
 A reproducible, pure black-box pretraining benchmark (**Rank-Coded Continuation Ranking / Rank-NCE**) covering **105 live strict zero-CoT models across 18 labs** (`37` open-weight models—including `14` native-chat anchors + `3` visible `BYPASS` models matched to [Elie Bakouch’s Pre-training Index](https://eliebak.com/pretraining-index) and `20` additional open endpoints such as `Qwen3.8 2.4T-A95B`, `MiMo-V2.6-Pro`, `Mistral Large 3`, `Llama 4 Maverick`, and `GLM-5.x`—and `68` closed frontier endpoints across OpenAI, Anthropic, Google, xAI, Meta, Qwen, Zhipu, Tencent, Mistral, MiniMax, and StepFun, including all 10 published OpenAI Nov-22 base-chart models) on **`N = 954` Nov-2026 post-cutoff items across 5 domains**, plus the earlier **Protocol A** Direct OpenAI Responses logprob BPB harness.
 
 - **Interactive Dashboard:** `anpaure_pretraining_index.html` (mirrored at `docs/index.html`)
-- **Elie & BPBench Visual Diff:** `runs/elie_vs_anpaure_comparison.html`
+- **Technical Writeup:** `WRITEUP.md` (rendered at `docs/writeup.html`)
 - **Independent Audit Verifier:** `python3 audit_v1.py` (`20/20` checks: byte-identical rebuild, `99,921`-row trace replay across `105` live models, strict permutation check, runner-dashboard parity, EXTRAP & log-BPB LOLO verification, 15-metric answer-pattern health check, secret scan)
 - **Unit Test Suite:** `python3 -m unittest discover -s tests -v` (`19/19` passing, including `tests/test_trace_health.py`)
 
@@ -17,20 +17,19 @@ Primary native zero-fit score is **Pairwise Rank AUC** ($\text{AUC} = (8 - \over
 
 | Model | Lab | Clean N | CoT Items (`r_tok>0`) | Native AUC (`↑`) | Native MRR (`↑`) | Top-1% | OpenAI Scale (`↓`) | Elie Unch BPB (`↓`) |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
-| **Claude Fable 5.2** | Anthropic | 953/954 | **`0`** (`0.0%`) | **0.8550** | 0.7350 | 59.5% | 0.749 *(extrap)* | 0.391 *(extrap)* |
-| **Gemini 4 Carbon** | Google | 954/954 | **`0`** (`0.0%`) | **0.8482** | 0.7300 | 59.2% | 0.756 *(extrap)* | 0.396 *(extrap)* |
+| **Claude Fable 5.2** | Anthropic | 954/954 | **`0`** (`0.0%`) | **0.8552** | 0.7353 | 59.5% | 0.749 *(extrap)* | 0.391 *(extrap)* |
+| **Gemini 4 Carbon** | Google | 954/954 | **`0`** (`0.0%`) | **0.8482** | 0.7300 | 59.2% | 0.756 *(extrap)* | 0.397 *(extrap)* |
 | **GPT-6.2 Astra** | OpenAI | 954/954 | **`0`** (`0.0%`) | **0.8444** | 0.7114 | 55.8% | **0.761** *(pub)* | 0.400 *(extrap)* |
-| **Gemini 4 Argon** | Google | 952/954 | **`0`** (`0.0%`) | **0.8433** | 0.7208 | 58.0% | 0.760 | 0.400 *(extrap)* |
+| **Gemini 4 Argon** | Google | 954/954 | **`0`** (`0.0%`) | **0.8432** | 0.7206 | 58.0% | 0.760 | 0.401 *(extrap)* |
 | **Gemini 4 Neon** | Google | 954/954 | **`0`** (`0.0%`) | **0.8291** | 0.7073 | 56.1% | 0.772 | 0.412 *(extrap)* |
-| **Claude Opus 5.5** | Anthropic | 951/954 | **`0`** (`0.0%`) | **0.8176** | 0.6852 | 52.9% | 0.782 | 0.421 *(extrap)* |
+| **Claude Opus 5.5** | Anthropic | 953/954 | **`0`** (`0.0%`) | **0.8180** | 0.6859 | 53.0% | 0.781 | 0.421 *(extrap)* |
 | **GPT-6 Astra** | OpenAI | 954/954 | **`0`** (`0.0%`) | **0.8169** | 0.6823 | 52.8% | **0.783** *(pub)* | 0.422 *(extrap)* |
 | **GPT-6.1 Sol** | OpenAI | 954/954 | **`0`** (`0.0%`) | **0.8119** | 0.6703 | 50.6% | 0.786 | 0.426 *(extrap)* |
-| **GPT-6.2 Sol** | OpenAI | 951/954 | **`0`** (`0.0%`) | **0.7901** | 0.6410 | 47.1% | 0.804 | 0.443 *(extrap)* |
-| **GPT-6.1 Terra** | OpenAI | 954/954 | **`0`** (`0.0%`) | **0.7755** | 0.6215 | 44.5% | 0.815 | 0.454 *(extrap)* |
-| **Kimi K3.1 Pro** *(#1 Open)* | Moonshot | 951/954 | **`0`** (`0.0%`) | **0.7518** | 0.5875 | 40.0% | 0.832 | **0.484** *(exact)* |
-| **GPT-6 Sol** | OpenAI | 954/954 | **`0`** (`0.0%`) | **0.7432** | 0.5798 | 39.5% | 0.839 | 0.478 |
-| **Claude Sonnet 5.5** | Anthropic | 930/954 | **`0`** (`0.0%`) | **0.7404** | 0.5724 | 38.1% | 0.841 | 0.480 |
-| **GPT-5.6 Sol** | OpenAI | 954/954 | **`0`** (`0.0%`) | **0.7397** | 0.5681 | 37.1% | **0.828** *(pub)* | 0.480 |
+| **Claude Fable 5.1** | Anthropic | 933/954 | **`0`** (`0.0%`) | **0.8080** | 0.6770 | 52.7% | 0.789 | 0.429 *(extrap)* |
+| **Claude Fable 5** | Anthropic | 940/954 | **`0`** (`0.0%`) | **0.7929** | 0.6444 | 47.2% | 0.801 | 0.441 *(extrap)* |
+| **Gemini 3.1 Pro** | Google | 950/954 | **`0`** (`0.0%`) | **0.7904** | 0.6406 | 46.2% | 0.803 | 0.443 *(extrap)* |
+| **GPT-6.2 Sol** | OpenAI | 954/954 | **`0`** (`0.0%`) | **0.7893** | 0.6398 | 47.0% | 0.804 | 0.443 *(extrap)* |
+| **Kimi K3.1 Pro** *(#1 Open)* | Moonshot | 954/954 | **`0`** (`0.0%`) | **0.7520** | 0.5875 | 39.9% | 0.832 | **0.484** *(exact)* |
 
 ### Key Source-URL Cluster-Bootstrapped Head-to-Head Comparisons *(All Zero-CoT, Pairwise AUC)*
 - **Claude Fable 5.2 vs. Claude Opus 5.5** (`n=951`, `905` clusters): `+0.0373` AUC `[+0.023, +0.051]`, `+6.73%` Top-1, **`p < 0.0001`**
