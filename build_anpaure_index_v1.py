@@ -1181,6 +1181,8 @@ def build() -> None:
     #accessBtns button {{ padding: 7px 8px; text-align: center; }}
     #scatterBtns {{ display: grid; grid-template-columns: 1fr 1fr; width: 100%; }}
     #scatterBtns button {{ padding: 7px 8px; font-size: 12px; text-align: center; }}
+    #oaiGraphBtns {{ display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }}
+    #oaiGraphBtns button {{ padding: 7px 6px; font-size: 11.5px; text-align: center; }}
     .lb-head {{
       display: flex; justify-content: space-between; align-items: center;
       padding: 8px 4px;
@@ -1318,6 +1320,7 @@ def build() -> None:
     <a href="#" class="wordmark">Anpaure Index</a>
     <div class="nav-links">
       <a href="#leaderboard">Leaderboard</a>
+      <a href="#oai-perplexity">Perplexity</a>
       <a href="#win-rate">Win rate</a>
       <a href="#head-to-head">Pairs</a>
       <a href="#calibration">Calibration</a>
@@ -1436,6 +1439,32 @@ def build() -> None:
       <span><span class="micro extrap">EXTRAP</span> outside anchor span</span>
       <span><span class="micro bypass">BYPASS</span> raw template 0-CoT (excluded from fit)</span>
       <span style="margin-left:auto;"><b>&#9644;</b> dark inner = URL-cluster sampling CI &nbsp;&middot;&nbsp; <b>&mdash;</b> outer = Student-<i>t</i> log-BPB prediction CI</span>
+    </div>
+  </section>
+
+  <!-- SECTION 1B: OpenAI Base Log-Perplexity Scale Graph -->
+  <section id="oai-perplexity">
+    <div class="chart-frame">
+      <div class="sec-head" style="margin-bottom:6px;">
+        <h2 class="sec-title">OpenAI base perplexity scale</h2>
+        <div class="seg" id="oaiGraphBtns">
+          <button data-oai-view="top36" class="active">Top 36 Frontier</button>
+          <button data-oai-view="anchors">OpenAI Anchors ({len(oai_mids)})</button>
+          <button data-oai-view="all">All {len(eval_data)} Live</button>
+        </div>
+      </div>
+      <p class="sec-sub">
+        Models mapped onto OpenAI&rsquo;s Nov-22 base log-perplexity scale (<strong>&darr; lower is better</strong>) via the 2-parameter Thurstone <i>d&prime;</i> &rarr; ln(BPB) ruler (<code>r = {cal_oai['r']:+.3f}</code>, <code>&rho; = {cal_oai['rho']:+.3f}</code>, <code>LOO = {cal_oai['loo_pct']:.2f}%</code> across {len(oai_mids)} published OpenAI anchors). Vertical bars show 95% Student-<i>t</i> prediction intervals; hollow rings mark <code>EXTRAP</code> models below top anchor <code>GPT-6.2 Astra</code> (<code>0.761</code>).
+      </p>
+      <div class="chart-legend">
+        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4.5" fill="var(--lab-openai)" stroke="var(--ink)" stroke-width="1.3"/></svg>Published OpenAI anchor</span>
+        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4" fill="var(--lab-google)"/></svg>Translated (within anchor span)</span>
+        <span class="chip"><svg width="12" height="12" viewBox="0 0 12 12" style="width:12px;height:12px;"><circle cx="6" cy="6" r="4" fill="var(--surface)" stroke="var(--lab-anthropic)" stroke-width="2"/></svg>Extrapolated below 0.761 (EXTRAP)</span>
+        <span style="color:var(--faint);">&darr; Lower log-perplexity = stronger base pretraining</span>
+      </div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <svg id="oaiPerpChart" viewBox="0 0 1100 450" style="min-width:720px;"></svg>
+      </div>
     </div>
   </section>
 
@@ -1657,6 +1686,7 @@ function iconFor(lab) {{
 let metric = "auc";
 let accessFilter = "all";
 let scatterMetric = "unch_bpb";
+let oaiGraphView = "top36";
 
 const CFG = {{
   auc: {{
@@ -1991,6 +2021,114 @@ function renderLeaderboard() {{
   </tr>`).join("");
 }}
 
+function renderOaiPerplexity() {{
+  const svg = document.getElementById("oaiPerpChart");
+  if (!svg) return;
+  const allLive = DATA.models
+    .filter(m => m.oai_bpb != null && m.n_ok != null)
+    .slice()
+    .sort((a, b) => a.oai_bpb - b.oai_bpb);
+  let list = allLive;
+  if (oaiGraphView === "anchors") {{
+    list = allLive.filter(m => m.oai_exact).slice().sort((a, b) => b.oai_bpb - a.oai_bpb);
+  }} else if (oaiGraphView === "top36") {{
+    // Top 36 frontier models (plus GPT-4o anchor at the right end if not already included)
+    list = allLive.slice(0, 36);
+  }}
+
+  const n = list.length;
+  const W = oaiGraphView === "anchors" ? 920 : Math.max(1160, n * 31 + 156);
+  const H = oaiGraphView === "anchors" ? 395 : 460;
+  const padL = 56, padR = 98, padT = 26, plotB = oaiGraphView === "anchors" ? 305 : 300;
+  svg.setAttribute("viewBox", `0 0 ${{W}} ${{H}}`);
+  svg.style.minWidth = oaiGraphView === "anchors" ? "520px" : `${{Math.max(760, n * 21)}}px`;
+
+  const vals = list.flatMap(m => m.oai_ci ? [m.oai_ci[0], m.oai_ci[1], m.oai_bpb] : [m.oai_bpb]);
+  const yMin = Math.floor(Math.min(0.735, ...vals) * 50) / 50;
+  const yMax = Math.ceil(Math.max(oaiGraphView === "top36" ? 0.895 : 0.96, ...vals) * 50) / 50;
+  // OpenAI chart convention: higher log-perplexity at TOP, lower (better!) at BOTTOM!
+  const sy = v => padT + ((yMax - v) / (yMax - yMin)) * (plotB - padT);
+  const step = (W - padL - padR) / Math.max(1, n);
+  const sx = i => padL + (i + 0.5) * step;
+
+  let parts = [];
+  // Shaded extrapolation zone below GPT-6.2 Astra (0.761)
+  const y62 = sy(0.761);
+  if (y62 < plotB) {{
+    parts.push(`<rect x="${{padL}}" y="${{y62}}" width="${{W - padL - padR}}" height="${{plotB - y62}}" fill="color-mix(in srgb, var(--lab-anthropic) 6%, transparent)"/>`);
+  }}
+
+  // Clean horizontal gridlines
+  const yTicks = [];
+  for (let v = Math.ceil(yMin * 25) / 25; v <= yMax + 1e-6; v += 0.04) yTicks.push(Number(v.toFixed(2)));
+  for (const tv of yTicks) {{
+    const y = sy(tv);
+    parts.push(`<line x1="${{padL}}" y1="${{y}}" x2="${{W - padR}}" y2="${{y}}" stroke="var(--line)" stroke-dasharray="2,3"/>`);
+    parts.push(`<text x="${{padL - 8}}" y="${{y + 3.5}}" text-anchor="end" font-family="var(--mono)" font-size="10.5" fill="var(--faint)">${{tv.toFixed(2)}}</text>`);
+  }}
+
+  // Published OpenAI landmark lines on right edge
+  const refs = [
+    {{ v: 0.761, lbl: "6.2 Astra 0.761" }},
+    {{ v: 0.783, lbl: "6 Astra 0.783" }},
+    {{ v: 0.828, lbl: "5.6 Sol 0.828" }},
+    {{ v: 0.871, lbl: "5.4 0.871" }},
+    {{ v: 0.904, lbl: "4o 0.904" }},
+  ];
+  for (const rf of refs) {{
+    if (rf.v < yMin || rf.v > yMax) continue;
+    const y = sy(rf.v);
+    parts.push(`<line x1="${{padL}}" y1="${{y}}" x2="${{W - padR}}" y2="${{y}}" stroke="var(--lab-openai)" stroke-opacity="0.35" stroke-dasharray="4,4"/>`);
+    parts.push(`<text x="${{W - padR + 5}}" y="${{y + 3}}" font-family="var(--mono)" font-size="8.8" fill="var(--lab-openai)">${{rf.lbl}}</text>`);
+  }}
+  parts.push(`<line x1="${{padL}}" y1="${{plotB}}" x2="${{W - padR}}" y2="${{plotB}}" stroke="var(--line-strong)"/>`);
+  parts.push(`<line x1="${{padL}}" y1="${{padT}}" x2="${{padL}}" y2="${{plotB}}" stroke="var(--line-strong)"/>`);
+  parts.push(`<text x="14" y="${{(padT + plotB) / 2}}" transform="rotate(-90 14 ${{(padT + plotB) / 2}})" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--faint)">OpenAI Base Log-Perplexity (↓ lower is better)</text>`);
+
+  // Connecting curve for OpenAI Anchors view
+  if (oaiGraphView === "anchors") {{
+    const pts = list.map((m, i) => `${{sx(i).toFixed(1)}},${{sy(m.oai_bpb).toFixed(1)}}`).join(" ");
+    parts.push(`<polyline points="${{pts}}" fill="none" stroke="var(--lab-openai)" stroke-width="2" stroke-opacity="0.7"/>`);
+  }}
+
+  const valFs = n > 60 ? "7.4" : (n > 20 ? "8.5" : "10.5");
+  const nameFs = n > 60 ? "9.0" : (n > 20 ? "10.2" : "11.5");
+
+  list.forEach((m, i) => {{
+    const cx = sx(i);
+    const cy = sy(m.oai_bpb);
+    const col = labColor(m.lab);
+    const isPub = Boolean(m.oai_exact);
+    const isExtrap = Boolean(m.oai_extrap);
+    // Vertical 95% Student-t error bar for translated models
+    if (m.oai_ci && !isPub) {{
+      const yHi = sy(m.oai_ci[1]);
+      const yLo = sy(m.oai_ci[0]);
+      parts.push(`<line x1="${{cx}}" y1="${{yHi}}" x2="${{cx}}" y2="${{yLo}}" stroke="${{col}}" stroke-width="1.4" stroke-opacity="0.5"/>`);
+      parts.push(`<line x1="${{cx - 3}}" y1="${{yHi}}" x2="${{cx + 3}}" y2="${{yHi}}" stroke="${{col}}" stroke-width="1.2" stroke-opacity="0.55"/>`);
+      parts.push(`<line x1="${{cx - 3}}" y1="${{yLo}}" x2="${{cx + 3}}" y2="${{yLo}}" stroke="${{col}}" stroke-width="1.2" stroke-opacity="0.55"/>`);
+    }}
+    // Also show Anpaure estimate diamond on OpenAI Anchors view so users see exact 0.85% LOO fit!
+    if (oaiGraphView === "anchors" && m.oai_est != null) {{
+      const ey = sy(m.oai_est);
+      parts.push(`<line x1="${{cx}}" y1="${{cy}}" x2="${{cx}}" y2="${{ey}}" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="2,2"/>`);
+      parts.push(`<polygon points="${{cx}},${{ey - 4.5}} ${{cx + 4.5}},${{ey}} ${{cx}},${{ey + 4.5}} ${{cx - 4.5}},${{ey}}" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.4"><title>${{m.name}}: Published ${{m.oai_bpb.toFixed(3)}} vs Anpaure Est ${{m.oai_est.toFixed(3)}}</title></polygon>`);
+    }}
+    const r = isPub ? 5.2 : (n > 60 ? 3.5 : 4.5);
+    const fill = isExtrap ? "var(--surface)" : col;
+    const stroke = isPub ? "var(--ink)" : (isExtrap ? col : "var(--surface)");
+    const sw = isPub ? 1.5 : (isExtrap ? 2.0 : 1.0);
+    const tip = `${{m.name}} (${{m.lab}}): OpenAI Log-PPL ${{m.oai_bpb.toFixed(3)}}${{isPub ? " [Published]" : (m.oai_ci ? ` [95% CI ${{m.oai_ci[0].toFixed(3)}}–${{m.oai_ci[1].toFixed(3)}}]` : "")}} · AUC ${{m.auc.toFixed(4)}} · Top-1 ${{m.top1_pct.toFixed(1)}}%`;
+    parts.push(`<circle cx="${{cx}}" cy="${{cy}}" r="${{r}}" fill="${{fill}}" stroke="${{stroke}}" stroke-width="${{sw}}"><title>${{tip}}</title></circle>`);
+    if (n <= 40 || i % 2 === 0) {{
+      const yLbl = isPub ? cy - 9 : (m.oai_ci ? sy(m.oai_ci[1]) - 5 : cy - 8);
+      parts.push(`<text x="${{cx}}" y="${{Math.max(padT + 9, yLbl)}}" text-anchor="middle" font-family="var(--mono)" font-size="${{valFs}}" fill="var(--ink-2)">${{m.oai_bpb.toFixed(3)}}</text>`);
+    }}
+    parts.push(`<text x="${{cx + 3}}" y="${{plotB + 12}}" transform="rotate(42 ${{cx + 3}} ${{plotB + 12}})" text-anchor="start" font-family="var(--sans)" font-size="${{nameFs}}" font-weight="${{isPub ? 600 : 400}}" fill="${{isPub ? 'var(--ink)' : 'var(--ink-2)'}}">${{m.name}}</text>`);
+  }});
+  svg.innerHTML = parts.join("");
+}}
+
 function renderWinChart() {{
   const svg = document.getElementById("winChart");
   const list = DATA.models
@@ -2152,6 +2290,14 @@ document.querySelectorAll("#accessBtns button").forEach(btn => {{
     renderLeaderboard();
   }});
 }});
+document.querySelectorAll("#oaiGraphBtns button").forEach(btn => {{
+  btn.addEventListener("click", () => {{
+    document.querySelectorAll("#oaiGraphBtns button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    oaiGraphView = btn.dataset.oaiView;
+    renderOaiPerplexity();
+  }});
+}});
 document.querySelectorAll("#scatterBtns button").forEach(btn => {{
   btn.addEventListener("click", () => {{
     document.querySelectorAll("#scatterBtns button").forEach(b => b.classList.remove("active"));
@@ -2166,6 +2312,7 @@ document.getElementById("themeBtn").addEventListener("click", () => {{
 }});
 
 renderLeaderboard();
+renderOaiPerplexity();
 renderWinChart();
 renderShowdown();
 renderScatter();
